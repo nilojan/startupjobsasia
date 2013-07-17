@@ -1,0 +1,172 @@
+<?php
+
+// uncomment the following to define a path alias
+// Yii::setPathOfAlias('local','path/to/local-folder');
+Yii::setPathOfAlias('bootstrap', dirname(__FILE__).'/../extensions/bootstrap');
+Yii::setPathOfAlias('paypal', dirname(__FILE__).'/../extensions/paypal');
+
+// This is the main Web application configuration. Any writable
+// CWebApplication properties can be configured here.
+
+
+return array(
+	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
+	'name'=>'Startup Jobs Asia',
+        
+	// preloading 'log' component
+	'preload'=>array('log'),
+        
+
+	// autoloading model and component classes
+	'import'=>array(
+		'application.models.*',
+		'application.components.*',
+                'application.extensions.yii-mail.*',
+                'application.helpers.*',
+                
+            ),
+
+   
+       // 'theme'=>'bootstrap', // requires you to copy the theme under your themes directory
+	'modules'=>array(
+		// uncomment the following to enable the Gii tool
+		
+		'gii'=>array(
+		
+                'generatorPaths'=>array(
+                'bootstrap.gii',
+                 ),
+           
+                    'class'=>'system.gii.GiiModule',
+			'password'=>'123456',
+			// If removed, Gii defaults to localhost only. Edit carefully to taste.
+			'ipFilters'=>array('127.0.0.1','::1'),
+		),
+		
+	),
+
+	// application components
+	'components'=>array(
+		'user'=>array(
+			// enable cookie-based authentication
+			 'class'=>'WebUser',
+                        'allowAutoLogin'=>true,
+		),
+                'bootstrap'=>array(
+                'class'=>'bootstrap.components.Bootstrap',
+                
+                 ),
+		// uncomment the following to enable URLs in path-format
+		'image'=>array(
+                            'class'=>'application.extensions.image.CImageComponent',
+                            // GD or ImageMagick
+                            'driver'=>'GD',
+                            // ImageMagick setup path
+                            'params'=>array('directory'=>'/opt/local/bin'),
+                ),
+            
+                'Paypal' => array(
+                            'class'=>'paypal.components.Paypal',
+                            'apiUsername' => 'foryoung89-facilitator_api1.gmail.com',
+                            'apiPassword' => '1370866813',
+                            'apiSignature' => 'AGwhn2LphfWjyIRWvc3SpX2Os17IAcKaCktBlnu42LdKuy3XaY6HtRZ9',
+                            'apiLive' => false,
+ 
+                            'returnUrl' => 'job/confirmPayment', //regardless of url management component
+                            'cancelUrl' => 'site/index/', //regardless of url management component
+ 
+                            // Default currency to use, if not set USD is the default
+                            'currency' => 'SGD',
+ 
+                            // Default description to use, defaults to an empty string
+                            //'defaultDescription' => '',
+ 
+                            // Default Quantity to use, defaults to 1
+                            //'defaultQuantity' => '1',
+ 
+                           //The version of the paypal api to use, defaults to '3.0' (review PayPal documentation to include a valid API version)
+                           //'version' => '3.0',
+                ),
+		'urlManager'=>array(
+			'urlFormat'=>'path',
+                        'showScriptName'=>false,
+			'rules'=>array(
+				
+                               // '<controller:\w+>/<id:\d+>'=>'<controller>/view',
+				//'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
+				//'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+                                //'<controller>'=>'<controller:\w+>/<action:\w+>/<id:\d+><title>',
+                                '<controller>'=>'<controller:\w+>/<action:\w+>/<JID:\d+>/<title:\w+>',
+                                'company'=>'company/view/<CID:\d+>/title/',
+                                //'<controller>/<title>'=>'<controller>/<action>',
+				'<controller>'=>'<controller:\w+>/<action:\w+>',
+			),
+		),
+		
+		//'db'=>array(
+		//	'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
+		//),
+		// uncomment the following to use a MySQL database
+		
+		'db'=>array(
+			'connectionString' => 'mysql:host=localhost;dbname=mydb',
+			'emulatePrepare' => true,
+			'username' => 'root',
+			'password' => '',
+			'charset' => 'utf8',
+		),
+		
+		'errorHandler'=>array(
+			// use 'site/error' action to display errors
+			'errorAction'=>'site/error',
+		),
+		'log'=>array(
+			'class'=>'CLogRouter',
+			'routes'=>array(
+				array(
+					'class'=>'CFileLogRoute',
+					'levels'=>'error, warning',
+				),
+				// uncomment the following to show log messages on web pages
+				/*
+				array(
+					'class'=>'CWebLogRoute',
+				),
+				*/
+			),
+		),
+	
+       'mail' => array(
+        'class' => 'application.extensions.yii-mail.YiiMail',
+        'transportType'=>'smtp', /// case sensitive!
+       /* 'transportOptions'=>array(
+            'host'=>'smtp.gmail.com',
+            'username'=>'inspiredwearntu@gmail.com',
+            // or email@googleappsdomain.com
+            'password'=>'2011inspiredwear',
+            'port'=>'465',
+            'encryption'=>'ssl',
+            ),
+        * */
+        
+        'viewPath' => 'application.views.mail',
+        'logging' => true,
+        'dryRun' => false
+    ),
+            
+      
+         ),
+
+	// application-level parameters that can be accessed
+	// using Yii::app()->params['paramName']
+        // global variables
+	'params'=>array(
+		// this is used in contact page
+		'adminEmail'=>'webmaster@example.com',
+                'job_limit'=>'3',
+                'job_expire'=>'90',
+                'pageTitle'=>'StartUp Jobs Asia | Startup Hire | Startup Hiring | Startup Recruiting | Startup Jobs | VC Hire | VC Jobs | Work In Startups',
+                'pageDescription'=>'We bring great talents to great startups. StartUp Jobs Asia | Startup Hire | Startup Hiring | Startup Recruiting | Startup Jobs | Starup Careers | Startup Career',
+                'image'=> "/images/suj.png",
+            ),
+);
