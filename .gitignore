@@ -1,4 +1,6 @@
 index.php
 assets
+framework
+protected/config/main.php
 .log
 .project
