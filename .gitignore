@@ -2,5 +2,6 @@ index.php
 assets
 framework
 protected/config/main.php
+protected/runtime/application.log
 .log
 .project

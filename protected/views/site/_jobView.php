@@ -10,7 +10,7 @@
 <div class="clear">
 	<div class="ListLogo">
 		<?php $url1 = "{$data->company->cname} {$data->company->location}";
-		
+		/*
 		list($width, $height, $typee, $attr)  = getimagesize('http://test.startupjobs.sg'.Yii::app()->request->baseUrl.'/images/company/'. $data->company->image);
 
 		if($width == $height){
@@ -20,7 +20,9 @@
 		}else{
 			$image='<img src='.Yii::app()->request->baseUrl.'/images/company/'. $data->company->image.' align="middle" style="width:110px;" >';
 		}
+		*/
 		   //$company= $data->company;
+		   $image='<img src='.Yii::app()->request->baseUrl.'/images/company/'. $data->company->image.' align="middle" style="width:110px;" >';
 				
 				echo CHtml::link($image, array('company/view', 'CID'=>$data->CID, 'title'=>$url1));?>
 		<?php //$url = str_replace(' ','-',$data->title);?> 
