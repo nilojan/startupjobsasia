@@ -1,4 +1,4 @@
-2013/07/23 22:54:12 [error] [exception.CException] exception 'CException' with message 'The asset "E:\xampp\htdocs\git\startupjobsasia\protected\config/../extensions/bootstrap\assets" to be published does not exist.' in E:\xampp\htdocs\git\startupjobsasia\framework\web\CAssetManager.php:257
+2013/07/23 22:56:52 [error] [exception.CException] exception 'CException' with message 'The asset "E:\xampp\htdocs\git\startupjobsasia\protected\config/../extensions/bootstrap\assets" to be published does not exist.' in E:\xampp\htdocs\git\startupjobsasia\framework\web\CAssetManager.php:257
 Stack trace:
 #0 E:\xampp\htdocs\git\startupjobsasia\protected\extensions\bootstrap\components\Bootstrap.php(306): CAssetManager->publish('E:\xampp\htdocs...', true, -1, false)
 #1 E:\xampp\htdocs\git\startupjobsasia\protected\extensions\bootstrap\components\Bootstrap.php(50): Bootstrap->getAssetsUrl()
@@ -28,7 +28,7 @@ Stack trace:
 #25 {main}
 REQUEST_URI=/git/startupjobsasia/
 ---
-2013/07/23 22:55:01 [error] [exception.CException] exception 'CException' with message 'The asset "E:\xampp\htdocs\git\startupjobsasia\protected\config/../extensions/bootstrap\assets" to be published does not exist.' in E:\xampp\htdocs\git\startupjobsasia\framework\web\CAssetManager.php:257
+2013/07/23 22:57:05 [error] [exception.CException] exception 'CException' with message 'The asset "E:\xampp\htdocs\git\startupjobsasia\protected\config/../extensions/bootstrap\assets" to be published does not exist.' in E:\xampp\htdocs\git\startupjobsasia\framework\web\CAssetManager.php:257
 Stack trace:
 #0 E:\xampp\htdocs\git\startupjobsasia\protected\extensions\bootstrap\components\Bootstrap.php(306): CAssetManager->publish('E:\xampp\htdocs...', true, -1, false)
 #1 E:\xampp\htdocs\git\startupjobsasia\protected\extensions\bootstrap\components\Bootstrap.php(50): Bootstrap->getAssetsUrl()
