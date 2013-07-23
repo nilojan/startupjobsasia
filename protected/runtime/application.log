@@ -28,3 +28,33 @@ Stack trace:
 #25 {main}
 REQUEST_URI=/git/startupjobsasia/
 ---
+2013/07/23 22:55:01 [error] [exception.CException] exception 'CException' with message 'The asset "E:\xampp\htdocs\git\startupjobsasia\protected\config/../extensions/bootstrap\assets" to be published does not exist.' in E:\xampp\htdocs\git\startupjobsasia\framework\web\CAssetManager.php:257
+Stack trace:
+#0 E:\xampp\htdocs\git\startupjobsasia\protected\extensions\bootstrap\components\Bootstrap.php(306): CAssetManager->publish('E:\xampp\htdocs...', true, -1, false)
+#1 E:\xampp\htdocs\git\startupjobsasia\protected\extensions\bootstrap\components\Bootstrap.php(50): Bootstrap->getAssetsUrl()
+#2 E:\xampp\htdocs\git\startupjobsasia\protected\extensions\bootstrap\components\Bootstrap.php(81): Bootstrap->registerCoreCss()
+#3 E:\xampp\htdocs\git\startupjobsasia\protected\extensions\bootstrap\components\Bootstrap.php(115): Bootstrap->registerAllCss()
+#4 E:\xampp\htdocs\git\startupjobsasia\protected\views\layouts\main.php(17): Bootstrap->register()
+#5 E:\xampp\htdocs\git\startupjobsasia\framework\web\CBaseController.php(126): require('E:\xampp\htdocs...')
+#6 E:\xampp\htdocs\git\startupjobsasia\framework\web\CBaseController.php(95): CBaseController->renderInternal('E:\xampp\htdocs...', Array, true)
+#7 E:\xampp\htdocs\git\startupjobsasia\framework\web\widgets\CContentDecorator.php(76): CBaseController->renderFile('E:\xampp\htdocs...', Array, true)
+#8 E:\xampp\htdocs\git\startupjobsasia\framework\web\widgets\CContentDecorator.php(54): CContentDecorator->decorate('<div id="conten...')
+#9 E:\xampp\htdocs\git\startupjobsasia\framework\web\widgets\COutputProcessor.php(44): CContentDecorator->processOutput('<div id="conten...')
+#10 E:\xampp\htdocs\git\startupjobsasia\framework\web\CBaseController.php(206): COutputProcessor->run()
+#11 E:\xampp\htdocs\git\startupjobsasia\framework\web\CBaseController.php(300): CBaseController->endWidget('CContentDecorat...')
+#12 E:\xampp\htdocs\git\startupjobsasia\protected\views\layouts\column1.php(6): CBaseController->endContent()
+#13 E:\xampp\htdocs\git\startupjobsasia\framework\web\CBaseController.php(126): require('E:\xampp\htdocs...')
+#14 E:\xampp\htdocs\git\startupjobsasia\framework\web\CBaseController.php(95): CBaseController->renderInternal('E:\xampp\htdocs...', Array, true)
+#15 E:\xampp\htdocs\git\startupjobsasia\framework\web\CController.php(784): CBaseController->renderFile('E:\xampp\htdocs...', Array, true)
+#16 E:\xampp\htdocs\git\startupjobsasia\protected\controllers\SiteController.php(17): CController->render('index')
+#17 E:\xampp\htdocs\git\startupjobsasia\framework\web\actions\CInlineAction.php(49): SiteController->actionIndex()
+#18 E:\xampp\htdocs\git\startupjobsasia\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#19 E:\xampp\htdocs\git\startupjobsasia\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#20 E:\xampp\htdocs\git\startupjobsasia\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#21 E:\xampp\htdocs\git\startupjobsasia\framework\web\CWebApplication.php(282): CController->run('')
+#22 E:\xampp\htdocs\git\startupjobsasia\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#23 E:\xampp\htdocs\git\startupjobsasia\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#24 E:\xampp\htdocs\git\startupjobsasia\index.php(13): CApplication->run()
+#25 {main}
+REQUEST_URI=/git/startupjobsasia/
+---
