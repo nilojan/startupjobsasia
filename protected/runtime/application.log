@@ -7680,6 +7680,7 @@ Stack trace:
 REQUEST_URI=/git/startupjobsasia/images/company/52-MSFT_logo_png.png
 HTTP_REFERER=http://localhost/git/startupjobsasia/
 ---
+<<<<<<< HEAD
 2013/07/22 18:59:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/gridView.css".' in E:\xampp\htdocs\git\startupjobsasia\framework\web\CWebApplication.php:286
 Stack trace:
 #0 E:\xampp\htdocs\git\startupjobsasia\framework\web\CWebApplication.php(141): CWebApplication->runController('css/gridView.cs...')
@@ -7973,4 +7974,164 @@ Stack trace:
 #3 {main}
 REQUEST_URI=/git/startupjobsasia/images/company/14-facebook.jpg
 HTTP_REFERER=http://localhost/git/startupjobsasia/
+=======
+2013/07/23 10:25:04 [error] [exception.CException] exception 'CException' with message 'The asset "C:\wamp\www\startupjobsasia\protected\config/../extensions/bootstrap\assets" to be published does not exist.' in C:\wamp\www\yii\framework\web\CAssetManager.php:257
+Stack trace:
+#0 C:\wamp\www\startupjobsasia\protected\extensions\bootstrap\components\Bootstrap.php(306): CAssetManager->publish('C:\wamp\www\sta...', true, -1, false)
+#1 C:\wamp\www\startupjobsasia\protected\extensions\bootstrap\components\Bootstrap.php(50): Bootstrap->getAssetsUrl()
+#2 C:\wamp\www\startupjobsasia\protected\extensions\bootstrap\components\Bootstrap.php(81): Bootstrap->registerCoreCss()
+#3 C:\wamp\www\startupjobsasia\protected\extensions\bootstrap\components\Bootstrap.php(115): Bootstrap->registerAllCss()
+#4 C:\wamp\www\startupjobsasia\protected\views\layouts\main.php(17): Bootstrap->register()
+#5 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\sta...')
+#6 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sta...', Array, true)
+#7 C:\wamp\www\yii\framework\web\widgets\CContentDecorator.php(76): CBaseController->renderFile('C:\wamp\www\sta...', Array, true)
+#8 C:\wamp\www\yii\framework\web\widgets\CContentDecorator.php(54): CContentDecorator->decorate('<div id="conten...')
+#9 C:\wamp\www\yii\framework\web\widgets\COutputProcessor.php(44): CContentDecorator->processOutput('<div id="conten...')
+#10 C:\wamp\www\yii\framework\web\CBaseController.php(206): COutputProcessor->run()
+#11 C:\wamp\www\yii\framework\web\CBaseController.php(300): CBaseController->endWidget('CContentDecorat...')
+#12 C:\wamp\www\startupjobsasia\protected\views\layouts\column1.php(6): CBaseController->endContent()
+#13 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\sta...')
+#14 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sta...', Array, true)
+#15 C:\wamp\www\yii\framework\web\CController.php(784): CBaseController->renderFile('C:\wamp\www\sta...', Array, true)
+#16 C:\wamp\www\startupjobsasia\protected\controllers\RegistrationController.php(84): CController->render('registration', Array)
+#17 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): RegistrationController->actionRegistration()
+#18 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#19 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(133): CController->runAction(Object(CInlineAction))
+#20 C:\wamp\www\yii\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#21 C:\wamp\www\yii\framework\web\CController.php(1145): CFilter->filter(Object(CFilterChain))
+#22 C:\wamp\www\yii\framework\web\filters\CInlineFilter.php(58): CController->filterAccessControl(Object(CFilterChain))
+#23 C:\wamp\www\yii\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter(Object(CFilterChain))
+#24 C:\wamp\www\yii\framework\web\CController.php(291): CFilterChain->run()
+#25 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#26 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('registration')
+#27 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('registration/re...')
+#28 C:\wamp\www\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#29 C:\wamp\www\startupjobsasia\index.php(15): CApplication->run()
+#30 {main}
+REQUEST_URI=/startupjobsasia/registration/registration
+HTTP_REFERER=http://localhost/startupjobsasia/
+---
+2013/07/23 10:25:35 [error] [exception.CException] exception 'CException' with message 'SiteController cannot find the requested view "index".' in C:\wamp\www\yii\framework\web\CController.php:878
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('index', NULL, true)
+#1 C:\wamp\www\startupjobsasia\protected\controllers\SiteController.php(17): CController->render('index')
+#2 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): SiteController->actionIndex()
+#3 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\wamp\www\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('')
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#8 C:\wamp\www\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#9 C:\wamp\www\startupjobsasia\index.php(15): CApplication->run()
+#10 {main}
+REQUEST_URI=/startupjobsasia/
+HTTP_REFERER=http://localhost/startupjobsasia/registration/registration
+---
+2013/07/23 10:25:44 [error] [exception.CException] exception 'CException' with message 'SiteController cannot find the requested view "index".' in C:\wamp\www\yii\framework\web\CController.php:878
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('index', NULL, true)
+#1 C:\wamp\www\startupjobsasia\protected\controllers\SiteController.php(17): CController->render('index')
+#2 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): SiteController->actionIndex()
+#3 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#4 C:\wamp\www\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#5 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#6 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('')
+#7 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#8 C:\wamp\www\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#9 C:\wamp\www\startupjobsasia\index.php(15): CApplication->run()
+#10 {main}
+REQUEST_URI=/startupjobsasia/
+HTTP_REFERER=http://localhost/startupjobsasia/registration/registration
+---
+2013/07/23 18:26:34 [error] [exception.CDbException] exception 'CDbException' with message 'CDbConnection failed to open the DB connection: SQLSTATE[HY000] [1049] Unknown database 'mydb'' in C:\wamp\www\yii\framework\db\CDbConnection.php:381
+Stack trace:
+#0 C:\wamp\www\yii\framework\db\CDbConnection.php(330): CDbConnection->open()
+#1 C:\wamp\www\yii\framework\db\CDbConnection.php(308): CDbConnection->setActive(true)
+#2 C:\wamp\www\yii\framework\base\CModule.php(387): CDbConnection->init()
+#3 C:\wamp\www\yii\framework\base\CApplication.php(438): CModule->getComponent('db')
+#4 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(623): CApplication->getDb()
+#5 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(2309): CActiveRecord->getDbConnection()
+#6 C:\wamp\www\yii\framework\db\ar\CActiveRecord.php(387): CActiveRecordMetaData->__construct(Object(job))
+#7 C:\wamp\www\yii\framework\web\CActiveDataProvider.php(74): CActiveRecord::model('job')
+#8 C:\wamp\www\startupjobsasia\protected\views\site\index.php(38): CActiveDataProvider->__construct('job', Array)
+#9 C:\wamp\www\yii\framework\web\CBaseController.php(126): require('C:\wamp\www\sta...')
+#10 C:\wamp\www\yii\framework\web\CBaseController.php(95): CBaseController->renderInternal('C:\wamp\www\sta...', NULL, true)
+#11 C:\wamp\www\yii\framework\web\CController.php(869): CBaseController->renderFile('C:\wamp\www\sta...', NULL, true)
+#12 C:\wamp\www\yii\framework\web\CController.php(782): CController->renderPartial('index', NULL, true)
+#13 C:\wamp\www\startupjobsasia\protected\controllers\SiteController.php(17): CController->render('index')
+#14 C:\wamp\www\yii\framework\web\actions\CInlineAction.php(49): SiteController->actionIndex()
+#15 C:\wamp\www\yii\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#16 C:\wamp\www\yii\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#17 C:\wamp\www\yii\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#18 C:\wamp\www\yii\framework\web\CWebApplication.php(282): CController->run('')
+#19 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('')
+#20 C:\wamp\www\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#21 C:\wamp\www\startupjobsasia\index.php(15): CApplication->run()
+#22 {main}
+REQUEST_URI=/startupjobsasia/
+HTTP_REFERER=http://localhost/startupjobsasia/registration/registration
+---
+2013/07/23 10:27:32 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/gridView.css".' in C:\wamp\www\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('css/gridView.cs...')
+#1 C:\wamp\www\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\wamp\www\startupjobsasia\index.php(15): CApplication->run()
+#3 {main}
+REQUEST_URI=/startupjobsasia/css/gridView.css
+HTTP_REFERER=http://localhost/startupjobsasia/
+---
+2013/07/23 10:27:33 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/company/48-url.jpg".' in C:\wamp\www\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('images/company/...')
+#1 C:\wamp\www\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\wamp\www\startupjobsasia\index.php(15): CApplication->run()
+#3 {main}
+REQUEST_URI=/startupjobsasia/images/company/48-url.jpg
+HTTP_REFERER=http://localhost/startupjobsasia/
+---
+2013/07/23 10:27:33 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/company/14-facebook.jpg".' in C:\wamp\www\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('images/company/...')
+#1 C:\wamp\www\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\wamp\www\startupjobsasia\index.php(15): CApplication->run()
+#3 {main}
+REQUEST_URI=/startupjobsasia/images/company/14-facebook.jpg
+HTTP_REFERER=http://localhost/startupjobsasia/
+---
+2013/07/23 10:27:33 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/company/52-MSFT_logo_png.png".' in C:\wamp\www\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('images/company/...')
+#1 C:\wamp\www\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\wamp\www\startupjobsasia\index.php(15): CApplication->run()
+#3 {main}
+REQUEST_URI=/startupjobsasia/images/company/52-MSFT_logo_png.png
+HTTP_REFERER=http://localhost/startupjobsasia/
+---
+2013/07/23 10:33:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/gridView.css".' in C:\wamp\www\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('css/gridView.cs...')
+#1 C:\wamp\www\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\wamp\www\startupjobsasia\index.php(15): CApplication->run()
+#3 {main}
+REQUEST_URI=/startupjobsasia/css/gridView.css
+HTTP_REFERER=http://localhost/startupjobsasia/
+---
+2013/07/23 10:33:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/company/14-facebook.jpg".' in C:\wamp\www\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('images/company/...')
+#1 C:\wamp\www\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\wamp\www\startupjobsasia\index.php(15): CApplication->run()
+#3 {main}
+REQUEST_URI=/startupjobsasia/images/company/14-facebook.jpg
+HTTP_REFERER=http://localhost/startupjobsasia/
+---
+2013/07/23 10:33:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/company/48-url.jpg".' in C:\wamp\www\yii\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\wamp\www\yii\framework\web\CWebApplication.php(141): CWebApplication->runController('images/company/...')
+#1 C:\wamp\www\yii\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\wamp\www\startupjobsasia\index.php(15): CApplication->run()
+#3 {main}
+REQUEST_URI=/startupjobsasia/images/company/48-url.jpg
+HTTP_REFERER=http://localhost/startupjobsasia/
+>>>>>>> signup dropdown
 ---

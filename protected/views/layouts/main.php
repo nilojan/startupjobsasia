@@ -69,7 +69,11 @@
     'type'=>'pills', // '', 'tabs', 'pills' (or 'list')
     'stacked'=>false, // whether this is a stacked menu
     'items'=>array(
-        array('label'=>'SIGN UP', 'url'=>array('/registration/registration'),'visible'=>Yii::app()->user->isGuest),
+       // array('label'=>'SIGN UP', 'url'=>array('/registration/registration'),'visible'=>Yii::app()->user->isGuest),
+         array('label'=>'SIGN UP', 'items'=>array(
+            array('label'=>'User', 'url'=>array('/registration/registration')),
+            array('label'=>'Employee', 'url'=>array('/registration/registration')),            
+            ),'visible'=>Yii::app()->user->isGuest),
 		//array('label'=>'Deposit Resume', 'url'=>array('/site/depositResume'),'visible'=>Yii::app()->user->isGuest()),
         //array('label'=>'Register Company', 'url'=>array('/registration/registerCompany'),'visible'=>Yii::app()->user->isMember()),
         array('label'=>'Submit a job', 'url'=>array('/job/submitJob'),'visible'=>Yii::app()->user->isCompany()),
