@@ -7680,3 +7680,39 @@ Stack trace:
 REQUEST_URI=/git/startupjobsasia/images/company/52-MSFT_logo_png.png
 HTTP_REFERER=http://localhost/git/startupjobsasia/
 ---
+2013/07/23 19:17:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "css/gridView.css".' in E:\xampp\htdocs\git\startupjobsasia\framework\web\CWebApplication.php:286
+Stack trace:
+#0 E:\xampp\htdocs\git\startupjobsasia\framework\web\CWebApplication.php(141): CWebApplication->runController('css/gridView.cs...')
+#1 E:\xampp\htdocs\git\startupjobsasia\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 E:\xampp\htdocs\git\startupjobsasia\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/git/startupjobsasia/css/gridView.css
+HTTP_REFERER=http://localhost/git/startupjobsasia/
+---
+2013/07/23 19:17:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/company/52-MSFT_logo_png.png".' in E:\xampp\htdocs\git\startupjobsasia\framework\web\CWebApplication.php:286
+Stack trace:
+#0 E:\xampp\htdocs\git\startupjobsasia\framework\web\CWebApplication.php(141): CWebApplication->runController('images/company/...')
+#1 E:\xampp\htdocs\git\startupjobsasia\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 E:\xampp\htdocs\git\startupjobsasia\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/git/startupjobsasia/images/company/52-MSFT_logo_png.png
+HTTP_REFERER=http://localhost/git/startupjobsasia/
+---
+2013/07/23 19:17:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/company/48-url.jpg".' in E:\xampp\htdocs\git\startupjobsasia\framework\web\CWebApplication.php:286
+Stack trace:
+#0 E:\xampp\htdocs\git\startupjobsasia\framework\web\CWebApplication.php(141): CWebApplication->runController('images/company/...')
+#1 E:\xampp\htdocs\git\startupjobsasia\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 E:\xampp\htdocs\git\startupjobsasia\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/git/startupjobsasia/images/company/48-url.jpg
+HTTP_REFERER=http://localhost/git/startupjobsasia/
+---
+2013/07/23 19:17:30 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "images/company/14-facebook.jpg".' in E:\xampp\htdocs\git\startupjobsasia\framework\web\CWebApplication.php:286
+Stack trace:
+#0 E:\xampp\htdocs\git\startupjobsasia\framework\web\CWebApplication.php(141): CWebApplication->runController('images/company/...')
+#1 E:\xampp\htdocs\git\startupjobsasia\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 E:\xampp\htdocs\git\startupjobsasia\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/git/startupjobsasia/images/company/14-facebook.jpg
+HTTP_REFERER=http://localhost/git/startupjobsasia/
+---
