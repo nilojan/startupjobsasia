@@ -11,11 +11,11 @@ class RegistrationController extends Controller {
                   'users'=>array('?'),  ),
             array('allow',
                   'actions'=>array('registration'),
-                  'users'=>array('?'),  ),
+                  'users'=>array('*'),  ),
                 //'roles'=>array('0','1','2'),  
             array('allow',
                   'actions'=>array('registerCompany'),
-                  'roles'=>array('0'),),
+                  'roles'=>array('*'),),
             array('deny',
                   'users'=>array('*'),),
         );

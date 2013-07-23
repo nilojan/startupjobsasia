@@ -1,8 +1,8 @@
 <?php
 $this->breadcrumbs = array(
-    'Registration',
+    'User Registration',
 );
-$this->pageTitle = 'Registration | '.Yii::app()->params['pageTitle'];
+$this->pageTitle = 'User Registration | '.Yii::app()->params['pageTitle'];
 ?>
 
 

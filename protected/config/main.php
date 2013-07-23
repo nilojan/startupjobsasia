@@ -101,6 +101,28 @@ return array(
                                 //'<controller>/<title>'=>'<controller>/<action>',
 				'<controller>'=>'<controller:\w+>/<action:\w+>',
 			),
+	/*array(
+	        'post/<id:\d+>/<title:.*?>'=>'post/view',
+	        'posts/<tag:.*?>'=>'post/index',
+	      //  'api/<controller:\w+>/<id:\w+>/<var:\w+>'=>array('<controller>/restView', 'verb'=>'GET'),
+	        // REST patterns
+	        array('api/list', 'pattern'=>'api/<model:\w+>', 'verb'=>'GET'),
+	        array('api/view', 'pattern'=>'api/<model:\w+>/<id:\d+>', 'verb'=>'GET'),
+	        array('api/relational', 'pattern'=>'api/<model1:\w+>/<var1:\w+>/<model2:\w+>', 'verb'=>'GET'),
+
+//	        array('api/registerdevice', 'pattern'=>'api/<para:\w+>/<para_appname:\w+>/<para_appversion:\w+>/<para_deviceuid:\w+>/<para_devicetoken:\w+>/<para_devicemodel:\w+>/<para_devicename:\w+>/<para_deviceversion:\w+>/<para_pushbadge:\w+>/<para_pushalert:\w+>/<para_pushsound:\w+>', 'verb'=>'GET'),
+	        array('api/registerdevice', 'pattern'=>'api/<action:\w+>', 'verb'=>'POST'),
+	        
+
+	        //array('api/register', 'pattern'=>'api/<model1:\w+>/<var1:\w+>/<model2:\w+>/<var2:\w+>/<model3:\w+>', 'verb'=>'GET'),
+	        //array('api/login', 'pattern'=>'api/<model:\w+>/<uname:\w+>/<pwd:\w+>', 'verb'=>'GET'),
+
+	        array('api/update', 'pattern'=>'api/<model:\w+>/<id:\d+>', 'verb'=>'PUT'),
+	        array('api/delete', 'pattern'=>'api/<model:\w+>/<id:\d+>', 'verb'=>'DELETE'),
+	        array('api/create', 'pattern'=>'api/<model:\w+>', 'verb'=>'POST'),
+	        // Other controllers
+	        '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+	    ),*/
 		),
 		
 		//'db'=>array(
