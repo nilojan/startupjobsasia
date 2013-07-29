@@ -22,11 +22,6 @@
 
 	<?php echo $form->textFieldRow($model,'gender',array('class'=>'span5','maxlength'=>45)); ?>
 
-	<?php echo $form->captchaRow($model, 'verifyCode'); ?>
-        <div class="hint">Please enter the letters as they are shown in the image above.
-                          <br/>Letters are not case-sensitive.
-        </div>
-
 	<div class="form-actions">
 		<?php $this->widget('bootstrap.widgets.TbButton', array(
 			'buttonType'=>'submit',
