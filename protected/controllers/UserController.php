@@ -9,11 +9,12 @@ class UserController extends Controller
         return array(
            
             array('allow', // allow authenticated users to access all actions
-                 'roles'=>array('0'),
+                 'roles'=>array('1','2','0'),
+            // 'users' => array('*'),
                 ),
             array('allow',
                   'actions'=>array('depositResume'),
-                  'users'=>array('@'),  
+                  'users'=>array('*'),  
                  ),
             array('deny',
                   'users'=>array('*'),
@@ -39,7 +40,7 @@ class UserController extends Controller
                     $oldfilename = $user->resume;
                     $oldfilename2 = $user->resume2;
                     $user->coverLetter = nl2br($model->coverLetter);    //cannot safe cover letter very strange
-                    //resume -> uploaded resume, resume2 -> resume;
+                    ////resume -> uploaded resume, resume2 -> resume;
                     if (!empty($uploadedFile)) {      //uploaded file is not empty
                                     $fileName = str_replace(' ', '', "{$user->ID}-{$uploadedFile}");  // random number + file name
                                     $user->resume = $fileName;

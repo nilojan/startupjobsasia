@@ -11,7 +11,7 @@ class JobController extends Controller {
             ),
             array('allow',
                   'actions'=>array('apply'),
-                  'users'=>array('@'),  
+                  'users'=>array('*'),  
                     
             ),
             array('allow',

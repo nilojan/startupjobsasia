@@ -11,8 +11,8 @@ class AdminController extends Controller
             array('allow', // allow authenticated users to access all actions
                   'roles'=>array('1'),
             ),
-            array('deny'),
-                'users'=>array('*'),
+            array('deny',
+                'users'=>array('*')),
         );
     }    
     
