@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
-	'Userdetails'=>array('index'),
+	'Employees'=>array('index'),
 	'Manage',
 );
 
 $this->menu=array(
-	array('label'=>'List Userdetails','url'=>array('index')),
-	array('label'=>'Create Userdetails','url'=>array('create')),
+	array('label'=>'List Employee','url'=>array('index')),
+	array('label'=>'Create Employee','url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -15,7 +15,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$.fn.yiiGridView.update('userdetails-grid', {
+	$.fn.yiiGridView.update('employee-grid', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -23,7 +23,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Userdetails</h1>
+<h1>Manage Employees</h1>
 
 <p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
@@ -38,32 +38,18 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 </div><!-- search-form -->
 
 <?php $this->widget('bootstrap.widgets.TbGridView',array(
-	'id'=>'userdetails-grid',
+	'id'=>'employee-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'ud_id',
-		'u_id',
-		'fname',
-		'lname',
-		'contact',
+		'EID',
+		'username',
 		'email',
-		/*
+		'password',
+		'birthDate',
 		'gender',
-		'dob',
-		'country',
-		'last_job',
-		'h_edu',
-		'work_exp',
-		'curr_salary',
-		'exp_salary',
-		'availability',
-		'resume1',
-		'resume2',
-		'resume_uploaded',
-		'photo',
-		'cover_letter',
-		'modified',
+		/*
+		'name',
 		*/
 		array(
 			'class'=>'bootstrap.widgets.TbButtonColumn',

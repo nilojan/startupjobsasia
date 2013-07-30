@@ -36,7 +36,7 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                                         'label'=>'Forget Password',
                                         'type'=>'info', 
                                         'size'=>'', 
-                                        'url'=>Yii::app()->createUrl("registration/forgetPassword"),    
+                                        'url'=>Yii::app()->createUrl("user/forgetPassword"),    
 )); ?>  
 
  </div>

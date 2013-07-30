@@ -27,6 +27,7 @@
 			'buttonType'=>'submit',
 			'type'=>'primary',
 			'label'=>$model->isNewRecord ? 'Register' : 'Save',
+		//	'label'=>$model->isNewRecord ? 'Create' : 'Save',
 		)); ?>
 	</div>
 

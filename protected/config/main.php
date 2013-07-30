@@ -1,5 +1,5 @@
 <?php
-
+include("dbconfig.php");
 // uncomment the following to define a path alias
 // Yii::setPathOfAlias('local','path/to/local-folder');
 Yii::setPathOfAlias('bootstrap', dirname(__FILE__).'/../extensions/bootstrap');
@@ -91,9 +91,10 @@ return array(
 			'urlFormat'=>'path',
                         'showScriptName'=>false,
 			'rules'=>array(
+				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 				
                                // '<controller:\w+>/<id:\d+>'=>'<controller>/view',
-				//'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
+				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				//'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
                                 //'<controller>'=>'<controller:\w+>/<action:\w+>/<id:\d+><title>',
                                 '<controller>'=>'<controller:\w+>/<action:\w+>/<JID:\d+>/<title:\w+>',
@@ -130,14 +131,24 @@ return array(
 		//),
 		// uncomment the following to use a MySQL database
 		
-		'db'=>array(
+		/*'db'=>array(
 			'connectionString' => 'mysql:host=localhost;dbname=mydb',
+			//'connectionString' => 'mysql:host=localhost;dbname=startup_job',
 			'emulatePrepare' => true,
 			'username' => 'root',
 			'password' => '',
 			'charset' => 'utf8',
 		),
-		
+		*/
+
+		'db'=>array(
+	     'connectionString' => 'mysql:host='.global_dbhost.';dbname='.global_dbdatabase.'',
+	     'emulatePrepare' => global_emulatePrepare,
+	     'username' => global_dbusername,
+	     'password' => global_dbpassword,
+	     'charset' => global_charset,
+	    ),
+
 		'errorHandler'=>array(
 			// use 'site/error' action to display errors
 			'errorAction'=>'site/error',

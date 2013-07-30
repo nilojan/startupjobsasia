@@ -71,7 +71,7 @@
     'items'=>array(
        // array('label'=>'SIGN UP', 'url'=>array('/registration/registration'),'visible'=>Yii::app()->user->isGuest),
          array('label'=>'SIGN UP', 'items'=>array(
-            array('label'=>'User', 'url'=>array('/registration/registration')),
+            array('label'=>'User', 'url'=>array('/user/registration')),
             array('label'=>'Employee', 'url'=>array('/employee/register')),            
             ),'visible'=>Yii::app()->user->isGuest),
 		//array('label'=>'Deposit Resume', 'url'=>array('/site/depositResume'),'visible'=>Yii::app()->user->isGuest()),

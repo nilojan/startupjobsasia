@@ -1,165 +1,292 @@
 <?php
 
 class UserController extends Controller
-{   public function filters()   {
-        return array( 'accessControl' ); // perform access control for CRUD operations
-    }
- 
-    public function accessRules()   {
-        return array(
-           
-            array('allow', // allow authenticated users to access all actions
-                 'roles'=>array('1','2','0'),
-            // 'users' => array('*'),
+{
+	/**
+	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
+	 * using two-column layout. See 'protected/views/layouts/column2.php'.
+	 */
+	public $layout='//layouts/column2';
+
+	/**
+	 * @return array action filters
+	 */
+	public function filters()
+	{
+		return array(
+			'accessControl', // perform access control for CRUD operations
+		);
+	}
+
+	/**
+	 * Specifies the access control rules.
+	 * This method is used by the 'accessControl' filter.
+	 * @return array access control rules
+	 */
+	public function accessRules()
+	{
+		return array(
+			array('allow', // allow authenticated users to access all actions
+              //   'roles'=>array('1','2','0'),
+            	 'users' => array('*'),
                 ),
             array('allow',
                   'actions'=>array('depositResume'),
                   'users'=>array('*'),  
                  ),
-            array('deny',
-                  'users'=>array('*'),
-                ),
-           
-			// array('deny'),
-            //     'users'=>array('*'),
-        );
-    }
-    // 2 versions of resume are stored
-    public function actionDepositResume()   {
-             $model = new ApplyJobForm();
-             $user=user::model()->find(':ID=ID', array('ID'=>Yii::app()->user->getID()));
-             $model->coverLetter = str_replace('<br />', "", $user->coverLetter);
-             
-             if (isset($_POST['ApplyJobForm'])) {
-                 $model->attributes = $_POST['ApplyJobForm'];
-                 if ($model->validate()) {
-                    
-                    $uploadedFile=CUploadedFile::getInstance($model,'resume');
-                    $uploadedPhoto=CUploadedFile::getInstance($model,'photo');
-                    $oldphotoname= $user->photo;
-                    $oldfilename = $user->resume;
-                    $oldfilename2 = $user->resume2;
-                    $user->coverLetter = nl2br($model->coverLetter);    //cannot safe cover letter very strange
-                    ////resume -> uploaded resume, resume2 -> resume;
-                    if (!empty($uploadedFile)) {      //uploaded file is not empty
-                                    $fileName = str_replace(' ', '', "{$user->ID}-{$uploadedFile}");  // random number + file name
-                                    $user->resume = $fileName;
-                                    $user->resume2= $oldfilename;
-                    }                
-                    if (!empty($uploadedPhoto)) {   // photo is not empty
-                                    $photoName = str_replace(' ', '', "{$user->ID}-{$uploadedPhoto}");
-                                    $user->photo = $photoName;
-                                    
-                    }
-                     if ($user->save())   {
-                         if (!empty($uploadedFile)) {      
-                                $uploadedFile->saveAs(Yii::app()->basepath.'/../resume/'.$fileName);  // image will uplode to rootDirectory/banner    
-                                 if ($oldfilename != $fileName) {
-                                        if ($oldfilename2 != null && $oldfilename2 != $fileName )  //delete the file
-                                                unlink(Yii::app()->basePath . '/../resume/' . $oldfilename2);// image will uplode to rootDirectory/banner    
-                                }            
-                         }   
-                          if (!empty($uploadedPhoto)) {    
-                               $uploadedPhoto->saveAs(Yii::app()->basepath.'/../images/profile/'.$photoName);  
-                                        if ($oldphotoname != $photoName && $oldphotoname !=null) {
-                                                unlink(Yii::app()->basePath . '/../images/profile/' . $oldphotoname);
-                                        }
-                          }
-                         
-                     }     
-                 } 
-             }
-             $this->render('deposit', array('model'=>$model,
-                                            'user'=>$user));
-    }
-        
-    public function actionApplication() {
-		$this->render('application');
-    }
-    
-   
-    public function actionApplyJob($JID) {
-        //active record involved user, application, job
-       $model = new ApplyJobForm;
-       $ID = Yii::app()->user->getID();
-       $user = user::model()->find('ID=:ID',array('ID'=>$ID));
-       $model->coverLetter = str_replace('<br />', "", $user->coverLetter);
-            if (isset($_POST['ApplyJobForm'])) {
-                //check if applied
-                $model->attributes = $_POST['ApplyJobForm'];
-                if ($model->validate()) {
-                    $check = application::model()->find(':ID=ID&&:JID=JID',array(':ID'=>$ID,':JID'=>$JID));
-                    $uploadedFile=CUploadedFile::getInstance($model,'resume');
-                // if the user did not upload a file and also no resume stored
-                     if ($check!=null||(empty($uploadfile)&&($user->resume == null)))  {    // already applied to the job
-                             $this->redirect(array('site/page', 'view'=>'error'));
-                     }
-                // redirect if no resume is found
-                    else {
-                        $oldfilename = $user->resume;
-                        $application = new application;
-                        $job = job::model()->find('JID=:JID', array('JID' => $JID));
-                    
-                        $user->coverLetter = nl2br($model->coverLetter);
-                        $application->cover_letter = nl2br($model->coverLetter);
-                        $application->ID =$ID;
-                        $application->JID = $JID;
-                        $application->CID = $job ->CID; 
-                    // send resume to employer 
-                    //$user = user::model()->find(':ID=ID', array(':ID'=>$ID)); 
-                    if ($application->save()) {    
-                          if (!empty($uploadedFile)) {      //uploaded file is not empty
-                                    $fileName = str_replace(' ', '', "{$application->ID}-{$uploadedFile}");  // random number + file name
-                                    $application->resume = $fileName;
-                                    if ($application->save())   {
-                                        $uploadedFile->saveAs(Yii::app()->basepath.'/../jobApplication/'.$fileName);
-                                        $this->redirect(array('site/page', 'view'=>'success'));
-                                    }
-                            }           //uploaded file is empty
-                            else {      //use previous resume
-                                    $fileName = $application->ID.'-'.$user->resume;
-                                    $application->resume =$fileName;
-                                    if ($application->save())   {       // copy the file to the job application folder
-                                        copy(Yii::app()->basepath.'/../resume/'.$user->resume,Yii::app()->basepath.'/../jobApplication/'.$fileName);
-                                        $this->redirect(array('site/page', 'view'=>'success'));
-                                    }
-                            }
-                            // array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-                           
-                    }
-                }
-            }
-            }
-            $this->render('applyJob', array('user'=>$user,
-                                         'model'=>$model));
-}
-    
-public function actionChangePassword()  {
-        $model = new EditProfileForm;
-        $user=user::model()->find(':ID=ID', array('ID'=>Yii::app()->user->getID()));
-        //CActiveRecord for old one
-        if (isset($_POST['EditProfileForm'])) {
-            $pForm->attributes = $_POST['EditProfileForm'];
-            $key = 'AG*@#(129)!@K.><>]{[|sd`rjenfla0847&($#)!$Masdc$#@';
-            $pwd = hash('sha512', $key . ($model->oldPassword));
-            $pwd = substr($pwd, 0, 100);
+             array('allow',
+                  'actions'=>array('registration'),
+                  'users'=>array('*'),  
+                  ),
+                //'roles'=>array('0','1','2'),  
+            array('allow',
+                  'actions'=>array('registerCompany'),
+                  'roles'=>array('*'),
+                  ),
+		/*	array('allow',  // allow all users to perform 'index' and 'view' actions
+				'actions'=>array('index','view'),
+				'users'=>array('*'),
+			),
+			array('allow', // allow authenticated user to perform 'create' and 'update' actions
+				'actions'=>array('create','update'),
+				'users'=>array('@'),
+			),
+			array('allow', // allow admin user to perform 'admin' and 'delete' actions
+				'actions'=>array('admin','delete'),
+				'users'=>array('admin'),
+			),*/
+			array('deny',  // deny all users
+				'users'=>array('*'),
+			),
+		);
+	}
 
-            $oldPwd = $user->password;
-            if ($pwd == $oldPwd) {
-                    $pwd1 = hash('sha512', $key . ($model->newPassword));
-                    $user->password = substr($pwd1, 0, 100);
-                    if ($user->save())  
-                        $this->redirect();
-                }
-            } 
-        }
- public function actionProfile()    {
+	/**
+	 * Displays a particular model.
+	 * @param integer $id the ID of the model to be displayed
+	 */
+	public function actionView($id)
+	{
+		$this->render('view',array(
+			'model'=>$this->loadModel($id),
+		));
+	}
+
+	/**
+	 * Creates a new model.
+	 * If creation is successful, the browser will be redirected to the 'view' page.
+	 */
+	public function actionCreate()
+	{
+		$model=new User;
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['User']))
+		{
+			$model->attributes=$_POST['User'];
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->ID));
+		}
+
+		$this->render('create',array(
+			'model'=>$model,
+		));
+	}
+
+	/**
+	 * Updates a particular model.
+	 * If update is successful, the browser will be redirected to the 'view' page.
+	 * @param integer $id the ID of the model to be updated
+	 */
+	public function actionUpdate($id)
+	{
+		$model=$this->loadModel($id);
+
+		// Uncomment the following line if AJAX validation is needed
+		// $this->performAjaxValidation($model);
+
+		if(isset($_POST['User']))
+		{
+			$model->attributes=$_POST['User'];
+			if($model->save())
+				$this->redirect(array('view','id'=>$model->ID));
+		}
+
+		$this->render('update',array(
+			'model'=>$model,
+		));
+	}
+
+	/**
+	 * Deletes a particular model.
+	 * If deletion is successful, the browser will be redirected to the 'admin' page.
+	 * @param integer $id the ID of the model to be deleted
+	 */
+	public function actionDelete($id)
+	{
+		if(Yii::app()->request->isPostRequest)
+		{
+			// we only allow deletion via POST request
+			$this->loadModel($id)->delete();
+
+			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+			if(!isset($_GET['ajax']))
+				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
+		}
+		else
+			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+	}
+
+	/**
+	 * Lists all models.
+	 */
+	public function actionIndex()
+	{
+		$dataProvider=new CActiveDataProvider('User');
+		$this->render('index',array(
+			'dataProvider'=>$dataProvider,
+		));
+	}
+
+	/**
+	 * Manages all models.
+	 */
+	public function actionAdmin()
+	{
+		$model=new User('search');
+		$model->unsetAttributes();  // clear any default values
+		if(isset($_GET['User']))
+			$model->attributes=$_GET['User'];
+
+		$this->render('admin',array(
+			'model'=>$model,
+		));
+	}
+
+	/**
+	 * Returns the data model based on the primary key given in the GET variable.
+	 * If the data model is not found, an HTTP exception will be raised.
+	 * @param integer the ID of the model to be loaded
+	 */
+	public function loadModel($id)
+	{
+		$model=User::model()->findByPk($id);
+		if($model===null)
+			throw new CHttpException(404,'The requested page does not exist.');
+		return $model;
+	}
+
+	/**
+	 * Performs the AJAX validation.
+	 * @param CModel the model to be validated
+	 */
+	protected function performAjaxValidation($model)
+	{
+		if(isset($_POST['ajax']) && $_POST['ajax']==='user-form')
+		{
+			echo CActiveForm::validate($model);
+			Yii::app()->end();
+		}
+	}
+	public function actionProfile()    
+	{
      //if ($ID = null)    { 
             $user=user::model()->find(':ID=ID', array('ID'=>Yii::app()->user->getID()));
      //}
-      $this->render('profile', array('user'=>$user,));
+      $this->render('profile', array('user'=>$user,));     
      
-     
- }
+ 	}
+
+ 	public function actionRegistration() {
+        $model = new RegistrationForm;
+        if (isset($_POST['RegistrationForm'])) {
+              $model->attributes = $_POST['RegistrationForm'];
+              if ($model->validate()) {       //generate activation key
+               $activationKey = mt_rand() . mt_rand() . mt_rand() . mt_rand() . mt_rand();
+                // $model->activationKey= mt_rand() . mt_rand() . mt_rand() . mt_rand() . mt_rand();
+                        $key = 'AG*@#(129)!@K.><>]{[|sd`rjenfla0847&($#)!$Masdc$#@';
+                        $pwd = hash('sha512', $key . ($model->password));
+                        $pwd = substr($pwd, 0, 100);
+                        $record = new user;
+                        // Save into user
+                        $record->username = $model->username;
+                        $record->password = $pwd;
+                        $record->name = $model->name;
+                        $record->email = $model->email;
+                        if ($record->save())	{
+                                $message = new YiiMailMessage;
+                                $baseUrl = Yii::app()->request->baseUrl;
+                                $serverPath = 'localhost/yii/uStyle';
+                                $body = "Hi <font type=\"bold\">" . $record->name . "</font><br>
+                                <br>
+                                Welcome to StartUp Jobs Asia! Your account <font type=\"bold\">" . $record->username . "</font> has been registered.<br>
+                                <br>
+                                In order to ensure that you have received this confirmation, we ask that you follow the link below and confirm that this is in fact the correct email address.<br>
+                                <br>
+                                <a href=\"" . Yii::app()->baseURL . '/index.php/registration/verify?code=' . $activationKey . "\">Verify Your Email Here</a><br>
+                                <br>
+                                Accounts that have not been confirmed will be deactivated and removed from our system within 7 days, including all email addresses.<br> 
+                                <br>
+                                If you have NOT attempted to create an account at uStyle please ignore this email - it might have been sent because someone mistyped his/her own email address.<br>
+                                THIS IS AN AUTO-GENERATED MESSAGE - PLEASE DO NOT REPLY TO THIS MESSAGE!<br>
+                                <br>
+                                -------------<br>
+                                StartUp Jobs Asia Team";
+                                $message->setBody($body, 'text/html');
+                                $message->subject = "StartUp Jobs Asia Account Verification";
+                                $message->addTo($model->email);
+                                $message->from = 'noreply@StartUpJobsAsia.com';
+               //                 Yii::app()->mail->send($message);
+                                $this->redirect(array('site/page', 'view' => 'success'));
+			}
+		}
+        }
+        $this->render('registration', array('model' => $model));
+    }
+
+    public function actionForgetPassword() {
+        $model = new forgetPassword;
+
+        if (isset($_POST['forgetPassword'])) {
+            $model->attributes = $_POST['forgetPassword'];
+
+            if ($user = user::model()->find('email=:email', array('email' => $model->email))) {
+
+                $pwd1 = substr(str_shuffle(str_repeat('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789', 6)), 0, 6);
+                $key = 'AG*@#(129)!@K.><>]{[|sd`rjenfla0847&($#)!$Masdc$#@';
+                $pwd = hash('sha512', $key . ($pwd1));
+                $pwd = substr($pwd, 0, 100);
+                $user->password = $pwd;
+                $user->save();
+
+                $message = new YiiMailMessage;
+                $baseUrl = Yii::app()->request->baseUrl;
+                $serverPath = 'localhost/yii/uStyle';
+                $body = "Hi <font type=\"bold\">" . $user->name . "</font><br>
+                        <br>
+                        Your account <font type=\"bold\">" . $member->username . "</font>'s password has been reset.<br>
+                        <br>
+                        This is your new password : ".$pwd1."<br>
+                        <br>
+                        ------------------------------------------------------------------------<br>
+                        THIS IS AN AUTO-GENERATED MESSAGE - PLEASE DO NOT REPLY TO THIS MESSAGE!<br>
+                        ------------------------------------------------------------------------<br>
+                        <br>
+                        -------------<br>
+                        uStyle Team";
+                $message->setBody($body, 'text/html');
+                $message->subject = "uStyle Account Verification";
+                $message->addTo($model->email);
+                $message->from = 'noreply@uStyle.com';
+                Yii::app()->mail->send($message);
+                $this->redirect(array('site/page', 'view' => 'sentmail'));
+            }
+            $this->redirect(array('site/page', 'view' => 'emailNotFound'));
+        }
+        $this->render('forgetPassword', array('model' => $model));
+    }
+
 
 }
