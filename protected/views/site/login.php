@@ -1,4 +1,11 @@
-<?php
+
+<?php if(!(Yii::app()->user->isGuest))
+   {
+     $this->redirect(Yii::app()->getBaseUrl(true));
+     //Yii::app()->getBaseUrl(true)
+   }
+   else
+   {
 $this->breadcrumbs=array(
 	'Login',
 );
@@ -44,6 +51,8 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 
 
 
-<?php $this->endWidget(); ?>
+<?php $this->endWidget();
+}
+ ?>
 
 </div>

@@ -50,12 +50,28 @@ return array(
 		'user'=>array(
 			// enable cookie-based authentication
 			 'class'=>'WebUser',
-                        'allowAutoLogin'=>true,
+              'allowAutoLogin'=>true,
 		),
                 'bootstrap'=>array(
                 'class'=>'bootstrap.components.Bootstrap',
                 
                  ),
+
+            'mail' => array(
+			    'class' => 'ext.yii-mail.YiiMail',
+			     'transportType'=>'smtp',
+			     'transportOptions'=>array(
+			       'host'=>'smtp.gmail.com',
+			       'username'=>'inspiredwearntu@gmail.com',//contohna nama_email@yahoo.co.id
+			       'password'=>'2011inspiredwear',
+			       'port'=>'465',
+			       'encryption'=>'ssl',
+			     	),
+			    'viewPath' => 'application.views.mail',
+			    'logging' => true,
+			    'dryRun' => false
+			), 
+
 		// uncomment the following to enable URLs in path-format
 		'image'=>array(
                             'class'=>'application.extensions.image.CImageComponent',
@@ -169,9 +185,9 @@ return array(
 			),
 		),
 	
-       'mail' => array(
-        'class' => 'application.extensions.yii-mail.YiiMail',
-        'transportType'=>'smtp', /// case sensitive!
+     //  'mail' => array(
+     //   'class' => 'application.extensions.yii-mail.YiiMail',
+     //   'transportType'=>'smtp', /// case sensitive!
        /* 'transportOptions'=>array(
             'host'=>'smtp.gmail.com',
             'username'=>'inspiredwearntu@gmail.com',
@@ -182,10 +198,11 @@ return array(
             ),
         * */
         
-        'viewPath' => 'application.views.mail',
-        'logging' => true,
-        'dryRun' => false
-    ),
+    //    'viewPath' => 'application.views.mail',
+    //    'logging' => true,
+    //    'dryRun' => false
+   // ),
+		
             
       
          ),
