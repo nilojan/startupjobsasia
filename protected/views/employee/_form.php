@@ -19,6 +19,7 @@
 
 	<?php echo $form->textFieldRow($model,'email',array('class'=>'span5','maxlength'=>100)); ?>
 
+<<<<<<< HEAD
 	<?php echo $form->textFieldRow($model,'photo',array('class'=>'span5','maxlength'=>100)); ?>
 
 	<?php echo $form->textAreaRow($model,'coverletter',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
@@ -57,11 +58,18 @@
 
 	<?php echo $form->textFieldRow($model,'last_modified',array('class'=>'span5')); ?>
 
+=======
+>>>>>>> e2d716017bcd3f63195d5861e12885e5e6e75fe4
 	<div class="form-actions">
 		<?php $this->widget('bootstrap.widgets.TbButton', array(
 			'buttonType'=>'submit',
 			'type'=>'primary',
+<<<<<<< HEAD
 			'label'=>$model->isNewRecord ? 'Create' : 'Save',
+=======
+			'label'=>$model->isNewRecord ? 'Register' : 'Save',
+		//	'label'=>$model->isNewRecord ? 'Create' : 'Save',
+>>>>>>> e2d716017bcd3f63195d5861e12885e5e6e75fe4
 		)); ?>
 	</div>
 

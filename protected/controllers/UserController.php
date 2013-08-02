@@ -69,7 +69,11 @@ class UserController extends Controller
 	public function actionView($id)
 	{
 		$this->render('view',array(
+<<<<<<< HEAD
 			'model'=>$this->loadEmployeeModel($id),
+=======
+			'model'=>$this->loadModel($id),
+>>>>>>> e2d716017bcd3f63195d5861e12885e5e6e75fe4
 		));
 	}
 
@@ -120,6 +124,7 @@ class UserController extends Controller
 		));
 	}
 
+<<<<<<< HEAD
 	public function actionEdit($id)
 	{
 		$model=$this->loadEmployeeModel($id);
@@ -144,6 +149,8 @@ class UserController extends Controller
 	}
 
 
+=======
+>>>>>>> e2d716017bcd3f63195d5861e12885e5e6e75fe4
 	/**
 	 * Deletes a particular model.
 	 * If deletion is successful, the browser will be redirected to the 'admin' page.
@@ -203,6 +210,7 @@ class UserController extends Controller
 		return $model;
 	}
 
+<<<<<<< HEAD
 	public function loadEmployeeModel($id)
 	{
 		
@@ -214,6 +222,8 @@ class UserController extends Controller
 		return $model;
 	}
 
+=======
+>>>>>>> e2d716017bcd3f63195d5861e12885e5e6e75fe4
 	/**
 	 * Performs the AJAX validation.
 	 * @param CModel the model to be validated
@@ -303,6 +313,7 @@ class UserController extends Controller
         }
         $this->render('registration', array('model' => $model));
     }
+<<<<<<< HEAD
 
     public function actionVerify($code) {
         //if ($user = user::model()->find('activationKey=:activationKey', array('activationKey' => $code))) {
@@ -346,6 +357,51 @@ class UserController extends Controller
 	            	$this->redirect(array('site/page', 'view' => 'verifyUser','status'=> '3'));
 	            }
 
+=======
+
+    public function actionVerify($code) {
+        //if ($user = user::model()->find('activationKey=:activationKey', array('activationKey' => $code))) {
+           // $user->activationKey = '0';
+          $code = $_GET['code'];
+
+		if($user_id = Yii::app()->db->createCommand()
+                                    ->select('id')
+                                    ->from('user1')
+                                    ->where('activation_key=:key',array(':key'=>$code))
+                                   ->queryAll())
+            	{
+	            	if($register_status = Yii::app()->db->createCommand()
+                                    ->select('registered')
+                                    ->from('employee1')
+                                    ->where('UID=:id', array(':id'=>$user_id[0]['id']))
+                                   ->queryAll())
+	            	{
+	            		if($register_status[0]['registered'] == '0')
+	            		{	            	
+			            	$command = Yii::app()->db->createCommand();
+			            	if($command->update('employee1', array(                    
+			                    'registered' => '1',                     
+			                ),  'UID=:id', array(':id'=>$user_id[0]['id'])))
+			            	{  
+			            		echo "account activated!";	
+			            		$this->redirect(array('site/page', 'view' => 'verifyUser','status'=> '1'));
+			            	}
+			            }
+			            else
+			            {
+			            	echo "account already activated!";	
+			            	$this->redirect(array('site/page', 'view' => 'verifyUser','status'=> '2'));
+			            }
+		            }
+		           // $this->redirect(array('site/page', 'view' => 'verify'));
+		        }
+		        else
+	            {
+	            	echo "varification code not found!";
+	            	$this->redirect(array('site/page', 'view' => 'verifyUser','status'=> '3'));
+	            }
+
+>>>>>>> e2d716017bcd3f63195d5861e12885e5e6e75fe4
 	        $this->render('verify', array('model' => $model));    
     }
 
