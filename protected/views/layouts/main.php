@@ -71,20 +71,20 @@
     'items'=>array(
        // array('label'=>'SIGN UP', 'url'=>array('/registration/registration'),'visible'=>Yii::app()->user->isGuest),
          array('label'=>'SIGN UP', 'items'=>array(
-            array('label'=>'User', 'url'=>array('/registration/registration')),
+            array('label'=>'User', 'url'=>array('/user/registration')),
             array('label'=>'Employee', 'url'=>array('/employee/register')),            
             ),'visible'=>Yii::app()->user->isGuest),
 		//array('label'=>'Deposit Resume', 'url'=>array('/site/depositResume'),'visible'=>Yii::app()->user->isGuest()),
         //array('label'=>'Register Company', 'url'=>array('/registration/registerCompany'),'visible'=>Yii::app()->user->isMember()),
         array('label'=>'Submit a job', 'url'=>array('/job/submitJob'),'visible'=>Yii::app()->user->isCompany()),
-        array('label'=>'Update Profile', 'url'=>array('/user/depositResume'),'visible'=>Yii::app()->user->isMember()),
+        array('label'=>'Edit Profile', 'url'=>array('/user/edit/1'),'visible'=>Yii::app()->user->isMember()),
         array('label'=>'Company', 'url'=>array('/company/company'),'visible'=>Yii::app()->user->isCompany()),
         array('label'=>'Update Profile', 'url'=>array('/company/update'),'visible'=>Yii::app()->user->isCompany()),
         array('label'=>'Manage', 'url'=>array('/admin/manage'),'visible'=>Yii::app()->user->isAdmin()),
         array('label'=>'Manage Jobs', 'url'=>array('/job/manageJobs'),'visible'=>Yii::app()->user->isCompany()),
         array('label'=>'Applications', 'url'=>array('/company/application'),'visible'=>Yii::app()->user->isCompany()),
         array('label'=>'Applications', 'url'=>array('/user/application'),'visible'=>Yii::app()->user->isMember()),
-        array('label'=>'Profile', 'url'=>array('/user/profile'),'visible'=>Yii::app()->user->isMember()),
+        array('label'=>'Profile', 'url'=>array('/user/view/1'),'visible'=>Yii::app()->user->isMember()),
 		//array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
 
         array('label'=>'LOGIN', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
