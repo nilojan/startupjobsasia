@@ -161,7 +161,7 @@ class SiteController extends Controller
             }
             $this->redirect(array('site/page', 'view' => 'emailNotFound'));
         }
-        $this->render('login', array('forget' => $forget));
+        $this->render('forgetPassword', array('forget' => $forget));
     }   
     public function actionFeeds()    {
 

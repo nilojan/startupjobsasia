@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
 	'Employees'=>array('index'),
-	$model->name,
+	$model->EID,
 );
 
 $this->menu=array(
@@ -19,11 +19,30 @@ $this->menu=array(
 	'data'=>$model,
 	'attributes'=>array(
 		'EID',
-		'username',
+		'UID',
+		'registered',
+		'fname',
+		'lname',
+		'contact',
 		'email',
-		'password',
-		'birthDate',
+		'photo',
+		'coverletter',
 		'gender',
-		'name',
+		'dob',
+		'location',
+		'country',
+		'lastjob',
+		'edu',
+		'work_exp',
+		'curr_salary',
+		'exp_salary',
+		'availability',
+		'resume',
+		'content',
+		'source',
+		'ip',
+		'acc_status',
+		'views',
+		'last_modified',
 	),
 )); ?>
