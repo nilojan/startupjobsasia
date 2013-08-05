@@ -60,7 +60,7 @@ class RegistrationForm extends CFormModel {
         */    
             // verifyCode needs to be entered correctly
            //       array('email, username','unique','className'=>'member'),
-            array('verifyCode', 'captcha', 'allowEmpty' => !CCaptcha::checkRequirements()),
+          //  array('verifyCode', 'captcha', 'allowEmpty' => !CCaptcha::checkRequirements()),
             array('password2', 'compare', 'compareAttribute' => 'password','message'=> 'Password does not match')
         );
     }

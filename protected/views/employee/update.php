@@ -1,7 +1,7 @@
 <?php
 $this->breadcrumbs=array(
 	'Employees'=>array('index'),
-	$model->name=>array('view','id'=>$model->EID),
+	$model->EID=>array('view','id'=>$model->EID),
 	'Update',
 );
 

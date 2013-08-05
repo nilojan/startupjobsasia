@@ -57,13 +57,15 @@ class RegistrationController extends Controller {
                                 $message = new YiiMailMessage;
                                 $baseUrl = Yii::app()->request->baseUrl;
                                 $serverPath = 'localhost/yii/uStyle';
+                                $verification_link = Yii::app()->getBaseUrl(true).'/user/verify/code/'.$activationKey;
+                                
                                 $body = "Hi <font type=\"bold\">" . $record->name . "</font><br>
                                 <br>
                                 Welcome to StartUp Jobs Asia! Your account <font type=\"bold\">" . $record->username . "</font> has been registered.<br>
                                 <br>
                                 In order to ensure that you have received this confirmation, we ask that you follow the link below and confirm that this is in fact the correct email address.<br>
                                 <br>
-                                <a href=\"" . Yii::app()->baseURL . '/index.php/registration/verify?code=' . $activationKey . "\">Verify Your Email Here</a><br>
+                                <a href='".$verification_link."'>Verify Your Email Here</a><br>
                                 <br>
                                 Accounts that have not been confirmed will be deactivated and removed from our system within 7 days, including all email addresses.<br> 
                                 <br>
