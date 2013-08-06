@@ -3,8 +3,6 @@ $this->pageTitle = Yii::app()->name . ' - Main';
 $this->breadcrumbs = array(
     'Main');
 ?>
-<title>My Applications | StartUp Jobs Asia | Startup Hire | Startup Hiring | Startup Recruiting | Startup Jobs | VC Hire | VC Jobs | Work In Startups</title>
-
 <h1>Applications</h1>
 
      
@@ -17,7 +15,7 @@ $this->breadcrumbs = array(
                                                                     
                                                                     ),
                                                                     'pagination'=>array(
-                                                                                        'pageSize'=>15,
+                                                                        'pageSize'=>15,
                                                                     ),
                                                 )); ?>
         

@@ -5,11 +5,7 @@ $this->breadcrumbs = array(
 $this->pageTitle = 'User Registration | '.Yii::app()->params['pageTitle'];
 ?>
 
-
-
-<p>
-Please fill out the form with your particulars
-</p>
+<p>Please fill out the form with your particulars</p>
 
 <?php /** @var BootActiveForm $form */
             $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
@@ -38,11 +34,3 @@ Please fill out the form with your particulars
                                                               'label'=>'Submit')); ?>
       </div>    
 <?php $this->endWidget(); ?>
-
-
-
-
-
-
-
-
