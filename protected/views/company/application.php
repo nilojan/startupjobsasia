@@ -7,11 +7,11 @@ $this->pageTitle = 'Application | '.Yii::app()->params['pageTitle'];
 <h1>Applications</h1>
 
      
-       <?php
-        $dataProvider=new CActiveDataProvider('application', array( 'criteria'=>array(
+       <?php 
+        $dataProvider=new CActiveDataProvider('application1', array( 'criteria'=>array(
                                                                     'order'=>'applied DESC',
-                                                                    'with' =>array('job','company'),
-                                                                    'condition'=>'company.CID=:CID',
+                                                                  //  'with' =>array('JID','CID'),
+                                                                   'condition'=>'CID=:CID',
                                                                     'params'=>array(':CID'=>$company->CID),    
                                                                     
                                                                     ),
@@ -19,6 +19,8 @@ $this->pageTitle = 'Application | '.Yii::app()->params['pageTitle'];
                                                                                         'pageSize'=>15,
                                                                     ),
                                                 )); ?>
+
+            <?php //var_dump($dataProvider); die; ?>
         
  <?php       $this->widget('bootstrap.widgets.TbListView', array(
             'dataProvider'=>$dataProvider,

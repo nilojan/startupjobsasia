@@ -106,7 +106,7 @@ return array(
 		'urlManager'=>array(
 			'urlFormat'=>'path',
                         'showScriptName'=>false,
-			'rules'=>array(
+			'rules'=>/*array(
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
 				
                                // '<controller:\w+>/<id:\d+>'=>'<controller>/view',
@@ -117,8 +117,8 @@ return array(
                                 'company'=>'company/view/<CID:\d+>/title/',
                                 //'<controller>/<title>'=>'<controller>/<action>',
 				'<controller>'=>'<controller:\w+>/<action:\w+>',
-			),
-	/*array(
+			),*/
+	array(
 	        'post/<id:\d+>/<title:.*?>'=>'post/view',
 	        'posts/<tag:.*?>'=>'post/index',
 	      //  'api/<controller:\w+>/<id:\w+>/<var:\w+>'=>array('<controller>/restView', 'verb'=>'GET'),
@@ -139,7 +139,7 @@ return array(
 	        array('api/create', 'pattern'=>'api/<model:\w+>', 'verb'=>'POST'),
 	        // Other controllers
 	        '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
-	    ),*/
+	    ),
 		),
 		
 		//'db'=>array(

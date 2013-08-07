@@ -59,10 +59,10 @@ class Employee extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('fname, lname, contact, email, photo, coverletter, gender, dob, location, country, lastjob, edu, work_exp, curr_salary, exp_salary, availability, resume, content, source, ip, acc_status, views', 'required'),
+			array('fname, lname, contact, email, coverletter, gender, dob, location, country, lastjob, edu, work_exp, curr_salary, exp_salary, availability, content, source, ip, acc_status, views', 'required'),
 			array('UID, registered, contact, work_exp, curr_salary, exp_salary, views', 'numerical', 'integerOnly'=>true),
 			array('fname, lname', 'length', 'max'=>30),
-			array('email, photo', 'length', 'max'=>100),
+			array('email, photo', 'length', 'max'=>250),
 			array('gender', 'length', 'max'=>10),
 			array('location, source, ip', 'length', 'max'=>255),
 			array('country', 'length', 'max'=>50),
@@ -70,6 +70,10 @@ class Employee extends CActiveRecord
 			array('availability, acc_status', 'length', 'max'=>20),
 			array('resume', 'length', 'max'=>256),
 			array('last_modified', 'safe'),
+			//image upload		
+			array('photo', 'file', 'types'=>'jpg,gif,png', 'allowEmpty'=>true,'wrongType'=>'Only jpg/gif/png allowed.'),
+			array('resume', 'file', 'types'=>'pdf,doc,docx', 'allowEmpty'=>true,'wrongType'=>'Only pdf/doc/docx allowed.'),
+			array('coverletter', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('EID, UID, registered, fname, lname, contact, email, photo, coverletter, gender, dob, location, country, lastjob, edu, work_exp, curr_salary, exp_salary, availability, resume, content, source, ip, acc_status, views, last_modified', 'safe', 'on'=>'search'),
