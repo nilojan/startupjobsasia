@@ -49,7 +49,7 @@
                                     'items'=>array(
                                                     array('label'=>'Register', 'url'=>'#', 'items'=>array(
                                                             array('label'=>'A User', 'url'=>array('/user/registration')),
-                                                           // '---',
+                                                            '---',
                                                             array('label'=>'A StartUp', 'url'=>'#'),
                                                     )),
                                                     array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),

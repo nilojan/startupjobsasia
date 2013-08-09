@@ -43,9 +43,11 @@ class Application1 extends CActiveRecord
 		return array(
 			array('EID, JID, CID, offered, shortlist, onhold', 'numerical', 'integerOnly'=>true),
 			array('applied', 'safe'),
+			array('jobstatus', 'safe'),	
+			array('jobstatus', 'required'),	
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('AID, EID, JID, CID, offered, shortlist, onhold, applied', 'safe', 'on'=>'search'),
+			array('AID, EID, JID, CID, jobstatus, offered, shortlist, onhold, applied', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -57,7 +59,11 @@ class Application1 extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-		);
+			'job'=> array(self::BELONGS_TO, 'job', 'JID'),
+            'company'=> array(self::BELONGS_TO, 'company', 'CID'),
+           // 'user'=> array(self::BELONGS_TO, 'user', 'ID'),
+            'Employee'=> array(self::BELONGS_TO, 'Employee', 'EID'),
+	);
 	}
 
 	/**
@@ -70,6 +76,7 @@ class Application1 extends CActiveRecord
 			'EID' => 'Eid',
 			'JID' => 'Jid',
 			'CID' => 'Cid',
+			'jobstatus' => 'Job Status',
 			'offered' => 'Offered',
 			'shortlist' => 'Shortlist',
 			'onhold' => 'Onhold',
@@ -92,6 +99,7 @@ class Application1 extends CActiveRecord
 		$criteria->compare('EID',$this->EID);
 		$criteria->compare('JID',$this->JID);
 		$criteria->compare('CID',$this->CID);
+		$criteria->compare('jobstatus',$this->jobstatus);
 		$criteria->compare('offered',$this->offered);
 		$criteria->compare('shortlist',$this->shortlist);
 		$criteria->compare('onhold',$this->onhold);

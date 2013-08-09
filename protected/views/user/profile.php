@@ -42,7 +42,7 @@ if($_GET['id'] == $curent_user_id)
 		'contact',
 		'email',
 		//'photo',
-		'coverletter',
+		'coverLetter',
 		'gender',
 		'dob',
 		'location',
@@ -62,6 +62,13 @@ if($_GET['id'] == $curent_user_id)
 		//'last_modified',
 	),
 )); ?>
+
+<?php if(Yii::app()->user->isCompany() || Yii::app()->user->isAdmin())
+{ ?>
+<div class ="span2">
+                    <?php  echo CHtml::link(CHtml::encode('Download Resume'),Yii::app()->baseUrl . '/resume/'.$model->resume,array('target'=>'_blank')); ?>
+</div>
+<?php } ?>
 
     
 

@@ -75,7 +75,18 @@ class UserController extends Controller
 	}
 
 	public function actionApplication() {
-		$this->render('application');
+		
+		$id = Yii::app()->user->getID();
+		$user=$this->loadEmployeeModel($id);
+		//var_dump($user->EID);
+		//die();
+		//$company = company::model()->find('ID=:ID', array('ID' => Yii::app()->user->getID()));
+        //$this->render('application',array('user' => $user));
+
+        $user = Employee::model()->find('EID=:ID', array('ID' => $user->EID));
+        
+        $this->render('application',array('user' => $user));
+		
     }
 
 	public function actionApplyJob($JID) {
@@ -88,7 +99,7 @@ class UserController extends Controller
                 //check if applied
                 $model->attributes = $_POST['ApplyJobForm'];
                 if ($model->validate()) {
-                    $check = application::model()->find(':ID=ID&&:JID=JID',array(':ID'=>$ID,':JID'=>$JID));
+                    $check = Application1::model()->find(':ID=EID&&:JID=JID',array(':ID'=>$ID,':JID'=>$JID));
                     $uploadedFile=CUploadedFile::getInstance($model,'resume');
                 // if the user did not upload a file and also no resume stored
                      if ($check!=null||(empty($uploadfile)&&($user->resume == null)))  {    // already applied to the job
@@ -97,12 +108,12 @@ class UserController extends Controller
                 // redirect if no resume is found
                     else {
                         $oldfilename = $user->resume;
-                        $application = new application;
+                        $application = new Application1;
                         $job = job::model()->find('JID=:JID', array('JID' => $JID));
                     
                         $user->coverLetter = nl2br($model->coverLetter);
                         $application->cover_letter = nl2br($model->coverLetter);
-                        $application->ID =$ID;
+                        $application->EID =$ID;
                         $application->JID = $JID;
                         $application->CID = $job ->CID; 
                     // send resume to employer 
@@ -117,7 +128,7 @@ class UserController extends Controller
                                     }
                             }           //uploaded file is empty
                             else {      //use previous resume
-                                    $fileName = $application->ID.'-'.$user->resume;
+                                    $fileName = $application->EID.'-'.$user->resume;
                                     $application->resume =$fileName;
                                     if ($application->save())   {       // copy the file to the job application folder
                                         copy(Yii::app()->basepath.'/../resume/'.$user->resume,Yii::app()->basepath.'/../jobApplication/'.$fileName);

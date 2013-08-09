@@ -21,17 +21,29 @@ $this->pageTitle = 'Application | '.Yii::app()->params['pageTitle'];
                                                 )); ?>
 
             <?php //var_dump($dataProvider); die; ?>
+<!--   <table class ="table">
+  <div class ="span2">Job Title</div>
+  <div class ="span2">Bidder Name</div>
+  <div class ="span2">Resume</div>
+  <div class ="span2">Status</div>
+  <div class ="span2">Applied On</div>
+  <div class ="btn-toolbar">Edit</div>
+  <div class ="btn-toolbar">Delete</div>
+</table> -->
         
  <?php       $this->widget('bootstrap.widgets.TbListView', array(
             'dataProvider'=>$dataProvider,
-            'cssFile' => Yii::app()->baseUrl . '/css/gridView.css',
+           // 'cssFile' => Yii::app()->baseUrl . '/css/gridView.css',
+            'cssFile' => false,
             'itemView'=>'_applicationView',   // refers to the partial view named '_post'
-            //'ajaxUpdate'=>false,
+           // 'ajaxUpdate'=>true,
             //'htmlOptions' => array("class"=>"table table-striped"),   
             'sortableAttributes'=>array(
               'job.title'=>'Title',
+
             
            // 'created'=>'Created',
     ),
 ));
  ?>
+ 

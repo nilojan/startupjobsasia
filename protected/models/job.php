@@ -42,7 +42,8 @@ class job extends CActiveRecord {
     {
         return array(
             'company'=>array(self::BELONGS_TO, 'company', 'CID'),
-            'application'=>array(self::HAS_MANY, 'application', 'JID'),
+            'Application1'=>array(self::HAS_MANY, 'Application1', 'JID'),
+            //'Employee'=>array(self::BELONGS_TO, 'Employee', 'EID'),
             
         );
     }

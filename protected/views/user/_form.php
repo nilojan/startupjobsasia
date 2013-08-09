@@ -27,7 +27,7 @@
     ?> 
     
 
-	<?php echo $form->textAreaRow($model,'coverletter',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
+	<?php echo $form->textAreaRow($model,'coverLetter',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
 
 	<?php echo $form->textFieldRow($model,'gender',array('class'=>'span5','maxlength'=>10)); ?>
 

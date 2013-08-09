@@ -26,3 +26,5 @@ $this->breadcrumbs = array(
            // 'created'=>'Created',
     ),
 ));
+
+?>
