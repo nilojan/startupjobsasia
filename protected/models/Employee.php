@@ -59,7 +59,7 @@ class Employee extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('fname, lname, contact, email, coverLetter, gender, dob, location, country, lastjob, edu, work_exp, curr_salary, exp_salary, availability, content, source, ip, acc_status, views', 'required'),
+			array('fname, lname, contact, email, coverLetter, gender, location, country, lastjob, edu, work_exp, curr_salary, exp_salary, availability, content, source, ip, acc_status, views', 'required'),
 			array('UID, registered, contact, work_exp, curr_salary, exp_salary, views', 'numerical', 'integerOnly'=>true),
 			array('fname, lname', 'length', 'max'=>30),
 			array('email, photo', 'length', 'max'=>250),
@@ -70,6 +70,7 @@ class Employee extends CActiveRecord
 			array('availability, acc_status', 'length', 'max'=>20),
 			array('resume', 'length', 'max'=>256),
 			array('last_modified', 'safe'),
+			array('dob', 'safe'),
 			//image upload		
 			array('photo', 'file', 'types'=>'jpg,gif,png', 'allowEmpty'=>true,'wrongType'=>'Only jpg/gif/png allowed.'),
 			array('resume', 'file', 'types'=>'pdf,doc,docx', 'allowEmpty'=>true,'wrongType'=>'Only pdf/doc/docx allowed.'),
@@ -77,6 +78,7 @@ class Employee extends CActiveRecord
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('EID, UID, registered, fname, lname, contact, email, photo, coverLetter, gender, dob, location, country, lastjob, edu, work_exp, curr_salary, exp_salary, availability, resume, content, source, ip, acc_status, views, last_modified', 'safe', 'on'=>'search'),
+
 		);
 	}
 

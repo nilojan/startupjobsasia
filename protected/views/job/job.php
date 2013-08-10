@@ -157,12 +157,28 @@ $this->breadcrumbs = array(
 
 	<div class="clear">   
 		<div id="job">
-		  <?php $this->widget('bootstrap.widgets.TbButton', array(
-												'label'=>'Apply Online',
-												'type'=>'primary', 
-												'size'=>'large', 
-												'url'=>Yii::app()->createUrl("user/applyJob", array("JID"=>$job->JID )),    
-		)); ?>  
+		  <?php 
+		  if(Yii::app()->user->isMember())
+		  {
+
+			  $this->widget('bootstrap.widgets.TbButton', array(
+													'label'=>'Apply Online',
+													'type'=>'primary', 
+													'size'=>'large', 
+													'url'=>Yii::app()->createUrl("user/applyJob", array("JID"=>$job->JID )),    
+			)); 
+		  }
+		  if(Yii::app()->user->isGuest)
+		  {
+		  	
+			  $this->widget('bootstrap.widgets.TbButton', array(
+													'label'=>'Apply Online',
+													'type'=>'primary', 
+													'size'=>'large', 
+													'url'=>Yii::app()->createUrl("user/apply_Job", array("JID"=>$job->JID )),    
+			)); 
+		  }
+		  ?>  
 
 		</div>
 	</div>

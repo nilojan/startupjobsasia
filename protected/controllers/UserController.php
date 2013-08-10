@@ -91,6 +91,7 @@ class UserController extends Controller
 
 	public function actionApplyJob($JID) {
         //active record involved user, application, job
+
        $model = new ApplyJobForm;
        $ID = Yii::app()->user->getID();
        $user = Employee::model()->find('UID=:ID',array('ID'=>$ID));
@@ -144,6 +145,90 @@ class UserController extends Controller
             $this->render('applyJob', array('user'=>$user,
                                          'model'=>$model));
 		}
+
+		public function actionApply_Job($JID) {
+        //active record involved user, application, job
+
+       //$model = new Employee;
+			$model = new Employee();
+			//$model = new ApplyJobForm;
+			
+			if(isset($_POST['Employee'])) {
+            	$model->attributes = $_POST['Employee'];
+            	var_dump($_POST);
+            	die;
+            	$uploadedFile=CUploadedFile::getInstance($model,'resume');
+            	var_dump($model->attributes);
+				die();
+				if($model->save(false))
+				{
+					var_dump($model->fname);
+					die();
+				}
+				/*if($model->validate()) {
+					$model->save();
+					
+				}*/
+			}
+
+       /*$model = new ApplyJobForm;
+       if(Yii::app()->user->isGuest)
+       	{
+	        //$user = Employee::model()->find('UID=:ID',array('ID'=>$ID));
+	        //$model->coverLetter = str_replace('<br />', "", $user->coverLetter);
+	            if (isset($_POST['ApplyJobForm'])) {
+	                //check if applied
+	                $model->attributes = $_POST['ApplyJobForm'];
+	                if ($model->validate()) {
+	                    $check = Application1::model()->find(':ID=EID&&:JID=JID',array(':ID'=>$ID,':JID'=>$JID));
+	                    $uploadedFile=CUploadedFile::getInstance($model,'resume');
+	                // if the user did not upload a file and also no resume stored
+	                     if ($check!=null||(empty($uploadfile)&&($user->resume == null)))  {    // already applied to the job
+	                             $this->redirect(array('site/page', 'view'=>'error'));
+	                     }
+	                // redirect if no resume is found
+	                    else {
+	                        $oldfilename = $user->resume;
+	                        $application = new Application1;
+	                        $job = job::model()->find('JID=:JID', array('JID' => $JID));
+	                    
+	                        $user->coverLetter = nl2br($model->coverLetter);
+	                        $application->cover_letter = nl2br($model->coverLetter);
+	                        $application->EID =$ID;
+	                        $application->JID = $JID;
+	                        $application->CID = $job ->CID; 
+	                    // send resume to employer 
+	                    //$user = user::model()->find(':ID=ID', array(':ID'=>$ID)); 
+	                    if ($application->save()) {    
+	                          if (!empty($uploadedFile)) {      //uploaded file is not empty
+	                                    $fileName = str_replace(' ', '', "{$application->ID}-{$uploadedFile}");  // random number + file name
+	                                    $application->resume = $fileName;
+	                                    if ($application->save())   {
+	                                        $uploadedFile->saveAs(Yii::app()->basepath.'/../jobApplication/'.$fileName);
+	                                        $this->redirect(array('site/page', 'view'=>'success'));
+	                                    }
+	                            }           //uploaded file is empty
+	                            else {      //use previous resume
+	                                    $fileName = $application->EID.'-'.$user->resume;
+	                                    $application->resume =$fileName;
+	                                    if ($application->save())   {       // copy the file to the job application folder
+	                                        copy(Yii::app()->basepath.'/../resume/'.$user->resume,Yii::app()->basepath.'/../jobApplication/'.$fileName);
+	                                        $this->redirect(array('site/page', 'view'=>'success'));
+	                                    }
+	                            }
+	                            // array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
+	                           
+	                    }
+	                }
+	            }
+	            }
+	        }
+            $this->render('applyJob', array('user'=>$user,
+                                         'model'=>$model)); */
+			
+			$this->render('apply_Job');
+		}
+
 	 public function actionDepositResume()   {
              $model = new ApplyJobForm();
              $user=user::model()->find(':ID=ID', array('ID'=>Yii::app()->user->getID()));
