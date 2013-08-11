@@ -3,6 +3,7 @@
 $this->breadcrumbs=array(
 	'Apply',
 );
+
 ?>
 
 <h1>Confirmation</h1>
@@ -34,4 +35,3 @@ Or upload another resume
 </div>
             
 <?php $this->endWidget(); ?>
-

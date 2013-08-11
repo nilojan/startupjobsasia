@@ -4,6 +4,7 @@ include("dbconfig.php");
 // Yii::setPathOfAlias('local','path/to/local-folder');
 Yii::setPathOfAlias('bootstrap', dirname(__FILE__).'/../extensions/bootstrap');
 Yii::setPathOfAlias('paypal', dirname(__FILE__).'/../extensions/paypal');
+Yii::setPathOfAlias('editable', dirname(__FILE__).'/../extensions/x-editable');
 
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
@@ -23,6 +24,7 @@ return array(
 		'application.components.*',
                 'application.extensions.yii-mail.*',
                 'application.helpers.*',
+                'editable.*'
                 
             ),
 
@@ -56,6 +58,15 @@ return array(
                 'class'=>'bootstrap.components.Bootstrap',
                 
                  ),
+
+            'editable' => array(
+            'class'     => 'editable.EditableConfig',
+            'form'      => 'bootstrap',        //form style: 'bootstrap', 'jqueryui', 'plain' 
+            'mode'      => 'inline',            //mode: 'popup' or 'inline'  
+            'defaults'  => array(              //default settings for all editable elements
+               'emptytext' => 'Pending'
+            )
+        	),        
 
             'mail' => array(
 			    'class' => 'ext.yii-mail.YiiMail',

@@ -1,0 +1,137 @@
+-----------
+user table:
+-----------
+
+CREATE TABLE IF NOT EXISTS `user1` (
+  `UID` int(255) NOT NULL AUTO_INCREMENT,
+  `username` varchar(80) DEFAULT NULL,
+  `password` varchar(120) DEFAULT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `name` varchar(100) DEFAULT NULL,
+  `role` varchar(2) DEFAULT '0',
+  `activation_key` varchar(100) DEFAULT NULL,
+  `last_login` timestamp NULL DEFAULT NULL,
+  `registered` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  
+  PRIMARY KEY (`uid`)
+);
+
+---------------
+employee table:
+---------------
+
+CREATE TABLE IF NOT EXISTS `employee1` (
+  `EID` int(11) NOT NULL AUTO_INCREMENT,
+  `UID` int(10) DEFAULT NULL,
+  `registered` int(1) DEFAULT '0', 
+  `fname` varchar(30) NOT NULL,
+  `lname` varchar(30) NOT NULL,
+  `contact` int(15) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `photo` varchar(100) NOT NULL,
+  `coverletter` text NOT NULL,
+  `gender` varchar(10) NOT NULL,
+  `dob` date NOT NULL,
+  `location` varchar(255) NOT NULL,
+  `country` varchar(50) NOT NULL,
+  `lastjob` varchar(250) NOT NULL,
+  `edu` varchar(250) NOT NULL,
+  `work_exp` int(10) NOT NULL,
+  `curr_salary` int(10) NOT NULL,
+  `exp_salary` int(10) NOT NULL,
+  `availability` varchar(20) NOT NULL,
+  `resume` varchar(256) NOT NULL,
+  `content` text NOT NULL,
+  `source` varchar(255) NOT NULL,
+  `ip` varchar(255) NOT NULL,
+  `acc_status` varchar(20) NOT NULL,
+  `views` int(10) NOT NULL,
+  `last_modified` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`EID`),
+  UNIQUE KEY `UID` (`UID`),
+  UNIQUE KEY `email` (`email`)
+);
+
+--------------
+company table:
+--------------
+
+CREATE TABLE IF NOT EXISTS `company1` (
+  `CID` int(11) NOT NULL AUTO_INCREMENT,
+  `UID` varchar(45) DEFAULT NULL,
+  `cname` varchar(45) DEFAULT NULL,
+  `cemail` varchar(45) DEFAULT NULL,
+  `address` text,
+  `image` varchar(150) DEFAULT 'default.jpg',
+  `contact` int(19) DEFAULT NULL,
+  `job_count` int(11) DEFAULT '0',
+  `status` varchar(45) DEFAULT NULL,
+  `started` timestamp NULL DEFAULT NULL,
+  `awards` text,
+  `summary` text,
+  `coverpicture` varchar(150) DEFAULT NULL,
+  `mission` text,
+  `culture` text,
+  `benefits` text,
+  `location` text,
+  `twitter` varchar(150) DEFAULT NULL,
+  `facebook` varchar(150) DEFAULT NULL,
+  `website` varchar(150) DEFAULT NULL,
+  `created` timestamp NULL DEFAULT NULL,
+  `modified` timestamp NULL DEFAULT NULL,
+  `unique_views` int(11) DEFAULT '0',
+  `views` int(11) DEFAULT '0',
+  PRIMARY KEY (`CID`),
+
+);
+
+-----------
+job table:
+-----------
+
+CREATE TABLE IF NOT EXISTS `job1` (
+  `JID` int(11) NOT NULL AUTO_INCREMENT,
+  `CID` varchar(45) DEFAULT NULL,
+  `title` varchar(500) NOT NULL,
+  `description` text DEFAULT NULL,
+  `responsibility` text NOT NULL,
+  `requirement` text NOT NULL,
+  `type` varchar(45) DEFAULT NULL,
+  `types` varchar(254) NOT NULL,
+  `full_time` varchar(10) NOT NULL,
+  `part_time` varchar(10) NOT NULL,
+  `freelance` varchar(10) NOT NULL,
+  `internship` varchar(10) NOT NULL,
+  `temporary` varchar(10) NOT NULL,
+  `category` varchar(45) DEFAULT NULL,
+  `location` varchar(45) DEFAULT NULL,
+  `salary` varchar(45) DEFAULT NULL,
+  `howtoapply` text NOT NULL,
+  `post` datetime DEFAULT NULL,
+  `created` timestamp NULL DEFAULT NULL,
+  `modified` timestamp NULL DEFAULT NULL,
+  `expire` timestamp NULL DEFAULT NULL,
+  `premium` tinyint(1) DEFAULT '0',
+  `tags` varchar(150) DEFAULT NULL,
+  `meta` varchar(45) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
+  `unique_views` int(11) DEFAULT '0',
+  `views` int(11) DEFAULT '0',
+  PRIMARY KEY (`JID`)
+);
+
+------------------
+application table:
+------------------
+
+CREATE TABLE IF NOT EXISTS `application1` (
+  `AID` int(255) NOT NULL AUTO_INCREMENT,
+  `EID` int(255) DEFAULT NULL,
+  `JID` int(255) DEFAULT NULL,
+  `CID` int(255) DEFAULT NULL,
+  `applied` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `cover_letter` varchar(1000) DEFAULT NULL,
+  `resume` varchar(1000) DEFAULT 'default',
+  PRIMARY KEY (`AID`).
+  UNIQUE KEY `JID` (`JID`),
+);

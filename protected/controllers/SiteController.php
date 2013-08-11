@@ -171,7 +171,7 @@ class SiteController extends Controller
     }
     
         //  resume are stored
-    public function actionDepositResume()   {
+    public function actionDeposit_Resume()   {
              $model = new DepositResume();
              
              if (isset($_POST['DepositResume'])) {
@@ -193,7 +193,7 @@ class SiteController extends Controller
                     $uploadedFile=CUploadedFile::getInstance($model,'resume');
                     $uploadedPhoto=CUploadedFile::getInstance($model,'photo');
 					
-					$newFilePath = Yii::app()->basepath.'/../tmp/'.$uploadedFile;
+					$newFilePath = Yii::app()->basepath.'/../resume/'.$uploadedFile;
 					$uploadSuccess = $uploadedFile->saveAs($newFilePath);
 					
 					if (!$uploadSuccess) {

@@ -6,6 +6,16 @@ class ApplyJobForm extends CFormModel
     public $resume;
     public $photo;
     public $coverLetter;
+
+    public $fname;
+    public $lname;
+    public $email;
+    public $contact;
+    public $dob;
+    public $gender;
+    public $edu;
+    public $country;
+  
     
     
     /**

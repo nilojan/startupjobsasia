@@ -7,11 +7,11 @@ $this->breadcrumbs = array(
 
      
        <?php
-        $dataProvider=new CActiveDataProvider('application', array( 'criteria'=>array(
+        $dataProvider=new CActiveDataProvider('application1', array( 'criteria'=>array(
                                                                     'order'=>'applied DESC',
-                                                                    'with' =>array('job','user'),
-                                                                    'condition'=>'user.ID=:ID',
-                                                                    'params'=>array(':ID'=>Yii::app()->user->getID()),    
+                                                                   // 'with' =>array('job','Employee'),
+                                                                    'condition'=>'EID=:ID',
+                                                                    'params'=>array(':ID'=>$user->EID),    
                                                                     
                                                                     ),
                                                                     'pagination'=>array(
@@ -25,10 +25,8 @@ $this->breadcrumbs = array(
             'itemView'=>'_applicationView',   // refers to the partial view named '_post'
             //'ajaxUpdate'=>false,
             //'htmlOptions' => array("class"=>"table table-striped"),   
-            'sortableAttributes'=>array(
-              'job.title'=>'Title',
-            
-           // 'created'=>'Created',
-    ),
+            /*'sortableAttributes'=>array(
+              'last_reviewed'=>'last_reviewed',*/            
+           // 'created'=>'Created',    ),
 ));
  ?>
