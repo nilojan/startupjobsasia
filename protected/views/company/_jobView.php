@@ -24,8 +24,8 @@
          </div>
 		 
          </div>
-	<div id="JobType" class="type">
-		<div class ="<?php echo $data->type; ?>">
+	<div id="JobType" class="span2 type">
+		<div class ="<?php echo $data->type; ?> row">
 		                    <?php //echo $data->type; ?>
 							<?php $job_type = str_replace('-','',$data->type);?> 
 			<?php echo CHtml::link($data->type,array('site', $job_type)); ?>
