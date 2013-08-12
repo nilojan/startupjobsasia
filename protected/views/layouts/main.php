@@ -28,7 +28,7 @@
                                                         //array('label'=>'Register', 'url'=>array('/registration/registration')),
                                                         //array('label'=>'Jobs', 'url'=>array('/job/all')),
                                                         array('label'=>'User Registration', 'url'=>array('/registration/registration1'),'visible'=>Yii::app()->user->isGuest),
-                                                        array('label'=>'Register Company', 'url'=>array('/registration/registerCompany'),'visible'=>Yii::app()->user->isMember()),
+                                                        //array('label'=>'Register Company', 'url'=>array('/registration/registerCompany'),'visible'=>Yii::app()->user->isMember()),
                                                         array('label'=>'Submit a job', 'url'=>array('/job/submitJob'),'visible'=>Yii::app()->user->isCompany()),
                                                         array('label'=>'Update Profile', 'url'=>array('/user/edit'),'visible'=>Yii::app()->user->isMember()),
                                                         array('label'=>'Company', 'url'=>array('/company/company'),'visible'=>Yii::app()->user->isCompany()),
@@ -47,7 +47,7 @@
                                     'class'=>'bootstrap.widgets.TbMenu',
                                     'htmlOptions'=>array('class'=>'pull-right'),
                                     'items'=>array(
-                                                    array('label'=>'Register', 'url'=>'#', 'items'=>array(
+                                                    array('label'=>'Register', 'url'=>'#', 'visible'=>Yii::app()->user->isGuest, 'items'=>array(
                                                             array('label'=>'A User', 'url'=>array('/user/registration')),
                                                             '---',
                                                             array('label'=>'A StartUp', 'url'=>'#'),
