@@ -114,6 +114,47 @@ class CompanyController extends Controller  {
         
             $this->render('application',array('company' => $company));
    }
+
+   public function actionRegisterCompany() {
+            $model = new CompanyForm;
+            if (isset($_POST['CompanyForm'])) {
+                  $model->attributes = $_POST['CompanyForm'];
+                  if ($model->validate())   {  
+                  $ID = Yii::app()->user->getID();
+                     //generate activation ke
+                  $company = new company;
+                  
+                  $company->ID = $ID;
+                  $company->address = $model->address;
+                  $company->contact = $model->contact;
+                  $company->cname = $model->cname;
+                  $company->mission = nl2br($model->mission);
+                  $company->cemail = $model->cemail;
+                  $company->status = 0;
+                  $uploadedFile=CUploadedFile::getInstance($model,'image');
+                  if (!empty($uploadedFile)) {
+                            $fileName = "{$company->CID}-{$uploadedFile}";  // random number + file name
+                            $company->image = $fileName;
+                              // image will uplode to rootDirectory/banner    
+                  }              
+                  if ($company->save()) {
+                            if (!empty($uploadedFile)) 
+                                    $uploadedFile->saveAs(Yii::app()->basepath.'/../images/company/'.$fileName);
+                  }                      
+                  $user=user::model()->find(':ID=ID', array('ID'=>$ID));
+                  $user->role = 2;
+                  $user->CID = $company->CID;
+                  $user->save();
+                
+                  $approve = new approve; 
+                  $approve->CID = $company->CID;
+                  if ($approve->save())
+                            $this->redirect(array('company/company'));
+            
+                  }
+            }
+        $this->render('register_company', array('model' => $model));
+    }
         
 
 }
