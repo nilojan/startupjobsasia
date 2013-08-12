@@ -29,7 +29,7 @@ class ApplyJobForm extends CFormModel
             //array('resume, photo, coverLetter', 'safe'),
             // email has to be a valid email address
            // array('address,contact, image, about','safe'),
-            
+
             // verifyCode needs to be entered correctly
             array('coverLetter', 'safe'),
             array('resume', 'file',

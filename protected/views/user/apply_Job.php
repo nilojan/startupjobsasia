@@ -4,7 +4,6 @@ $this->breadcrumbs=array(
 	'Apply',
 );
 
-$model = new Employee();
 
 ?>
 
