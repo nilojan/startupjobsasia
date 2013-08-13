@@ -179,12 +179,36 @@ class UserController extends Controller
 						$saved = true;
 						$fileName = str_replace(' ', '', "{$existing_employee->EID}-{$uploadedFile->name}");                                 
                         $uploadedFile->saveAs(Yii::app()->basepath.'/../jobApplication/'.$fileName);
+
+                        $application = new Application1;
+                    	$job = job::model()->find('JID=:JID', array('JID' => $JID));
+                    	$company = company::model()->find('CID=:CID', array('CID' => $job->CID));
+                    	$application->cover_letter = nl2br($model->coverLetter);
+                   		$application->EID = $EID;
+                        $application->JID = $JID;
+                        $application->CID = $job->CID;
+                        $application->resume = $model->resume;
+
+                      	if($application->save())  {
+                        	//send email
+                        	$data = array(
+			       				'name' => $existing_employee->name,
+			       				'job' => $job->title,
+			       				'company' =>  $company->cname,
+			       				'username' => $new_user->username,					       				
+			       				'to' => $model->email,
+
+			       				);					       		
+					       		$sendEmail =  Yii::app()->user->sendEmail('applyjob',$data);
+                        }
+
                         $this->redirect(array('site/page', 'view'=>'success'));                        					 	
 					}					 
             		
             	}
             	else
             	{
+            			//guest user
             			$saved = true;
 												
 						$new_user = new User();
@@ -208,48 +232,28 @@ class UserController extends Controller
             				//$user = Employee::model()->find('EID=:ID',array('ID'=>$ID));
 				       		if($model->save())
 							{
-					       		Yii::import('ext.yii-mail.YiiMailMessage');
-								                        		
-		                        $message = new YiiMailMessage;
-		                        $baseUrl = Yii::app()->request->baseUrl;
+					       		$baseUrl = Yii::app()->request->baseUrl;
 		                        $serverPath = 'localhost/yii/uStyle';
 		                        $verification_link = Yii::app()->getBaseUrl(true).'/user/verify/code/'.$new_user->activation_key;
-		                        $body = "Hi <font type=\"bold\">" . $new_user->name . "</font><br>
-		                        <br>
-		                        Welcome to StartUp Jobs Asia! Your account <font type=\"bold\">" . $new_user->username . "</font> has been registered.<br>
-		                        <br>
-		                        In order to ensure that you have received this confirmation, we ask that you follow the link below and confirm that this is in fact the correct email address.<br>
-		                        <br>
-		                        <a href='".$verification_link."'>Verify Your Email Here</a><br>
-		                        <br>
-		                        You can use follwing username and passsword to login into your account.
-		                        <br>
-		                        Username : " . $new_user->username . "
-		                        <br>" . "
-		                        Password : " . $dt . "
-		                        <br>
-		                        <br>
-		                        Accounts that have not been confirmed will be deactivated and removed from our system within 7 days, including all email addresses.<br> 
-		                        <br>
-		                        If you have NOT attempted to create an account at startupjobs please ignore this email - it might have been sent because someone mistyped his/her own email address.<br>
-		                        THIS IS AN AUTO-GENERATED MESSAGE - PLEASE DO NOT REPLY TO THIS MESSAGE!<br>
-		                        <br>
-		                        -------------<br>
-		                        StartUp Jobs Asia Team";
-		                        $message->setBody($body, 'text/html');
-		                        $message->subject = "StartUp Jobs Asia Account Verification";
-		                        $message->addTo($model->email);
-		                        $message->from = 'noreply@StartUpJobsAsia.com';
-		                        Yii::app()->mail->send($message);		                        
-		               
 
+					       		//send email				       		
+					       		$data = array(
+					       				'name' => $new_user->name,
+					       				'activation_key' => $verification_link,
+					       				'verify_link' =>  $verification_link,
+					       				'username' => $new_user->username,
+					       				'password' => $dt,
+					       				'to' => $model->email,
+					       				);					       		
+					       		$sendEmail =  Yii::app()->user->sendEmail('registration',$data);
+		               
 								$fileName = str_replace(' ', '', "{$model->EID}-{$uploadedFile->name}");                                 
 		                        $uploadedFile->saveAs(Yii::app()->basepath.'/../jobApplication/'.$fileName);
-		                        //$this->redirect(array('site/page', 'view'=>'success'));
-		  
+		                        		  
 		                    	$EID = Yii::app()->db->getLastInsertID();
 		                    	$application = new Application1;
 		                    	$job = job::model()->find('JID=:JID', array('JID' => $JID));
+		                    	$company = company::model()->find('CID=:CID', array('CID' => $job->CID));
 		                    	$application->cover_letter = nl2br($model->coverLetter);
 		                   		$application->EID = $EID;
 		                        $application->JID = $JID;
@@ -258,109 +262,27 @@ class UserController extends Controller
 
 		                        if($application->save())
 		                        {
-		                        	//send mail
+		                        	//send email
+		                        	$data = array(
+					       				'name' => $new_user->name,
+					       				'job' => $job->title,
+					       				'company' =>  $company->cname,
+					       				'username' => $new_user->username,					       				
+					       				'to' => $model->email,
 
+					       				);					       		
+							       		$sendEmail =  Yii::app()->user->sendEmail('applyjob',$data);
 		                        }
+
 		                        $this->redirect(array('site/page', 'view'=>'success'));
 
                      	}
                 	} 
             	}
-            }
-            
-
+            }     
+      	
             	
-            	/*if($model->save())
-            	{
-            		$ID = Yii::app()->db->getLastInsertID();            		
-            		$user = Employee::model()->find('EID=:ID',array('ID'=>$ID));
-            		if ($model->validate()) {
-	                    $check = Application1::model()->find(':ID=EID&&:JID=JID',array(':ID'=>$ID,':JID'=>$JID));
-	                    if($check)
-	                    {
-	                    	//you have already applied for this job
-	                    	//$this->redirect(array('site/page', 'view'=>'error'));
-	                    }
-	                    else
-	                    {
-	                    	$application = new Application1;
-	                    	$job = job::model()->find('JID=:JID', array('JID' => $JID));
-	                    	$user->coverLetter = nl2br($model->coverLetter);
-                       		$application->cover_letter = nl2br($model->coverLetter);
-                       		$application->EID = $ID;
-	                        $application->JID = $JID;
-	                        $application->CID = $job->CID; 
-
-
-	                    }
-	                    //$uploadedFile=CUploadedFile::getInstance($model,'resume');
-	                    //  if the user did not upload a file and also no resume stored
-	                   // if ($check!=null||(empty($uploadfile)&&($user->resume == null)))  {    // already applied to the job
-	                            // $this->redirect(array('site/page', 'view'=>'error'));
-                     	//}
-
-                    }
-
-            	}*/
-
-             	    
-				
-				
-		
-
-       /*$model = new ApplyJobForm;
-       if(Yii::app()->user->isGuest)
-       	{
-	        //$user = Employee::model()->find('UID=:ID',array('ID'=>$ID));
-	        //$model->coverLetter = str_replace('<br />', "", $user->coverLetter);
-	            if (isset($_POST['ApplyJobForm'])) {
-	                //check if applied
-	                $model->attributes = $_POST['ApplyJobForm'];
-	                if ($model->validate()) {
-	                    $check = Application1::model()->find(':ID=EID&&:JID=JID',array(':ID'=>$ID,':JID'=>$JID));
-	                    $uploadedFile=CUploadedFile::getInstance($model,'resume');
-	                // if the user did not upload a file and also no resume stored
-	                     if ($check!=null||(empty($uploadfile)&&($user->resume == null)))  {    // already applied to the job
-	                             $this->redirect(array('site/page', 'view'=>'error'));
-	                     }
-	                // redirect if no resume is found
-	                    else {
-	                        $oldfilename = $user->resume;
-	                        $application = new Application1;
-	                        $job = job::model()->find('JID=:JID', array('JID' => $JID));
-	                    
-	                        $user->coverLetter = nl2br($model->coverLetter);
-	                        $application->cover_letter = nl2br($model->coverLetter);
-	                        $application->EID =$ID;
-	                        $application->JID = $JID;
-	                        $application->CID = $job ->CID; 
-	                    // send resume to employer 
-	                    //$user = user::model()->find(':ID=ID', array(':ID'=>$ID)); 
-	                    if ($application->save()) {    
-	                          if (!empty($uploadedFile)) {      //uploaded file is not empty
-	                                    $fileName = str_replace(' ', '', "{$application->ID}-{$uploadedFile}");  // random number + file name
-	                                    $application->resume = $fileName;
-	                                    if ($application->save())   {
-	                                        $uploadedFile->saveAs(Yii::app()->basepath.'/../jobApplication/'.$fileName);
-	                                        $this->redirect(array('site/page', 'view'=>'success'));
-	                                    }
-	                            }           //uploaded file is empty
-	                            else {      //use previous resume
-	                                    $fileName = $application->EID.'-'.$user->resume;
-	                                    $application->resume =$fileName;
-	                                    if ($application->save())   {       // copy the file to the job application folder
-	                                        copy(Yii::app()->basepath.'/../resume/'.$user->resume,Yii::app()->basepath.'/../jobApplication/'.$fileName);
-	                                        $this->redirect(array('site/page', 'view'=>'success'));
-	                                    }
-	                            }
-	                            // array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
-	                           
-	                    }
-	                }
-	            }
-	            }
-	        }
-            $this->render('applyJob', array('user'=>$user,
+            /*$this->render('applyJob', array('user'=>$user,
                                          'model'=>$model)); */
 			
 			$this->render('apply_Job',array('model'=>$model));		
