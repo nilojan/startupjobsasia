@@ -154,7 +154,9 @@ $this->breadcrumbs = array(
 				<span class='st_linkedin_hcount' displayText='LinkedIn'></span>
 				</div>
      </div>
-
+	<div class="clear"> 
+		Total applicants : <?php echo $total_applicants; ?>
+	</div>
 	<div class="clear">   
 		<div id="job">
 		  <?php 

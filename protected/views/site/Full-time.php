@@ -6,11 +6,13 @@ $this->breadcrumbs = array(
 ?>
 
 <?php
+       
         $dataProvider=new CActiveDataProvider('job', array( 'criteria'=>array(
                                                                     'order'=>'created DESC',
                                                              //       'scope'=>'Full-time',    
+                                                                    //'condition'=>'JID in(SELECT JID FROM job WHERE type="Internship")', 
                                                                     'condition'=>'type=:type',
-                                                                    'params'=>array(':type'=>'Full-time'),
+                                                                   'params'=>array(':type'=>'Full-time'),
                                                                     ),
                                                                     'pagination'=>array(
                                                                                         'pageSize'=>20,
