@@ -6,6 +6,10 @@ $this->pageOgTitle = "{$job->title} {$company->cname} {$job->location}";
 $this->pageOgDesc= substr($job->description,0,400);
 $this->pageOgImage='/images/company/'.$company->image;
 
+$this->breadcrumbs = array(
+    $job->title,
+);
+
 ?>
 
 <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
@@ -27,13 +31,6 @@ $this->pageOgImage='/images/company/'.$company->image;
 	border-top:2px solid #F97C30;
 }
 </style>
-
-<?php
-$this->breadcrumbs = array(
-    $job->title,
-);
-
-?>
 
 <div class ="abc"></div>
 

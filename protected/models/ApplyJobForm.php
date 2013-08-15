@@ -60,6 +60,7 @@ class ApplyJobForm extends CFormModel
     public function attributeLabels() {
         return array(
             'coverLetter'=>'Cover Letter',
+			'gender'=>'Gender',
         );
     }
 

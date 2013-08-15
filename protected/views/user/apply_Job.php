@@ -25,9 +25,47 @@ $this->breadcrumbs=array(
     <?php echo $form->textFieldRow($model,'email',array('class'=>'span9', 'rows'=>10)); ?>
     <?php echo $form->textFieldRow($model,'contact',array('class'=>'span9', 'rows'=>10)); ?>
     <?php echo $form->textFieldRow($model,'dob',array('class'=>'span9', 'rows'=>10)); ?>
-    <?php echo $form->textFieldRow($model,'gender',array('class'=>'span9', 'rows'=>10)); ?>
-    <?php echo $form->textFieldRow($model,'edu',array('class'=>'span9', 'rows'=>10)); ?>
+	<?php echo $form->dropDownListRow($model, 'gender', array('Male'=>'Male', 'Female'=>'Female'), 
+                                                                 array('options' => array('M' => array('selected' => true)))); ?>
+	<?php echo $form->dropDownListRow($model, 'edu', array(	'Doctorate'=>'Doctorate (PHD)',
+															'Master'=>'Master',
+															'Bachelor'=>'Bachelor Degree',
+															'Diploma'=>'High School / Diploma',
+															'Cert'=>'Cert',
+															'Others'=>'Others'), 
+                                                                 array('options' => array('M' => array('selected' => true)))); ?>
     <?php echo $form->textFieldRow($model,'country',array('class'=>'span9', 'rows'=>10)); ?>
+	<?php echo $form->dropDownListRow($model, 'country', array(	''=>'Nationality (PHD)',
+															'Afghan'=>'Afghan',
+															'Albanian'=>'Albanian',
+															'Algerian'=>'Algerian',
+															'American'=>'American',
+															'Andorran'=>'Andorran',
+															'Angolan'=>'Angolan',
+															'Antiguans'=>'Antiguans',
+															'Argentinean'=>'Argentinean',
+															'Australian'=>'Australian',
+															'Austrian'=>'Austrian',
+															'Azerbaijani'=>'Azerbaijani',
+															'Bahamian'=>'Bahamian',
+															'Bahraini'=>'Bahraini',
+															'Bangladeshi'=>'Bangladeshi',
+															'Barbadian'=>'Barbadian',
+															'Barbudans'=>'Barbudans',
+															'Batswana'=>'Batswana',
+															'Belarusian'=>'Belarusian',
+															'American'=>'American',
+															'American'=>'American',
+															'American'=>'American',
+															'American'=>'American',
+															'American'=>'American',
+															'American'=>'American',
+															'American'=>'American',
+															'American'=>'American',
+															'American'=>'American',
+															'American'=>'American',
+															'Others'=>'Others'), 
+                                                                 array('options' => array('M' => array('selected' => true)))); ?>	
     <?php echo $form->textAreaRow($model,'coverLetter', array('class'=>'span9', 'rows'=>10)); ?>
     <?php echo $form->fileFieldRow($model,'resume'); ?>
 
