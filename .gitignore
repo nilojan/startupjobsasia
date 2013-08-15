@@ -1,6 +1,7 @@
 index.php
 assets
 framework
+jobApplication
 protected/config/main.php
 protected/runtime/application.log
 .log
