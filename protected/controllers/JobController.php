@@ -162,10 +162,15 @@ class JobController extends Controller {
     
     public function actionJob($JID) {
         $job = job::model()->find('JID=:JID', array('JID' => $JID));
-        $CID=$job->CID;
+        $CID=$job->CID;        
         $company = company::model()->find('CID=:CID', array('CID'=> $CID));
+        $aplicants = application1::model()->find('JID=:JID', array('JID'=> $JID));
+        $total_applicants = count($aplicants);
+
+
         $this->render('job', array('job' => $job,
-                                   'company'=>$company) );
+                                   'company'=>$company,
+                                   'total_applicants'=> $total_applicants) );
     }
     
     
@@ -275,6 +280,17 @@ class JobController extends Controller {
         $this->redirect(array('site/page','view'=>'success'));
  
         //$this->render('cancel');
+    }
+
+    public function actionSearch()
+    {
+        //The token of the cancelled payment typically used to cancel the payment within your application
+        $query = $_GET['q'];
+
+       // $this->redirect(array('site/page','view'=>'success'));
+ 
+        $this->render('search', array('query'=>$query));
+       // $this->render('search');
     }
  
     public function actionConfirmPayment()  {

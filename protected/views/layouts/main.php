@@ -42,7 +42,7 @@
                                                         //   array('label'=>'Upgrade', 'url'=>array('/company/upgrade'),'visible'=>Yii::app()->user->isCompany()),
                                                       ),
                                     ),
-                            '<form class="navbar-search pull-left" action="'.Yii::app()->request->baseUrl.'/search/search" method = "post"><input type="text" class="search-query span2" placeholder="Search"></form>',
+                            '<form class="navbar-search pull-left" action="'.Yii::app()->request->baseUrl.'/job/search" method = "get"><input type="text" name="q" class="search-query span2" placeholder="Search"></form>',
                             array(
                                     'class'=>'bootstrap.widgets.TbMenu',
                                     'htmlOptions'=>array('class'=>'pull-right'),

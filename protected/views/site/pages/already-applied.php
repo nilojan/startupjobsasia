@@ -6,8 +6,7 @@ $this->pageTitle = 'Already Applied | '.Yii::app()->params['pageTitle'];
 
 ?>
 <h3> You have already applied for this job</h3>
-                <p>A mail will be sent to your email in the next 15 minutes.<br/>
-                    Please verify your email account.</p>
+            
 
 
                
