@@ -3,23 +3,32 @@ class JobController extends Controller {
     public function filters()   {
         return array( 'accessControl' ); // perform access control for CRUD operations
     }
- 
+
+in jobController.php on line #13
+[3:24:28 PM] Parth Shah: array('allow',
+                  'actions'=>array('apply','search'),
+                  'users'=>array('*'),  
+                    
+            ),
+[3:24:51 PM] Parth Shah: add 'search' in that array
+	
     public function accessRules()   {
         return array(
             array('allow', // allow authenticated users to access all actions
                   'roles'=>array('2'),
             ),
             array('allow',
-                  'actions'=>array('apply'),
+                  'actions'=>array('apply','search'),
                   'users'=>array('*'),  
                     
             ),
             array('allow',
                   'actions'=>array('job'),
                   'users'=>array('*'),
-            ),
+            ),		
             array('deny',
                   'users'=>array('*')),
+
             );
     }
     public function actions() {
