@@ -11,7 +11,7 @@ class CompanyController extends Controller  {
                   'roles'=>array('2'),
            ),
             array('allow',  // allow all users to view company account
-                  'actions'=>array('view'),
+                  'actions'=>array('view','registration'),
                   'users'=>array('*'),
                 ),
             array('deny',
@@ -57,6 +57,7 @@ class CompanyController extends Controller  {
                     $company->benefits = nl2br($CForm ->benefits);
                     $company->mission = nl2br($CForm->mission);
                     $company->address = nl2br($CForm->address);
+                    $company->privacy = $CForm->privacy;
 					
                     $company->contact=$CForm->contact;
                     $uploadedFile=CUploadedFile::getInstance($CForm,'image');
@@ -115,7 +116,7 @@ class CompanyController extends Controller  {
             $this->render('application',array('company' => $company));
    }
 
-   public function actionRegisterCompany() {
+   public function actionRegistration() {
             $model = new CompanyForm;
             if (isset($_POST['CompanyForm'])) {
                   $model->attributes = $_POST['CompanyForm'];
@@ -153,7 +154,7 @@ class CompanyController extends Controller  {
             
                   }
             }
-        $this->render('register_company', array('model' => $model));
+        $this->render('registration', array('model' => $model));
     }
         
 

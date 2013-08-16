@@ -84,7 +84,13 @@ class SiteController extends Controller
       }
          
       public function actionFullTime() {
-        $this->render('Full-time');
+        $location = '';
+       // var_dump($_GET);
+        if(isset($_GET['loc']) && $_GET['loc'] != '')
+        {
+            $location = $_GET['loc'];
+        }
+        $this->render('Full-time', array('location' => $location));
          //  $this->render('fullTime', array('posts' => $post));
            
        }
@@ -100,10 +106,20 @@ class SiteController extends Controller
          
          $this->render('internship');
        }
-      public function actionLocation() {
+      /*public function actionLocation() {
+
+         var_dump($_GET);
          
          $this->render('location');
-       }	   
+       }*/	
+
+      public function actionJobs() {
+
+         $location = $_GET['location'];
+         
+         $this->render('location',array('location'=>$location));
+       } 
+
      public function actionFreeLance() {
         $PAGE_SIZE = 10; 
         $model=new job();

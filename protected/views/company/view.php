@@ -1,12 +1,12 @@
 <style type="text/css">
 .abc
 {
-	<?php if(isset($company->coverpicture)){  ?>
+	/*<?php if(isset($company->coverpicture)){  ?>*/
     height: 250px;
 	background-image:url("<?php echo Yii::app()->request->baseUrl.'/images/cover/'.$company->coverpicture; ?>");	
-	<?php }else{  ?>
+	/*<?php }else{  ?>
 	height: 0px;
-	<?php } ?>
+	<?php } ?>*/
     background-color: transparent;
     background-position: center center;
     background-repeat: no-repeat;
@@ -49,14 +49,27 @@ $this->pageOgImage='/images/company/180/'.$company->image;
 	 </div>
 	 
 	<div class="span6" style="float:right;border:3px solid #F97C30;background:#fff;">
-	 <?php echo '<img src='.Yii::app()->request->baseUrl.'/images/company/'. $company->image.' style="width:92%;padding:4%;" >'?>
+	 <?php
+        $default_image = 'startup_default.jpg';
+        $img_url = Yii::app()->getBaseUrl(true).'/images/company/'. $company->image; 
+         $file_headers = @get_headers($img_url);
+        if(($file_headers[0] == 'HTTP/1.1 404 Not Found') || ($file_headers[0] == 'HTTP/1.0 404 Not Found') || ($company->image == '')) {
+            $img_url = Yii::app()->request->baseUrl.'/images/company/'. $default_image; 
+            echo '<img src="'.$img_url.'" style="width:92%;padding:4%;" >';
+        }
+        else {
+            echo '<img src="'.$img_url.'" style="width:92%;padding:4%;" >';
+        }
+
+     ?>
 	 </div>
 	 <div class="span11" id="clear" style="text-align:right;border:3px solid #F97C30;float:right;margin-top:15px;">
 	 <div style="text-align:left;background:#F97C30;color:#fff;padding:10px;"><h1 style="margin:0px;"></h1></div>
 	 
 	   
 												
-		<?php       $this->widget('bootstrap.widgets.TbListView', array(
+		<?php     
+             $this->widget('bootstrap.widgets.TbListView', array(
             'dataProvider'=>$dataProvider,
             //'cssFile' => Yii::app()->baseUrl . '/css/gridView.css',
             'itemView'=>'_jobView',   // refers to the partial view named '_post'

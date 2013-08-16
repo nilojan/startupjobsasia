@@ -10,7 +10,7 @@ class JobController extends Controller {
                   'roles'=>array('2'),
             ),
             array('allow',
-                  'actions'=>array('apply'),
+                  'actions'=>array('apply','search'),
                   'users'=>array('*'),  
                     
             ),

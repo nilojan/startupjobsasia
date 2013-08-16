@@ -27,8 +27,8 @@
                                                         //array('label'=>'Contact', 'url'=>array('/site/contact')),
                                                         //array('label'=>'Register', 'url'=>array('/registration/registration')),
                                                         //array('label'=>'Jobs', 'url'=>array('/job/all')),
-                                                        array('label'=>'User Registration', 'url'=>array('/registration/registration1'),'visible'=>Yii::app()->user->isGuest),
-                                                        array('label'=>'Register Company', 'url'=>array('/registration/registerCompany'),'visible'=>Yii::app()->user->isMember()),
+                                                        array('label'=>'User Registration', 'url'=>array('/user/registration'),'visible'=>Yii::app()->user->isGuest),
+                                                        array('label'=>'Register Company', 'url'=>array('/company/registration'),'visible'=>Yii::app()->user->isMember()),
                                                         array('label'=>'Submit a job', 'url'=>array('/job/submitJob'),'visible'=>Yii::app()->user->isCompany()),
                                                         array('label'=>'Update Profile', 'url'=>array('/user/edit'),'visible'=>Yii::app()->user->isMember()),
                                                         array('label'=>'Company', 'url'=>array('/company/company'),'visible'=>Yii::app()->user->isCompany()),
@@ -49,8 +49,8 @@
                                     'items'=>array(
                                                     array('label'=>'Register', 'url'=>'#', 'items'=>array(
                                                             array('label'=>'A User', 'url'=>array('/user/registration')),
-                                                            '---',
-                                                            array('label'=>'A StartUp', 'url'=>'#'),
+                                                           // '---',
+                                                            array('label'=>'A StartUp', 'url'=>array('/company/registration')),
                                                     )),
                                                     array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
                                                     array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
@@ -70,7 +70,7 @@
        // array('label'=>'SIGN UP', 'url'=>array('/registration/registration'),'visible'=>Yii::app()->user->isGuest),
          array('label'=>'SIGN UP', 'items'=>array(
             array('label'=>'User', 'url'=>array('/user/registration')),
-            array('label'=>'Employee', 'url'=>array('/employee/register')),            
+            array('label'=>'StartUP', 'url'=>array('/company/registration')),            
             ),'visible'=>Yii::app()->user->isGuest),
 		//array('label'=>'Deposit Resume', 'url'=>array('/site/depositResume'),'visible'=>Yii::app()->user->isGuest()),
         //array('label'=>'Register Company', 'url'=>array('/registration/registerCompany'),'visible'=>Yii::app()->user->isMember()),
@@ -94,11 +94,11 @@
 
 	<ul class="nav nav-pills">
         <li><a href ="<?php echo Yii::app()->request->baseUrl?>/site/latest">Latest</a></li>
-		<li><a href ="<?php echo Yii::app()->request->baseUrl?>/site/fullTime">Full Time</a></li>
-		<li><a href ="<?php echo Yii::app()->request->baseUrl?>/site/partTime">Part Time</a></li>
+		<li><a href ="<?php echo Yii::app()->request->baseUrl?>/site/fulltime">Full Time</a></li>
+		<li><a href ="<?php echo Yii::app()->request->baseUrl?>/site/parttime">Part Time</a></li>
         <li><a href ="<?php echo Yii::app()->request->baseUrl?>/site/freelance">Freelance</a></li>
 		<li><a href ="<?php echo Yii::app()->request->baseUrl?>/site/internship">Internship</a></li>
-		<li><a href ="<?php echo Yii::app()->request->baseUrl?>/site/Temporary">Temporary</a></li>
+		<li><a href ="<?php echo Yii::app()->request->baseUrl?>/site/temporary">Temporary</a></li>
     </ul>
 	
 

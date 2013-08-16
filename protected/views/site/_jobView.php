@@ -42,7 +42,7 @@
 		<div class="clear">
 			
 			<span class="CompanyName"><?php echo CHtml::link($data->company->cname,array('company/view', 'CID'=>$data->CID,$url1)); ?> </span> / 			
-			<span class="CountryName"><?php echo CHtml::link($data->location,array('site/', 'location'=>$data->location)); ?></span>
+			<span class="CountryName"><?php echo CHtml::link($data->location,array('site/jobs', 'location'=>$data->location)); ?></span>
 					
 		</div>
 		 

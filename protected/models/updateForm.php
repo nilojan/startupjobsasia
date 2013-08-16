@@ -20,6 +20,7 @@ class UpdateForm extends CFormModel
         public $started;
         public $summary;
         public $cover_letter;
+        public $privacy;
     
 	/**
 	 * Declares the validation rules.
@@ -53,6 +54,7 @@ class UpdateForm extends CFormModel
                         'cname'     => 'Company Name',
                         'image'     => 'Company logo',
                         'coverpicture'     => 'Cover Photo',
+                        'privacy' => 'Privacy',
 		);
 	}
 }
