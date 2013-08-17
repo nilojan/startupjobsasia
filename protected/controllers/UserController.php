@@ -611,8 +611,8 @@ class UserController extends Controller
 
  	public function actionRegistration() {
         
+        //$model = new RegistrationForm;
         $model = new RegistrationForm;
-        
         if (isset($_POST['RegistrationForm'])) {
               $model->attributes = $_POST['RegistrationForm'];
               if ($model->validate()) {       //generate activation key

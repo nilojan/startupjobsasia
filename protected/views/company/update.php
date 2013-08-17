@@ -39,5 +39,5 @@ $this->pageTitle = 'Update Company | '.Yii::app()->params['pageTitle'];
                 <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary','label'=>'Submit')); ?>
             </div>
             
-    <?php $this->endWidget(); ?>
+    <?php $this->endWidget();    ?>
             

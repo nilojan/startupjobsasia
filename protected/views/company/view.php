@@ -91,10 +91,11 @@ $this->pageOgImage='/images/company/180/'.$company->image;
 			
 			<p style="text-align:justify;font-family: 'FrutigerLT';"><?php echo str_replace('</br>',"",$company->address); ?></p>
 			
-			<p style="text-align:justify;font-family: 'FrutigerLT';">tel : <a href="tel:<?php echo CHtml::encode($company->contact) ?>"><?php echo CHtml::encode($company->contact) ?></a></p>
+			<?php if($company->privacy == 0) { ?>
+            <p style="text-align:justify;font-family: 'FrutigerLT';">tel : <a href="tel:<?php echo CHtml::encode($company->contact) ?>"><?php echo CHtml::encode($company->contact) ?></a></p>
 			
 			<p style="text-align:justify;font-family: 'FrutigerLT';">email : <a href="mailto:<?php echo CHtml::encode($company->cemail) ?>"><?php echo CHtml::encode($company->cemail) ?></a></p>
-			
+			<?php } ?>
                 <h3> Our Mission </h3>
 				<p style="text-align:justify;font-family: 'FrutigerLT';">
                 <?php //   echo count($job);

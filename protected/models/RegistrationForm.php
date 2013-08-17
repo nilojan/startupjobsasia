@@ -31,6 +31,7 @@ class RegistrationForm extends CFormModel {
             // email has to be a valid email address
        //     array('mailingAddress','safe'),
             array('email', 'email'),
+       //     array('username','unique','message'=>'Username is already taken!'),
             // username must be at lenght minimal of 6 characters
             array('name', 'length', 'max'=>45),
             array('username', 'length', 'min'=>6, 'max'=>15),
@@ -64,6 +65,10 @@ class RegistrationForm extends CFormModel {
             array('password2', 'compare', 'compareAttribute' => 'password','message'=> 'Password does not match')
         );
     }
+    /*public function tableName()
+    {
+      return 'user1';
+    }*/
     
 
     /*

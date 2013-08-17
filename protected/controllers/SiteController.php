@@ -51,26 +51,28 @@ class SiteController extends Controller
                 if (isset($_POST['ajax']) && $_POST['ajax'] === 'login-form') {
                         echo CActiveForm::validate($model);
                         Yii::app()->end();
+                       
                 }
                 // collect user input data
                 if (isset($_POST['LoginForm'])) {
                         $model->attributes = $_POST['LoginForm'];
                 // validate user input and redirect to the previous page if valid
-                if ($model->validate()) {
-               // if ($employee->activationKey != 0) {
-                 //   $this->redirect(array('registration/resend?memberEmail='.$member->email));
-                //} else {
-                    $user =user::model()->find('username=:username', array('username' => $model->username));
-                    $user ->last_login = new CDbExpression('NOW()');
-                    $user->save();
-                    $returnUrl = Yii::app()->user->returnUrl;
-                    $model->login();
-                    if($returnUrl == '/yii/suj/index.php')
-                            $this->redirect(array('site/index'));
-                    
-                    Yii::app()->request->redirect($returnUrl);
+                        if ($model->validate()) {
+
+                       // if ($employee->activationKey != 0) {
+                         //   $this->redirect(array('registration/resend?memberEmail='.$member->email));
+                        //} else {
+                            $user =user::model()->find('username=:username', array('username' => $model->username));
+                            $user ->last_login = new CDbExpression('NOW()');
+                            $user->save();
+                            $returnUrl = Yii::app()->user->returnUrl;
+                            $model->login();
+                            if($returnUrl == '/yii/suj/index.php')
+                                    $this->redirect(array('site/index'));
+                            
+                            Yii::app()->request->redirect($returnUrl);
+                        }
                 }
-            }
         $this->render('login', array('model' => $model));
     }
 

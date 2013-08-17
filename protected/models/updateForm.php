@@ -29,7 +29,7 @@ class UpdateForm extends CFormModel
 	{
 		return array(
 			// name, email, subject and body are required
-	     array('cname, address,contact,mission,culture,benefits,image,coverpicture','safe'),
+	     array('cname, address,contact,mission,culture,benefits,image,coverpicture,privacy','safe'),
           
              array('image', 'file',
                    'types'=>'jpg, png, jpeg, gif',
