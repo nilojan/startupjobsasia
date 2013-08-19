@@ -21,7 +21,7 @@ $this->breadcrumbs = array(
         
  <?php       $this->widget('bootstrap.widgets.TbListView', array(
             'dataProvider'=>$dataProvider,
-            'cssFile' => Yii::app()->baseUrl . '/css/gridView.css',
+            //'cssFile' => Yii::app()->baseUrl . '/css/gridView.css',
             'itemView'=>'_applicationView',   // refers to the partial view named '_post'
             //'ajaxUpdate'=>false,
             //'htmlOptions' => array("class"=>"table table-striped"),   
