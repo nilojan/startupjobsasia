@@ -28,7 +28,7 @@
                                                         //array('label'=>'Register', 'url'=>array('/registration/registration')),
                                                         //array('label'=>'Jobs', 'url'=>array('/job/all')),
                                                         array('label'=>'User Registration', 'url'=>array('/user/registration'),'visible'=>Yii::app()->user->isGuest),
-                                                        array('label'=>'Register Company', 'url'=>array('/company/registration'),'visible'=>Yii::app()->user->isMember()),
+                                                        //array('label'=>'Register Company', 'url'=>array('/company/registration'),'visible'=>Yii::app()->user->isMember()),
                                                         array('label'=>'Submit a job', 'url'=>array('/job/submitJob'),'visible'=>Yii::app()->user->isCompany()),
                                                         array('label'=>'Update Profile', 'url'=>array('/user/edit'),'visible'=>Yii::app()->user->isMember()),
                                                         array('label'=>'Company', 'url'=>array('/company/company'),'visible'=>Yii::app()->user->isCompany()),

@@ -42,9 +42,10 @@ else if($action=='depositResume')
     <?php echo $form->textFieldRow($model,'email',array('class'=>'span9', 'rows'=>10)); ?>
     <?php echo $form->textFieldRow($model,'contact',array('class'=>'span9', 'rows'=>10)); ?>
     <?php echo $form->textFieldRow($model,'dob',array('class'=>'span9', 'rows'=>10)); ?>
-	<?php echo $form->dropDownListRow($model, 'gender', array('Male'=>'Male', 'Female'=>'Female'), 
+	<?php echo $form->dropDownListRow($model, 'gender', array(''=>'Gender', 'Male'=>'Male', 'Female'=>'Female'), 
                                                                  array('options' => array('M' => array('selected' => true)))); ?>
-	<?php echo $form->dropDownListRow($model, 'edu', array(	'Doctorate'=>'Doctorate (PHD)',
+	<?php echo $form->dropDownListRow($model, 'edu', array(	''=>'Highest Education',
+															'Doctorate'=>'Doctorate (PHD)',
 															'Master'=>'Master',
 															'Bachelor'=>'Bachelor Degree',
 															'Diploma'=>'High School / Diploma',
