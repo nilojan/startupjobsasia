@@ -32,7 +32,10 @@ class UserIdentity extends CUserIdentity
                 //$employee['username'] => $employee['password'],
             );
   
-        $emp = employee::model()->find('UID=:user_id', array(':user_id'=>$user->ID));
+        //$emp = employee::model()->find('UID=:user_id', array(':user_id'=>$user->ID));
+
+
+		$emp = Employee::model()->find('UID=:user_id', array(':user_id'=>$user->ID));
 
 
         
