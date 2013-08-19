@@ -3,15 +3,19 @@
 $Loc = Yii::app()->getRequest()->getQuery('location');
 
 $this->pageTitle = Yii::app()->name . $Loc. ' - Singapore jobs';
+$loc = 'Jobs';
+if($location != ''){
+    $loc =   $location.' Jobs';  
+}
 $this->breadcrumbs = array(
-    'Singapore Jobs',
+    $loc,
 );
 
 
         $dataProvider=new CActiveDataProvider('job', array( 'criteria'=>array(
                                                                     'order'=>'created DESC',
                                                                     'condition'=>'location=:location',
-                                                                    'params'=>array(':location'=>'Singapore'),
+                                                                    'params'=>array(':location'=>$location),
                                                                     ),
                                                                     'pagination'=>array(
                                                                                         'pageSize'=>20,

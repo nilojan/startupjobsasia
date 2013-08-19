@@ -1,16 +1,33 @@
 <?php
+if($action=='applyjob')
+{
+    $this->breadcrumbs=array(
+    	'Apply Job',
+    );
+}
+else if($action=='depositResume')
+{
+    $this->breadcrumbs=array(
+        'Deposit Resume',
+    );
+}
 
-$this->breadcrumbs=array(
-	'Apply',
-);
 
 
 
-?>
-
-<h1>Apply for this Job</h1>
-<!-- <h3>You are submitting</h3> -->
-  
+if($action=='applyjob')
+{ 
+  ?>
+    <h1>Apply for this Job</h1>
+  <?php 
+}
+else if($action=='depositResume')
+{
+   ?>
+    <h1>Deposit Resume</h1>
+  <?php
+}
+?>  
 <?php  $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                                                                                 'id'=>'horizontalForm',
                                                                                 'type'=>'horizontal',

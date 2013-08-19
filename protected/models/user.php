@@ -47,6 +47,7 @@ class User extends CActiveRecord
 			array('email, name, activation_key', 'length', 'max'=>100),
 			array('role', 'length', 'max'=>2),
 			array('last_login, registered', 'safe'),
+			array('username','unique','attributeName' => 'username','message'=>'heloo'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('ID, username, password, email, name, role, activation_key, last_login, registered', 'safe', 'on'=>'search'),

@@ -24,7 +24,7 @@ class UserIdentity extends CUserIdentity
 
         
         $use1 = $this->username;
-        $user=user::model()->find('username=:username', array(':username'=>$use1));
+        $user = user::model()->find('username=:username', array(':username'=>$use1));
         $users = array(
                 'demo' => 'demo',
                 'admin' => 'admin',
@@ -32,12 +32,23 @@ class UserIdentity extends CUserIdentity
                 //$employee['username'] => $employee['password'],
             );
   
+        $emp = employee::model()->find('UID=:user_id', array(':user_id'=>$user->ID));
+
+
         
-        
-            if(!isset($users[$this->username]))
+        if(!isset($users[$this->username]))
 			$this->errorCode=self::ERROR_USERNAME_INVALID;
 		else if($users[$this->username]!==$this->password)
 			$this->errorCode=self::ERROR_PASSWORD_INVALID;
+        else if(($users[$this->username]==$this->password) && ($emp->registered == 0))
+        { ?>
+            <script type="text/javascript">
+             //  $('#err_msg').html('Your account is not activated yet! <br> Please check your email and activate your account ');
+              alert("Your account is not activated yet! Please check your email and activate your account ");
+            </script>
+
+  <?php }
+            
 		else                                        // successful
 		{	
                         $this->setState('roles', $user->role);

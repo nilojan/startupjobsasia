@@ -285,13 +285,70 @@ class UserController extends Controller
             /*$this->render('applyJob', array('user'=>$user,
                                          'model'=>$model)); */
 			
-			$this->render('apply_Job',array('model'=>$model));		
+			$this->render('apply_Job',array('model'=>$model,'action'=>'applyjob'));		
 	    }
 
 	 public function actionDepositResume()   {
-             $model = new ApplyJobForm();
+
+	 		$model = new Employee();
+            
+	 		if (isset($_POST['Employee'])) {
+             	$model->attributes = $_POST['Employee'];
+             	$uploadedFile=CUploadedFile::getInstance($model,'resume');
+
+	            $new_user = new User();
+				$new_user->username = $model->fname.rand(11,999);
+				
+				$key = 'AG*@#(129)!@K.><>]{[|sd`rjenfla0847&($#)!$Masdc$#@';
+	            $dt = date("dmY");
+	            $pwd = hash('sha512', $key.($dt));
+	            $pwd = substr($pwd, 0, 100);						
+				$new_user->password = $pwd;
+				
+				$new_user->email = $model->email;
+				$new_user->name = $model->fname;
+				$new_user->activation_key = mt_rand().mt_rand().mt_rand().mt_rand();
+
+	       		if($new_user->save())
+	       		{
+
+		       		$ID = Yii::app()->db->getLastInsertID();
+		       		$model->UID = $ID; 
+
+		       		$fileName = str_replace(' ', '', "{$ID}-{$uploadedFile->name}");   
+		       		$model->resume = $fileName;       		
+					//$user = Employee::model()->find('EID=:ID',array('ID'=>$ID));
+		       		if($model->save())
+					{
+			       		$baseUrl = Yii::app()->request->baseUrl;
+	                    $serverPath = 'localhost/yii/uStyle';
+	                    $verification_link = Yii::app()->getBaseUrl(true).'/user/verify/code/'.$new_user->activation_key;
+
+			       		//send email				       		
+			       		$data = array(
+			       				'name' => $new_user->name,
+			       				'activation_key' => $verification_link,
+			       				'verify_link' =>  $verification_link,
+			       				'username' => $new_user->username,
+			       				'password' => $dt,
+			       				'to' => $model->email,
+			       				);					       		
+			       		$sendEmail =  Yii::app()->user->sendEmail('registration',$data);	           
+						                                
+	                    $uploadedFile->saveAs(Yii::app()->basepath.'/../resume/'.$model->resume);
+
+	                    $this->redirect(array('site/page', 'view'=>'success'));
+
+	            	}
+	            }
+	        }
+		                
+
+
+/*
+            // $model = new ApplyJobForm();
              $user=user::model()->find(':ID=ID', array('ID'=>Yii::app()->user->getID()));
-             $model->coverLetter = str_replace('<br />', "", $user->coverLetter);
+            // $model->coverLetter = str_replace('<br />', "", $user->coverLetter);
              
              if (isset($_POST['ApplyJobForm'])) {
                  $model->attributes = $_POST['ApplyJobForm'];
@@ -332,8 +389,9 @@ class UserController extends Controller
                      }     
                  } 
              }
-             $this->render('deposit', array('model'=>$model,
-                                            'user'=>$user));
+*/             
+             $this->render('apply_job', array('model'=>$model,
+                                            'action'=>'depositResume'));
     }
 
 	/**
@@ -553,8 +611,8 @@ class UserController extends Controller
 
  	public function actionRegistration() {
         
+        //$model = new RegistrationForm;
         $model = new RegistrationForm;
-        
         if (isset($_POST['RegistrationForm'])) {
               $model->attributes = $_POST['RegistrationForm'];
               if ($model->validate()) {       //generate activation key

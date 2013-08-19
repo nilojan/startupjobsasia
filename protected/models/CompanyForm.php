@@ -19,6 +19,7 @@ class CompanyForm extends CFormModel
     public $summary;
     public $cover_letter;
     public $coverpicture;
+    public $privacy;
   //   public $mailingAddress;
  
     
@@ -72,6 +73,7 @@ class CompanyForm extends CFormModel
             'cname'     => 'Company Name',
             'image'     => 'Company logo',
             'cover'     => 'Cover Photo',
+            'privacy'   => 'Privacy',
         );
     }
 

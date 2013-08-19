@@ -20,15 +20,23 @@
 			   		<div class="clear">
       <?php $url1 = "{$data->company->cname} {$data->location}";?>
 	 <span class="CompanyName"><?php echo CHtml::link($data->company->cname,array('company/view', 'CID'=>$data->CID,$url1)); ?> </span> / 
-	 <span class="CountryName"><?php echo CHtml::link($data->location,array('site/', 'location'=>$data->location)); ?></span>
+	 <span class="CountryName"><?php echo CHtml::link($data->location,array('site/jobs', 'location'=>$data->location)); ?></span>
          </div>
 		 
          </div>
+<<<<<<< HEAD
 	<div id="JobType" class="span2 type">
 		<div class ="<?php echo $data->type; ?> row">
 		                    <?php //echo $data->type; ?>
 							<?php $job_type = str_replace('-','',$data->type);?> 
 			<?php echo CHtml::link($data->type,array('site', $job_type)); ?>
+=======
+	<div id="JobType" class="type">
+		<div class ="<?php echo $data->type; ?>">
+		                    <?php $job_type = str_replace('-','',$data->type);?> 
+		                    <?php $job_type = strtolower ($job_type) ?>
+							<?php echo CHtml::link($data->type,array('site/'.$job_type)); ?>
+>>>>>>> viv_changes
 		</div>
 	</div> 
        

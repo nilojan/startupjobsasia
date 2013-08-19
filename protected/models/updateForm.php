@@ -20,6 +20,7 @@ class UpdateForm extends CFormModel
         public $started;
         public $summary;
         public $cover_letter;
+        public $privacy;
     
 	/**
 	 * Declares the validation rules.
@@ -28,7 +29,7 @@ class UpdateForm extends CFormModel
 	{
 		return array(
 			// name, email, subject and body are required
-	     array('cname, address,contact,mission,culture,benefits,image,coverpicture','safe'),
+	     array('cname, address,contact,mission,culture,benefits,image,coverpicture,privacy','safe'),
           
              array('image', 'file',
                    'types'=>'jpg, png, jpeg, gif',
@@ -53,6 +54,7 @@ class UpdateForm extends CFormModel
                         'cname'     => 'Company Name',
                         'image'     => 'Company logo',
                         'coverpicture'     => 'Cover Photo',
+                        'privacy' => 'Privacy',
 		);
 	}
 }

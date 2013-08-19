@@ -98,11 +98,11 @@ $this->breadcrumbs = array(
 	
 	 <div class="span6">
 	 		<p style="text-align:justify;font-family: 'FrutigerLT';"><?php echo str_replace('</br>',"",$company->address); ?></p>
-			
+			<?php if($company->privacy == 0) { ?>
 			<p style="text-align:justify;font-family: 'FrutigerLT';">tel : <a href="tel:<?php echo CHtml::encode($company->contact) ?>"><?php echo CHtml::encode($company->contact) ?></a></p>
-			
+		
 			<p style="text-align:justify;font-family: 'FrutigerLT';">email : <a href="mailto:<?php echo CHtml::encode($company->cemail) ?>"><?php echo CHtml::encode($company->cemail) ?></a></p>
-			
+			<?php } ?>
 
               <?php $url = str_replace(' ','-',$company->cname);?> 
               <h1><?php echo CHtml::encode($job->title); ?></h1>      
@@ -124,25 +124,30 @@ $this->breadcrumbs = array(
 
 				<?php echo nl2br($job->description) ?>
 				
-				
+				<?php if($job->responsibility != '') { ?>
 				<h3>Responsibility </h3>
                 <?php echo nl2br($job->responsibility) ?>
-				
+				<?php } ?>
+				<?php if($job->requirement != '') { ?>
 				<h3>Requirement </h3>
                 <?php echo nl2br($job->requirement) ?>
-				
+				<?php } ?>
+				<?php if($job->howtoapply != '') { ?>
 				<h3> How to apply </h3>
                 <?php echo nl2br($job->howtoapply) ?>
+                <?php } ?>
 				<!--
 				<h3> Type </h3>
 				<?php echo CHtml::encode($job->type) ?>-->
 				
+				<?php if($job->salary != '') { ?>
 				<h3> Salary </h3>
 				<?php echo CHtml::encode($job->salary) ?>
-				
+				 <?php } ?>
+				<?php if($job->location != '') { ?>
 				<h3> location </h3>
 				<?php echo CHtml::encode($job->location)?>
-				
+				 <?php } ?>
 				
 				<div class="clear" style="padding:20px 0px;">
 				<span style="font-size: 24px;font-weight: bold;">SHARE THIS </span>

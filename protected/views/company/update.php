@@ -32,10 +32,12 @@ $this->pageTitle = 'Update Company | '.Yii::app()->params['pageTitle'];
             <?php echo $form->textAreaRow($CForm, 'culture', array('class' => 'span8', 'rows' => 5)); ?>
             <?php echo $form->textAreaRow($CForm, 'benefits', array('class' => 'span8', 'rows' => 5)); ?>
             <?php echo $form->textAreaRow($CForm, 'awards', array('class' => 'span8', 'rows' => 3)); ?>
+
+            <?php echo $form->radioButtonListInlineRow($CForm, 'privacy',array('1' => 'On', '0'=>'Off')); ?>
             
             <div class="form-actions">
                 <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary','label'=>'Submit')); ?>
             </div>
             
-    <?php $this->endWidget(); ?>
+    <?php $this->endWidget();    ?>
             
