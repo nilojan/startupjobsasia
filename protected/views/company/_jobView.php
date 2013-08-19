@@ -29,7 +29,6 @@
 		                    <?php $job_type = str_replace('-','',$data->type);?> 
 		                    <?php $job_type = strtolower ($job_type) ?>
 							<?php echo CHtml::link($data->type,array('site/'.$job_type)); ?>
-
 		</div>
 	</div> 
        
