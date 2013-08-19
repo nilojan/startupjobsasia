@@ -24,19 +24,12 @@
          </div>
 		 
          </div>
-<<<<<<< HEAD
-	<div id="JobType" class="span2 type">
-		<div class ="<?php echo $data->type; ?> row">
-		                    <?php //echo $data->type; ?>
-							<?php $job_type = str_replace('-','',$data->type);?> 
-			<?php echo CHtml::link($data->type,array('site', $job_type)); ?>
-=======
 	<div id="JobType" class="type">
 		<div class ="<?php echo $data->type; ?>">
 		                    <?php $job_type = str_replace('-','',$data->type);?> 
 		                    <?php $job_type = strtolower ($job_type) ?>
 							<?php echo CHtml::link($data->type,array('site/'.$job_type)); ?>
->>>>>>> viv_changes
+
 		</div>
 	</div> 
        
