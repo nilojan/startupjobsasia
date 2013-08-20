@@ -21,6 +21,8 @@ Please fill out the form with your particulars
 
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 	<?php echo $form->errorSummary($model); ?>
+        <?php echo $form->textFieldRow($model, 'username', array('class' =>'span3')); ?>
+        <?php echo $form->passwordFieldRow($model, 'password', array('class' =>'span3')); ?>
         <?php echo $form->textFieldRow($model, 'cname', array('class' =>'span5')); ?>
         <?php echo $form->fileFieldRow($model, 'image'); ?>  
         <?php echo $form->textFieldRow($model, 'cemail', array('class' => 'span5', 'rows' => 1)); ?>

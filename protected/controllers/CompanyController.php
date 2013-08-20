@@ -117,42 +117,76 @@ class CompanyController extends Controller  {
    }
 
    public function actionRegistration() {
+<<<<<<< HEAD
             $model = new CompanyForm;
             if (isset($_POST['CompanyForm'])) {
+=======
+            
+          $model  = new StartupRegistrationForm;
+           // $model = new CompanyForm;
+            /*if (isset($_POST['CompanyForm'])) {
+>>>>>>> viv_changes
                   $model->attributes = $_POST['CompanyForm'];
                   if ($model->validate())   {  
-                  $ID = Yii::app()->user->getID();
+                  $ID = Yii::app()->user->getID();*/
+
+          if (isset($_POST['StartupRegistrationForm'])) {
+              $model->attributes = $_POST['StartupRegistrationForm'];
+              if ($model->validate()) {       //generate activation key
+               $activationKey = mt_rand() . mt_rand() . mt_rand() . mt_rand();
+                // $model->activationKey= mt_rand() . mt_rand() . mt_rand() . mt_rand() . mt_rand();
+                        $key = 'AG*@#(129)!@K.><>]{[|sd`rjenfla0847&($#)!$Masdc$#@';
+                        $pwd = hash('sha512', $key . ($model->password));
+                        $pwd = substr($pwd, 0, 100);
+
                      //generate activation ke
-                  $company = new company;
-                  
-                  $company->ID = $ID;
-                  $company->address = $model->address;
-                  $company->contact = $model->contact;
-                  $company->cname = $model->cname;
-                  $company->mission = nl2br($model->mission);
-                  $company->cemail = $model->cemail;
-                  $company->status = 0;
-                  $uploadedFile=CUploadedFile::getInstance($model,'image');
-                  if (!empty($uploadedFile)) {
-                            $fileName = "{$company->CID}-{$uploadedFile}";  // random number + file name
-                            $company->image = $fileName;
-                              // image will uplode to rootDirectory/banner    
-                  }              
-                  if ($company->save()) {
-                            if (!empty($uploadedFile)) 
-                                    $uploadedFile->saveAs(Yii::app()->basepath.'/../images/company/'.$fileName);
-                  }                      
-                  $user=user::model()->find(':ID=ID', array('ID'=>$ID));
+                        $record = new user;  // Save into user
+
+                        $record->username = $model->username;
+                        $record->password = $pwd;
+                        $record->name = $model->cname;
+                        $record->email = $model->cemail;
+                        $record->activation_key = $activationKey;
+                        $record->role = 2;
+                        if($record->save()) {
+                          $uid = Yii::app()->db->getLastInsertID();
+                          $company = new company;                 
+                          $company->ID = $uid;
+                          $company->address = $model->address;
+                          $company->contact = $model->contact;
+                          $company->cname = $model->cname;
+                          $company->mission = nl2br($model->mission);
+                          $company->cemail = $model->cemail;
+                          $company->status = 0;
+                          $uploadedFile=CUploadedFile::getInstance($model,'image');
+                          if (!empty($uploadedFile)) {
+                                    $fileName = "{$company->ID}-{$uploadedFile}";  // random number + file name
+                                    $company->image = $fileName;
+                                      // image will uplode to rootDirectory/banner    
+                          }              
+                          if ($company->save()) {
+                                    if (!empty($uploadedFile)) {
+                                            $uploadedFile->saveAs(Yii::app()->basepath.'/../images/company/'.$fileName);
+                                          $this->redirect(array('site/page', 'view' => 'success'));  
+                                    }
+                          } 
+
+                          
+                          //$record->CID = $company->CID;
+                         // $record->save(); 
+                                            
+                  /*$user=user::model()->find(':ID=ID', array('ID'=>$ID));
                   $user->role = 2;
                   $user->CID = $company->CID;
-                  $user->save();
+                  $user->save();*/
+
                 
-                  $approve = new approve; 
+                  /*$approve = new approve; 
                   $approve->CID = $company->CID;
                   if ($approve->save())
-                            $this->redirect(array('company/company'));
+                            $this->redirect(array('company/company')); */
             
-                  }
+                  } } 
             }
         $this->render('registration', array('model' => $model));
     }

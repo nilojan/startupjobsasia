@@ -19,9 +19,9 @@ class UserIdentity extends CUserIdentity
         private $_id;
         private $CID = null;
         
-       public function authenticate()
-	{        
+        public function authenticate()	{        
 
+<<<<<<< HEAD
         
         $use1 = $this->username;
         $user = user::model()->find('username=:username', array(':username'=>$use1));
@@ -59,12 +59,82 @@ class UserIdentity extends CUserIdentity
                         $this->errorCode=self::ERROR_NONE;
                         
                         
+=======
+            $user_available = 'false';
+            $use1 = $this->username;
+            if($user = user::model()->find('username=:username', array(':username'=>$use1)))
+            {
+                $user_available = 'true';            
+            }
+            $users = array(
+                    'demo' => 'demo',
+                    'admin' => 'admin',
+                    $user['username'] => $user['password'],
+                    //$employee['username'] => $employee['password'],
+                );
+           
+            $user_active = '';  
+            $startup_active = '';  
+            
+            if(($user_available == 'true') && ($user->role == 0))
+            {
+                $user_active = 'false';
+                $emp = employee::model()->find('UID=:user_id', array(':user_id'=>$user->ID));
+                if($emp->registered == 1)
+                {
+                    $user_active =  'true';   
+>>>>>>> viv_changes
                 }
-                return !$this->errorCode;
-	
-        
+
+            } 
+            if(($user_available == 'true') && ($user->role == 2))
+            {
+                $startup_active = 'false';
+                $startup = company::model()->find('ID=:user_id', array(':user_id'=>$user->ID));
+                if($startup->registered == 1)
+                {
+                    $startup_active =  'true';   
+                } 
+            }   
+            
+            if(!isset($users[$this->username]) || ($user_available == 'false'))
+    			$this->errorCode=self::ERROR_USERNAME_INVALID;
+    		else if($users[$this->username]!==$this->password)
+    			$this->errorCode=self::ERROR_PASSWORD_INVALID;        
+            else if(($users[$this->username]==$this->password) && ($user_active == 'false'))
+            { ?>
+                <script type="text/javascript">
+                 //  $('#err_msg').html('Your account is not activated yet! <br> Please check your email and activate your account ');
+                  alert("Your account is not activated yet! Please check your email and activate your account ");
+                </script>
+
+            <?php }
+            else if(($users[$this->username]==$this->password) && ($startup_active == 'false'))
+            { ?>
+                <script type="text/javascript">
+                 //  $('#err_msg').html('Your account is not activated yet! <br> Please check your email and activate your account ');
+                  alert("Your startup account is not activated yet! Please check your email and activate your account ");
+                </script>
+            <?php 
+                $this->setState('roles', $user->role);
+                $this->_id = $user['ID']; 
+                $this->errorCode=self::ERROR_NONE;
+
+            }            
+    		else                                        // successful
+    		{	                     
+                    
+                    $this->setState('roles', $user->role);
+                    $this->_id = $user['ID']; 
+                    $this->errorCode=self::ERROR_NONE;
+                            
+                            
+            }
+            
+            return !$this->errorCode;        
         }
-         public function getID()    {
+
+        public function getID()    {
         
             return $this->_id;
         }
@@ -73,7 +143,7 @@ class UserIdentity extends CUserIdentity
             
         }
 
-         public function isAdmin()    {
+        public function isAdmin()    {
             if ($this->role == '1')
                 return True;
             else
