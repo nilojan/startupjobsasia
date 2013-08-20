@@ -1,4 +1,4 @@
-<?php error_reporting(0); /* @var $this Controller */ ?>
+<?php /* @var $this Controller */ ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -28,11 +28,7 @@
                                                         //array('label'=>'Register', 'url'=>array('/registration/registration')),
                                                         //array('label'=>'Jobs', 'url'=>array('/job/all')),
                                                         array('label'=>'User Registration', 'url'=>array('/user/registration'),'visible'=>Yii::app()->user->isGuest),
-<<<<<<< HEAD
-                                                        //array('label'=>'Register Company', 'url'=>array('/company/registration'),'visible'=>Yii::app()->user->isMember()),
-=======
                                                         array('label'=>'Register Company', 'url'=>array('/company/registration'),'visible'=>Yii::app()->user->isMember()),
->>>>>>> viv_changes
                                                         array('label'=>'Submit a job', 'url'=>array('/job/submitJob'),'visible'=>Yii::app()->user->isCompany()),
                                                         array('label'=>'Update Profile', 'url'=>array('/user/edit'),'visible'=>Yii::app()->user->isMember()),
                                                         array('label'=>'Company', 'url'=>array('/company/company'),'visible'=>Yii::app()->user->isCompany()),
@@ -51,7 +47,7 @@
                                     'class'=>'bootstrap.widgets.TbMenu',
                                     'htmlOptions'=>array('class'=>'pull-right'),
                                     'items'=>array(
-                                                    array('label'=>'Register', 'url'=>'#', 'visible'=>Yii::app()->user->isGuest, 'items'=>array(
+                                                    array('label'=>'Register', 'url'=>'#', 'items'=>array(
                                                             array('label'=>'A User', 'url'=>array('/user/registration')),
                                                            // '---',
                                                             array('label'=>'A StartUp', 'url'=>array('/company/registration')),
@@ -74,11 +70,7 @@
        // array('label'=>'SIGN UP', 'url'=>array('/registration/registration'),'visible'=>Yii::app()->user->isGuest),
          array('label'=>'SIGN UP', 'items'=>array(
             array('label'=>'User', 'url'=>array('/user/registration')),
-<<<<<<< HEAD
-            array('label'=>'StartUP', 'url'=>array('/company/registration')),
-=======
             array('label'=>'StartUP', 'url'=>array('/company/registration')),            
->>>>>>> viv_changes
             ),'visible'=>Yii::app()->user->isGuest),
 		//array('label'=>'Deposit Resume', 'url'=>array('/site/depositResume'),'visible'=>Yii::app()->user->isGuest()),
         //array('label'=>'Register Company', 'url'=>array('/registration/registerCompany'),'visible'=>Yii::app()->user->isMember()),
