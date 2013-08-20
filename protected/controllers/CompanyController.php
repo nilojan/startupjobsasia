@@ -117,15 +117,10 @@ class CompanyController extends Controller  {
    }
 
    public function actionRegistration() {
-<<<<<<< HEAD
-            $model = new CompanyForm;
-            if (isset($_POST['CompanyForm'])) {
-=======
             
           $model  = new StartupRegistrationForm;
            // $model = new CompanyForm;
             /*if (isset($_POST['CompanyForm'])) {
->>>>>>> viv_changes
                   $model->attributes = $_POST['CompanyForm'];
                   if ($model->validate())   {  
                   $ID = Yii::app()->user->getID();*/
