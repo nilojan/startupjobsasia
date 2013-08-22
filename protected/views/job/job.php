@@ -4,11 +4,7 @@ $this->pageTitle = "Startup Hire: {$job->title} {$company->cname} {$job->locatio
 $this->pageDesc = substr($job->description,0,180);
 $this->pageOgTitle = "{$job->title} {$company->cname} {$job->location}";
 $this->pageOgDesc= substr($job->description,0,400);
-$this->pageOgImage='/images/company/'.$company->image;
-
-$this->breadcrumbs = array(
-    $job->title,
-);
+$this->pageOgImage='/images/company/180/'.$company->image;
 
 ?>
 
@@ -32,8 +28,6 @@ $this->breadcrumbs = array(
 }
 </style>
 
-<<<<<<< HEAD
-=======
 <?php
 // to count total,unique visits
 Yii::app()->user->CountVisitors($job->JID);
@@ -44,7 +38,6 @@ $this->breadcrumbs = array(
 
 ?>
 
->>>>>>> viv_changes
 <div class ="abc"></div>
 
 <div class="row-fluid">
