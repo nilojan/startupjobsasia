@@ -445,7 +445,14 @@ class UserController extends Controller
 	{
 		$id = Yii::app()->user->getId();
 		$model=$this->loadEmployeeModel($id);
+		$myDate = new myDate();
+		$mydob = explode('-', $model->dob);
+		
+		$myDate->year = $mydob[0];
+		$myDate->month = $mydob[1];
+		$myDate->day = $mydob[2];
 
+		//var_dump($myDate); die();
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
@@ -454,12 +461,21 @@ class UserController extends Controller
 		{
 			
 			$model->attributes=$_POST['Employee'];
+			$myDate->attributes=$_POST['myDate'];
+			$myDate->day = $_POST['myDate']['day'];
+			$myDate->month = $_POST['myDate']['month'];
+			$myDate->year = $_POST['myDate']['year'];
+			
+			$model->dob = $myDate->year.'-'.$myDate->month.'-'.$myDate->day;
+
+			var_dump($model);
 			     	
 			$ephoto = CUploadedFile::getInstance($model,'photo');
 			$eresume = CUploadedFile::getInstance($model,'resume');
 			$model->photo = $ephoto;
 			$model->resume = $eresume;
 			$model->last_modified = date("d/m/y : H:i:s", time());
+
 			// var_dump($ephoto);
 			// die;
 			if(isset($ephoto->name) && $ephoto->name != '') 
@@ -489,13 +505,14 @@ class UserController extends Controller
             }
 			if($model->save())
 				{
-					echo "saved";
-					//$this->redirect(array('admin'));
+					$urll = Yii::app()->getBaseUrl(true).'/user/profile/'.$id;
+					$this->redirect($urll);
 				}
 		}
 
 		$this->render('edit',array(
 			'model'=>$model,
+			'myDate'=>$myDate,
 		));
 	}
 

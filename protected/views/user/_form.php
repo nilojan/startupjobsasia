@@ -29,14 +29,30 @@
 
 	<?php echo $form->textAreaRow($model,'coverLetter',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
 
+<<<<<<< HEAD
 	
 	<?php echo $form->dropDownListRow($model, 'gender', array(''=>'Gender', 'Male'=>'Male', 'Female'=>'Female'), 
                                                                  array('options' => array('M' => array('selected' => true)))); ?>
 																 
 	<?php echo $form->textFieldRow($model,'dob',array('class'=>'span5')); ?>
+=======
+	<?php echo $form->dropDownListRow($model,'gender',array('Male'=>'Male', 'Female'=>'Female'), array('class'=>'span5','maxlength'=>10)); ?>
 
-	<?php echo $form->textFieldRow($model,'location',array('class'=>'span5','maxlength'=>255)); ?>
+	<br><?php echo CHtml::encode($model->getAttributeLabel('dob')); ?>
+	
+	    <?php echo $form->dropDownListRow($myDate,'day', $myDate->getDates(), array('select'=>$myDate->day)); ?>
+   
+    
+        <?php echo $form->dropDownListRow($myDate,'month', $myDate->getMonths(), array('select'=>$myDate->month)); ?>
+   
+   
+        <?php echo $form->dropDownListRow($myDate,'year', $myDate->getYears(), array('select'=>$myDate->year)); ?>
 
+>>>>>>> viv_changes
+
+    <?php echo $form->dropDownListRow($model,'location',$model->getCountryList(), array('select'=>$model->location, 'prompt'=>'Select'), array('class'=>'span5','maxlength'=>255)); ?>
+
+<<<<<<< HEAD
 	<?php echo $form->dropDownListRow($model, 'country', array(	''=>'Nationality',
 															'Afghan'=>'Afghan',
 															'Albanian'=>'Albanian',
@@ -229,6 +245,9 @@
 															'Others'=>'Others'), 
                                                                  array('options' => array('M' => array('selected' => true)))); ?>
 																 
+=======
+	<?php echo $form->dropDownListRow($model,'country',$model->getCountryList(), array('select'=>$model->country, 'prompt'=>'Select'), array('class'=>'span5','maxlength'=>50)); ?>
+>>>>>>> viv_changes
 
 	<?php echo $form->textFieldRow($model,'lastjob',array('class'=>'span5','maxlength'=>250)); ?>
 
@@ -260,10 +279,7 @@
 	 <?php //echo   '<H2>' .CHtml::link(CHtml::encode('Resume'),Yii::app()->baseUrl . '/resume/'.$model->resume, array('target'=>'_blank') );?></H2>
 	<?php echo $form->fileFieldRow($model, 'resume');
 	if($model->resume != '')
-    	echo '<input type="hidden" name="old_resume" value="'.$model->resume.'" />';        
-    ?> 
-
-	<?php echo $form->textAreaRow($model,'content',array('rows'=>6, 'cols'=>50, 'class'=>'span8')); ?>
+    	echo '<input type="hidden" name="old_resume" value="'.$model->resume.'" />';     ?> 
 
 	<?php //echo $form->textFieldRow($model,'source',array('class'=>'span5','maxlength'=>255)); ?>
 
