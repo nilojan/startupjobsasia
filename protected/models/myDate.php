@@ -6,10 +6,7 @@ class myDate extends CFormModel
     public $day;
     public $month;
     public $year;
-<<<<<<< HEAD
-=======
     public $country_code;
->>>>>>> viv_changes
 
    
     /**
@@ -68,9 +65,6 @@ class myDate extends CFormModel
         );
     }
 
-<<<<<<< HEAD
-    
-=======
     public function getCountryList()
     {
       return array(
@@ -494,7 +488,6 @@ class myDate extends CFormModel
       '263'=>'Zimbabwe (+263)',
       );
     }
->>>>>>> viv_changes
     
 
     /*
