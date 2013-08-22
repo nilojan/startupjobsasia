@@ -62,6 +62,44 @@ class WebUser extends CWebUser {
         return $this->_model;
     }
 
+    function dateDiff($d1, $d2) {
+    // Return the number of days between the two dates:
+
+      return round(abs(strtotime($d1)-strtotime($d2))/86400);
+
+    }
+
+    function CountVisitors($job_id) {
+    // Return the number of days between the two dates:
+        $ip= $_SERVER["REMOTE_ADDR"];
+        $datetime =date("Y/m/d") . ' ' . date('H:i:s');
+        if($stats = Stats::model()->find('JID=:jid AND IP=:ip',array(':jid'=>$job_id,':ip'=>$ip)))
+        {
+            $stats->visits = $stats->visits+1;
+            $stats->last_visit = $datetime;
+            $stats->save();
+            $job = job::model()->find('JID=:jid',array(':jid'=>$job_id));
+            $job->views = $job->views+1;
+            $job->save();
+        }
+        else
+        {
+            $stats = new Stats();                
+            $stats->JID = $job_id;
+            $stats->IP = $ip;
+            $stats->visits = 1;
+            $stats->last_visit = $datetime;
+            $stats->save();
+            $job = job::model()->find('JID=:jid',array(':jid'=>$job_id));
+            $job->unique_views = $job->unique_views+1;
+            $job->views = $job->views+1;
+            $job->save();
+
+        }
+    }
+    
+
+
      function sendEmail($event,$data)   {
             
              // events

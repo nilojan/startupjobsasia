@@ -452,6 +452,14 @@ class UserController extends Controller
 		$myDate->month = $mydob[1];
 		$myDate->day = $mydob[2];
 
+		//var_dump($model->contact);
+
+		$contact = explode('-', $model->contact);
+		$myDate->country_code = $contact[0];
+		$model->contact = $contact[1];
+		//var_dump($myDate->country_code); 
+		//var_dump($model->contact); 
+
 		//var_dump($myDate); die();
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
@@ -465,10 +473,14 @@ class UserController extends Controller
 			$myDate->day = $_POST['myDate']['day'];
 			$myDate->month = $_POST['myDate']['month'];
 			$myDate->year = $_POST['myDate']['year'];
+			$myDate->country_code = $_POST['myDate']['country_code'];
+			$model->contact = $myDate->country_code.'-'.$model->contact;
+
 			
 			$model->dob = $myDate->year.'-'.$myDate->month.'-'.$myDate->day;
 
-			var_dump($model);
+			//var_dump($myDate->attributes);
+			//die;
 			     	
 			$ephoto = CUploadedFile::getInstance($model,'photo');
 			$eresume = CUploadedFile::getInstance($model,'resume');
