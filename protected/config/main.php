@@ -24,7 +24,12 @@ return array(
 		'application.components.*',
                 'application.extensions.yii-mail.*',
                 'application.helpers.*',
-                'editable.*'
+                'editable.*',
+                'application.modules.PcViewsCounter.*',
+		        'application.modules.PcViewsCounter.models.*',
+		        'application.modules.PcViewsCounter.controllers.*',
+		        'application.modules.PcViewsCounter.components.*',
+		        'application.modules.PcViewsCounter.extensions.ViewsCountWidget.*',
                 
             ),
 
@@ -33,17 +38,21 @@ return array(
 	'modules'=>array(
 		// uncomment the following to enable the Gii tool
 		
-		'gii'=>array(
+			'gii'=>array(
 		
                 'generatorPaths'=>array(
-                'bootstrap.gii',
+                	'bootstrap.gii',
                  ),
            
-                    'class'=>'system.gii.GiiModule',
+            'class'=>'system.gii.GiiModule',
 			'password'=>'123456',
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			//'ipFilters'=>array('127.0.0.1','::1'),
-		),
+			),
+
+			'contentViewsCounter' => array(
+           			'class' => 'application.modules.PcViewsCounter.PcViewsCounterModule',
+       		 ),
 		
 	),
 

@@ -32,6 +32,19 @@ $this->breadcrumbs = array(
 }
 </style>
 
+<<<<<<< HEAD
+=======
+<?php
+// to count total,unique visits
+Yii::app()->user->CountVisitors($job->JID);
+
+$this->breadcrumbs = array(
+    $job->title,
+);
+
+?>
+
+>>>>>>> viv_changes
 <div class ="abc"></div>
 
 <div class="row-fluid">
@@ -157,7 +170,10 @@ $this->breadcrumbs = array(
 				</div>
      </div>
 	<div class="clear"> 
-		Total applicants : <?php echo $total_applicants; ?>
+		<p>Total applicants : <?php echo $total_applicants; ?></p>
+		<p>Job expires in <?php echo $days_left; ?> days.</p>
+		<p>Total Views : <?php echo $job->views; ?></p>
+		<p>Unique Views : <?php echo $job->unique_views; ?></p>
 	</div>
 	<div class="clear">   
 		<div id="job">

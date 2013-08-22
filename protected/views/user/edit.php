@@ -1,4 +1,5 @@
 <?php
+
 $this->breadcrumbs=array(
 	'User'=>array('index'),
 //	$model->EID=>array('view','id'=>$model->EID),

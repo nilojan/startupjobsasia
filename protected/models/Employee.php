@@ -60,7 +60,7 @@ class Employee extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('fname, lname, contact, email, coverLetter, gender, country, edu', 'required'),
-			array('UID, registered, contact, work_exp, curr_salary, exp_salary, views', 'numerical', 'integerOnly'=>true),
+			array('UID, registered, work_exp, curr_salary, exp_salary, views', 'numerical', 'integerOnly'=>true),
 			array('fname, lname', 'length', 'max'=>30),
 			array('email, photo', 'length', 'max'=>250),
 			array('gender', 'length', 'max'=>10),
@@ -177,6 +177,7 @@ class Employee extends CActiveRecord
 		));
 	}
 
+<<<<<<< HEAD
 	public function getCountryList()
     {
       return array(
@@ -374,4 +375,7 @@ class Employee extends CActiveRecord
 		      'zimbabwean'=>'Zimbabwean',
 			);
     }
+=======
+
+>>>>>>> viv_changes
 }
