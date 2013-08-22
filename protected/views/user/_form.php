@@ -37,24 +37,6 @@
 
 	<?php echo $form->dropDownListRow($model,'gender',array('Male'=>'Male', 'Female'=>'Female'), array('class'=>'span5','maxlength'=>10)); ?>
 
-<<<<<<< HEAD
-	<?php echo $form->dropDownListRow($model,'gender',array('Male'=>'Male', 'Female'=>'Female'), array('class'=>'span5','maxlength'=>10)); ?>
-
-	<br><?php echo CHtml::encode($model->getAttributeLabel('dob')); ?>
-	
-	    <?php echo $form->dropDownListRow($myDate,'day', $myDate->getDates(), array('select'=>$myDate->day)); ?>
-   
-    
-        <?php echo $form->dropDownListRow($myDate,'month', $myDate->getMonths(), array('select'=>$myDate->month)); ?>
-   
-   
-        <?php echo $form->dropDownListRow($myDate,'year', $myDate->getYears(), array('select'=>$myDate->year)); ?>
-
-
-    <?php echo $form->dropDownListRow($model,'location',$model->getCountryList(), array('select'=>$model->location, 'prompt'=>'Select'), array('class'=>'span5','maxlength'=>255)); ?>
-
-	<?php echo $form->dropDownListRow($model,'country',$model->getCountryList(), array('select'=>$model->country, 'prompt'=>'Select'), array('class'=>'span5','maxlength'=>50)); ?>
-=======
 	<br><?php echo CHtml::encode($model->getAttributeLabel('dob')); ?>
 	
 	    <?php echo $form->dropDownListRow($myDate,'day', $myDate->getDates(), array('select'=>$myDate->day,'class'=>'span1')); ?>
@@ -69,7 +51,6 @@
     <?php echo $form->dropDownListRow($model,'location',$myDate->getCountryList(), array('select'=>$model->location, 'prompt'=>'Select'), array('class'=>'span5','maxlength'=>255)); ?>
 
 	<?php echo $form->dropDownListRow($model,'country',$myDate->getCountryList(), array('select'=>$model->country, 'prompt'=>'Select'), array('class'=>'span5','maxlength'=>50)); ?>
->>>>>>> viv_changes
 
 	<?php echo $form->textFieldRow($model,'lastjob',array('class'=>'span3','maxlength'=>250)); ?>
 
