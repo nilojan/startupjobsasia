@@ -91,6 +91,20 @@ class JobController extends Controller {
                                             $feed->image = $company->image;
                                             
                                             $feed->save();
+
+                                            // send email notification
+                                            
+                                            $usr = user::model()->find('ID=:ID', array('ID' => Yii::app()->user->getID()));
+                                            
+                                            $data = array(
+                                            'job' => $job_title,
+                                            'company' =>  $company->cname,                                                                                   
+                                            //'to' => 'post@startupjobs.asia',
+                                            'to' => 'sb9176@adzek.com',
+                                            'job_url' => Yii::app()->getBaseUrl(true).'/job/job?JID='.$JID,
+
+                                            );                              
+                                            $sendEmail =  Yii::app()->user->sendEmail('submit_job',$data);
                                             
                                             $this->redirect(array('job/job','JID' => $JID));
                                             
