@@ -2,6 +2,13 @@
 $this->breadcrumbs = array(
     'Submit a Job',);
 $this->pageTitle = 'Submit Job | '.Yii::app()->params['pageTitle'];
+if($job_post_balance == 0)
+{ ?>
+   <div><p>You have used all your free job post quota. Please buy some credits to post more jobs.</p> </div> 
+<?php
+}
+else
+{
 ?>
 
 <div class="hint"><p>Please fill out the form with your particulars</p></div>
@@ -82,7 +89,9 @@ $this->pageTitle = 'Submit Job | '.Yii::app()->params['pageTitle'];
        </div>
     <?php $this->endWidget(); ?>
 </div>
-
+<?php 
+}
+?>
 
 
 

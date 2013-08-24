@@ -21,6 +21,7 @@ class JobForm extends CFormModel
         public $location;
         public $tags;
         public $category;
+        
 	/**
 	 * Declares the validation rules.
 	 */
@@ -54,7 +55,7 @@ class JobForm extends CFormModel
 			'verifyCode'=>'Verification Code',
 			'howtoapply' =>'How to Apply',
 			'tags' =>'Key Words',
-
+ 
 		);
 	}
 }

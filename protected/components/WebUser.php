@@ -240,7 +240,31 @@ class WebUser extends CWebUser {
                                           Yii::app()->mail->send($message); 
                                           $flag = true;                                            
 
-                                  break;                    
+                                  break;   
+
+                  case 'premium_job' :
+                  
+                                    $body = "Hi <font type=\"bold\">" . $data['name'] . "</font><br>
+                                            <br>                                           
+                                            <br>
+                                            You have added a job in premium listings: <br><br>
+                                            Job Title : ".$data['job']."<br>
+                                            Company Name : ".$data['company']."<br>
+                                            Job URL : <a href='".$data['job_url']."'>".$data['job_url']."</a><br><br><br>
+
+                                            <br>
+                                            THIS IS AN AUTO-GENERATED MESSAGE - PLEASE DO NOT REPLY TO THIS MESSAGE!<br>
+                                            <br>
+                                            -------------<br>
+                                            StartUp Jobs Asia Team";
+                                          $message->setBody($body, 'text/html');
+                                          $message->subject = "StartUp Jobs Asia - Premium Job";
+                                          $message->addTo($data['to']);
+                                          $message->from = 'noreply@StartUpJobsAsia.com';
+                                          Yii::app()->mail->send($message); 
+                                          $flag = true;                                            
+
+                                  break;                   
               }
               
              if($flag == true)
