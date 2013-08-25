@@ -7,7 +7,7 @@ $this->pageTitle = 'Go Premium | '.Yii::app()->params['pageTitle'];
 
 
       <h1>Premium</h1>
-      <?php echo $abc ?>
+      <?php // echo $abc ?>
       Your job has been succesfully posted
       
       Go premium at $10 for a premium post.

@@ -107,7 +107,8 @@ class UserController extends Controller
                              $this->redirect(array('site/page', 'view'=>'error'));
                      }
                 // redirect if no resume is found
-                    else {
+                    else 
+                    {
                         $oldfilename = $user->resume;
                         $application = new Application1;
                         $job = job::model()->find('JID=:JID', array('JID' => $JID));
@@ -119,23 +120,60 @@ class UserController extends Controller
                         $application->CID = $job ->CID; 
                     // send resume to employer 
                     //$user = user::model()->find(':ID=ID', array(':ID'=>$ID)); 
-                    if ($application->save()) {    
-                          if (!empty($uploadedFile)) {      //uploaded file is not empty
+                    if ($application->save()) 
+                    {    
+                          if (!empty($uploadedFile)) 
+                          {      //uploaded file is not empty
                                     $fileName = str_replace(' ', '', "{$application->ID}-{$uploadedFile}");  // random number + file name
                                     $application->resume = $fileName;
-                                    if ($application->save())   {
+                                    if ($application->save())   
+                                    {
                                         $uploadedFile->saveAs(Yii::app()->basepath.'/../jobApplication/'.$fileName);
-                                        $this->redirect(array('site/page', 'view'=>'success'));
+                                        
+                                      // send email notification
+                                        $company = company::model()->find('CID=:CID', array('CID' => $job->CID));
+                                        $usr = user::model()->find('ID=:ID', array('ID' => $ID));
+                                        
+                                        $data = array(
+					       				'name' => $user->name,
+					       				'job' => $job->title,
+					       				'company' =>  $company->cname,
+					       				'username' => $usr->username,					       				
+					       				'to' => $model->email,
+
+					       				);					       		
+							       		$sendEmail =  Yii::app()->user->sendEmail('applyjob_existing_user',$data);
+	                                    
+	                                    $this->redirect(array('site/page', 'view'=>'success'));
                                     }
                             }           //uploaded file is empty
-                            else {      //use previous resume
+                            else 
+                            {      //use previous resume
                                     $fileName = $application->EID.'-'.$user->resume;
                                     $application->resume =$fileName;
-                                    if ($application->save())   {       // copy the file to the job application folder
+                                    if ($application->save())   
+                                    {       // copy the file to the job application folder
                                         copy(Yii::app()->basepath.'/../resume/'.$user->resume,Yii::app()->basepath.'/../jobApplication/'.$fileName);
-                                        $this->redirect(array('site/page', 'view'=>'success'));
+                                        
+                                        // send email notification
+                                        $company = company::model()->find('CID=:CID', array('CID' => $job->CID));
+                                        $usr = user::model()->find('ID=:ID', array('ID' => $ID));
+                                        
+                                        $data = array(
+					       				'name' => $user->name,
+					       				'job' => $job->title,
+					       				'company' =>  $company->cname,
+					       				'username' => $usr->username,					       				
+					       				'to' => $model->email,
+
+					       				);					       		
+							       		$sendEmail =  Yii::app()->user->sendEmail('applyjob_existing_user',$data);
+	                                    
+	                                    $this->redirect(array('site/page', 'view'=>'success'));
                                     }
                             }
+
+
                             // array('label'=>'About', 'url'=>array('/site/page', 'view'=>'about')),
                            
                     }
@@ -146,10 +184,44 @@ class UserController extends Controller
                                          'model'=>$model));
 		}
 
+		public function actionForgetPassword() 
+		{
+	        $model = new forgetPassword;
+
+	        if (isset($_POST['forgetPassword'])) {
+	            $model->attributes = $_POST['forgetPassword'];
+
+	            if ($user = user::model()->find('email=:email', array('email' => $model->email))) {
+
+	                $pwd1 = substr(str_shuffle(str_repeat('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789', 6)), 0, 6);
+	                $key = 'AG*@#(129)!@K.><>]{[|sd`rjenfla0847&($#)!$Masdc$#@';
+	                $pwd = hash('sha512', $key . ($pwd1));
+	                $pwd = substr($pwd, 0, 100);
+	                $user->password = $pwd;
+	                if($user->save())
+	                {
+		                $data = array(
+						       				'name' => $user->name,
+						       				'account' => $user->username,
+						       				'pwd' =>  $pwd1,					       									       				
+						       				'to' => $model->email,
+
+						       				);					       		
+						$sendEmail =  Yii::app()->user->sendEmail('forgot_password',$data);					
+	                
+	                	$this->redirect(array('site/page', 'view' => 'sentmail'));
+	               	}
+	            }
+	            $this->redirect(array('site/page', 'view' => 'emailNotFound'));
+	        }
+	        $this->render('forgetPassword', array('model' => $model));
+	    }
+
 		public function actionApply_Job($JID) {
         //active record involved user, application, job
 			$model = new Employee();				
-			if(isset($_POST['Employee'])) {
+			if(isset($_POST['Employee'])) 
+			{
             	$model->attributes = $_POST['Employee'];
             	$uploadedFile=CUploadedFile::getInstance($model,'resume');
             	$model->resume = $uploadedFile->name;
@@ -173,7 +245,8 @@ class UserController extends Controller
                     	//you have already applied for this job
                     	echo "you have aready applied for this job!";
                     	$this->redirect(array('site/page', 'view'=>'already-applied'));
-                    } 
+                    }                                       	
+
 					if($existing_employee->save())
 					{
 						$saved = true;
@@ -189,7 +262,8 @@ class UserController extends Controller
                         $application->CID = $job->CID;
                         $application->resume = $model->resume;
 
-                      	if($application->save())  {
+                      	if($application->save())  
+                      	{
                         	//send email
                         	$data = array(
 			       				'name' => $existing_employee->name,
@@ -752,7 +826,7 @@ class UserController extends Controller
 	        $this->render('verify', array('model' => $model));    
     }
 
-    public function actionForgetPassword() {
+   /* public function actionForgetPassword() {
         $model = new forgetPassword;
 
         if (isset($_POST['forgetPassword'])) {
@@ -792,7 +866,7 @@ class UserController extends Controller
             $this->redirect(array('site/page', 'view' => 'emailNotFound'));
         }
         $this->render('forgetPassword', array('model' => $model));
-    }
+    }*/
 
 
 }

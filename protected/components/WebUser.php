@@ -173,6 +173,98 @@ class WebUser extends CWebUser {
                                           $flag = true;                                            
 
                                   break;
+
+                  case 'applyjob_existing_user' :
+
+                                    $body = "Hi <font type=\"bold\">" . $data['username'] . "</font><br>
+                                          <br>
+                                          You have applied for a job <br>
+                                          <br>
+                                          <br>
+                                          Title : ".$data['job']."<br>
+                                          Company : ".$data['company']."<br><br><br>
+                                          
+                                          THIS IS AN AUTO-GENERATED MESSAGE - PLEASE DO NOT REPLY TO THIS MESSAGE!<br>
+                                          <br>
+                                          -------------<br>
+                                          StartUp Jobs Asia Team";
+                                          $message->setBody($body, 'text/html');
+                                          $message->subject = "StartUp Jobs Asia - Apply Job";
+                                          $message->addTo($data['to']);
+                                          $message->from = 'noreply@StartUpJobsAsia.com';
+                                          Yii::app()->mail->send($message); 
+                                          $flag = true;                                            
+
+                                  break;
+
+                  case 'submit_job' :
+                  
+                                    $body = "Hello<br>
+                                          <br>
+                                          A new job has been posted by startup : <br>
+                                          <br>
+                                          <br>
+                                          Title : ".$data['job']."<br>
+                                          Company : ".$data['company']."<br><br><br>
+                                          URL : <a href='".$data['job_url']."'>".$data['job_url']."</a><br><br><br>
+                                          
+                                          THIS IS AN AUTO-GENERATED MESSAGE - PLEASE DO NOT REPLY TO THIS MESSAGE!<br>
+                                          <br>
+                                          -------------<br>
+                                          StartUp Jobs Asia Team";
+                                          $message->setBody($body, 'text/html');
+                                          $message->subject = "StartUp Jobs Asia - New Job";
+                                          $message->addTo($data['to']);
+                                          $message->from = 'noreply@StartUpJobsAsia.com';
+                                          Yii::app()->mail->send($message); 
+                                          $flag = true;                                            
+
+                                  break; 
+
+                  case 'forgot_password' :
+                  
+                                    $body = "Hi <font type=\"bold\">" . $data['name'] . "</font><br>
+                                            <br>
+                                            Your account <font type=\"bold\">" . $data['account'] . "</font>'s password has been reset.<br>
+                                            <br>
+                                            This is your new password : ".$data['pwd']."<br>
+                                            <br>
+                                            THIS IS AN AUTO-GENERATED MESSAGE - PLEASE DO NOT REPLY TO THIS MESSAGE!<br>
+                                            <br>
+                                            -------------<br>
+                                            StartUp Jobs Asia Team";
+                                          $message->setBody($body, 'text/html');
+                                          $message->subject = "StartUp Jobs Asia - New Password";
+                                          $message->addTo($data['to']);
+                                          $message->from = 'noreply@StartUpJobsAsia.com';
+                                          Yii::app()->mail->send($message); 
+                                          $flag = true;                                            
+
+                                  break;   
+
+                  case 'premium_job' :
+                  
+                                    $body = "Hi <font type=\"bold\">" . $data['name'] . "</font><br>
+                                            <br>                                           
+                                            <br>
+                                            You have added a job in premium listings: <br><br>
+                                            Job Title : ".$data['job']."<br>
+                                            Company Name : ".$data['company']."<br>
+                                            Job URL : <a href='".$data['job_url']."'>".$data['job_url']."</a><br><br><br>
+
+                                            <br>
+                                            THIS IS AN AUTO-GENERATED MESSAGE - PLEASE DO NOT REPLY TO THIS MESSAGE!<br>
+                                            <br>
+                                            -------------<br>
+                                            StartUp Jobs Asia Team";
+                                          $message->setBody($body, 'text/html');
+                                          $message->subject = "StartUp Jobs Asia - Premium Job";
+                                          $message->addTo($data['to']);
+                                          $message->from = 'noreply@StartUpJobsAsia.com';
+                                          Yii::app()->mail->send($message); 
+                                          $flag = true;                                            
+
+                                  break;                   
               }
               
              if($flag == true)

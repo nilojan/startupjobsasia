@@ -46,11 +46,13 @@ class JobController extends Controller {
      * else redirect to not approved
      */
     public function actionSubmitJob() {
+       
        $model = new JobForm;
        $company = company::model()->find('ID=:ID', array('ID' => Yii::app()->user->getID()));
-       if ($company ->status == 0) {
+       if ($company->status == 0) {
             $this->redirect(array('site/index'));
         }
+
        if (isset($_POST['JobForm'])) {
                        
                        $model->attributes = $_POST['JobForm'];
@@ -81,7 +83,12 @@ class JobController extends Controller {
                                       //$record->created = $date;
                                       //$record->expiration = $date->add(new DateInterval('P30D'));; 
                                       if ($record->save()) {      
-                                            $JID=$record->JID;           //redirect  
+                                            
+                                            $company->job_post_balance--;
+                                            $company->save();
+
+
+                                            $JID=$record->JID;             
                                             $feed = new feeds;
                                             $feed->title = "{$record->title} {$company->cname} {$record->location}";
                                             $feed->description=substr($record->description, 0, 70);
@@ -92,6 +99,20 @@ class JobController extends Controller {
                                             $feed->image = $company->image;
                                             
                                             $feed->save();
+
+                                            // send email notification
+                                            
+                                            $usr = user::model()->find('ID=:ID', array('ID' => Yii::app()->user->getID()));
+                                            
+                                            $data = array(
+                                            'job' => $job_title,
+                                            'company' =>  $company->cname,                                                                                   
+                                            //'to' => 'post@startupjobs.asia',
+                                            'to' => 'sb9176@adzek.com',
+                                            'job_url' => Yii::app()->getBaseUrl(true).'/job/job?JID='.$JID,
+
+                                            );                              
+                                            $sendEmail =  Yii::app()->user->sendEmail('submit_job',$data);
                                             
                                             $this->redirect(array('job/job','JID' => $JID));
                                             
@@ -102,16 +123,25 @@ class JobController extends Controller {
                        else
                             $this->redirect(array('site/page', 'view'=>'notApproved'));
        }
-       $this->render('submitJob', array('model' => $model));
+       $this->render('submitJob', array('model' => $model,'job_post_balance'=>$company->job_post_balance));
     }
     //Not completed
     //Upgrade job posting to premium
     
     public function actionPremium($JID) {
         
-        Yii::app()->session['JID'] = $JID;
-        $abc =  Yii::app()->session['JID'];
-        $this->render('premium', array('JID'=>$JID, 'abc'=>$abc));
+        $ID = Yii::app()->user->getID();
+        if($job = job::model()->with('company')->find('JID=:JID&&ID=:ID',  array(':JID' => $JID, ':ID'=>$ID)))
+        {
+            Yii::app()->session['JID'] = $JID;
+            $abc =  Yii::app()->session['JID'];
+            $this->render('premium', array('JID'=>$JID, 'abc'=>$abc)); 
+        }
+        else
+        {
+            $this->render('premium', array('JID'=>$JID, 'abc'=>$abc));
+        }
+        
     }
     
     
@@ -184,6 +214,13 @@ class JobController extends Controller {
         $job->delete();
        
     } 
+
+    public function actionDelete($JID) {
+        $job = job::model()->with('company')->find('JID=:JID&&ID=:ID',  array(':JID' => $JID, ':ID'=>Yii::app()->user->getID()));
+        $job->delete();
+        $this->redirect(array('job/manageJobs'));
+       
+    } 
   
     public function actionJobList()  {
         $CID = Yii::app()->user->getID();
@@ -196,7 +233,7 @@ class JobController extends Controller {
     public function actionBuy($JID){
  
         // set 
-        $paymentInfo['Order']['theTotal'] = 10.00;
+        $paymentInfo['Order']['theTotal'] = 5.00;
         $paymentInfo['Order']['description'] = "Some payment description here";
         $paymentInfo['Order']['quantity'] = '1';
  
@@ -300,13 +337,28 @@ class JobController extends Controller {
  
     public function actionConfirmPayment()  {
                 $JID = Yii::app()->session['JID'];
-                echo $JID;
-                $job = job::model()->find('JID=:JID',  array('JID' => $JID, ));
+               // echo $JID;
+                //$job = job::model()->find('JID=:JID',  array('JID' => $JID, ));
+                $job = job::model()->with('company')->find('JID=:JID&&ID=:ID',  array(':JID' => $JID, ':ID'=>Yii::app()->user->getID()));
+                $company = company::model()->find('CID=:CID',array(':CID'=>$job->CID));
+                $user = user::model()->find('ID=:ID',array(':ID'=>Yii::app()->user->getID()));
                 $job->premium = 1;
                 $job->save();
+
+                $data = array(
+                    'name' => $user->name,
+                    'job' => $job->title,
+                    'job_url' => Yii::app()->getBaseUrl(true).'/job/job?JID='.$job->JID,
+                    'company' =>  $company->cname,
+                    'username' => $user->username,
+                    'to' => $user->email,
+                );                              
+                $sendEmail =  Yii::app()->user->sendEmail('premium_job',$data);
                 Yii::app()->session['JID'] = null;
+               // var_dump($sendEmail); die;
+                $this->redirect(array('job/manageJobs'));
                 //$this->render('confirm');
-                $this->redirect(array('site/page','view'=>'success'));
+                //$this->redirect(array('site/page','view'=>'success'));
     }
 }
 ?>
