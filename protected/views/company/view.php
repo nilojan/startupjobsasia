@@ -5,7 +5,7 @@
     height: 250px;
 	background-image:url("<?php echo Yii::app()->request->baseUrl.'/images/cover/'.$company->coverpicture; ?>");	
 	/*<?php }else{  ?>
-	height: 0px;
+	height: 50px;
 	<?php } ?>*/
     background-color: transparent;
     background-position: center center;

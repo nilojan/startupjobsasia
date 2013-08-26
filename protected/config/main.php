@@ -82,7 +82,7 @@ return array(
 			     'transportType'=>'smtp',
 			     'transportOptions'=>array(
 			       'host'=>'smtp.gmail.com',
-			       'username'=>'inspiredwearntu@gmail.com',//contohna nama_email@yahoo.co.id
+			       'username'=>'inspiredwearntu@gmail.com',
 			       'password'=>'2011inspiredwear',
 			       'port'=>'465',
 			       'encryption'=>'ssl',

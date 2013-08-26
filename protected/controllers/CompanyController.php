@@ -37,7 +37,7 @@ class CompanyController extends Controller  {
     
     public function actionUpdate() {
         $ID = Yii::app()->user->getID();
-        $CForm = new UpdateForm;
+        $CForm = new updateForm;
         $company = company::model()->find('ID=:ID', array('ID' => $ID));
         //CActiveRecord for old one
         $CForm->attributes = $company->attributes;
