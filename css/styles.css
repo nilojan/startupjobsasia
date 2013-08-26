@@ -236,20 +236,8 @@ h1.HomeLatestJobs {
 	padding: 10px;
 	float:left;
 	}
-
-	
-.SearchForm input[type="text"] {
-    border: 2px solid #F97C30;
-	width:77%;
-	-webkit-border-radius: 1px;
-	-moz-border-radius: 1px;
-	border-radius: 1px;
-}
-.SearchForm {
-    float: right;
-    width: 25%;
-}
-
+	.SearchForm{float:right; width:25%;}
+	.SearchForm input[type="text"]{border:2px solid #F97C30;}
 	
 	.items{padding:0px;}
 	.list-view{padding:30px;}

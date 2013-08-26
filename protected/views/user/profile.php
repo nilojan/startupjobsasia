@@ -139,3 +139,7 @@ if($_GET['id'] == $curent_user_id)
                     <?php  echo CHtml::link(CHtml::encode('Download Resume'),Yii::app()->baseUrl . '/resume/'.$model->resume,array('target'=>'_blank')); ?>
 </div>
 <?php } ?>
+
+    
+
+

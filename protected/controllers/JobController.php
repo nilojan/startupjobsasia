@@ -3,7 +3,7 @@ class JobController extends Controller {
     public function filters()   {
         return array( 'accessControl' ); // perform access control for CRUD operations
     }
-	
+ 
     public function accessRules()   {
         return array(
             array('allow', // allow authenticated users to access all actions
@@ -17,10 +17,9 @@ class JobController extends Controller {
             array('allow',
                   'actions'=>array('job'),
                   'users'=>array('*'),
-            ),		
+            ),
             array('deny',
                   'users'=>array('*')),
-
             );
     }
     public function actions() {
@@ -195,7 +194,7 @@ class JobController extends Controller {
         $job = job::model()->find('JID=:JID', array('JID' => $JID));
         $CID=$job->CID;        
         $company = company::model()->find('CID=:CID', array('CID'=> $CID));
-        $aplicants = Application1::model()->find('JID=:JID', array('JID'=> $JID));
+        $aplicants = application1::model()->find('JID=:JID', array('JID'=> $JID));
         $total_applicants = count($aplicants);
         $today = date('Y-m-d H:i:s');
         $days_left = Yii::app()->user->dateDiff($today, $job->expire);

@@ -1,8 +1,8 @@
 <?php
 $this->breadcrumbs=array(
-	'TESTIMONIALS',
+	'Advisors',
 );
-$this->pageTitle = 'TESTIMONIALS for Startup Jobs Asia | '.Yii::app()->params['pageTitle'];
+$this->pageTitle = 'Advisors of Startup Jobs Asia | '.Yii::app()->params['pageTitle'];
 ?>
 
 

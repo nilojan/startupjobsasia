@@ -9,7 +9,7 @@
 
 <div class="clear">
                     
-    <div class="span10" style="text-align:left;">
+    <div class ="span9" style="text-align:left;">
                     <span class="JobRole">
 					<?php $url2 = "{$data->title} {$data->company->cname} {$data->location}";?>
 					<?php echo CHtml::link($data->title, array('job/job', 'JID' => $data->JID, 'title'=>$url2)); ?> 

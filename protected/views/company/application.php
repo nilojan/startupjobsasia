@@ -8,7 +8,7 @@ $this->pageTitle = 'Application | '.Yii::app()->params['pageTitle'];
 
      
        <?php 
-        $dataProvider=new CActiveDataProvider('Application1', array( 'criteria'=>array(
+        $dataProvider=new CActiveDataProvider('application1', array( 'criteria'=>array(
                                                                     'order'=>'applied DESC',
                                                                   //  'with' =>array('JID','CID'),
                                                                    'condition'=>'CID=:CID',

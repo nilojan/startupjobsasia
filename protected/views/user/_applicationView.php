@@ -9,7 +9,7 @@ var_dump($data->company->cname); */
 
 //var_dump($data->JID); 
 ?>   
-<div class ="span11">
+<table class ="table">
          <div class ="span2">          
                     <?php echo CHtml::link($data->job->title, array('job/job', 'JID' => $data->JID)) ; ?>
          </div>
