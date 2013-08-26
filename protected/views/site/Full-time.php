@@ -3,8 +3,8 @@ $this->pageTitle = Yii::app()->name . ' - Full Time jobs';
 $this->breadcrumbs = array(
     'Full Time Jobs',
 );
-$condition = 'type = :type';
-$params = array(':type'=>'Full-time');
+$condition = 'type = :type OR full_time=:type2';
+$params = array(':type'=>'Full-time',':type2'=>'Full-time');
 
 if($location != '')
 {

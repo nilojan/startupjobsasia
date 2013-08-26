@@ -55,6 +55,12 @@ class JobController extends Controller {
        if (isset($_POST['JobForm'])) {
                        
                        $model->attributes = $_POST['JobForm'];
+                       $model->full_time = $_POST['JobForm']['full_time'];
+                       $model->part_time = $_POST['JobForm']['part_time'];
+                       $model->freelance = $_POST['JobForm']['freelance'];
+                       $model->internship = $_POST['JobForm']['internship'];
+                       $model->temporary = $_POST['JobForm']['temporary'];
+                      
                        if ($company ->status == 1) {
                             if ($model->validate()) {
                                       $record = new job;
@@ -161,7 +167,12 @@ class JobController extends Controller {
         //$model->about = str_replace('<br />', "", $company->about);
         if (isset($_POST['JobForm'])) {
                     $model->attributes = $_POST['JobForm'];
-					
+					$model->full_time = $_POST['JobForm']['full_time'];
+                    $model->part_time = $_POST['JobForm']['part_time'];
+                    $model->freelance = $_POST['JobForm']['freelance'];
+                    $model->internship = $_POST['JobForm']['internship'];
+                    $model->temporary = $_POST['JobForm']['temporary'];
+                    
 					$job_title = str_replace('/','-',$model->title);
 					
                     $job->title = $job_title;

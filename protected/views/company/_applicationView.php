@@ -4,6 +4,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+//var_dump($data->Employee); die;
 
 ?>
 <!-- <table class ="table">
@@ -22,7 +23,7 @@
                     <?php echo CHtml::link($data->Employee->fname, array('user/profile/'.$data->Employee->EID)) ; ?>                    
          </div>
          <div class ="span2">
-                    <?php  echo CHtml::link(CHtml::encode('Resume'),Yii::app()->baseUrl . '/resume/'.$data->Employee->resume,array('target'=>'_blank')); ?>
+                    <?php echo CHtml::link(CHtml::encode('Resume'),Yii::app()->baseUrl . '/resume/'.$data->Employee->resume,array('target'=>'_blank')); ?>
          </div>
         <div class ="span2">
                   
