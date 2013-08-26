@@ -40,7 +40,7 @@ class UserIdentity extends CUserIdentity
             if(($user_available == 'true') && ($user->role == 0))
             {
                 $user_active = 'false';
-                $emp = employee::model()->find('UID=:user_id', array(':user_id'=>$user->ID));
+                $emp = Employee::model()->find('UID=:user_id', array(':user_id'=>$user->ID));
                 if($emp->registered == 1)
                 {
                     $user_active =  'true';   

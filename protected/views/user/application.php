@@ -7,7 +7,7 @@ $this->breadcrumbs = array(
 
      
        <?php
-        $dataProvider=new CActiveDataProvider('application1', array( 'criteria'=>array(
+        $dataProvider=new CActiveDataProvider('Application1', array( 'criteria'=>array(
                                                                     'order'=>'applied DESC',
                                                                    // 'with' =>array('job','Employee'),
                                                                     'condition'=>'EID=:ID',
