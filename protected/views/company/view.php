@@ -1,12 +1,12 @@
 <style type="text/css">
 .abc
 {
-	/*<?php if(isset($company->coverpicture)){  ?>*/
+	<?php if(isset($company->coverpicture)){  ?>
     height: 250px;
 	background-image:url("<?php echo Yii::app()->request->baseUrl.'/images/cover/'.$company->coverpicture; ?>");	
-	/*<?php }else{  ?>
+	<?php }else{  ?>
 	height: 50px;
-	<?php } ?>*/
+	<?php } ?>
     background-color: transparent;
     background-position: center center;
     background-repeat: no-repeat;

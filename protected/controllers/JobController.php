@@ -50,7 +50,7 @@ class JobController extends Controller {
        $model = new JobForm;
        $company = company::model()->find('ID=:ID', array('ID' => Yii::app()->user->getID()));
        if ($company->status == 0) {
-            $this->redirect(array('site/index'));
+            $this->redirect(array('site/page/view/notApproved'));
         }
 
        if (isset($_POST['JobForm'])) {

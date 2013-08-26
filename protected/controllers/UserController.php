@@ -285,7 +285,7 @@ class UserController extends Controller
             			//guest user
             			$saved = true;
 												
-						$new_user = new User();
+						$new_user = new user();
 						$new_user->username = $model->fname.rand(11,999);
 						
 						$key = 'AG*@#(129)!@K.><>]{[|sd`rjenfla0847&($#)!$Masdc$#@';
