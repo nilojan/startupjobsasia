@@ -362,7 +362,7 @@ class UserController extends Controller
 			$this->render('apply_Job',array('model'=>$model,'action'=>'applyjob'));		
 	    }
 
-	 public function actionDepositResume()   {
+	 public function actionDepositResume(){
 
 	 		$model = new Employee();
             

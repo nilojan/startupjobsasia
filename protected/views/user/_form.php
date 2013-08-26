@@ -54,15 +54,32 @@
 
 	<?php echo $form->textFieldRow($model,'lastjob',array('class'=>'span3','maxlength'=>250)); ?>
 
-	<?php echo $form->textFieldRow($model,'edu',array('class'=>'span3','maxlength'=>250)); ?>
+	<?php echo $form->dropDownListRow($model, 'edu', array(''=>'Education', 
+															'Doctorate'=>'Doctorate (PHD)',
+															'Master'=>'Master Degree',
+															'Bachelor'=>'Bachelor Degree',
+															'Diploma'=>'High School / Diploma',
+															'Cert'=>'Professional Certification',
+															'Others'=>'Others')); ?>
 
-	<?php echo $form->textFieldRow($model,'work_exp',array('class'=>'span2')); ?>
+	<?php echo $form->dropDownListRow($model,'work_exp',array(''=>'Work Experience',
+															'0.5'=>'less than 6 months',
+															'1'=>'1 year',
+															'2'=>'2 year',
+															'3'=>'3 year',
+															'4'=>'4 year',
+															'5'=>'5 year',
+															'6'=>'more than 5 year')); ?>
 
 	<?php echo $form->textFieldRow($model,'curr_salary',array('class'=>'span2')); ?>
 
 	<?php echo $form->textFieldRow($model,'exp_salary',array('class'=>'span2')); ?>
 
-	<?php echo $form->textFieldRow($model,'availability',array('class'=>'span5','maxlength'=>20)); ?>
+	<?php echo $form->dropDownListRow($model,'availability',array(''=>'Availability',
+																'immediately'=>'immediately',
+																'1 week'=>'1 week',
+																'2 week'=>'2 week',
+																'1 month'=>'1 month')); ?>
 
 	<?php //echo $form->textFieldRow($model,'resume',array('class'=>'span5','maxlength'=>256)); ?>
 	 <?php //echo   '<H2>' .CHtml::link(CHtml::encode('Resume'),Yii::app()->baseUrl . '/resume/'.$model->resume, array('target'=>'_blank') );?></H2>
