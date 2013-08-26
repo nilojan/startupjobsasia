@@ -54,5 +54,12 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 
 <div id="err_msg" ></div>
 
+
+
+
+	<ul class="nav nav-pills">
+        <li><a href ="<?php echo Yii::app()->request->baseUrl?>/user/forgetPassword">Reset Password</a></li>
+    </ul>
+	
 </div>
 

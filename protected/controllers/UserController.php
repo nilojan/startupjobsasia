@@ -160,7 +160,7 @@ class UserController extends Controller
                                         $usr = user::model()->find('ID=:ID', array('ID' => $ID));
                                         
                                         $data = array(
-					       				'name' => $user->name,
+					       				'name' => $user->fname,
 					       				'job' => $job->title,
 					       				'company' =>  $company->cname,
 					       				'username' => $usr->username,					       				
