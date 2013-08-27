@@ -3,7 +3,10 @@ $this->pageTitle = Yii::app()->name . ' - Main';
 $this->breadcrumbs = array(
     'Main');
 ?>
+<<<<<<< HEAD
+=======
 
+>>>>>>> viv_changes
 <h1>Applications</h1>
 
      
@@ -16,13 +19,13 @@ $this->breadcrumbs = array(
                                                                     
                                                                     ),
                                                                     'pagination'=>array(
-                                                                                        'pageSize'=>15,
+                                                                        'pageSize'=>15,
                                                                     ),
                                                 )); ?>
         
  <?php       $this->widget('bootstrap.widgets.TbListView', array(
             'dataProvider'=>$dataProvider,
-            'cssFile' => Yii::app()->baseUrl . '/css/gridView.css',
+            //'cssFile' => Yii::app()->baseUrl . '/css/gridView.css',
             'itemView'=>'_applicationView',   // refers to the partial view named '_post'
             //'ajaxUpdate'=>false,
             //'htmlOptions' => array("class"=>"table table-striped"),   
