@@ -3,7 +3,7 @@ class JobController extends Controller {
     public function filters()   {
         return array( 'accessControl' ); // perform access control for CRUD operations
     }
-	
+ 
     public function accessRules()   {
         return array(
             array('allow', // allow authenticated users to access all actions
@@ -17,10 +17,9 @@ class JobController extends Controller {
             array('allow',
                   'actions'=>array('job'),
                   'users'=>array('*'),
-            ),		
+            ),
             array('deny',
                   'users'=>array('*')),
-
             );
     }
     public function actions() {
@@ -56,6 +55,12 @@ class JobController extends Controller {
        if (isset($_POST['JobForm'])) {
                        
                        $model->attributes = $_POST['JobForm'];
+                       $model->full_time = $_POST['JobForm']['full_time'];
+                       $model->part_time = $_POST['JobForm']['part_time'];
+                       $model->freelance = $_POST['JobForm']['freelance'];
+                       $model->internship = $_POST['JobForm']['internship'];
+                       $model->temporary = $_POST['JobForm']['temporary'];
+                      
                        if ($company ->status == 1) {
                             if ($model->validate()) {
                                       $record = new job;
@@ -162,7 +167,12 @@ class JobController extends Controller {
         //$model->about = str_replace('<br />', "", $company->about);
         if (isset($_POST['JobForm'])) {
                     $model->attributes = $_POST['JobForm'];
-					
+					$model->full_time = $_POST['JobForm']['full_time'];
+                    $model->part_time = $_POST['JobForm']['part_time'];
+                    $model->freelance = $_POST['JobForm']['freelance'];
+                    $model->internship = $_POST['JobForm']['internship'];
+                    $model->temporary = $_POST['JobForm']['temporary'];
+                    
 					$job_title = str_replace('/','-',$model->title);
 					
                     $job->title = $job_title;
@@ -195,7 +205,7 @@ class JobController extends Controller {
         $job = job::model()->find('JID=:JID', array('JID' => $JID));
         $CID=$job->CID;        
         $company = company::model()->find('CID=:CID', array('CID'=> $CID));
-        $aplicants = Application1::model()->find('JID=:JID', array('JID'=> $JID));
+        $aplicants = application1::model()->find('JID=:JID', array('JID'=> $JID));
         $total_applicants = count($aplicants);
         $today = date('Y-m-d H:i:s');
         $days_left = Yii::app()->user->dateDiff($today, $job->expire);
