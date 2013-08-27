@@ -55,11 +55,51 @@ class JobController extends Controller {
        if (isset($_POST['JobForm'])) {
                        
                        $model->attributes = $_POST['JobForm'];
-                       $model->full_time = $_POST['JobForm']['full_time'];
-                       $model->part_time = $_POST['JobForm']['part_time'];
-                       $model->freelance = $_POST['JobForm']['freelance'];
-                       $model->internship = $_POST['JobForm']['internship'];
-                       $model->temporary = $_POST['JobForm']['temporary'];
+                       if($_POST['JobForm']['full_time'] == '0')
+                       {
+                            $model->full_time = null;
+                       }
+                       else
+                       {
+                            $model->full_time = $_POST['JobForm']['full_time'];
+                       }
+
+                       if($_POST['JobForm']['part_time'] == '0')
+                       {
+                            $model->part_time = null;
+                       }
+                       else
+                       {
+                            $model->part_time = $_POST['JobForm']['part_time'];
+                       }
+
+                       if($_POST['JobForm']['freelance'] == '0')
+                       {
+                            $model->freelance = null;
+                       }
+                       else
+                       {
+                            $model->freelance = $_POST['JobForm']['freelance'];
+                       }
+
+                       if($_POST['JobForm']['internship'] == '0')
+                       {
+                            $model->internship = null;
+                       }
+                       else
+                       {
+                            $model->internship = $_POST['JobForm']['internship'];
+                       }
+
+                       if($_POST['JobForm']['temporary'] == '0')
+                       {
+                            $model->temporary = null;
+                       }
+                       else
+                       {
+                            $model->temporary = $_POST['JobForm']['temporary'];
+                       }
+                                             
                       
                        if ($company ->status == 1) {
                             if ($model->validate()) {
@@ -205,7 +245,7 @@ class JobController extends Controller {
         $job = job::model()->find('JID=:JID', array('JID' => $JID));
         $CID=$job->CID;        
         $company = company::model()->find('CID=:CID', array('CID'=> $CID));
-        $aplicants = Application1::model()->find('JID=:JID', array('JID'=> $JID));
+        $aplicants = application1::model()->find('JID=:JID', array('JID'=> $JID));
         $total_applicants = count($aplicants);
         $today = date('Y-m-d H:i:s');
         $days_left = Yii::app()->user->dateDiff($today, $job->expire);
