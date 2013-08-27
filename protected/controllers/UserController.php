@@ -366,7 +366,7 @@ class UserController extends Controller
             /*$this->render('applyJob', array('user'=>$user,
                                          'model'=>$model)); */
 			
-			$this->render('apply_Job',array('model'=>$model,'action'=>'applyjob'));		
+			$this->render('apply_job',array('model'=>$model,'action'=>'applyjob'));		
 	    }
 
 	 public function actionDepositResume()   {
