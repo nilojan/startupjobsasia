@@ -1,4 +1,5 @@
 <?php
+
 $this->pageTitle = Yii::app()->name . ' - Main';
 $this->breadcrumbs = array(
     'Main');
@@ -30,4 +31,5 @@ $this->breadcrumbs = array(
               'last_reviewed'=>'last_reviewed',*/            
            // 'created'=>'Created',    ),
 ));
+
  ?>

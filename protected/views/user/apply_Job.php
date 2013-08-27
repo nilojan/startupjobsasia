@@ -37,15 +37,37 @@ else if($action=='depositResume')
                                                                                 )); ?>
     <?php echo $form->errorSummary($model); ?> 
        
-    <?php echo $form->textFieldRow($model,'fname',array('class'=>'span9', 'rows'=>10)); ?>
-    <?php echo $form->textFieldRow($model,'lname',array('class'=>'span9', 'rows'=>10)); ?>
-    <?php echo $form->textFieldRow($model,'email',array('class'=>'span9', 'rows'=>10)); ?>
-    <?php echo $form->textFieldRow($model,'contact',array('class'=>'span9', 'rows'=>10)); ?>
-    <?php echo $form->textFieldRow($model,'dob',array('class'=>'span9', 'rows'=>10)); ?>
-    <?php echo $form->textFieldRow($model,'gender',array('class'=>'span9', 'rows'=>10)); ?>
-    <?php echo $form->textFieldRow($model,'edu',array('class'=>'span9', 'rows'=>10)); ?>
-    <?php echo $form->textFieldRow($model,'country',array('class'=>'span9', 'rows'=>10)); ?>
-    <?php echo $form->textAreaRow($model,'coverLetter', array('class'=>'span9', 'rows'=>10)); ?>
+    <?php echo $form->textFieldRow($model,'fname',array('class'=>'span3', 'rows'=>10)); ?>
+    <?php echo $form->textFieldRow($model,'lname',array('class'=>'span3', 'rows'=>10)); ?>
+    <?php echo $form->textFieldRow($model,'email',array('class'=>'span3', 'rows'=>10)); ?>
+    <?php echo $form->textFieldRow($model,'contact',array('class'=>'span3', 'rows'=>10)); ?>
+    <?php echo $form->textFieldRow($model,'dob',array('class'=>'span3', 'rows'=>10)); ?>
+    <?php    
+        $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+        'model' => $model,
+       // 'name'=>'bdate',  
+        'attribute'=>'dob', 
+        // additional javascript options for the date picker plugin
+        'options'=>array(
+            'showAnim'=>'fold',
+            'changeYear'=>'true',
+            'changeMonth'=>'true',
+            'yearRange'=> '1940:2013',
+        ),
+        'htmlOptions'=>array(
+            'style'=>'height:20px;display:none;'
+        ),
+        ));
+    ?>
+    <?php echo $form->radioButtonListRow($model, 'gender', array(
+        'Male' => 'Male',
+        'Female' => 'Female'
+    )); ?>
+   
+    
+    <?php echo $form->textFieldRow($model,'edu',array('class'=>'span3', 'rows'=>10)); ?>
+    <?php echo $form->textFieldRow($model,'country',array('class'=>'span3', 'rows'=>10)); ?>
+    <?php echo $form->textAreaRow($model,'coverLetter', array('class'=>'span5', 'rows'=>5)); ?>
     <?php echo $form->fileFieldRow($model,'resume'); ?>
 
 
