@@ -15,7 +15,7 @@
   <div class ="span2">Applied On</div>
   <div class ="btn-toolbar">Edit</div>
   <div class ="btn-toolbar">Delete</div> -->
-<div class ="span12">
+<table class ="table">
          <div class ="span2">          
                     <?php echo CHtml::link($data->job->title, array('job/job', 'JID' => $data->JID)) ; ?>
          </div>
@@ -37,11 +37,7 @@
                           'title'     => 'Select Action',
                           'placement' => 'right',
                           'showbuttons' => false,
-                          'source'    => Editable::source(array('Pending' => 'Request is pending',
-																'Offered' => 'Offer Job', 
-																'Shortlisted' => 'Add to shortlist', 
-																'Onhold' => 'Put on hold', 
-																'Rejected' => 'Reject Request')),
+                          'source'    => Editable::source(array('Pending' => 'Request is pending', 'Offered' => 'Offer Job', 'Shortlisted' => 'Add to shortlist', 'Onhold' => 'Put on hold', 'Rejected' => 'Reject Request')),
                           
                       ));
                   ?>
