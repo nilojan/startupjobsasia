@@ -205,7 +205,7 @@ class JobController extends Controller {
         $job = job::model()->find('JID=:JID', array('JID' => $JID));
         $CID=$job->CID;        
         $company = company::model()->find('CID=:CID', array('CID'=> $CID));
-        $aplicants = application1::model()->find('JID=:JID', array('JID'=> $JID));
+        $aplicants = Application1::model()->find('JID=:JID', array('JID'=> $JID));
         $total_applicants = count($aplicants);
         $today = date('Y-m-d H:i:s');
         $days_left = Yii::app()->user->dateDiff($today, $job->expire);
