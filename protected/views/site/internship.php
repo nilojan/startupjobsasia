@@ -5,8 +5,8 @@ $this->breadcrumbs = array(
 );
         $dataProvider=new CActiveDataProvider('job', array( 'criteria'=>array(
                                                                     'order'=>'created DESC',
-                                                                    'condition'=>'type=:type',
-                                                                    'params'=>array(':type'=>'Internship'),
+                                                                    'condition'=>'type=:type OR internship=:type2',
+                                                                    'params'=>array(':type'=>'Internship',':type2'=>'Internship'),
                                                                     ),
                                                                     'pagination'=>array(
                                                                                         'pageSize'=>20,

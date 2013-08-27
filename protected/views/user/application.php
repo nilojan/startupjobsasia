@@ -3,6 +3,10 @@ $this->pageTitle = Yii::app()->name . ' - Main';
 $this->breadcrumbs = array(
     'Main');
 ?>
+<<<<<<< HEAD
+=======
+
+>>>>>>> viv_changes
 <h1>Applications</h1>
 
      
