@@ -371,7 +371,7 @@ class UserController extends Controller
 
 	 public function actionDepositResume()   {
 
-	 		$model = new Employee();
+			$model = new Employee();
             
 	 		if (isset($_POST['Employee'])) {
 
