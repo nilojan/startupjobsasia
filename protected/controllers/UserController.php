@@ -499,13 +499,8 @@ class UserController extends Controller
 	        }		               
 
             
-<<<<<<< HEAD
-             $this->render('apply_job', array('model'=>$model,
-                                            'action'=>'depositResume'));
-=======
             $this->render('apply_job', array('model'=>$model,'myDate'=>$myDate,'action'=>'depositResume'));
 											
->>>>>>> viv_changes
     }
 
 	/**
