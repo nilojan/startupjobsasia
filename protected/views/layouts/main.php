@@ -71,8 +71,8 @@
        // array('label'=>'SIGN UP', 'url'=>array('/registration/registration'),'visible'=>Yii::app()->user->isGuest),
          array('label'=>'DEPOSIT RESUME', 'url'=>array('/user/depositResume'),'visible'=>Yii::app()->user->isGuest),
          array('label'=>'SIGN UP', 'items'=>array(
-            array('label'=>'User', 'url'=>array('/user/registration')),
-            array('label'=>'StartUP', 'url'=>array('/company/registration')),            
+            array('label'=>'User', 'url'=>array('/user/registration'),'visible'=>Yii::app()->user->isGuest),
+            array('label'=>'StartUP', 'url'=>array('/company/registration'),'visible'=>Yii::app()->user->isGuest),            
             ),'visible'=>Yii::app()->user->isGuest),
 		        //array('label'=>'Register StartUp', 'url'=>array('/company/registration'),'visible'=>Yii::app()->user->isMember()),
         array('label'=>'Submit a job', 'url'=>array('/job/submitJob'),'visible'=>Yii::app()->user->isCompany()),

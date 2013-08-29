@@ -226,7 +226,22 @@ class UserController extends Controller
 
 		public function actionApply_Job($JID) {
         //active record involved user, application, job
-			$model = new Employee();				
+			$model = new Employee();	
+
+			/*  Using from Action Edit for myDate */
+			$myDate = new myDate();
+			$mydob = explode('-', $model->dob);
+			
+			//$myDate->year = $mydob[0];
+			//$myDate->month = $mydob[1];
+			//$myDate->day = $mydob[2];
+
+
+			$contact = explode('-', $model->contact);
+			$myDate->country_code = $contact[0];
+			//$model->contact = $contact[1];
+
+			
 			if(isset($_POST['Employee'])) 
 			{
             	$model->attributes = $_POST['Employee'];
@@ -305,6 +320,17 @@ class UserController extends Controller
 						$new_user->name = $model->fname;
 						$new_user->activation_key = mt_rand().mt_rand().mt_rand().mt_rand();
 
+						
+							/*  Using from Action Edit for myDate */
+							$myDate->attributes=$_POST['myDate'];
+							$myDate->day = $_POST['myDate']['day'];
+							$myDate->month = $_POST['myDate']['month'];
+							$myDate->year = $_POST['myDate']['year'];
+							$myDate->country_code = $_POST['myDate']['country_code'];
+							$model->contact = $myDate->country_code.'-'.$model->contact;
+						
+							$model->dob = $myDate->year.'-'.$myDate->month.'-'.$myDate->day;
+				
 			       		if($new_user->save())
 			       		{
 
@@ -372,6 +398,20 @@ class UserController extends Controller
 	 public function actionDepositResume()   {
 
 			$model = new Employee();
+			
+			/*  Using from Action Edit for myDate */
+			$myDate = new myDate();
+			$mydob = explode('-', $model->dob);
+			
+			//$myDate->year = $mydob[0];
+			//$myDate->month = $mydob[1];
+			//$myDate->day = $mydob[2];
+
+
+			$contact = explode('-', $model->contact);
+			$myDate->country_code = $contact[0];
+			//$model->contact = $contact[1];
+		
             
 	 		if (isset($_POST['Employee'])) {
 
@@ -391,6 +431,16 @@ class UserController extends Controller
 				$new_user->name = $model->fname;
 				$new_user->activation_key = mt_rand().mt_rand().mt_rand().mt_rand();
 
+				/*  Using from Action Edit for myDate */
+				$myDate->attributes=$_POST['myDate'];
+				$myDate->day = $_POST['myDate']['day'];
+				$myDate->month = $_POST['myDate']['month'];
+				$myDate->year = $_POST['myDate']['year'];
+				$myDate->country_code = $_POST['myDate']['country_code'];
+				$model->contact = $myDate->country_code.'-'.$model->contact;
+			
+				$model->dob = $myDate->year.'-'.$myDate->month.'-'.$myDate->day;
+			
 	       		if($new_user->save())
 	       		{
 
@@ -449,8 +499,8 @@ class UserController extends Controller
 	        }		               
 
             
-             $this->render('apply_job', array('model'=>$model,
-                                            'action'=>'depositResume'));
+            $this->render('apply_job', array('model'=>$model,'myDate'=>$myDate,'action'=>'depositResume'));
+											
     }
 
 	/**
@@ -689,7 +739,9 @@ class UserController extends Controller
 	{
 		if(!$id)
 		{
-			$id = Yii::app()->user->getId();
+			//$id = Yii::app()->user->getId();
+		    $this->redirect(array('/site/page/view/notAuthorized'));
+
 		}
 			$this->render('profile',array(
 			'model'=>$this->loadEmployeeModel($id),
