@@ -51,9 +51,8 @@ $this->breadcrumbs=array(
 			'style'=>'height:20px;display:none;'
 		),
 		));
-		
-
 	?>
+    
 
 	<?php echo $form->radioButtonListRow($model, 'gender', array(
         'Male' => 'Male',

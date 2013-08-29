@@ -14,14 +14,16 @@ $this->breadcrumbs=array(
 	//$model->EID,
 	'Profile',
 );
+echo "<div class=\"span10\">";
 
-echo '<img src='.Yii::app()->request->baseUrl.'/images/profile/'. $model->photo.' style= " height:200px; width:200px; float:left; border:1px solid silver;" >';
+echo '<img src='.Yii::app()->request->baseUrl.'/images/profile/'. $model->photo.' style= "margin-left:20px;height:200px; width:200px; float:left; border:5px solid #F89406;" >';
 
 ?>
 
-<?php //echo $user->username; ?>
+<span style="font-family: 'BebasNeue';font-size:60px;padding:0px 20px;"><?php echo $model->fname." ".$model->lname; ?></span>
+<hr style="border:2px solid #F89406;margin: 80px 0 100px;" />
 
-<br/><h1><?php echo $model->fname." ".$model->lname; ?></h1> 
+
 <?php $curent_user_id = (string)Yii::app()->user->getId();
 if($_GET['id'] == $curent_user_id)
 { ?>
@@ -29,10 +31,10 @@ if($_GET['id'] == $curent_user_id)
 <?php } 
 
 ?>
-<br/><br/>
-<b><?php echo CHtml::encode($model->getAttributeLabel('EID')); ?>:</b>
-	<?php echo CHtml::link(CHtml::encode($model->EID),array('view','id'=>$model->EID)); ?>
-	<br />
+<br/>
+	<?php //echo CHtml::encode($model->getAttributeLabel('EID')); ?>
+	<?php //echo CHtml::link(CHtml::encode($model->EID),array('view','id'=>$model->EID)); ?>
+	
 
 	<b><?php echo CHtml::encode($model->getAttributeLabel('fname')); ?>:</b>
 	<?php echo CHtml::encode($model->fname); ?>
@@ -133,9 +135,17 @@ if($_GET['id'] == $curent_user_id)
 	),
 )); */?>
 
-<?php if(Yii::app()->user->isCompany() || Yii::app()->user->isAdmin())
-{ ?>
+
+
+ 
+<?php if(Yii::app()->user->isCompany() || Yii::app()->user->isAdmin()) { ?>
 <div class ="span2">
                     <?php  echo CHtml::link(CHtml::encode('Download Resume'),Yii::app()->baseUrl . '/resume/'.$model->resume,array('target'=>'_blank')); ?>
 </div>
 <?php } ?>
+<<<<<<< HEAD
+=======
+
+    
+</div>
+>>>>>>> viv_changes

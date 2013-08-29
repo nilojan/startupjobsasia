@@ -37,6 +37,7 @@ else if($action=='depositResume')
                                                                                 )); ?>
     <?php echo $form->errorSummary($model); ?> 
        
+<<<<<<< HEAD
     <?php echo $form->textFieldRow($model,'fname',array('class'=>'span9', 'rows'=>10)); ?>
     <?php echo $form->textFieldRow($model,'lname',array('class'=>'span9', 'rows'=>10)); ?>
     <?php echo $form->textFieldRow($model,'email',array('class'=>'span9', 'rows'=>10)); ?>
@@ -244,6 +245,69 @@ else if($action=='depositResume')
 															'Others'=>'Others'), 
                                                                  array('options' => array('M' => array('selected' => true)))); ?>	
     <?php echo $form->textAreaRow($model,'coverLetter', array('class'=>'span9', 'rows'=>10)); ?>
+=======
+    <?php echo $form->textFieldRow($model,'fname',array('class'=>'span3', 'rows'=>10)); ?>
+    <?php echo $form->textFieldRow($model,'lname',array('class'=>'span3', 'rows'=>10)); ?>
+    <?php echo $form->textFieldRow($model,'email',array('class'=>'span3', 'rows'=>10)); ?>
+
+	
+	<?php echo $form->dropDownListRow($myDate,'country_code', $myDate->getCountryCodes(), array('select'=>$myDate->country_code)); ?>
+	<?php echo $form->textField($model,'contact',array('class'=>'span2','maxlength'=>10)); ?><span id="errmsg"></span>
+	
+    <?php /* echo $form->textFieldRow($model,'dob',array('class'=>'span3', 'rows'=>10)); 
+       
+        $this->widget('zii.widgets.jui.CJuiDatePicker', array(
+        'model' => $model,
+       // 'name'=>'bdate',  
+        'attribute'=>'dob', 
+        // additional javascript options for the date picker plugin
+        'options'=>array(
+            'showAnim'=>'fold',
+            'changeYear'=>'true',
+            'changeMonth'=>'true',
+            'yearRange'=> '1940:2013',
+        ),
+        'htmlOptions'=>array(
+            'style'=>'height:20px;display:none;'
+        ),
+        ));
+		*/
+    ?>
+	
+		<br><?php echo CHtml::encode($model->getAttributeLabel('dob')); ?>
+	
+	    <?php echo $form->dropDownListRow($myDate,'day', $myDate->getDates(), array('select'=>$myDate->day,'class'=>'span1')); ?>
+   
+    
+        <?php echo $form->dropDownList($myDate,'month', $myDate->getMonths(), array('select'=>$myDate->month,'class'=>'span2')); ?>
+   
+   
+        <?php echo $form->dropDownList($myDate,'year', $myDate->getYears(), array('select'=>$myDate->year,'class'=>'span1')); ?>
+	
+    <?php echo $form->dropDownListRow($model,'location',$myDate->getCountryList(), array('select'=>$model->location, 'prompt'=>'Select'), array('class'=>'span5','maxlength'=>255)); ?>
+
+	<?php echo $form->dropDownListRow($model,'country',$myDate->getCountryList(), array('select'=>$model->country, 'prompt'=>'Select'), array('class'=>'span5','maxlength'=>50)); ?>
+
+	
+    <?php echo $form->radioButtonListRow($model, 'gender', array(
+        'Male' => 'Male',
+        'Female' => 'Female'
+    )); ?>
+   
+    
+
+	<?php echo $form->dropDownListRow($model, 'edu', array(''=>'Education', 
+															'Doctorate'=>'Doctorate (PHD)',
+															'Master'=>'Master Degree',
+															'Bachelor'=>'Bachelor Degree',
+															'Diploma'=>'High School / Diploma',
+															'Cert'=>'Professional Certification',
+															'Others'=>'Others')); ?>
+															
+
+	
+    <?php echo $form->textAreaRow($model,'coverLetter', array('class'=>'span5', 'rows'=>5)); ?>
+>>>>>>> viv_changes
     <?php echo $form->fileFieldRow($model,'resume'); ?>
 
 
