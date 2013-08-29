@@ -737,11 +737,16 @@ class UserController extends Controller
 
 	public function actionProfile($id)
 	{
-		if(!$id)
+		if(!Yii::app()->user->isCompany())
 		{
+			$uid = Yii::app()->user->getID();
+			if((!$id) || ($id != $uid))
+			{
 			//$id = Yii::app()->user->getId();
+			var_dump($id); 
 		    $this->redirect(array('/site/page/view/notAuthorized'));
 
+			}
 		}
 			$this->render('profile',array(
 			'model'=>$this->loadEmployeeModel($id),
