@@ -37,7 +37,7 @@ else if($action=='depositResume')
                                                                                 )); ?>
     <?php echo $form->errorSummary($model); ?> 
        
-<<<<<<< HEAD
+
     <?php echo $form->textFieldRow($model,'fname',array('class'=>'span9', 'rows'=>10)); ?>
     <?php echo $form->textFieldRow($model,'lname',array('class'=>'span9', 'rows'=>10)); ?>
     <?php echo $form->textFieldRow($model,'email',array('class'=>'span9', 'rows'=>10)); ?>
