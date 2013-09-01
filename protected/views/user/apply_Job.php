@@ -30,11 +30,13 @@ else if($action=='depositResume')
 ?>  
 <?php  $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                                                                                 'id'=>'horizontalForm',
-                                                                                'type'=>'horizontal',
-                                                                                'enableClientValidation'=>true,
+                                                                                //'type'=>'horizontal',
+                                                                                'enableClientValidation'=>false,
+                                                                                'enableAjaxValidation'=>false,
                                                                                 'clientOptions'=>array('validateOnSubmit'=>true,),
                                                                                 'htmlOptions' => array('enctype' => 'multipart/form-data'),
                                                                                 )); ?>
+    <p class="help-block">Fields with <span class="required">*</span> are required.</p>
     <?php echo $form->errorSummary($model); ?> 
        
     <?php echo $form->textFieldRow($model,'fname',array('class'=>'span3', 'rows'=>10)); ?>
@@ -42,7 +44,7 @@ else if($action=='depositResume')
     <?php echo $form->textFieldRow($model,'email',array('class'=>'span3', 'rows'=>10)); ?>
 
 	
-	<?php echo $form->dropDownListRow($myDate,'country_code', $myDate->getCountryCodes(), array('select'=>$myDate->country_code)); ?>
+	<?php echo $form->dropDownListRow($myDate,'country_code', $myDate->getCountryCodes(), array('select'=>$myDate->country_code,'class'=>'span2')); ?>
 	<?php echo $form->textField($model,'contact',array('class'=>'span2','maxlength'=>10)); ?><span id="errmsg"></span>
 	
     <?php /* echo $form->textFieldRow($model,'dob',array('class'=>'span3', 'rows'=>10)); 
@@ -65,13 +67,11 @@ else if($action=='depositResume')
 		*/
     ?>
 	
-		<br><?php echo CHtml::encode($model->getAttributeLabel('dob')); ?>
+		<br><?php echo CHtml::encode($model->getAttributeLabel('dob')); ?><br>
 	
-	    <?php echo $form->dropDownListRow($myDate,'day', $myDate->getDates(), array('select'=>$myDate->day,'class'=>'span1')); ?>
+	    <?php echo $form->dropDownList($myDate,'day', $myDate->getDates(), array('select'=>$myDate->day,'class'=>'span1')); ?>
    
-    
         <?php echo $form->dropDownList($myDate,'month', $myDate->getMonths(), array('select'=>$myDate->month,'class'=>'span2')); ?>
-   
    
         <?php echo $form->dropDownList($myDate,'year', $myDate->getYears(), array('select'=>$myDate->year,'class'=>'span1')); ?>
 	

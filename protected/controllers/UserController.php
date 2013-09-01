@@ -74,6 +74,18 @@ class UserController extends Controller
 		));
 	}
 
+	public function actionSearch()
+    {
+        
+        $query = $_GET['q'];
+
+       // $this->redirect(array('site/page','view'=>'success'));
+ 
+        $this->render('search', array('query'=>$query));
+       
+    }
+ 
+
 	public function actionApplication() {
 		
 		if(Yii::app()->user->isGuest)
@@ -96,7 +108,7 @@ class UserController extends Controller
 		
     }
 
-	public function actionApplyJob($JID) {
+	public function actionApplyJob1($JID) {
         //active record involved user, application, job
 
        $model = new ApplyJobForm;
@@ -224,7 +236,7 @@ class UserController extends Controller
 	        $this->render('forgetPassword', array('model' => $model));
 	    }
 
-		public function actionApply_Job($JID) {
+		public function actionApply_Job1($JID) {
         //active record involved user, application, job
 			$model = new Employee();	
 
@@ -392,7 +404,7 @@ class UserController extends Controller
             /*$this->render('applyJob', array('user'=>$user,
                                          'model'=>$model)); */
 			
-			$this->render('apply_job',array('model'=>$model,'action'=>'applyjob'));		
+			$this->render('apply_job',array('model'=>$model,'myDate'=>$myDate,'action'=>'applyjob'));		
 	    }
 
 	 public function actionDepositResume()   {
@@ -609,20 +621,44 @@ class UserController extends Controller
             }
             else
             {
-            	$model->photo = $_POST['old_pic'];
+            	if(isset($_POST['old_pic']) && $_POST['old_pic'] != '') 
+            		$model->photo = $_POST['old_pic'];
+            	else
+            		$model->photo = '';
             }
 
             if(isset($eresume->name) && $eresume->name != '') 
             {
                        // file_put_contents("Profile_update.txt","\n profile upd : ".$profile_pic,FILE_APPEND);
-                    	$ext = $model->resume->extensionName;
-                    	$new_name = Yii::app()->user->getID()."_user_resume.".$ext;
+                    	$extt = $model->resume->extensionName;
+                    	$new_name = Yii::app()->user->getID()."_user_resume.".$extt;
                         move_uploaded_file($eresume->tempName,"./resume/".$new_name);
 						$model->resume = $new_name;
+
+						$Content ='';
+						if($extt == 'doc')
+						{
+							$Content = Yii::app()->user->read_file_doc(Yii::app()->basepath.'/../resume/'.$model->resume);
+						}
+						if($extt == 'docx')
+						{
+							$Content = Yii::app()->user->read_file_docx(Yii::app()->basepath.'/../resume/'.$model->resume);
+						}
+						if($extt == 'pdf')
+						{
+							$read_pdf = new ReadPDF();
+							$Content = $read_pdf->decodePDF(Yii::app()->basepath.'/../resume/'.$model->resume);							
+						}
+						$model->content = $Content;
+
             }
             else
             {
-            	$model->resume = $_POST['old_resume'];
+            	if(isset($_POST['old_resume']) && $_POST['old_resume'] != '') 
+            		$model->resume = $_POST['old_resume'];
+            	else
+            		$model->resume = '';
+
             }
 			if($model->save())
 				{

@@ -62,6 +62,7 @@
  
 
 	<div class="topHeader">
+
 		<a href="<?php echo Yii::app()->request->baseUrl;?>"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/suj.png" style= "width: 320px"></a>	
 
 	<?php $this->widget('bootstrap.widgets.TbMenu', array(
@@ -90,6 +91,22 @@
         array('label'=>'LOGOUT ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest, 'active'=>true),		
     ),
 )); ?>
+<?php if(Yii::app()->user->isCompany())
+{ ?>
+ <div class="clear">
+    <form class="SearchForm" action="<?php echo Yii::app()->request->baseUrl?>/user/search">
+    <input type="text" name="q" placeholder="SEARCH USERS">
+    </form>
+</div>
+<?php } ?>
+<?php if(Yii::app()->user->isMember())
+{ ?>
+ <div class="clear">
+    <form class="SearchForm" action="<?php echo Yii::app()->request->baseUrl?>/job/search">
+    <input type="text" name="q" placeholder="SEARCH JOBS">
+    </form>
+</div>
+<?php } ?>
 	</div>
 
 
@@ -109,7 +126,6 @@
                                 'links'=>$this->breadcrumbs,
                 )); ?>
 <?php endif?>
-
 
 
 

@@ -10,7 +10,15 @@ $this->pageOgImage='/images/company/180/'.$company->image;
 
 <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
 <script type="text/javascript">stLight.options({publisher: "b824f821-ae9e-43bc-a63f-7f65b2405fe7", doNotHash: false, doNotCopy: false, hashAddressBar: true});</script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('#applyjob').hide();
+	$('#user_apply').click(function(){
+		$('#applyjob').fadeToggle();
+	});
 
+});
+</script>
 <style type="text/css">
 .abc
 {
@@ -189,15 +197,17 @@ $this->breadcrumbs = array(
 	</div>
 	<div class="clear">   
 		<div id="job">
-		  <?php 
+		  <?php 		
+
 		  if(Yii::app()->user->isMember())
 		  {
 
 			  $this->widget('bootstrap.widgets.TbButton', array(
 													'label'=>'Apply Online',
+													'htmlOptions'   => array('id'=> 'user_apply'),
 													'type'=>'primary', 
 													'size'=>'large', 
-													'url'=>Yii::app()->createUrl("user/applyJob", array("JID"=>$job->JID )),    
+													//'url'=>Yii::app()->createUrl("user/applyJob", array("JID"=>$job->JID )),    
 			)); 
 		  }
 		  if(Yii::app()->user->isGuest)
@@ -205,14 +215,110 @@ $this->breadcrumbs = array(
 		  	
 			  $this->widget('bootstrap.widgets.TbButton', array(
 													'label'=>'Apply Online',
+													'htmlOptions'   => array('id'=> 'user_apply'),
 													'type'=>'primary', 
 													'size'=>'large', 
-													'url'=>Yii::app()->createUrl("user/apply_Job", array("JID"=>$job->JID )),    
+													//'url'=>Yii::app()->createUrl("user/apply_Job", array("JID"=>$job->JID )),    
 			)); 
 		  }
 		  ?>  
 
 		</div>
-	</div>
+	</div>	
+
+<div id="applyjob">
+	<br> 
+	<?php if(Yii::app()->user->isGuest){
+	 $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
+                                                                                'id'=>'horizontalForm',
+                                                                                //'type'=>'horizontal',
+                                                                                'enableClientValidation'=>false,
+                                                                                'enableAjaxValidation'=>false,
+                                                                                'clientOptions'=>array('validateOnSubmit'=>true,),
+                                                                                'htmlOptions' => array('enctype' => 'multipart/form-data'),
+                                                                                )); ?>
+    <!-- <p class="help-block">Fields with <span class="required">*</span> are required.</p> -->
+    <?php echo $form->errorSummary($model); ?> 
+       
+    <?php echo $form->textFieldRow($model,'fname',array('class'=>'span5', 'rows'=>10)); ?>
+    <?php echo $form->textFieldRow($model,'lname',array('class'=>'span5', 'rows'=>10)); ?>
+    <?php echo $form->textFieldRow($model,'email',array('class'=>'span5', 'rows'=>10)); ?>
+
+	
+	<?php echo $form->dropDownListRow($myDate,'country_code', $myDate->getCountryCodes(), array('select'=>$myDate->country_code,'class'=>'span3')); ?>
+	<?php echo $form->textField($model,'contact',array('class'=>'span3','maxlength'=>10)); ?><span id="errmsg"></span>
+	
+		<br><?php echo CHtml::encode($model->getAttributeLabel('dob')); ?><br>
+	
+	    <?php echo $form->dropDownList($myDate,'day', $myDate->getDates(), array('select'=>$myDate->day,'class'=>'span2')); ?>
+   
+        <?php echo $form->dropDownList($myDate,'month', $myDate->getMonths(), array('select'=>$myDate->month,'class'=>'span3')); ?>
+   
+        <?php echo $form->dropDownList($myDate,'year', $myDate->getYears(), array('select'=>$myDate->year,'class'=>'span2')); ?>
+	
+    <?php echo $form->dropDownListRow($model,'location',$myDate->getCountryList(), array('select'=>$model->location, 'prompt'=>'Select'), array('class'=>'span5','maxlength'=>255)); ?>
+
+	<?php echo $form->dropDownListRow($model,'country',$myDate->getCountryList(), array('select'=>$model->country, 'prompt'=>'Select'), array('class'=>'span5','maxlength'=>50)); ?>
+
+	
+    <?php echo $form->radioButtonListRow($model, 'gender', array(
+        'Male' => 'Male',
+        'Female' => 'Female'
+    )); ?>
+   
+    
+
+	<?php echo $form->dropDownListRow($model, 'edu', array(''=>'Education', 
+															'Doctorate'=>'Doctorate (PHD)',
+															'Master'=>'Master Degree',
+															'Bachelor'=>'Bachelor Degree',
+															'Diploma'=>'High School / Diploma',
+															'Cert'=>'Professional Certification',
+															'Others'=>'Others')); ?>
+															
+
+	
+    <?php echo $form->textAreaRow($model,'coverLetter', array('class'=>'span8', 'rows'=>5)); ?>
+    <?php echo $form->fileFieldRow($model,'resume'); ?>
+
+
+<div id="job" class="apply-instructions">
+    <h3>Are you sure you want to submit this? </h3>
+    <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary','label'=>'Submit')); ?>
+
+</div>
+            
+<?php $this->endWidget(); } 
+if(Yii::app()->user->isMember()) {
+	if($user->resume != null)
+          echo 'You have uploaded ';   
+          echo   CHtml::link(CHtml::encode($user->resume),Yii::app()->baseUrl . '/resume/'.$user->resume, array('target'=>'_blank')); ?>
+ 
+          
+		<br>
+		Or upload another
+
+		<?php  $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
+		                                                                                'id'=>'horizontalForm',
+		                                                                                //'type'=>'horizontal',
+		                                                                                'enableClientValidation'=>true,
+		                                                                                'clientOptions'=>array('validateOnSubmit'=>true,),
+		                                                                                'htmlOptions' => array('enctype' => 'multipart/form-data'),
+		                                                                                )); ?>
+		    <?php echo $form->errorSummary($model); ?> 
+		    <?php echo $form->fileFieldRow($model, 'resume'); ?>
+		    <?php echo $form->textAreaRow($model,'coverLetter', array('class'=>'span9', 'rows'=>10)); ?>
+		        
+
+		<div id="job" class="apply-instructions">
+		    <h3>Are you sure you want to submit this? </h3>
+		    <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary','label'=>'Submit')); ?>
+
+		</div>
+		            
+		<?php $this->endWidget(); 
+}
+?>
+</div>
 </div>
 </div>
