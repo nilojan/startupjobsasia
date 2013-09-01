@@ -81,12 +81,11 @@ return array(
 			    'class' => 'ext.yii-mail.YiiMail',
 			     'transportType'=>'smtp',
 			     'transportOptions'=>array(
-					'host'=>'smtp.gmail.com',
-					'username'=>'inspiredwearntu@gmail.com',
-					// or email@googleappsdomain.com
-					'password'=>'2011inspiredwear',
-					'port'=>'465',
-					'encryption'=>'ssl',
+			       'host'=>'127.0.0.1',
+			       'username'=>'nilojan@startupjobs.asia',
+			       'password'=>'babishan10',
+			       'port'=>'25',
+			      // 'encryption'=>'non',
 			     	),
 			    'viewPath' => 'application.views.mail',
 			    'logging' => true,
