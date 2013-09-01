@@ -173,7 +173,7 @@ class SiteController extends Controller
                 $message->setBody($body, 'text/html');
                 $message->subject = "uStyle Account Verification";
                 $message->addTo($model->email);
-                $message->from = 'noreply@uStyle.com';
+                $message->from = 'noreply@startupjobs.asia';
                 Yii::app()->mail->send($message);
                 $this->redirect(array('site/page', 'view' => 'sentmail'));
             }
