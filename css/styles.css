@@ -239,8 +239,20 @@ h1.HomeLatestJobs {
 	padding: 10px;
 	float:left;
 	}
-	.SearchForm{float:right; width:25%;}
-	.SearchForm input[type="text"]{border:2px solid #F97C30;}
+
+	
+.SearchForm input[type="text"] {
+    border: 2px solid #F97C30;
+	width:77%;
+	-webkit-border-radius: 1px;
+	-moz-border-radius: 1px;
+	border-radius: 1px;
+}
+.SearchForm {
+    float: right;
+    width: 25%;
+}
+
 	
 	.items{padding:0px;}
 	.list-view{padding:30px;}
@@ -298,6 +310,13 @@ h1.AboutUs,h1.Advisors {
 .st_twitter_hcount .stArrow{display:none;}
 .st_linkedin_hcount .stArrow{display:none;}
 
+
+.CheckBox .control-group{float:left;}
+.CheckBox{clear:both;
+  display:block;
+  float:none;
+  overflow:hidden;}
+=======
 .dashboard-a{
 	background:#258dc8;
 	height:200px;
@@ -334,4 +353,4 @@ h1.AboutUs,h1.Advisors {
 	overflow:hidden;
 	padding:20px;
 	
-	}	
+	}
