@@ -1,3 +1,6 @@
+@import url("icons.css");
+/*  from http://marcoceppi.github.io/bootstrap-glyphicons/  */
+
 @font-face {
 	font-style: normal;
 	font-family: 'BebasNeue';
@@ -294,3 +297,41 @@ h1.AboutUs,h1.Advisors {
 .st_facebook_count .stArrow{display:none;}
 .st_twitter_hcount .stArrow{display:none;}
 .st_linkedin_hcount .stArrow{display:none;}
+
+.dashboard-a{
+	background:#258dc8;
+	height:200px;
+	margin-bottom:10px;
+	display:block;
+	overflow:hidden;
+	padding:20px;
+	
+	}
+.dashboard-b{
+	background:#75d350;
+	height:200px;
+	margin-bottom:10px;
+	display:block;
+	overflow:hidden;
+	padding:20px;
+	
+	}
+.dashboard-c{
+	background:#f76f6f;
+	height:200px;
+	margin-bottom:10px;
+	display:block;
+	overflow:hidden;
+	padding:20px;
+	
+	}	
+	
+.dashboard-d{
+	background:#ffd06b;
+	height:200px;
+	margin-bottom:10px;
+	display:block;
+	overflow:hidden;
+	padding:20px;
+	
+	}	
