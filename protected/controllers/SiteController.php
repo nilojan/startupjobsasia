@@ -16,6 +16,11 @@ class SiteController extends Controller
 	public function actionIndex()   {
 		$this->render('index');
 	}
+	
+	public function actionDashboard()   {
+		$this->render('dashboard');
+	}
+	
 	/**
 	 * This is the action to handle external exceptions.
 	 */
@@ -68,7 +73,7 @@ class SiteController extends Controller
                             $returnUrl = Yii::app()->user->returnUrl;
                             $model->login();
                             if($returnUrl == '/yii/suj/index.php')
-                                    $this->redirect(array('site/index'));
+                                    $this->redirect(array('site/dashboard'));
                             
                             Yii::app()->request->redirect($returnUrl);
                         }
