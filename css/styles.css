@@ -306,3 +306,9 @@ h1.AboutUs,h1.Advisors {
 .st_facebook_count .stArrow{display:none;}
 .st_twitter_hcount .stArrow{display:none;}
 .st_linkedin_hcount .stArrow{display:none;}
+
+.CheckBox .control-group{float:left;}
+.CheckBox{clear:both;
+  display:block;
+  float:none;
+  overflow:hidden;}

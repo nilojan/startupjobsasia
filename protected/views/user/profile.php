@@ -35,7 +35,7 @@ if($_GET['id'] == $curent_user_id)
 	<?php //echo CHtml::encode($model->getAttributeLabel('EID')); ?>
 	<?php //echo CHtml::link(CHtml::encode($model->EID),array('view','id'=>$model->EID)); ?>
 	
-
+<!--
 	<b><?php echo CHtml::encode($model->getAttributeLabel('fname')); ?>:</b>
 	<?php echo CHtml::encode($model->fname); ?>
 	<br />
@@ -43,7 +43,7 @@ if($_GET['id'] == $curent_user_id)
 	<b><?php echo CHtml::encode($model->getAttributeLabel('lname')); ?>:</b>
 	<?php echo CHtml::encode($model->lname); ?>
 	<br />
-
+-->
 	<b><?php echo CHtml::encode($model->getAttributeLabel('coverLetter')); ?>:</b>
 	<?php echo CHtml::encode($model->coverLetter); ?>
 	<br />
@@ -96,8 +96,8 @@ if($_GET['id'] == $curent_user_id)
 	<?php echo CHtml::encode($model->availability); ?>
 	<br />
 
-	<b><?php echo CHtml::encode($model->getAttributeLabel('content')); ?>:</b>
-	<?php echo CHtml::encode($model->content); ?>
+	<b><?php //echo CHtml::encode($model->getAttributeLabel('content')); ?></b>
+	<?php //echo CHtml::encode($model->content); ?>
 	<br />
 
 	
