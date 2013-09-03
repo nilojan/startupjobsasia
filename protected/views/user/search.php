@@ -1,7 +1,7 @@
 <?php
-$this->pageTitle = Yii::app()->name . ' - Search Jobs';
+$this->pageTitle = Yii::app()->name . ' - Search Candidate';
 $this->breadcrumbs = array(
-    'Search Jobs',
+    'Search Candidate',
 );
 
 //$query = str_replace(" "," +",$query);
@@ -14,7 +14,7 @@ $this->breadcrumbs = array(
                                                              AGAINST ("'.$query.'" IN BOOLEAN MODE))',  
                                                            ),
                                                         'pagination'=>array(
-                                                                            'pageSize'=>20,
+                                                                            'pageSize'=>5,
                                                         ),
                                                 ));
         $this->widget('zii.widgets.CListView', array(
