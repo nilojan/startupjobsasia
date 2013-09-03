@@ -7,7 +7,7 @@ $this->pageTitle = 'Update Company | '.Yii::app()->params['pageTitle'];
 
 <h1>Update Company</h1>
 <br>
-
+    
         <?php /** @var BootActiveForm $form */
             $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                                                                                 'id'=>'horizontalForm',
