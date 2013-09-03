@@ -40,19 +40,30 @@ class CompanyController extends Controller  {
         $CForm = new updateForm;
         $company = company::model()->find('ID=:ID', array('ID' => $ID));
         //CActiveRecord for old one
+
         $CForm->attributes = $company->attributes;
         $CForm->address = str_replace('<br />', "", $company->address);
         $CForm->mission = str_replace('<br />', "", $company->mission);
         $CForm->culture = str_replace('<br />', "", $company->culture);
         $CForm->benefits = str_replace('<br />', "", $company->benefits);
+        $CForm->website = $company->website;
+        $CForm->facebook = $company->facebook;
+        $CForm->summary = $company->summary;
+        $CForm->awards = $company->awards;
         
         if (isset($_POST['UpdateForm'])) {
                    $CForm->attributes = $_POST['UpdateForm'];
+                   $CForm->website = $_POST['UpdateForm']['website'];
+                   $CForm->facebook = $_POST['UpdateForm']['facebook'];
+                   $CForm->summary = $_POST['UpdateForm']['summary'];
+                   $CForm->awards = $_POST['UpdateForm']['awards'];
                    if ($CForm->validate()) {
                     $company->cname = $CForm->cname;
-					$company->website = $CForm->website;
-					$company->facebook = $CForm->facebook;
-					
+					         $company->website = $CForm->website;
+					         $company->facebook = $CForm->facebook;
+                   $company->summary = $CForm->summary;
+                   $company->awards = $CForm->awards;
+
                     $company->culture = nl2br($CForm ->culture);
                     $company->benefits = nl2br($CForm ->benefits);
                     $company->mission = nl2br($CForm->mission);
