@@ -14,7 +14,14 @@ $this->pageTitle = 'Update Job | '.Yii::app()->params['pageTitle'];
                                                                                 )); ?>
 
 	<div class="hint"><p class="note">Fields with <span class="required">*</span> are required.</p></div>
-	<?php echo $form->errorSummary($model); ?>
+	<?php echo $form->errorSummary($model); 
+    var_dump($model->type);
+    var_dump($model->full_time);
+    var_dump($model->part_time);
+    var_dump($model->freelance);
+    var_dump($model->internship);
+    var_dump($model->temporary);
+    ?>
         <?php echo $form->textFieldRow($model, 'title',array('class'=>'span5')); ?>
         <?php echo $form->dropDownListRow($model, 'type', array(''         =>'',
                                                                 'Full-time' => 'Full-time',

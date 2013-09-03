@@ -206,34 +206,75 @@ class JobController extends Controller {
             $model->attributes = $job->attributes;
         //$model->about = str_replace('<br />', "", $company->about);
         if (isset($_POST['JobForm'])) {
+
                     $model->attributes = $_POST['JobForm'];
-					$model->full_time = $_POST['JobForm']['full_time'];
-                    $model->part_time = $_POST['JobForm']['part_time'];
-                    $model->freelance = $_POST['JobForm']['freelance'];
-                    $model->internship = $_POST['JobForm']['internship'];
-                    $model->temporary = $_POST['JobForm']['temporary'];
+                    $model->attributes = $_POST['JobForm'];
+                       if($_POST['JobForm']['full_time'] == '0')
+                       {
+                            $model->full_time = null;
+                       }
+                       else
+                       {
+                            $model->full_time = $_POST['JobForm']['full_time'];
+                       }
+
+                       if($_POST['JobForm']['part_time'] == '0')
+                       {
+                            $model->part_time = null;
+                       }
+                       else
+                       {
+                            $model->part_time = $_POST['JobForm']['part_time'];
+                       }
+
+                       if($_POST['JobForm']['freelance'] == '0')
+                       {
+                            $model->freelance = null;
+                       }
+                       else
+                       {
+                            $model->freelance = $_POST['JobForm']['freelance'];
+                       }
+
+                       if($_POST['JobForm']['internship'] == '0')
+                       {
+                            $model->internship = null;
+                       }
+                       else
+                       {
+                            $model->internship = $_POST['JobForm']['internship'];
+                       }
+
+                       if($_POST['JobForm']['temporary'] == '0')
+                       {
+                            $model->temporary = null;
+                       }
+                       else
+                       {
+                            $model->temporary = $_POST['JobForm']['temporary'];
+                       }
                     
 					$job_title = str_replace('/','-',$model->title);
 					
                     $job->title = $job_title;
                     $job->description = $model->description;
-					$job->responsibility = $model->responsibility;
-					$job->requirement = $model->requirement;
-					$job->howtoapply = $model->howtoapply;
+          					$job->responsibility = $model->responsibility;
+          					$job->requirement = $model->requirement;
+          					$job->howtoapply = $model->howtoapply;
                     $job->type = $model->type;
-					$job->full_time = $model->full_time;
-					$job->part_time = $model->part_time;
-					$job->freelance = $model->freelance;
-					$job->internship = $model->internship;
-					$job->temporary = $model->temporary;
+          					$job->full_time = $model->full_time;
+          					$job->part_time = $model->part_time;
+          					$job->freelance = $model->freelance;
+          					$job->internship = $model->internship;
+          					$job->temporary = $model->temporary;
                     $job->salary = $model->salary;
-					$job->location = $model->location;
-					$job->category = $model->category;
-					$job->tags = $model->tags;
+          					$job->location = $model->location;
+          					$job->category = $model->category;
+          					$job->tags = $model->tags;
                     $job->modified = new CDbExpression('NOW()');
                     if ($job->save()) {      
                                        //redirect  
-                                       $this->redirect(array('job/job','JID' => $JID));
+                               $this->redirect(array('job/job','JID' => $JID));
                                      }
                      
         }             
@@ -332,7 +373,7 @@ class JobController extends Controller {
                       }
                       else
                       {
-                          //guest user
+                          //first time guest user
                           $saved = true;
                                 
                           $new_user = new user();
@@ -430,6 +471,7 @@ class JobController extends Controller {
                        $ID = Yii::app()->user->getID();
                        $user = Employee::model()->find('UID=:ID',array('ID'=>$ID));
                        $model->coverLetter = str_replace('<br />', "", $user->coverLetter);
+
                             if (isset($_POST['ApplyJobForm'])) {
                                 //check if applied
                                 $model->attributes = $_POST['ApplyJobForm'];
@@ -517,7 +559,17 @@ class JobController extends Controller {
                                                          'company'=>$company,
                                                          'total_applicants'=> $total_applicants,
                                                          'days_left' => $days_left,));
-                      }     
+                      }  
+
+                  if(Yii::app()->user->isCompany())
+                  {
+                        $this->render('job', array(
+                               'job' => $job,
+                               'company'=>$company,
+                               'total_applicants'=> $total_applicants,
+                               'days_left' => $days_left,));
+                       
+                  } 
 
        
     }
