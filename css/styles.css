@@ -365,3 +365,27 @@ h1.AboutUs,h1.Advisors {
 .dashboard-d:hover{
 	background:#F7D487;
 	}
+.dashboard-e{
+	background:#FC88D9;
+	height:200px;
+	margin-bottom:10px;
+	display:block;
+	overflow:hidden;
+	padding:20px;
+	
+	}
+.dashboard-e:hover{
+	background:#F6A4DD;
+	}	
+.dashboard-f{
+	background:#62FFE3;
+	height:200px;
+	margin-bottom:10px;
+	display:block;
+	overflow:hidden;
+	padding:20px;
+	
+	}
+.dashboard-f:hover{
+	background:#A6F7E8;
+	}		
