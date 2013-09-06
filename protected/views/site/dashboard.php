@@ -39,15 +39,21 @@
 { ?>
 <div class="clear">
 	<div class="span12">
-		<div class="span3 dashboard-a">
-			<i class="icon-large icon-cloud"></i>Edit Profile
-		</div>
-		<div class="span3 dashboard-c">
-			<i class="icon-large icon-cloud"></i>Applications
-		</div>
-		<div class="span3 dashboard-d">
-			<i class="icon-large icon-cloud"></i>Profile
-		</div>
+		<a href ="<?php echo Yii::app()->request->baseUrl?>/user/edit">
+			<div class="span3 dashboard-a">
+				<i class="icon-large icon-cloud"></i>Edit Profile
+			</div>
+		</a>
+		<a href ="<?php echo Yii::app()->request->baseUrl?>/user/application">
+			<div class="span3 dashboard-c">
+				<i class="icon-large icon-cloud"></i>Applications
+			</div>
+		</a>
+		<a href ="<?php echo Yii::app()->request->baseUrl?>/user/profile/<?php Yii::app()->user->getId(); ?>">
+			<div class="span3 dashboard-d">
+				<i class="icon-large icon-cloud"></i>Profile
+			</div>
+		</a>
 	</div>
 </div>
 <?php } ?>
