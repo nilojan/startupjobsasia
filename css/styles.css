@@ -326,6 +326,9 @@ h1.AboutUs,h1.Advisors {
 	padding:20px;
 	
 	}
+.dashboard-a:hover{
+	background:#53A1CE;
+	}
 .dashboard-b{
 	background:#75d350;
 	height:200px;
@@ -335,6 +338,9 @@ h1.AboutUs,h1.Advisors {
 	padding:20px;
 	
 	}
+.dashboard-b:hover{
+	background:#97E679;
+	}	
 .dashboard-c{
 	background:#f76f6f;
 	height:200px;
@@ -344,7 +350,9 @@ h1.AboutUs,h1.Advisors {
 	padding:20px;
 	
 	}	
-	
+.dashboard-c:hover{
+	background:#F7A4A4;
+	}	
 .dashboard-d{
 	background:#ffd06b;
 	height:200px;
@@ -353,4 +361,7 @@ h1.AboutUs,h1.Advisors {
 	overflow:hidden;
 	padding:20px;
 	
+	}
+.dashboard-d:hover{
+	background:#F7D487;
 	}
