@@ -75,6 +75,19 @@
 
 	<?php echo $form->textFieldRow($model,'exp_salary',array('class'=>'span2')); ?>
 
+	<?php echo $form->textFieldRow($model,'tags',array('class'=>'span2')); ?>
+<?php $this->widget('ext.yii-selectize.YiiSelectize', array(
+    'model' => $model,
+    'attribute' => 'test',
+    'data' => array(
+        'hello' => 'Hello',
+        'world' => 'World',
+    ),
+    'useWithBootstrap' => true,
+//    'cssTheme' => 'bootstrap2', // uncomment to use v2 theme instead of v3
+    'fullWidth' => false,
+));?>
+	
 	<?php echo $form->dropDownListRow($model,'availability',array(''=>'Availability',
 																'immediately'=>'immediately',
 																'1 week'=>'1 week',

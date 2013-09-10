@@ -11,6 +11,15 @@ Yii::setPathOfAlias('editable', dirname(__FILE__).'/../extensions/x-editable');
 
 
 return array(
+	'widgetFactory' => array(
+    'widgets' => array(
+        'YiiSelectize' => array(
+            'defaultOptions' => array(
+                'create' => false,
+            ),
+        ),
+    ),
+),
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Startup Jobs Asia',
         
