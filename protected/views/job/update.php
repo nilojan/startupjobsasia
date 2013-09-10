@@ -6,7 +6,9 @@ $this->pageTitle = 'Update Job | '.Yii::app()->params['pageTitle'];
 
 <div class="hint"><p>Please fill out the form with your particulars</p></div>
 <div class ="span6">
+
     <?php /** @var BootActiveForm $form */
+          var_dump($model->salary);
             $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array('id'=>'verticalForm',
                                                                                 'type'=>'horizontal',
                                                                                 'enableClientValidation'=>true,
@@ -15,12 +17,8 @@ $this->pageTitle = 'Update Job | '.Yii::app()->params['pageTitle'];
 
 	<div class="hint"><p class="note">Fields with <span class="required">*</span> are required.</p></div>
 	<?php echo $form->errorSummary($model); 
-    var_dump($model->type);
-    var_dump($model->full_time);
-    var_dump($model->part_time);
-    var_dump($model->freelance);
-    var_dump($model->internship);
-    var_dump($model->temporary);
+  
+    
     ?>
         <?php echo $form->textFieldRow($model, 'title',array('class'=>'span5')); ?>
         <?php echo $form->dropDownListRow($model, 'type', array(''         =>'',
@@ -50,17 +48,18 @@ $this->pageTitle = 'Update Job | '.Yii::app()->params['pageTitle'];
                                                                 'Singapore' => 'Singapore',
                                                                 'Taiwan' => 'Taiwan',
                                                                 'Thailand' => 'Thailand',
-                                                                'Vietnam' => 'Vietnam',), 
-                                                                 array('options' => array('M' => array('selected' => true)))); ?>
+                                                                'Vietnam' => 'Vietnam',) 
+                                                                 //array('options' => array('M' => array('selected' => true)))
+                                                                 ); ?>
         
         
         <?php echo $form->dropDownListRow($model, 'salary', array(''         =>'',
                                                                  '<1000' => '<$1000',
-                                                                 '1000-2000' => '$1000-$2000',
-                                                                 '2000-4000' => '$2000-$4000',
-                                                                 '4000-6000'=> '$4000-$6000',
-                                                                 '>6000' => '>$6000'), 
-                                                                 array('options' => array('M' => array('selected' => true)))); ?>
+                                                                 '1001-2000' => '$1001-$2000',
+                                                                 '2001-4000' => '$2001-$4000',
+                                                                 '4001-6000'=> '$4001-$6000',
+                                                                 '>6000' => '>$6000',) 
+                                                                 ); ?>
         <?php echo $form->dropDownListRow($model, 'category', array(''         =>'',
                                                                  'Analytics' => 'Analytics',
                                                                  'Business Development' => 'Business Development',

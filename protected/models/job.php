@@ -51,6 +51,7 @@ class job extends CActiveRecord {
     public function rules() {
    
         return array(
+            array('full_time,part_time,freelance,intership,temporary','safe',)
             
         );
     }

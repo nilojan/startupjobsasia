@@ -200,10 +200,24 @@ class JobController extends Controller {
        
         //need to check company id as well...
         //potential error
-        $job = job::model()->with('company')->find('JID=:JID&&ID=:ID',  array(':JID' => $JID, ':ID'=>$ID));
+          if(Yii::app()->user->isAdmin())
+          {
+              $job = job::model()->with('company')->find('JID=:JID',  array(':JID' => $JID));  
+          }
+          else
+          {
+              $job = job::model()->with('company')->find('JID=:JID&&ID=:ID',  array(':JID' => $JID, ':ID'=>$ID));
+          }
+        
         //CActiveRecord for old one
         if ($job !=null)
             $model->attributes = $job->attributes;
+            $model->full_time= $job->full_time;
+            $model->part_time= $job->part_time;
+            $model->freelance= $job->freelance;
+            $model->internship= $job->internship;
+            $model->temporary= $job->temporary;
+
         //$model->about = str_replace('<br />', "", $company->about);
         if (isset($_POST['JobForm'])) {
 
@@ -273,7 +287,12 @@ class JobController extends Controller {
           					$job->tags = $model->tags;
                     $job->modified = new CDbExpression('NOW()');
                     if ($job->save()) {      
-                                       //redirect  
+                                       //redirect 
+                              if(yii::app()->user->isAdmin())
+                              {
+                               $this->redirect(array('admin/manage')); 
+                              }  
+
                                $this->redirect(array('job/job','JID' => $JID));
                                      }
                      

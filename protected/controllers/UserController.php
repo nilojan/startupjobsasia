@@ -754,22 +754,9 @@ class UserController extends Controller
 			Yii::app()->end();
 		}
 	}
-/*	public function actionProfile()    
-	{
-     //if ($ID = null)    { 
-            $user=user::model()->find(':ID=ID', array('ID'=>Yii::app()->user->getID()));
-     //}
-      $this->render('profile', array('user'=>$user,));     
-     
- 	}*/
 
- 	/*public function actionProfile()
-	{
-		$id = Yii::app()->user->getId();
-		$this->render('profile',array(
-			'model'=>$this->loadEmployeeModel($id),
-		));
-	}*/
+
+ 
 
 	public function actionProfile($id)
 	{

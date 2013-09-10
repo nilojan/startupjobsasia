@@ -11,15 +11,7 @@ Yii::setPathOfAlias('editable', dirname(__FILE__).'/../extensions/x-editable');
 
 
 return array(
-	'widgetFactory' => array(
-    'widgets' => array(
-        'YiiSelectize' => array(
-            'defaultOptions' => array(
-                'create' => false,
-            ),
-        ),
-    ),
-),
+	
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Startup Jobs Asia',
         
@@ -67,6 +59,15 @@ return array(
 
 	// application components
 	'components'=>array(
+		'widgetFactory' => array(
+    'widgets' => array(
+        'YiiSelectize' => array(
+            'defaultOptions' => array(
+                'create' => false,
+            ),
+        ),
+    ),
+),
 		'user'=>array(
 			// enable cookie-based authentication
 			 'class'=>'WebUser',
