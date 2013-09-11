@@ -25,7 +25,7 @@ echo '<img src='.Yii::app()->request->baseUrl.'/images/profile/'. $model->photo.
 
 
 <?php $curent_user_id = (string)Yii::app()->user->getId();
-if($_GET['id'] == $curent_user_id)
+if($_GET['id'] == $curent_user_id || Yii::app()->user->isAdmin())
 { ?>
 <p><a href="<?php echo Yii::app()->getBaseUrl(true).'/user/edit/1'; ?>" ><?php echo 'Edit Profile'; ?></a></p>
 <?php } 
@@ -122,7 +122,7 @@ $query = '+'.$query;
  $dataProvider=new CActiveDataProvider('job', array( 
                                                 'criteria'=>array(
                                                         'order'=>'created DESC',
-                                                         'condition'=>'JID in(SELECT JID FROM job WHERE MATCH (title,description) 
+                                                         'condition'=>'JID in(SELECT JID FROM job WHERE status = 1 && MATCH (title,description) 
                                                              AGAINST ("'.$query.'" IN BOOLEAN MODE))',  
                                                            ),
                                                         'pagination'=>array(

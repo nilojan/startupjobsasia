@@ -74,7 +74,7 @@ class SiteController extends Controller
                             $model->login();
                             if(Yii::app()->user->isMember())
                             {
-                                    $this->redirect(array('user/profile'.Yii::app()->user->getID()));
+                                    $this->redirect(array('user/profile/'.Yii::app()->user->getID()));
                             }else if(Yii::app()->user->isAdmin())
                             {
                                 $this->redirect(array('admin/manage'));

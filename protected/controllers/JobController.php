@@ -221,9 +221,12 @@ class JobController extends Controller {
         //$model->about = str_replace('<br />', "", $company->about);
         if (isset($_POST['JobForm'])) {
 
+                   
                     $model->attributes = $_POST['JobForm'];
-                    $model->attributes = $_POST['JobForm'];
-                       if($_POST['JobForm']['full_time'] == '0')
+                    
+                    if(!(Yii::app()->user->isAdmin()))
+                    {
+                      if($_POST['JobForm']['full_time'] == '0')
                        {
                             $model->full_time = null;
                        }
@@ -266,25 +269,36 @@ class JobController extends Controller {
                        else
                        {
                             $model->temporary = $_POST['JobForm']['temporary'];
-                       }
+                       }  
+                        $job_title = str_replace('/','-',$model->title);
+                        $job->title = $job_title;
+                        $job->description = $model->description;
+                        $job->responsibility = $model->responsibility;
+                        $job->requirement = $model->requirement;
+                        $job->howtoapply = $model->howtoapply;
+                        $job->type = $model->type;
+                        $job->full_time = $model->full_time;
+                        $job->part_time = $model->part_time;
+                        $job->freelance = $model->freelance;
+                        $job->internship = $model->internship;
+                        $job->temporary = $model->temporary;
+                        $job->salary = $model->salary;
+                        $job->location = $model->location;
+                        $job->category = $model->category;
+                        $job->tags = $model->tags;
+                        $job->modified = new CDbExpression('NOW()');
+                    }
+                       
                     
-					$job_title = str_replace('/','-',$model->title);
+				        	 $job_title = str_replace('/','-',$model->title);
 					
                     $job->title = $job_title;
                     $job->description = $model->description;
-          					$job->responsibility = $model->responsibility;
-          					$job->requirement = $model->requirement;
-          					$job->howtoapply = $model->howtoapply;
-                    $job->type = $model->type;
-          					$job->full_time = $model->full_time;
-          					$job->part_time = $model->part_time;
-          					$job->freelance = $model->freelance;
-          					$job->internship = $model->internship;
-          					$job->temporary = $model->temporary;
-                    $job->salary = $model->salary;
-          					$job->location = $model->location;
-          					$job->category = $model->category;
-          					$job->tags = $model->tags;
+          					$job->url = $model->url;
+          					$job->meta = $model->meta;
+                    $job->meta_title = $model->meta_title;
+
+          					
                     $job->modified = new CDbExpression('NOW()');
                     if ($job->save()) {      
                                        //redirect 

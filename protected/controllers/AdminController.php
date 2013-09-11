@@ -21,6 +21,12 @@ class AdminController extends Controller
           $this->render('jobs');
           
     }
+    public function actionUser() {
+          
+          $this->render('user');
+          
+    }
+
     public function actionEditJobStatus($JID) {
           
        $job = job::model()->find('JID=:JID',array(':JID'=>$JID));

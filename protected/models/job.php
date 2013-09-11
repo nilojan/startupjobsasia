@@ -48,6 +48,14 @@ class job extends CActiveRecord {
             
         );
     }
+    public function attributeLabels()
+    {
+       return array(
+            'meta' => 'Meta Title',
+            'cate_name' => 'Cate Name',
+        );
+    }
+
     public function rules() {
    
         return array(

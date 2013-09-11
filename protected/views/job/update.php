@@ -8,7 +8,7 @@ $this->pageTitle = 'Update Job | '.Yii::app()->params['pageTitle'];
 <div class ="span6">
 
     <?php /** @var BootActiveForm $form */
-          var_dump($model->salary);
+          
             $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array('id'=>'verticalForm',
                                                                                 'type'=>'horizontal',
                                                                                 'enableClientValidation'=>true,
@@ -20,7 +20,24 @@ $this->pageTitle = 'Update Job | '.Yii::app()->params['pageTitle'];
   
     
     ?>
+        <?php if (Yii::app()->user->isAdmin())
+        {
+            echo $form->textFieldRow($model, 'title',array('class'=>'span5')); 
+            echo $form->textAreaRow($model,'description', array('class'=>'span8', 'rows'=>15));
+            echo $form->textFieldRow($model,'meta_title', array('class'=>'span8', 'rows'=>15));
+            echo $form->textFieldRow($model,'meta', array('class'=>'span8', 'rows'=>15));
+            echo $form->textFieldRow($model,'url', array('class'=>'span8', 'rows'=>15));
+
+        }
+        ?>
+        <?php
+            if(!(Yii::app()->user->isAdmin()))
+            {
+
+
+         echo $form->textFieldRow($model, 'title',array('class'=>'span5')); ?>
         <?php echo $form->textFieldRow($model, 'title',array('class'=>'span5')); ?>
+
         <?php echo $form->dropDownListRow($model, 'type', array(''         =>'',
                                                                 'Full-time' => 'Full-time',
                                                                 'Part-time' => 'Part-time',
@@ -77,7 +94,9 @@ $this->pageTitle = 'Update Job | '.Yii::app()->params['pageTitle'];
 		<?php echo $form->textAreaRow($model,'responsibility', array('class'=>'span8', 'rows'=>10)); ?>
 		<?php echo $form->textAreaRow($model,'requirement', array('class'=>'span8', 'rows'=>10)); ?>
         <?php echo $form->textAreaRow($model,'howtoapply', array('class'=>'span8', 'rows'=>2)); ?>
-		<?php echo $form->textAreaRow($model,'tags', array('class'=>'span8', 'rows'=>2)); ?> 
+		<?php echo $form->textAreaRow($model,'tags', array('class'=>'span8', 'rows'=>2));
+            }
+         ?> 
         <div class="form-actions">
         <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary','label'=>'Submit')); ?>
          </div>

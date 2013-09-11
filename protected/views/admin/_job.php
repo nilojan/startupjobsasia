@@ -20,11 +20,28 @@
                                                                             'type'=>'inverse', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
                                                                             //array('job/update'),    
                                                                             'url'=>Yii::app()->createUrl("job/update", array("JID"=>$data->JID )),)); ?>
-                    <?php $this->widget('bootstrap.widgets.TbButton', array(
+                            <?php 
+                    if($data->status == 1)
+                    {
+                        $this->widget('bootstrap.widgets.TbButton', array(
                                                                             'label'=>'Disable',
                                                                             'type'=>'danger', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
                                                                             //array('job/update'),    
-                                                                            'url'=>Yii::app()->createUrl("admin/EditJobStatus", array("JID"=>$data->JID )),)); ?>
+                                                                            'url'=>Yii::app()->createUrl("admin/EditJobStatus", array("JID"=>$data->JID )),)); 
+                    }
+                    else
+                    {
+                        $this->widget('bootstrap.widgets.TbButton', array(
+                                                                            'label'=>'enable',
+                                                                            'type'=>'success', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+                                                                            //array('job/update'),    
+                                                                            'url'=>Yii::app()->createUrl("admin/EditJobStatus", array("JID"=>$data->JID )),)); 
+
+                    }
+
+                    ?>                                                     
+
+
 
                    
         </div>
