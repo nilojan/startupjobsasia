@@ -1,9 +1,4 @@
-	<?php
-// Importing the Xml Writer class
-Yii::import('application.extensions.xmlgenerator.*');
-require_once 'xmlgenerator.php';
-// declaring this page as an xml file
-header ("Content-Type:text/xml");
+<?php
 
 class FeedController extends Controller
 {
@@ -15,7 +10,7 @@ class FeedController extends Controller
             	 'users' => array('*'),
                 ),
             array('allow',
-                  'actions'=>array('FullTime'),
+                  'actions'=>array('FullTime','PartTime','Internship','Freelance','Temporary','Startup'),
                   'users'=>array('*'),  
                  ),
             
@@ -24,62 +19,56 @@ class FeedController extends Controller
 			),
 		);
 	}
-	
+	  
+   
 	 
 	public function actionFullTime()
 	{
-		
-		
+		$model = job::model()->findAll('type=:type',array('type'=>'Full-time'));
 
-		$xml=new XmlGenerator();
-		 // retrieve the latest 20 posts
-	    $jobs=job::model()->findAll(array(
-	        'order'=>'JID',
-	        
-	    ));
-	    
-	    $xml->push('item');
-	    $entries=array();
-	    foreach($jobs as $job)
-	    {	        
-	        $xml->push('job', array('id' => $job->JID));
-		   /* $xml->element('title', $job->title);
-		    $xml->element('description', $job->description);
-		    $xml->element('title', $job->title);*/
-		    $xml->element('location', $job->location);
-		    $xml->pop();
-	    }
-	    echo "<pre>";
-		var_dump($xml);
-		$xml->pop();
 		
-		echo $xml->getXml();
+		$this->layout = "xml.php";
+		$this->render("categories",array('model'=>$model));
 	}
-
-	// Uncomment the following methods and override them if needed
-	/*
-	public function filters()
+	public function actionPartTime()
 	{
-		// return the filter configuration for this controller, e.g.:
-		return array(
-			'inlineFilterName',
-			array(
-				'class'=>'path.to.FilterClass',
-				'propertyName'=>'propertyValue',
-			),
-		);
+		$model = job::model()->findAll('type=:type',array('type'=>'Part-time'));
+
+		
+		$this->layout = "xml.php";
+		$this->render("categories",array('model'=>$model));
+	}
+	public function actionInternship()
+	{
+		$model = job::model()->findAll('type=:type',array('type'=>'Internship'));
+
+		
+		$this->layout = "xml.php";
+		$this->render("categories",array('model'=>$model));
+	}
+	public function actionFreelance()
+	{
+		$model = job::model()->findAll('type=:type',array('type'=>'Freelance'));
+
+		
+		$this->layout = "xml.php";
+		$this->render("categories",array('model'=>$model));
+	}
+	public function actionTemporary()
+	{
+		$model = job::model()->findAll('type=:type',array('type'=>'Temporary'));
+
+		
+		$this->layout = "xml.php";
+		$this->render("categories",array('model'=>$model));
+	}
+	public function actionStartup()
+	{
+		$model = company::model()->findAll();
+		$imgpath =Yii::app()->getBaseUrl(true).'/images/company/';
+		
+		$this->layout = "xml.php";
+		$this->render("startups",array('model'=>$model,'imgpath'=>$imgpath));
 	}
 
-	public function actions()
-	{
-		// return external action classes, e.g.:
-		return array(
-			'action1'=>'path.to.ActionClass',
-			'action2'=>array(
-				'class'=>'path.to.AnotherActionClass',
-				'propertyName'=>'propertyValue',
-			),
-		);
-	}
-	*/
 }

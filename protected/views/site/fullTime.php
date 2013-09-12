@@ -1,28 +1,28 @@
 <?php
-$this->pageTitle = Yii::app()->name . ' - Full Time jobs';
 $this->breadcrumbs = array(
-    'Full Time Jobs',
+    'feeds',
 );
+$this->pageTitle = 'feeds | '.Yii::app()->params['pageTitle'];
 ?>
 
 <?php
         $dataProvider=new CActiveDataProvider('job', array( 'criteria'=>array(
-                                                                    'order'=>'created DESC',
-                                                             //       'scope'=>'Full-time', 
-                                                                   'condition'=>'type=:type',
+                                                                    
+                                                                    'condition'=>'type = :type',
                                                                     'params'=>array(':type'=>'Full-time'),
+                                                                    
+                                                                    'order'=>'t.created DESC',
+                                                                    
                                                                     ),
                                                                     'pagination'=>array(
-                                                                                        'pageSize'=>20,
+                                                                                        'pageSize'=>10,
                                                                     ),
-                                                ));
-        $this->widget('bootstrap.widgets.TbListView', array(
+                                                )); ?>
+
+ <?php       $this->widget('bootstrap.widgets.TbListView', array(
             'dataProvider'=>$dataProvider,
-            'cssFile' => Yii::app()->baseUrl . '/css/gridView.css',
-            'itemView'=>'_jobView',   // refers to the partial view named '_post'
-            'sortableAttributes'=>array(
-          //  'title',
-          //  'type' => 'Type',    
-           // 'created'=>'Created',
-    ),
+            'itemView'=>'_fulltime',  // refers to the partial view named '_post'
+           
+            
 ));
+ ?>
