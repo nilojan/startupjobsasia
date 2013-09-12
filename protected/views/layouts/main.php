@@ -13,7 +13,8 @@
 
 <div class="container" id="page">
 
-	<div id="header">
+	<div class="row-fluid">
+		<div id="header">
 
         <?php Yii::app()->bootstrap->register(); ?>
         <?php $this->widget('bootstrap.widgets.TbNavbar', array(
@@ -44,7 +45,7 @@
                                                         //   array('label'=>'Upgrade', 'url'=>array('/company/upgrade'),'visible'=>Yii::app()->user->isCompany()),
                                                       ),
                                     ),
-                            '<form class="navbar-search pull-left" action="'.Yii::app()->request->baseUrl.'/job/search" method = "get"><input type="text" name="q" class="search-query span2" placeholder="Search"></form>',
+                            '<form class="navbar-search pull-left" action="'.Yii::app()->request->baseUrl.'/job/search" method = "get"><input type="text" name="q" class="search-query span12" placeholder="Search"></form>',
                             array(
                                     'class'=>'bootstrap.widgets.TbMenu',
                                     'htmlOptions'=>array('class'=>'pull-right'),
@@ -90,25 +91,26 @@
 
         array('label'=>'LOGIN', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
         array('label'=>'LOGOUT ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest, 'active'=>true),		
-    ),
-)); ?>
-<?php if(Yii::app()->user->isCompany())
-{ ?>
- <div class="clear">
-    <form class="SearchForm" action="<?php echo Yii::app()->request->baseUrl?>/user/search">
-    <input type="text" name="q" placeholder="SEARCH USERS">
-    </form>
-</div>
-<?php } ?>
-<?php if(Yii::app()->user->isMember())
-{ ?>
- <div class="clear">
-    <form class="SearchForm" action="<?php echo Yii::app()->request->baseUrl?>/job/search">
-    <input type="text" name="q" placeholder="SEARCH JOBS">
-    </form>
-</div>
-<?php } ?>
+			),
+		)); 
+	
+	if(Yii::app()->user->isCompany())
+	{ ?>
+		<div class="clear">
+			<form class="SearchForm" action="<?php echo Yii::app()->request->baseUrl?>/user/search">
+			<input type="text" name="q" placeholder="SEARCH USERS">
+			</form>
+		</div>
+	<?php } 
+		if(Yii::app()->user->isMember())
+	{ ?>
+	<div class="clear">
+		<form class="SearchForm" action="<?php echo Yii::app()->request->baseUrl?>/job/search">
+		<input type="text" name="q" placeholder="SEARCH JOBS">
+		</form>
 	</div>
+<?php } ?>
+	</div><!-- topHeader -->
 
 
 	<ul class="nav nav-pills">
@@ -122,32 +124,40 @@
 	
 
  
- <?php if(isset($this->breadcrumbs)):?>
-               <?php $this->widget('bootstrap.widgets.TbBreadcrumbs', array(
-                                'links'=>$this->breadcrumbs,
-                )); ?>
-<?php endif?>
+	 <?php if(isset($this->breadcrumbs)):?>
+				   <?php $this->widget('bootstrap.widgets.TbBreadcrumbs', array(
+									'links'=>$this->breadcrumbs,
+					)); ?>
+	<?php endif?>
 
 
 
-</div>
-<?php echo $content; ?>
+		</div> <!-- header -->
+	</div><!-- row-fluid -->
 
-<div class="clear"></div>
+	<div class="row-fluid">
+		<?php echo $content; ?>
+	</div>
 
-    <div id="footer">
-	<ul class="nav nav-pills">    
-		<li><a href ="<?php echo Yii::app()->request->baseUrl?>/site/page/view/about"> ABOUT US </a></li>
-		<li><a href ="<?php echo Yii::app()->request->baseUrl?>/site/page/view/advisors">ADVISORS</a></li>
-        <li><a href ="<?php echo Yii::app()->request->baseUrl?>/site/page/view/testimonials">TESTIMONIAL</a></li>
-        <li><a href ="<?php echo Yii::app()->request->baseUrl?>/site/page/view/blog">BLOG</a></li>
-        
-        <li><a>EVENTS</a></li>
-        <li><a>PRESS RELEASE</a></li>
-        <li><a href ="<?php echo Yii::app()->request->baseUrl?>/site/contact">CONNECT</a></li>
-    </ul>
-	<div><small>Copyright &copy; <?php echo date('Y'); ?> by  Startup Jobs Asia. All Rights Reserved.</small></div>
+	<div class="clear"></div>
+	<div class="row-fluid">
+		<div id="footer">
+			<ul class="nav nav-pills">    
+				<li><a href ="<?php echo Yii::app()->request->baseUrl?>/site/page/view/about"> ABOUT US </a></li>
+				<li><a href ="<?php echo Yii::app()->request->baseUrl?>/site/page/view/advisors">ADVISORS</a></li>
+				<li><a href ="<?php echo Yii::app()->request->baseUrl?>/site/page/view/testimonials">TESTIMONIAL</a></li>
+				<li><a href ="<?php echo Yii::app()->request->baseUrl?>/site/page/view/blog">BLOG</a></li>
+				
+				<li><a>EVENTS</a></li>
+				<li><a>PRESS RELEASE</a></li>
+				<li><a href ="<?php echo Yii::app()->request->baseUrl?>/site/contact">CONNECT</a></li>
+			</ul>
+			
+			<div>
+				<small>Copyright &copy; <?php echo date('Y'); ?> by  Startup Jobs Asia. All Rights Reserved.</small>
+			</div>
 
-	</div><!-- footer -->
+		</div><!-- footer -->
+	</div>
 	</body>
 </html>

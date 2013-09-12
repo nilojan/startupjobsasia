@@ -133,6 +133,25 @@ $this->breadcrumbs = array(
 		                    <?php echo $job->type; ?>
 		         </div>
 		</div> 
+		Also this job available as 
+		<?php 
+			if ($job->full_time != ''){
+				echo $job->full_time;}
+			
+			if ($job->part_time != ''){
+				echo $job->part_time;}
+		
+			if ($job->freelance != ''){
+				echo $job->freelance;}
+				
+			if ($job->internship != ''){
+				echo $job->internship;}
+		
+			if ($job->temporary != ''){
+				echo $job->temporary;}
+			?>
+		
+		<br />
 		
       <div class="span11">    
 

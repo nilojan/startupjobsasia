@@ -199,7 +199,7 @@ class RegistrationController extends Controller {
         $message->subject = "uStyle Activation Key";
 
         $message->addTo($member->email);
-        $message->from = 'noreply@uStyle.com';
+        $message->from = 'noreply@startupjobs.asia';
         Yii::app()->mail->send($message);
         $this->redirect(array('site/page', 'view' => 'resend'));
     }

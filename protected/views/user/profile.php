@@ -34,7 +34,7 @@ if($_GET['id'] == $curent_user_id || Yii::app()->user->isAdmin())
 <br/>
 	
 	
-
+<!--
 	<b><?php echo CHtml::encode($model->getAttributeLabel('fname')); ?>:</b>
 	<?php echo CHtml::encode($model->fname); ?>
 	<br />
@@ -42,7 +42,7 @@ if($_GET['id'] == $curent_user_id || Yii::app()->user->isAdmin())
 	<b><?php echo CHtml::encode($model->getAttributeLabel('lname')); ?>:</b>
 	<?php echo CHtml::encode($model->lname); ?>
 	<br />
-
+-->
 	<b><?php echo CHtml::encode($model->getAttributeLabel('coverLetter')); ?>:</b>
 	<?php echo CHtml::encode($model->coverLetter); ?>
 	<br />
@@ -95,8 +95,13 @@ if($_GET['id'] == $curent_user_id || Yii::app()->user->isAdmin())
 	<?php echo CHtml::encode($model->availability); ?>
 	<br />
 
+<<<<<<< HEAD
+	<b><?php //echo CHtml::encode($model->getAttributeLabel('content')); ?></b>
+	<?php //echo CHtml::encode($model->content); ?>
+=======
 	<b><?php echo CHtml::encode($model->getAttributeLabel('tags')); ?>:</b>
 	<?php echo CHtml::encode($model->tags); ?>
+>>>>>>> viv_changes
 	<br />
 
 	

@@ -11,7 +11,6 @@ Yii::setPathOfAlias('editable', dirname(__FILE__).'/../extensions/x-editable');
 
 
 return array(
-	
 	'basePath'=>dirname(__FILE__).DIRECTORY_SEPARATOR.'..',
 	'name'=>'Startup Jobs Asia',
         
@@ -59,15 +58,6 @@ return array(
 
 	// application components
 	'components'=>array(
-		'widgetFactory' => array(
-    'widgets' => array(
-        'YiiSelectize' => array(
-            'defaultOptions' => array(
-                'create' => false,
-            ),
-        ),
-    ),
-),
 		'user'=>array(
 			// enable cookie-based authentication
 			 'class'=>'WebUser',
@@ -91,12 +81,11 @@ return array(
 			    'class' => 'ext.yii-mail.YiiMail',
 			     'transportType'=>'smtp',
 			     'transportOptions'=>array(
-					'host'=>'smtp.gmail.com',
-					'username'=>'inspiredwearntu@gmail.com',
-					// or email@googleappsdomain.com
-					'password'=>'2011inspiredwear',
-					'port'=>'465',
-					'encryption'=>'ssl',
+			       'host'=>'127.0.0.1',
+			       'username'=>'nilojan@startupjobs.asia',
+			       'password'=>'babishan10',
+			       'port'=>'25',
+			      // 'encryption'=>'non',
 			     	),
 			    'viewPath' => 'application.views.mail',
 			    'logging' => true,

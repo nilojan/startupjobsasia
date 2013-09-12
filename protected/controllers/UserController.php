@@ -244,14 +244,14 @@ class UserController extends Controller
 			$myDate = new myDate();
 			$mydob = explode('-', $model->dob);
 			
-			//$myDate->year = $mydob[0];
-			//$myDate->month = $mydob[1];
-			//$myDate->day = $mydob[2];
+			$myDate->year = $mydob[0];
+			$myDate->month = $mydob[1];
+			$myDate->day = $mydob[2];
 
 
 			$contact = explode('-', $model->contact);
 			$myDate->country_code = $contact[0];
-			//$model->contact = $contact[1];
+			$model->contact = $contact[1];
 
 			
 			if(isset($_POST['Employee'])) 
@@ -415,14 +415,14 @@ class UserController extends Controller
 			$myDate = new myDate();
 			$mydob = explode('-', $model->dob);
 			
-			//$myDate->year = $mydob[0];
-			//$myDate->month = $mydob[1];
-			//$myDate->day = $mydob[2];
+			$myDate->year = $mydob[0];
+			$myDate->month = $mydob[1];
+			$myDate->day = $mydob[2];
 
 
 			$contact = explode('-', $model->contact);
 			$myDate->country_code = $contact[0];
-			//$model->contact = $contact[1];
+			$model->contact = $contact[1];
 		
             
 	 		if (isset($_POST['Employee'])) {
@@ -771,11 +771,16 @@ class UserController extends Controller
 
 	public function actionProfile($id)
 	{
-		if(!$id)
+		if(!Yii::app()->user->isCompany())
 		{
+			$uid = Yii::app()->user->getID();
+			if((!$id) || ($id != $uid))
+			{
 			//$id = Yii::app()->user->getId();
+			var_dump($id); 
 		    $this->redirect(array('/site/page/view/notAuthorized'));
 
+			}
 		}
 			$this->render('profile',array(
 			'model'=>$this->loadEmployeeModel($id),
