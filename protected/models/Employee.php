@@ -29,6 +29,7 @@
  * @property string $ip
  * @property string $acc_status
  * @property integer $views
+ * @property string $tags
  * @property string $last_modified
  */
 class Employee extends CActiveRecord
@@ -79,7 +80,7 @@ class Employee extends CActiveRecord
 			array('coverLetter', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('EID, UID, registered, fname, lname, contact, email, photo, coverLetter, gender, dob, location, country, lastjob, edu, work_exp, curr_salary, exp_salary, availability, resume, content, source, ip, acc_status, views, last_modified', 'safe', 'on'=>'search'),
+			array('EID, UID, registered, fname, lname, contact, email, photo,tags, coverLetter, gender, dob, location, country, lastjob, edu, work_exp, curr_salary, exp_salary, availability, resume, content, source, ip, acc_status, views, last_modified', 'safe', 'on'=>'search'),
 
 		);
 	}
@@ -131,6 +132,7 @@ class Employee extends CActiveRecord
 			'acc_status' => 'Account Status',
 			'views' => 'Views',
 			'last_modified' => 'Last Modified',
+			'tags'=>'Tags/Keywords',
 		);
 	}
 

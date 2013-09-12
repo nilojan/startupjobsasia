@@ -4,9 +4,11 @@ $this->breadcrumbs = array(
     'Search Jobs',
 );
 
-//$query = str_replace(" "," +",$query);
-//$query = '+'.$query;
-//echo $query;
+
+$query = str_replace(" "," +",$query);
+$query = '+'.$query;
+
+
         $dataProvider=new CActiveDataProvider('job', array( 
                                                 'criteria'=>array(
                                                         'order'=>'created DESC',

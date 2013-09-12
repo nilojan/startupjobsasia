@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <?php $this->display_seo(); ?>
 <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/startupjobs_header.js"></script>
+<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/selectize.js"></script>
 
 </head>
 <body>

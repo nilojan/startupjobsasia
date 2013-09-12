@@ -48,9 +48,18 @@ class job extends CActiveRecord {
             
         );
     }
+    public function attributeLabels()
+    {
+       return array(
+            'meta' => 'Meta Title',
+            'cate_name' => 'Cate Name',
+        );
+    }
+
     public function rules() {
    
         return array(
+            array('full_time,part_time,freelance,intership,temporary','safe',)
             
         );
     }

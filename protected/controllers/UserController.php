@@ -562,9 +562,20 @@ class UserController extends Controller
 		));
 	}
 
-	public function actionEdit()
+	public function actionEdit($id)
 	{
-		$id = Yii::app()->user->getId();
+		if(yii::app()->user->isAdmin())
+		{
+			$id = $_GET['id'];		
+		}
+		else
+		{
+			$id = Yii::app()->user->getId();
+		}
+	
+
+		
+
 		$model=$this->loadEmployeeModel($id);
 		$myDate = new myDate();
 		$mydob = explode('-', $model->dob);
@@ -577,7 +588,7 @@ class UserController extends Controller
 
 		$contact = explode('-', $model->contact);
 		$myDate->country_code = $contact[0];
-		$model->contact = $contact[1];
+		$model->contact = @$contact[1];
 		//var_dump($myDate->country_code); 
 		//var_dump($model->contact); 
 
@@ -754,22 +765,9 @@ class UserController extends Controller
 			Yii::app()->end();
 		}
 	}
-/*	public function actionProfile()    
-	{
-     //if ($ID = null)    { 
-            $user=user::model()->find(':ID=ID', array('ID'=>Yii::app()->user->getID()));
-     //}
-      $this->render('profile', array('user'=>$user,));     
-     
- 	}*/
 
- 	/*public function actionProfile()
-	{
-		$id = Yii::app()->user->getId();
-		$this->render('profile',array(
-			'model'=>$this->loadEmployeeModel($id),
-		));
-	}*/
+
+ 
 
 	public function actionProfile($id)
 	{

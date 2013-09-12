@@ -1,3 +1,4 @@
+
 <?php $form=$this->beginWidget('bootstrap.widgets.TbActiveForm',array(
 	'id'=>'employee-form',
 	'enableAjaxValidation'=>false,
@@ -75,6 +76,9 @@
 
 	<?php echo $form->textFieldRow($model,'exp_salary',array('class'=>'span2')); ?>
 
+	<?php echo $form->textFieldRow($model,'tags',array('class'=>'span2')); ?>
+
+
 	<?php echo $form->dropDownListRow($model,'availability',array(''=>'Availability',
 																'immediately'=>'immediately',
 																'1 week'=>'1 week',
@@ -104,5 +108,6 @@
 			'label'=>$model->isNewRecord ? 'Create' : 'Save',
 		)); ?>
 	</div>
+
 
 <?php $this->endWidget(); ?>

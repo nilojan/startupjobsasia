@@ -6,7 +6,7 @@ $this->breadcrumbs = array(
 );
         $dataProvider=new CActiveDataProvider('job', array( 'criteria'=>array(
                                                                     'order'=>'created DESC',
-                                                                    'condition'=>'type=:type OR temporary=:type2',
+                                                                    'condition'=>' type=:type OR temporary=:type2 AND status = 1',
                                                                     'params'=>array(':type'=>'Temporary',':type2'=>'Temporary'),
                                                                     ),
                                                                     'pagination'=>array(

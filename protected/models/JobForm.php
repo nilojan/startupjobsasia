@@ -15,17 +15,22 @@ class JobForm extends CFormModel
 	public $freelance;
 	public $internship;
 	public $temporary;
-        public $salary;
-        public $created;
-        public $modified;
-        public $location;
-        public $tags;
-        public $category;
+    public $salary;
+    public $created;
+    public $modified;
+    public $location;
+    public $tags;
+    public $category;
+    public $meta;
+    public $meta_title;
+    public $url;
         
 	/**
 	 * Declares the validation rules.
 	 */
-	public function rules(){
+public function rules(){
+	if(!(Yii::app()->user->isAdmin()))
+	{
 		return array(
 			// name, email, subject and body are required
 			array('title, description, howtoapply, responsibility, requirement, type,location, category, tags', 'required'),
@@ -33,7 +38,25 @@ class JobForm extends CFormModel
 		//array('types', 'in','range'=>array('full_time,part_time,freelance,internship,temporary')),
 
 		
-                        array('salary,category,location','safe'),
+                        array('salary,category,meta,location','safe'),
+                    
+                      array('created,modified','default',
+                            'value'=>new CDbExpression('NOW()'),
+                        'setOnEmpty'=>false,'on'=>'insert'),
+    
+                        // verifyCode needs to be entered correctly
+		//	array('verifyCode', 'captcha', 'allowEmpty'=>!CCaptcha::checkRequirements()),
+		);
+	}else{
+
+		return array(
+			// name, email, subject and body are required
+			array('title, description', 'required'),
+		
+		//array('types', 'in','range'=>array('full_time,part_time,freelance,internship,temporary')),
+
+		
+                        array('salary,category,meta,location','safe'),
                     
                       array('created,modified','default',
                             'value'=>new CDbExpression('NOW()'),
@@ -43,7 +66,11 @@ class JobForm extends CFormModel
 		//	array('verifyCode', 'captcha', 'allowEmpty'=>!CCaptcha::checkRequirements()),
 		);
 	}
+		
+	}
 
+		
+	
 	/**
 	 * Declares customized attribute labels.
 	 * If not declared here, an attribute would have a label that is
@@ -55,6 +82,9 @@ class JobForm extends CFormModel
 			'verifyCode'=>'Verification Code',
 			'howtoapply' =>'How to Apply',
 			'tags' =>'Key Words',
+			'meta'=>'Meta Description',
+			'meta_title'=> 'Meta Title',
+			'ulr'=> 'URL',
  
 		);
 	}

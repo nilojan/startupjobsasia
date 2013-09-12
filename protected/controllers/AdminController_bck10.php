@@ -18,32 +18,8 @@ class AdminController extends Controller
     
     public function actionManage() {
           
-          $this->render('jobs');
+          $this->render('approve');
           
-    }
-    public function actionUser() {
-          
-          $this->render('user');
-          
-    }
-
-    public function actionEditJobStatus($JID) {
-          
-       $job = job::model()->find('JID=:JID',array(':JID'=>$JID));
-       if($job->status == 0)
-       {
-          $job->status = 1;
-       }
-       else if($job->status == 1)
-       {
-          $job->status = 0;
-       }
-         
-         if($job->save())
-         {
-          $this->redirect(array('admin/manage'));
-         } 
-
     }
 
     public function actionApprove($CID)   {

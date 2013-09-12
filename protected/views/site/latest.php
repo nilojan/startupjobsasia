@@ -10,7 +10,7 @@ $this->breadcrumbs = array(
 	 $dataProvider=new CActiveDataProvider('job', array( 'criteria'=>array(
                                                                    'order'=>'t.created DESC',
                                                                    // show all jobs that are not expired
-                                                                   //'condition'=>'expire >=today',
+                                                                   'condition'=>'t.status = 1',
                                                                    //'params'=>array('today'=>date('Y-m-d H:i:s')),
                                                                     'with'=>array('company'),
                                                                     ),

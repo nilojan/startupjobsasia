@@ -25,15 +25,14 @@ echo '<img src='.Yii::app()->request->baseUrl.'/images/profile/'. $model->photo.
 
 
 <?php $curent_user_id = (string)Yii::app()->user->getId();
-if($_GET['id'] == $curent_user_id)
+if($_GET['id'] == $curent_user_id || Yii::app()->user->isAdmin())
 { ?>
 <p><a href="<?php echo Yii::app()->getBaseUrl(true).'/user/edit/1'; ?>" ><?php echo 'Edit Profile'; ?></a></p>
 <?php } 
 
 ?>
 <br/>
-	<?php //echo CHtml::encode($model->getAttributeLabel('EID')); ?>
-	<?php //echo CHtml::link(CHtml::encode($model->EID),array('view','id'=>$model->EID)); ?>
+	
 	
 <!--
 	<b><?php echo CHtml::encode($model->getAttributeLabel('fname')); ?>:</b>
@@ -96,44 +95,18 @@ if($_GET['id'] == $curent_user_id)
 	<?php echo CHtml::encode($model->availability); ?>
 	<br />
 
+<<<<<<< HEAD
 	<b><?php //echo CHtml::encode($model->getAttributeLabel('content')); ?></b>
 	<?php //echo CHtml::encode($model->content); ?>
+=======
+	<b><?php echo CHtml::encode($model->getAttributeLabel('tags')); ?>:</b>
+	<?php echo CHtml::encode($model->tags); ?>
+>>>>>>> viv_changes
 	<br />
 
 	
 <br/><br/>
 
-<?php /*$this->widget('bootstrap.widgets.TbDetailView',array(
-	'data'=>$model,
-	'attributes'=>array(
-		'EID',
-		//'UID',
-		//'registered',
-		'fname',
-		'lname',
-		'contact',
-		'email',
-		//'photo',
-		'coverLetter',
-		'gender',
-		'dob',
-		'location',
-		'country',
-		'lastjob',
-		'edu',
-		'work_exp',
-		'curr_salary',
-		'exp_salary',
-		'availability',
-		'resume',
-		'content',
-		//'source',
-		//'ip',
-		//'acc_status',
-		//'views',
-		//'last_modified',
-	),
-)); */?>
 
 
 
@@ -143,6 +116,33 @@ if($_GET['id'] == $curent_user_id)
                     <?php  echo CHtml::link(CHtml::encode('Download Resume'),Yii::app()->baseUrl . '/resume/'.$model->resume,array('target'=>'_blank')); ?>
 </div>
 <?php } ?>
-
     
 </div>
+<div>
+	<h2>Suggested Jobs</h2>
+	<?php
+$query=$model->tags;
+$query = str_replace(","," +",$query);
+$query = '+'.$query;
+ $dataProvider=new CActiveDataProvider('job', array( 
+                                                'criteria'=>array(
+                                                        'order'=>'created DESC',
+                                                         'condition'=>'JID in(SELECT JID FROM job WHERE status = 1 && MATCH (title,description) 
+                                                             AGAINST ("'.$query.'" IN BOOLEAN MODE))',  
+                                                           ),
+                                                        'pagination'=>array(
+                                                                            'pageSize'=>20,
+                                                        ),
+                                                ));
+        $this->widget('zii.widgets.CListView', array(
+            'dataProvider'=>$dataProvider,
+            'cssFile' => Yii::app()->baseUrl . '/css/gridView.css',
+            'itemView'=>'_jobView',   // refers to the partial view named '_post'
+            'sortableAttributes'=>array(
+           // 'title',
+           // 'type' => 'Type',    
+           // 'created'=>'Created',
+    ),
+));
+	?>
+	</div>
