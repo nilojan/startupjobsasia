@@ -5,6 +5,7 @@ jobApplication
 resume
 images
 protected/config/main.php
+protected/config/dbconfig.php
 protected/runtime/application.log
 .log
 .project
