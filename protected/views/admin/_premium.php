@@ -21,21 +21,21 @@
                                                                             //array('job/update'),    
                                                                             'url'=>Yii::app()->createUrl("job/update", array("JID"=>$data->JID )),)); ?>
                             <?php 
-                    if($data->status == 1)
+                    if($data->premium == 1)
                     {
                         $this->widget('bootstrap.widgets.TbButton', array(
-                                                                            'label'=>'Disable',
+                                                                            'label'=>'Remove Premium',
                                                                             'type'=>'danger', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
                                                                             //array('job/update'),    
-                                                                            'url'=>Yii::app()->createUrl("admin/EditJobStatus", array("JID"=>$data->JID )),)); 
+                                                                            'url'=>Yii::app()->createUrl("admin/EditJobPremium", array("JID"=>$data->JID )),)); 
                     }
                     else
                     {
                         $this->widget('bootstrap.widgets.TbButton', array(
-                                                                            'label'=>'enable',
+                                                                            'label'=>'Make Premium',
                                                                             'type'=>'success', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
                                                                             //array('job/update'),    
-                                                                            'url'=>Yii::app()->createUrl("admin/EditJobStatus", array("JID"=>$data->JID )),)); 
+                                                                            'url'=>Yii::app()->createUrl("admin/EditJobPremium", array("JID"=>$data->JID )),)); 
 
                     }
 

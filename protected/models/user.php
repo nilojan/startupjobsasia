@@ -42,7 +42,8 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username', 'length', 'max'=>80),
+			//array('username', 'length', 'max'=>80),
+			array('username', 'unique', 'message' => "This user's name already exists."),
 			array('password', 'length', 'max'=>120),
 			array('email, name, activation_key', 'length', 'max'=>100),
 			array('role', 'length', 'max'=>2),

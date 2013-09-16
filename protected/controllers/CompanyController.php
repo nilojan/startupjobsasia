@@ -21,9 +21,15 @@ class CompanyController extends Controller  {
  
   
            
-    public function actionCompany() {
-        $ID = Yii::app()->user->getID();
-        $company = company::model()->find('ID=:ID', array('ID' => $ID));
+    public function actionCompany($id) {
+      if(!(Yii::app()->user->isAdmin()))
+      {
+         $id = Yii::app()->user->getID();
+      }
+        
+
+        $company = company::model()->find('ID=:ID', array('ID' => $id));
+        
         $this->actionView($company->CID);
     }
 
@@ -35,10 +41,14 @@ class CompanyController extends Controller  {
                                      'job'=>$job));
     }
     
-    public function actionUpdate() {
-        $ID = Yii::app()->user->getID();
+    public function actionUpdate($id) {
+      if(!(yii::app()->user->isAdmin()))
+      {
+        $id = Yii::app()->user->getID();
+      }
+        
         $CForm = new updateForm;
-        $company = company::model()->find('ID=:ID', array('ID' => $ID));
+        $company = company::model()->find('ID=:ID', array('ID' => $id));
         //CActiveRecord for old one
 
         $CForm->attributes = $company->attributes;
@@ -104,8 +114,13 @@ class CompanyController extends Controller  {
                                         
                          }   
                      }    
-                   
-                     $this->redirect(array('company/Company'));
+                         if(!(yii::app()->user->isAdmin()))
+                         {
+                           $this->redirect(array('company/Company'));
+                         }else{
+                           $this->redirect(array('admin/startup/'.$company->ID));
+                         }
+                    
                    }      
                     
                     

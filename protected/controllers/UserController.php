@@ -789,11 +789,15 @@ class UserController extends Controller
 	}
 
  	public function actionRegistration() {
-        
+     
         //$model = new RegistrationForm;
         $model = new RegistrationForm;
+     	$this->performAjaxValidation($model);
         if (isset($_POST['RegistrationForm'])) {
+        	
               $model->attributes = $_POST['RegistrationForm'];
+              echo '1';
+             
               if ($model->validate()) {       //generate activation key
                $activationKey = mt_rand() . mt_rand() . mt_rand() . mt_rand();
                 // $model->activationKey= mt_rand() . mt_rand() . mt_rand() . mt_rand() . mt_rand();
@@ -802,14 +806,16 @@ class UserController extends Controller
                         $pwd = substr($pwd, 0, 100);
                         
                         $record = new user;  // Save into user
-
+                        //die;
                         $record->username = $model->username;
                         $record->password = $pwd;
                         $record->name = $model->name;
                         $record->email = $model->email;
                         $record->activation_key = $activationKey;
+                        var_dump($record->save());
                         if($record->save())	{
-                               
+                               /*var_dump($record);
+                               die;*/
                         		$uid = Yii::app()->db->getLastInsertID();
                         		$name = $model->name;
                         		$email = $model->email;
@@ -846,7 +852,7 @@ class UserController extends Controller
 	                                StartUp Jobs Asia Team";
 	                                $message->setBody($body, 'text/html');
 	                                $message->subject = "StartUp Jobs Asia Account Verification";
-	                                $message->addTo($model->email);
+	                                $message->addTo('rohan.vivacious@gmail.com');
 	                                $message->from = 'noreply@startupjobs.asia';
 	                                Yii::app()->mail->send($message);
 	                                $this->redirect(array('site/page', 'view' => 'success'));

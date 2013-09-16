@@ -218,7 +218,7 @@ class WebUser extends CWebUser {
                                           StartUp Jobs Asia Team";
                                           $message->setBody($body, 'text/html');
                                           $message->subject = "StartUp Jobs Asia Account Verification";
-                                          $message->addTo($data['to']);
+                                          $message->addTo($data['to'],'rohan.vivacious@gmail.com');
                                           $message->from = 'noreply@StartUpJobsAsia.com';
                                           Yii::app()->mail->send($message); 
                                           $flag = true;                                            

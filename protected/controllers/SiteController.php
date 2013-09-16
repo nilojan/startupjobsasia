@@ -80,7 +80,7 @@ class SiteController extends Controller
                                 $this->redirect(array('admin/manage'));
                             }
                             if($returnUrl == '/yii/suj/index.php')
-                                    $this->redirect(array('site/dashboard'));
+                                    $this->redirect(array('site/mangae'));
                             
                             Yii::app()->request->redirect($returnUrl);
                         }

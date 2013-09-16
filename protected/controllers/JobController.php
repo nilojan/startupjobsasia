@@ -661,6 +661,7 @@ class JobController extends Controller {
  
     public function actionConfirm($JID)
     {
+      
         $token = trim($_GET['token']);
         $payerId = trim($_GET['PayerID']);
  
@@ -703,6 +704,7 @@ class JobController extends Controller {
                 echo $JID;
                 $job = job::model()->find('JID=:JID',  array('JID' => $JID, ));
                 $job->premium = 1;
+               
                 $job->save();
                 Yii::app()->session['JID'] = null;
                 //$this->render('confirm');
@@ -742,6 +744,9 @@ class JobController extends Controller {
                 $company = company::model()->find('CID=:CID',array(':CID'=>$job->CID));
                 $user = user::model()->find('ID=:ID',array(':ID'=>Yii::app()->user->getID()));
                 $job->premium = 1;
+                date_default_timezone_set('Asia/Singapore');
+                $date = date('Y-m-d H:i:s');;
+                $job->pre_start_date = $date;
                 $job->save();
 
                 $data = array(

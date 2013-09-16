@@ -36,7 +36,8 @@
                                                         array('label'=>'Update Profile', 'url'=>array('/user/edit'),'visible'=>Yii::app()->user->isMember()),
                                                         array('label'=>'Company', 'url'=>array('/company/company'),'visible'=>Yii::app()->user->isCompany()),
                                                         array('label'=>'Update Profile', 'url'=>array('/company/update'),'visible'=>Yii::app()->user->isCompany()),
-                                                        array('label'=>'Manage', 'url'=>array('/admin/manage'),'visible'=>Yii::app()->user->isAdmin()),
+                                                        //array('label'=>'Manage', 'url'=>array('/admin/manage'),'visible'=>Yii::app()->user->isAdmin()),
+                                                        
                                                         array('label'=>'Manage Jobs', 'url'=>array('/job/manageJobs'),'visible'=>Yii::app()->user->isCompany()),
                                                         array('label'=>'Applications', 'url'=>array('/company/application'),'visible'=>Yii::app()->user->isCompany()),
                                                         array('label'=>'Applications', 'url'=>array('/user/application'),'visible'=>Yii::app()->user->isMember()),
@@ -55,6 +56,7 @@
                                                            // '---',
                                                             array('label'=>'A StartUp', 'url'=>array('/company/registration')),
                                                     )),
+
                                                     array('label'=>'Login', 'url'=>array('/site/login'), 'visible'=>Yii::app()->user->isGuest),
                                                     array('label'=>'Logout ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest)
                                                     ),
@@ -83,6 +85,8 @@
         array('label'=>'Company', 'url'=>array('/company/company'),'visible'=>Yii::app()->user->isCompany()),
         array('label'=>'Update Profile', 'url'=>array('/company/update'),'visible'=>Yii::app()->user->isCompany()),
         array('label'=>'Manage', 'url'=>array('/admin/manage'),'visible'=>Yii::app()->user->isAdmin()),
+        array('label'=>'Users', 'url'=>array('/admin/user'),'visible'=>Yii::app()->user->isAdmin()),
+        array('label'=>'Jobs', 'url'=>array('/admin/jobs'),'visible'=>Yii::app()->user->isAdmin()),
         array('label'=>'Manage Jobs', 'url'=>array('/job/manageJobs'),'visible'=>Yii::app()->user->isCompany()),
         array('label'=>'Applications', 'url'=>array('/company/application'),'visible'=>Yii::app()->user->isCompany()),
         array('label'=>'Applications', 'url'=>array('/user/application'),'visible'=>Yii::app()->user->isMember()),

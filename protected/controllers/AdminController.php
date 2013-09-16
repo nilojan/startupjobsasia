@@ -16,14 +16,29 @@ class AdminController extends Controller
         );
     }    
     
-    public function actionManage() {
+    public function actionJobs() {
           
           $this->render('jobs');
+          
+    }
+    public function actionManage() {
+          
+          $this->render('dashboard');
+          
+    }
+    public function actionStartup() {
+          
+          $this->render('startup');
           
     }
     public function actionUser() {
           
           $this->render('user');
+          
+    }
+    public function actionPremium() {
+          
+          $this->render('premium');
           
     }
 
@@ -41,7 +56,49 @@ class AdminController extends Controller
          
          if($job->save())
          {
-          $this->redirect(array('admin/manage'));
+          $this->redirect(array('admin/job'));
+         } 
+
+    }
+    public function actionEditJobPremium($JID) {
+       
+       $job = job::model()->find('JID=:JID',array(':JID'=>$JID));
+       if($job->premium  == 0)
+       {
+        
+          $job->premium  = 1;
+         date_default_timezone_set('Asia/Singapore');
+                $date = date('Y-m-d H:i:s');;
+                $job->pre_start_date = $date;
+
+       }
+       else if($job->premium   == 1)
+       {
+          $job->premium  = 0;
+       }
+         
+         if($job->save())
+         {
+
+          $this->redirect(array('admin/premium'));
+         } 
+
+    }
+     public function actionEditCompanyStatus($id) {
+          
+       $company = company::model()->find('ID=:ID',array(':ID'=>$id));
+       if($company->registered == 0)
+       {
+          $company->registered = 1;
+       }
+       else if($company->registered == 1)
+       {
+          $company->registered = 0;
+       }
+         
+         if($company->save())
+         {
+          $this->redirect(array('admin/startup'));
          } 
 
     }
