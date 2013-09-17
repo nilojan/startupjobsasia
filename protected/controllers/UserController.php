@@ -796,7 +796,7 @@ class UserController extends Controller
         if (isset($_POST['RegistrationForm'])) {
         	
               $model->attributes = $_POST['RegistrationForm'];
-              echo '1';
+             
              
               if ($model->validate()) {       //generate activation key
                $activationKey = mt_rand() . mt_rand() . mt_rand() . mt_rand();
@@ -829,12 +829,15 @@ class UserController extends Controller
 			                      			                        
                     			)))
                         		{
+
                         			Yii::import('ext.yii-mail.YiiMailMessage');
 									                        		
 	                                $message = new YiiMailMessage;
+
 	                                $baseUrl = Yii::app()->request->baseUrl;
 	                                $serverPath = 'localhost/yii/uStyle';
 	                                $verification_link = Yii::app()->getBaseUrl(true).'/user/verify/code/'.$activationKey;
+	                                
 	                                $body = "Hi <font type=\"bold\">" . $record->name . "</font><br>
 	                                <br>
 	                                Welcome to StartUp Jobs Asia! Your account <font type=\"bold\">" . $record->username . "</font> has been registered.<br>

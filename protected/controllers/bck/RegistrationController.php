@@ -54,7 +54,7 @@ class RegistrationController extends Controller {
                         $record->name = $model->name;
                         $record->email = $model->email;
                         if ($record->save())	{
-                                $message = new YiiMailMessage;
+                                /*$message = new YiiMailMessage;
                                 $baseUrl = Yii::app()->request->baseUrl;
                                 $serverPath = 'localhost/yii/uStyle';
                                 $body = "Hi <font type=\"bold\">" . $record->name . "</font><br>
@@ -77,7 +77,18 @@ class RegistrationController extends Controller {
                                 $message->addTo($model->email);
                                 $message->from = 'noreply@StartUpJobsAsia.com';
                //                 Yii::app()->mail->send($message);
-                                $this->redirect(array('site/page', 'view' => 'success'));
+                                $this->redirect(array('site/page', 'view' => 'success'));*/
+                                $data = array(
+                                                        'name' => $record->name, 
+                                                        'username' => $record->username,                       
+                                                        'to' => $model->email,
+                                                        'verify_link'=>$activationKey,
+                                                        'password'=>$record->password,
+
+                                                        );
+
+                           $sendEmail =  Yii::app()->user->sendEmail('registration',$data);
+
 			}
 		}
         }
