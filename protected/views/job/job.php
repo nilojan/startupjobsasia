@@ -232,9 +232,9 @@ $this->breadcrumbs = array(
 	 $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
                                                                                 'id'=>'horizontalForm',
                                                                                 //'type'=>'horizontal',
-                                                                                'enableClientValidation'=>false,
-                                                                                'enableAjaxValidation'=>false,
-                                                                                'clientOptions'=>array('validateOnSubmit'=>true,),
+                                                                                'enableClientValidation'=>true,
+                                                                                'enableAjaxValidation'=>true,
+                                                                                'clientOptions'=>array('validateOnSubmit'=>false,),
                                                                                 'htmlOptions' => array('enctype' => 'multipart/form-data'),
                                                                                 )); ?>
     <!-- <p class="help-block">Fields with <span class="required">*</span> are required.</p> -->
@@ -301,8 +301,9 @@ if(Yii::app()->user->isMember()) {
 		<?php  $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 		                                                                                'id'=>'horizontalForm',
 		                                                                                //'type'=>'horizontal',
-		                                                                                'enableClientValidation'=>true,
-		                                                                                'clientOptions'=>array('validateOnSubmit'=>true,),
+		                                                                                'enableClientValidation'=>false,
+		                                                                                'enableAjaxValidation'=>true,
+		                                                                                'clientOptions'=>array('validateOnSubmit'=>false,),
 		                                                                                'htmlOptions' => array('enctype' => 'multipart/form-data'),
 		                                                                                )); ?>
 		    <?php echo $form->errorSummary($model); ?> 

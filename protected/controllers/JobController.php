@@ -346,9 +346,14 @@ class JobController extends Controller {
               
               if(isset($_POST['Employee'])) 
               {
+                
                       $model->attributes = $_POST['Employee'];
-                      $uploadedFile=CUploadedFile::getInstance($model,'resume');
-                      $model->resume = $uploadedFile->name;
+                      if(isset($_POST['Employee']['resume']) && $_POST['Employee']['resume'] != '' )
+                      {
+                          $uploadedFile=CUploadedFile::getInstance($model,'resume');
+                          $model->resume = $uploadedFile->name;   
+                      } 
+                      
                       $saved = false;
                       if($existing_employee = Employee::model()->find('email=:email',array('email'=>$model->email)))
                       {
@@ -368,36 +373,64 @@ class JobController extends Controller {
                             {
                               //you have already applied for this job
                               echo "you have aready applied for this job!";
-                              $this->redirect(array('site/page', 'view'=>'already-applied'));
+                              //$this->redirect(array('site/page', 'view'=>'already-applied'));
                             }                                         
 
                   if($existing_employee->save())
                   {
                     $saved = true;
-                    $fileName = str_replace(' ', '', "{$existing_employee->EID}-{$uploadedFile->name}");                                 
+                      if(isset($_POST['Employee']['resume']) && $_POST['Employee']['resume'] != '' )
+                      {
+                                $fileName = str_replace(' ', '', "{$existing_employee->EID}-{$uploadedFile->name}");                                 
                                 $uploadedFile->saveAs(Yii::app()->basepath.'/../jobApplication/'.$fileName);
+                      }         
 
-                                $application = new Application1;
-                              $job = job::model()->find('JID=:JID', array('JID' => $JID));
-                              $company = company::model()->find('CID=:CID', array('CID' => $job->CID));
+                              $application = new Application1;
+                              $job = job::model()->find('JID=:JID', array(':JID' => $JID));
+                              $company = company::model()->find('CID=:CID', array(':CID' => $job->CID));
                               $application->cover_letter = nl2br($model->coverLetter);
-                              $application->EID = $EID;
-                                $application->JID = $JID;
-                                $application->CID = $job->CID;
-                                $application->resume = $model->resume;
+                              $application->EID = $existing_employee->EID;
+                              $application->JID = $JID;
+                              $application->CID = $job->CID;
+                              $application->resume = $model->resume;
 
                                 if($application->save())  
                                 {
                                   //send email
-                                  $data = array(
-                            'name' => $existing_employee->name,
+                          $user = user::model()->find('id=:uid',array(':uid'=>$existing_employee->UID));    
+                          $data = array(
+                            'name' => $existing_employee->fname,
                             'job' => $job->title,
                             'company' =>  $company->cname,
-                            'username' => $new_user->username,                        
+                            'username' => $user->username,                        
                             'to' => $model->email,
 
-                            );                    
-                            $sendEmail =  Yii::app()->user->sendEmail('applyjob',$data);
+                            );
+
+                            $adminData = user::model()->findAll('role=:role',array(':role'=>1));
+                            $dataAdmin = array(
+                                  'name' => $existing_employee->fname,
+                                  'job' => $job->title,
+                                  'company' =>  $company->cname,
+                                  'username' => $user->username, 
+                                  'to'=>$adminData[0]['email'],
+                                        );
+                            $startup=company::model()->find('cid=:cid',array(':cid'=>$job->CID));
+                            $datastartup = array(
+                                  'name' => $existing_employee->fname,
+                                  'job' => $job->title,
+                                  'company' =>  $company->cname,
+                                  'username' => $user->username, 
+                                  'to'=>$startup->cemail,
+                                        );
+
+                    $sendEmail =  Yii::app()->user->sendEmail('applyjob',$data);
+                    $sendEmailToAdmin=  Yii::app()->user->sendEmail('applyjob',$dataAdmin);  
+                    $sendEmailToStartup = Yii::app()->user->sendEmail('applyjob',$datastartup);                  
+                            if($sendEmailToAdmin){
+                              file_put_contents('email.txt', 'sent mail');
+                            }
+
                                 }
 
                                 $this->redirect(array('site/page', 'view'=>'success'));                                   
@@ -455,10 +488,11 @@ class JobController extends Controller {
                                       'to' => $model->email,
                                       );                    
                                   $sendEmail =  Yii::app()->user->sendEmail('registration',$data);
-                                 
+                      if(isset($_POST['Employee']['resume']) && $_POST['Employee']['resume'] != '' )
+                      {
                                   $fileName = str_replace(' ', '', "{$model->EID}-{$uploadedFile->name}");                                 
                                   $uploadedFile->saveAs(Yii::app()->basepath.'/../jobApplication/'.$fileName);
-                                                
+                      }                        
                                   $EID = Yii::app()->db->getLastInsertID();
                                   $application = new Application1;
                                   $job = job::model()->find('JID=:JID', array('JID' => $JID));
@@ -500,19 +534,23 @@ class JobController extends Controller {
                   }
                   if(Yii::app()->user->isMember())
                   {
+
                        $model = new ApplyJobForm;
                        $ID = Yii::app()->user->getID();
                        $user = Employee::model()->find('UID=:ID',array('ID'=>$ID));
                        $model->coverLetter = str_replace('<br />', "", $user->coverLetter);
 
                             if (isset($_POST['ApplyJobForm'])) {
+
                                 //check if applied
                                 $model->attributes = $_POST['ApplyJobForm'];
                                 if ($model->validate()) {
+
                                     $check = Application1::model()->find(':ID=EID&&:JID=JID',array(':ID'=>$ID,':JID'=>$JID));
                                     $uploadedFile=CUploadedFile::getInstance($model,'resume');
                                 // if the user did not upload a file and also no resume stored
-                                     if ($check!=null||(empty($uploadfile)&&($user->resume == null)))  {    // already applied to the job
+                                     if ($check!=null||(empty($uploadedFile)&&($model->resume == null)))  {    // already applied to the job
+
                                              $this->redirect(array('site/page', 'view'=>'error'));
                                      }
                                 // redirect if no resume is found
@@ -551,8 +589,27 @@ class JobController extends Controller {
                                                         'username' => $usr->username,                       
                                                         'to' => $model->email,
 
-                                                        );                    
-                                                        $sendEmail =  Yii::app()->user->sendEmail('applyjob_existing_user',$data);
+                                                        );  
+                                                        $adminData = user::model()->findAll('role=:role',array('role'=>1));
+                                                        $dataAdmin = array(
+                                                                'name'=> $user->fname,
+                                                                'job' => $job->title,
+                                                                'company' =>  $company->cname,
+                                                                'username' => $usr->username,
+                                                                'to'=>$adminData[0]['email'],
+                                                                                                );   
+                                                          $datastartup=  array(
+                                                                'name'=> $user->fname,
+                                                                'job' => $job->title,
+                                                                'company' =>  $company->cname,
+                                                                'username' => $usr->username,
+                                                                'to'=>$company->cemail,
+                                                                                                );                                                    
+                                                    
+
+                                                    $sendEmailToAdmin = Yii::app()->user->sendEmail('applyjob_existing_user',$dataAdmin);  
+                                                    $sendEmail =  Yii::app()->user->sendEmail('applyjob_existing_user',$data);
+                                                    $sendEmailToStartup =  Yii::app()->user->sendEmail('applyjob_existing_user',$datastartup);
                                                                       
                                                         $this->redirect(array('site/page', 'view'=>'success'));
                                                     }

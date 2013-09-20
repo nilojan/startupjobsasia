@@ -218,7 +218,7 @@ class WebUser extends CWebUser {
                                           StartUp Jobs Asia Team";
                                           $message->setBody($body, 'text/html');
                                           $message->subject = "StartUp Jobs Asia Account Verification";
-                                          $message->addTo($data['to'],'rohan.vivacious@gmail.com');
+                                          $message->addTo($data['to']);
                                           $message->from = 'noreply@StartUpJobsAsia.com';
                                           Yii::app()->mail->send($message); 
                                           $flag = true;                                            
@@ -313,7 +313,38 @@ class WebUser extends CWebUser {
                                           Yii::app()->mail->send($message); 
                                           $flag = true;                                            
 
-                                  break;   
+                                  break;  
+                  case 'deposit_resume':
+                            $body = "Hi <font type=\"bold\">" . $data['name'] . "</font><br>
+                                          <br>
+                                          Welcome to StartUp Jobs Asia! Your account <font type=\"bold\">" . $data['username'] . "</font> has been registered.<br>
+                                          <br>
+                                          In order to ensure that you have received this confirmation, we ask that you follow the link below and confirm that this is in fact the correct email address.<br>
+                                          <br>
+                                          <a href='".$data['verify_link']."'>Verify Your Email Here</a><br>
+                                          <br>
+                                          You can use follwing username and passsword to login into your account.
+                                          <br>
+                                          Username : " . $data['username'] . "
+                                          <br>" . "
+                                          Password : " . $data['password'] . "
+                                          <br>
+                                          <br>
+                                          Accounts that have not been confirmed will be deactivated and removed from our system within 7 days, including all email addresses.<br> 
+                                          <br>
+                                          If you have NOT attempted to create an account at startupjobs please ignore this email - it might have been sent because someone mistyped his/her own email address.<br>
+                                          THIS IS AN AUTO-GENERATED MESSAGE - PLEASE DO NOT REPLY TO THIS MESSAGE!<br>
+                                          <br>
+                                          -------------<br>
+                                          StartUp Jobs Asia Team";
+                                          $message->setBody($body, 'text/html');
+                                          $message->subject = "StartUp Jobs Asia Account Verification";
+                                          $message->addTo($data['to']);
+                                          $message->from = 'noreply@StartUpJobsAsia.com';
+                                          Yii::app()->mail->send($message); 
+                                          $flag = true;                                            
+
+                                  break; 
 
                   case 'premium_job' :
                   
@@ -337,7 +368,57 @@ class WebUser extends CWebUser {
                                           Yii::app()->mail->send($message); 
                                           $flag = true;                                            
 
-                                  break;                   
+                                  break;      
+
+                case 'startup_registration':
+                                   $body = "Hi <font type=\"bold\">" . $data['name'] . "</font><br>
+                                            <br>                                           
+                                            <br>
+                                            @@@$$$$  Welcome to startup jobs$$$$@@@@
+                                            
+                                            approve this Startup:
+
+                                            You have added a job in premium listings: <br><br>
+                                          
+                                            Company Name : ".$data['company']."<br>
+                                            
+
+                                            <br>
+                                            THIS IS AN AUTO-GENERATED MESSAGE - PLEASE DO NOT REPLY TO THIS MESSAGE!<br>
+                                            <br>
+                                            -------------<br>
+                                            StartUp Jobs Asia Team";
+                                          $message->setBody($body, 'text/html');
+                                          $message->subject = "StartUp Jobs Asia - Premium Job";
+                                          $message->addTo($data['to']);
+                                          $message->from = 'noreply@StartUpJobsAsia.com';
+                                          Yii::app()->mail->send($message); 
+                                          $flag = true;              
+
+                                  break;
+                case 'welcome_startups':
+                                   $body = "Hi <font type=\"bold\">" . $data['company'] . "</font><br>
+                                            <br>                                           
+                                            <br>
+                                            @@@$$$$  Welcome to startup jobs$$$$@@@@
+                                            
+                                            
+                                            
+
+                                            <br>
+                                            THIS IS AN AUTO-GENERATED MESSAGE - PLEASE DO NOT REPLY TO THIS MESSAGE!<br>
+                                            <br>
+                                            -------------<br>
+                                            StartUp Jobs Asia Team";
+                                          $message->setBody($body, 'text/html');
+                                          $message->subject = "StartUp Jobs Asia - Premium Job";
+                                          $message->addTo($data['to']);
+                                          $message->from = 'noreply@StartUpJobsAsia.com';
+                                          Yii::app()->mail->send($message); 
+                                          $flag = true;             
+
+                                  break;
+
               }
               
              if($flag == true)

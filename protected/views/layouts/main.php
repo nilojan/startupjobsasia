@@ -85,6 +85,7 @@
         array('label'=>'Company', 'url'=>array('/company/company'),'visible'=>Yii::app()->user->isCompany()),
         array('label'=>'Update Profile', 'url'=>array('/company/update'),'visible'=>Yii::app()->user->isCompany()),
         array('label'=>'Manage', 'url'=>array('/admin/manage'),'visible'=>Yii::app()->user->isAdmin()),
+        array('label'=>'startups', 'url'=>array('/admin/startups'),'visible'=>Yii::app()->user->isAdmin()),
         array('label'=>'Users', 'url'=>array('/admin/user'),'visible'=>Yii::app()->user->isAdmin()),
         array('label'=>'Jobs', 'url'=>array('/admin/jobs'),'visible'=>Yii::app()->user->isAdmin()),
         array('label'=>'Manage Jobs', 'url'=>array('/job/manageJobs'),'visible'=>Yii::app()->user->isCompany()),

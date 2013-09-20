@@ -186,6 +186,15 @@ class CompanyController extends Controller  {
                                       // image will uplode to rootDirectory/banner    
                           }              
                           if ($company->save()) {
+                            $adminData = user::model()->findAll('role=:role',array('role'=>1));
+                                $datastartup=  array(
+                                   'name'=> 'admin',
+                                   'company' =>$company->cname,
+                                   'to'=>$adminData[0]['email'],
+                                     );
+                                  $sendEmail= yii::app()->user->sendEmail('startup_registration',$datastartup);
+
+
                                     if (!empty($uploadedFile)) {
                                             $uploadedFile->saveAs(Yii::app()->basepath.'/../images/company/'.$fileName);
                                           $this->redirect(array('site/page', 'view' => 'success'));  

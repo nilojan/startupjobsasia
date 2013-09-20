@@ -89,7 +89,16 @@ class AdminController extends Controller
        $company = company::model()->find('ID=:ID',array(':ID'=>$id));
        if($company->registered == 0)
        {
+
+
           $company->registered = 1;
+
+          $datastartup=  array(
+              'name'=> 'startups',
+              'company' =>$company->cname,
+              'to'=>$company->cemail,
+                                     );
+            $sendEmail= yii::app()->user->sendEmail('welcome_startups',$datastartup);
        }
        else if($company->registered == 1)
        {

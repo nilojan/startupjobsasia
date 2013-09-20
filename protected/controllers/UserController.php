@@ -306,8 +306,18 @@ class UserController extends Controller
 			       				'username' => $new_user->username,					       				
 			       				'to' => $model->email,
 
-			       				);					       		
+			       				);
+                        	$adminData = user::model()->findAll('role=:role',array('role'=>1));
+					       	$dataAdmin = array(
+					       				'name' => $new_user->name,
+					       				'job' => $job->title,
+					       				'company' =>  $company->cname,
+					       				'to'=>$adminData[0]['email'],
+					       							);
+
+
 					       		$sendEmail =  Yii::app()->user->sendEmail('applyjob',$data);
+					       		$sendEmail =  Yii::app()->user->sendEmail('applyjob',$dataAdmin);
                         }
 
                         $this->redirect(array('site/page', 'view'=>'success'));                        					 	
@@ -389,8 +399,17 @@ class UserController extends Controller
 					       				'username' => $new_user->username,					       				
 					       				'to' => $model->email,
 
-					       				);					       		
+					       				);	
+		                        	$adminData = user::model()->findAll('role=:role',array('role'=>1));
+					       			$dataAdmin = array(
+					       				'name' => $new_user->name,
+					       				'job' => $job->title,
+					       				'company' =>  $company->cname,
+					       				'to'=>$adminData[0]['email'],
+					       							);	
+
 							       		$sendEmail =  Yii::app()->user->sendEmail('applyjob',$data);
+							       		$sendEmail =  Yii::app()->user->sendEmail('applyjob',$dataAdmin);
 		                        }
 
 		                        $this->redirect(array('site/page', 'view'=>'success'));
@@ -416,13 +435,13 @@ class UserController extends Controller
 			$mydob = explode('-', $model->dob);
 			
 			$myDate->year = $mydob[0];
-			$myDate->month = $mydob[1];
-			$myDate->day = $mydob[2];
+			$myDate->month = @$mydob[1];
+			$myDate->day = @$mydob[2];
 
 
 			$contact = explode('-', $model->contact);
 			$myDate->country_code = $contact[0];
-			$model->contact = $contact[1];
+			$model->contact = @$contact[1];
 		
             
 	 		if (isset($_POST['Employee'])) {
@@ -476,8 +495,17 @@ class UserController extends Controller
 			       				'username' => $new_user->username,
 			       				'password' => $dt,
 			       				'to' => $model->email,
-			       				);					       		
-			       		$sendEmail =  Yii::app()->user->sendEmail('registration',$data);	           
+			       				);
+			       		$adminData = user::model()->findAll('role=:role',array('role'=>1));
+					    $dataAdmin = array(
+					       			'name'=> $adminData[0]['name'],
+					       			'username'=> $adminData[0]['username'],
+					       			'password'=>$dt,
+					       			'verify_link'=>$verification_link,
+					       			'to'=>$adminData[0]['email'],
+					       	);				       		
+			       		$sendEmail =  Yii::app()->user->sendEmail('deposit_resume',$data);
+			       		$sendEmailToAdmin = Yii::app()->user->sendEmail('deposit_resume',$dataAdmin);	           
 						                                
 	                    $uploadedFile->saveAs(Yii::app()->basepath.'/../resume/'.$model->resume);
 	                    if (!$uploadedFile) {
@@ -812,15 +840,17 @@ class UserController extends Controller
                         $record->name = $model->name;
                         $record->email = $model->email;
                         $record->activation_key = $activationKey;
-                        var_dump($record->save());
-                        if($record->save())	{
-                               /*var_dump($record);
-                               die;*/
+
+                        /*var_dump($record->save(false));
+                        die;*/
+                       
+                        if($record->save(false))	{
+                               
                         		$uid = Yii::app()->db->getLastInsertID();
                         		$name = $model->name;
                         		$email = $model->email;
                         		$date = new DateTime();
-								echo $date->getTimestamp();
+								//$date->getTimestamp();
                         		$command = Yii::app()->db->createCommand();
                         		if($command->insert('employee1', array(
 	                                'UID' => $uid,
@@ -830,7 +860,7 @@ class UserController extends Controller
                     			)))
                         		{
 
-                        			Yii::import('ext.yii-mail.YiiMailMessage');
+                        			/*Yii::import('ext.yii-mail.YiiMailMessage');
 									                        		
 	                                $message = new YiiMailMessage;
 
@@ -857,8 +887,32 @@ class UserController extends Controller
 	                                $message->subject = "StartUp Jobs Asia Account Verification";
 	                                $message->addTo('rohan.vivacious@gmail.com');
 	                                $message->from = 'noreply@startupjobs.asia';
-	                                Yii::app()->mail->send($message);
-	                                $this->redirect(array('site/page', 'view' => 'success'));
+	                                Yii::app()->mail->send($message);*/
+
+						$verification_link = Yii::app()->getBaseUrl(true).'/user/verify/code/'.$activationKey;
+
+	                                $data = array(
+					       					'name'=>$record->name,
+					       					'username'=> $record->username,
+					       					'password'=>$model->password,
+					       					'verify-link'=>$verification_link,
+					       					'to'=> $record->email,
+
+					       				);	
+
+	                                $adminData = user::model()->findAll('role=:role',array('role'=>1));
+					       			$dataAdmin = array(
+					       					'name'=> $adminData[0]['name'],
+					       					'username'=> $adminData[0]['username'],
+					       					'password'=>$model->password,
+					       					'verify-link'=>$verification_link,
+					       					'to'=>$adminData[0]['email'],
+					       							);
+					    
+
+							     	$sendEmail =  Yii::app()->user->sendEmail('registration',$data);
+									$sendEmail =  Yii::app()->user->sendEmail('registration',$dataAdmin);
+	                               $this->redirect(array('site/page', 'view' => 'success'));
                                 }
 			}
 		}
