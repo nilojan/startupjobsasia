@@ -6,12 +6,14 @@ $this->pageTitle = 'DashBoard | '.Yii::app()->params['pageTitle'];
 ?>
 
 <h1>DashBoard</h1>
-<br>
-<div>
-<?php echo CHtml::link('Jobs',array('admin/jobs')); ?>
-</div>
-<div>
-<?php echo CHtml::link('user',array('admin/user')); ?>
-</div>
 
-            
+
+<div class="clear">
+	<div class="span12">
+		<?php echo CHtml::link('<div class="span3 dashboard-a"><i class="icon-large icon-cloud"></i>Manage User</div>',array('admin/user')); ?>
+
+		</a>
+		<?php echo CHtml::link('<div class="span3 dashboard-b"><i class=" icon-largeicon-cloud"></i>Manage Jobs</div>',array('admin/jobs')); ?>
+		
+	</div>
+</div>

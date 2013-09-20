@@ -5,7 +5,7 @@ $this->pageTitle = 'Update Job | '.Yii::app()->params['pageTitle'];
 ?>
 
 <div class="hint"><p>Please fill out the form with your particulars</p></div>
-<div class ="span6">
+<div class ="span12">
 
     <?php /** @var BootActiveForm $form */
           
@@ -22,7 +22,7 @@ $this->pageTitle = 'Update Job | '.Yii::app()->params['pageTitle'];
     ?>
         <?php if (Yii::app()->user->isAdmin())
         {
-            echo $form->textFieldRow($model, 'title',array('class'=>'span5')); 
+            echo $form->textFieldRow($model, 'title',array('class'=>'span8')); 
             echo $form->textAreaRow($model,'description', array('class'=>'span8', 'rows'=>15));
             echo $form->textFieldRow($model,'meta_title', array('class'=>'span8', 'rows'=>15));
             echo $form->textFieldRow($model,'meta', array('class'=>'span8', 'rows'=>15));
