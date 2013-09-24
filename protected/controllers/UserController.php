@@ -799,7 +799,7 @@ class UserController extends Controller
 
 	public function actionProfile($id)
 	{
-		if(!Yii::app()->user->isCompany())
+		if(yii::app()->user->isMember())
 		{
 			$uid = Yii::app()->user->getID();
 			if((!$id) || ($id != $uid))
@@ -895,7 +895,7 @@ class UserController extends Controller
 					       					'name'=>$record->name,
 					       					'username'=> $record->username,
 					       					'password'=>$model->password,
-					       					'verify-link'=>$verification_link,
+					       					'verify_link'=>$verification_link,
 					       					'to'=> $record->email,
 
 					       				);	
@@ -905,7 +905,7 @@ class UserController extends Controller
 					       					'name'=> $adminData[0]['name'],
 					       					'username'=> $adminData[0]['username'],
 					       					'password'=>$model->password,
-					       					'verify-link'=>$verification_link,
+					       					'verify_link'=>$verification_link,
 					       					'to'=>$adminData[0]['email'],
 					       							);
 					    

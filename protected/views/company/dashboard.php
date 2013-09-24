@@ -8,5 +8,5 @@ $this->pageTitle = 'DashBoard | '.Yii::app()->params['pageTitle'];
 <h1>DashBoard</h1>
 <br>
 
-This is Dashboard
+
             

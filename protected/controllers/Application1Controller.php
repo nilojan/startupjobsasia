@@ -107,12 +107,29 @@ class Application1Controller extends Controller
 	}
 
 	public function actionUpdateJob()
-	{
-		$es = new EditableSaver('Application1');  //'User' is name of model to be updated
-   		$es->onBeforeUpdate = function($event) {
-        	$event->sender->setAttribute('last_reviewed', date('Y-m-d H:i:s'));
-    	};
-   		$es->update();	
+	{  
+
+		
+		$jobstatus=$_POST['jobstatus'];
+		$id =$_POST['AID'];
+		file_put_contents("ajaxyiilog.txt","Inside ajax updatejob{$jobstatus}{$id}");
+		$application = Application1::model()->find('AID=:id',array(':id'=>$id));
+		$application->jobstatus =$jobstatus;
+		$application->last_reviewed = date('Y-m-d H:i:s');
+		$application->save();
+			$job = job::model()->find('JID=:jid',array(':jid'=>$application->JID));
+   			$user= user::model()->find('role =:role',array(':role' => 1));
+
+        		$data= array(
+        			'event'=>$jobstatus,
+        			'job'=>$job->title,
+        			'to'=>$user->email,
+        			);
+         $sendToAdmin =yii::app()->user->sendEmail('update_application',$data);
+      
+		
+			
+			
 	}
 
 	/**

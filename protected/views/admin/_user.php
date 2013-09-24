@@ -8,7 +8,7 @@
 
     <table class ="table">
          <div class ="span3">
-                    <?php echo CHtml::link($data->cname, array('User/profile/'.$data->ID)) ; ?>
+                    <?php echo CHtml::link($data->fname, array('User/profile/'.$data->UID)) ; ?>
          </div> 
         
          <div class="btn-toolbar">
@@ -16,7 +16,7 @@
                                                                             'label'=>'Edit',
                                                                             'type'=>'inverse', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
                                                                             //array('job/update'),    
-                                                                            'url'=>Yii::app()->createUrl("user/edit/".$data->ID),)); ?>
+                                                                            'url'=>Yii::app()->createUrl("user/edit/".$data->UID),)); ?>
                                                                            
 
 

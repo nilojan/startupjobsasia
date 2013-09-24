@@ -418,6 +418,29 @@ class WebUser extends CWebUser {
                                           $flag = true;             
 
                                   break;
+                case 'update_application':
+                                   $body = "Hi <font type=\"bold\">" . $data['event'] . "</font><br>
+                                            <br>                                           
+                                            <br>
+                                            @@@$$$$  Job updated by $$$$@@@@
+                                            
+                                            
+                                            
+
+                                            <br>
+                                            THIS IS AN AUTO-GENERATED MESSAGE - PLEASE DO NOT REPLY TO THIS MESSAGE!<br>
+                                            <br>
+                                            -------------<br>
+                                            StartUp Jobs Asia Team";
+                                          $message->setBody($body, 'text/html');
+                                          $message->subject = "StartUp Jobs Asia -Job Status Updated";
+                                          $message->addTo($data['to']);
+                                          $message->from = 'noreply@StartUpJobsAsia.com';
+                                          Yii::app()->mail->send($message); 
+                                          $flag = true;             
+
+                                  break;
+                  
 
               }
               

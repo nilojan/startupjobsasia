@@ -37,6 +37,7 @@ class JobController extends Controller {
         );
     }
     
+    
     public function actionManageJobs() {
         
        $this->render('manageJobs');
@@ -44,13 +45,33 @@ class JobController extends Controller {
     /*Approve job post only if company is approved ( status = 1)
      * else redirect to not approved
      */
+
     public function actionSubmitJob() {
        
+
        $model = new JobForm;
        $company = company::model()->find('ID=:ID', array('ID' => Yii::app()->user->getID()));
-       if ($company->status == 0) {
-            $this->redirect(array('site/page/view/notApproved'));
-        }
+          $post_bal = $company->job_post_balance;
+            $datetime1 = $company->created;
+            date_default_timezone_set('Asia/Singapore');
+            $datetime2 = date('Y-m-d H:i:s');
+            $interval = yii::app()->user->dateDiff($datetime1, $datetime2);
+            
+            if($company->status == 0)
+            {
+                $this->redirect(array('site/page/view/notApproved'));
+
+            }
+            else if($post_bal == 0||$post_bal <= 0 )
+            {
+              $this->redirect(array('site/page/view/NotEnoughCredit'));
+
+            }else if($interval >=30)
+            {
+              $this->redirect(array('site/page/view/NotEnoughTime'));
+            }
+      
+       
 
        if (isset($_POST['JobForm'])) {
                        
@@ -148,12 +169,12 @@ class JobController extends Controller {
                                             // send email notification
                                             
                                             $usr = user::model()->find('ID=:ID', array('ID' => Yii::app()->user->getID()));
-                                            
+                                            $adminData = user::model()->findAll('role=:role',array('role'=>1));
                                             $data = array(
                                             'job' => $job_title,
                                             'company' =>  $company->cname,                                                                                   
                                             //'to' => 'post@startupjobs.asia',
-                                            'to' => 'sb9176@adzek.com',
+                                            'to'=>$adminData[0]['email'],
                                             'job_url' => Yii::app()->getBaseUrl(true).'/job/job?JID='.$JID,
 
                                             );                              

@@ -44,6 +44,7 @@ class CompanyController extends Controller  {
     public function actionUpdate($id) {
       if(!(yii::app()->user->isAdmin()))
       {
+        
         $id = Yii::app()->user->getID();
       }
         
@@ -135,6 +136,16 @@ class CompanyController extends Controller  {
             
             $this->render('upgrade');
     }
+     public function actionAddons() {
+            
+            
+            $this->render('Addons');
+    }
+    public function actionDashboard() {
+            
+            
+            $this->render('Dashboard');
+    }
        
    public function actionApplication()  {
             $company = company::model()->find('ID=:ID', array('ID' => Yii::app()->user->getID()));
@@ -142,6 +153,65 @@ class CompanyController extends Controller  {
             $this->render('application',array('company' => $company));
    }
 
+
+   public function actionBuy($id){
+ 
+        $amt = $id;
+        $cid = Yii::app()->user->getID();
+        $paymentInfo['Order']['theTotal'] = $amt;
+        $paymentInfo['Order']['description'] = "Some payment description here";
+        $paymentInfo['Order']['quantity'] = '1';
+ 
+        // call paypal 
+        $result = Yii::app()->Paypal->SetExpressCheckout($paymentInfo); 
+        //Detect Errors 
+        if(!Yii::app()->Paypal->isCallSucceeded($result)){ 
+            if(Yii::app()->Paypal->apiLive === true){
+                //Live mode basic error message
+                $error = 'We were unable to process your request. Please try again later';
+            }else{
+                //Sandbox output the actual error message to dive in.
+                $error = $result['L_LONGMESSAGE0'];
+            }
+            echo $error;
+            Yii::app()->end();
+ 
+        }else { 
+            // send user to paypal 
+            $token = urldecode($result["TOKEN"]); 
+            Yii::app()->session['CID'] = $cid;
+            $payPalURL = Yii::app()->Paypal->paypalUrl.$token; 
+            $this->redirect($payPalURL); 
+        }
+    }
+ 
+public function actionConfirmPayment()  {
+                $CID = Yii::app()->session['CID'];
+               // echo $JID;
+                //$job = job::model()->find('JID=:JID',  array('JID' => $JID, ));
+                //$job = job::model()->with('company')->find('JID=:JID&&ID=:ID',  array(':JID' => $JID, ':ID'=>Yii::app()->user->getID()));
+                $company = company::model()->find('CID=:CID',array(':CID'=>$CID));
+                $user = user::model()->find('ID=:ID',array(':ID'=>Yii::app()->user->getID()));
+                $company->premium = 1;
+                $post_bal = $company->job_post_balance;
+                $post_bal = $post_bal + 10; 
+                $company->job_post_balance = $post_bal;
+                $company->save();
+
+                $data = array(
+                    'name' => $company->cname,
+                    'job_url' => Yii::app()->getBaseUrl(true).'/company/company/'.$company->CID,
+                    'company' =>  $company->cname,
+                    'username' => $user->username,
+                    'to' => $user->email,
+                );                              
+                $sendEmail =  Yii::app()->user->sendEmail('startup_premium',$data);
+                Yii::app()->session['CID'] = null;
+               // var_dump($sendEmail); die;
+                $this->redirect(array('company/manageJobs'));
+                //$this->render('confirm');
+                //$this->redirect(array('site/page','view'=>'success'));
+    }
    public function actionRegistration() {
             
           $model  = new StartupRegistrationForm;

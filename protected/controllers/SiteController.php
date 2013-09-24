@@ -78,6 +78,8 @@ class SiteController extends Controller
                             }else if(Yii::app()->user->isAdmin())
                             {
                                 $this->redirect(array('admin/manage'));
+                            }else if(Yii::app()->user->isCompany()){
+                                $this->redirect(array('company/Dashboard'));
                             }
                             if($returnUrl == '/yii/suj/index.php')
                                     $this->redirect(array('site/mangae'));

@@ -8,7 +8,7 @@ class company extends CActiveRecord {
     
     public function rules() {
         return array(
-            
+            array('premium','safe'),
         );
     }
 public function relations() {
