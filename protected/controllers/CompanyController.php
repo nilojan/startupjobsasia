@@ -136,10 +136,10 @@ class CompanyController extends Controller  {
             
             $this->render('upgrade');
     }
-     public function actionAddons() {
+     public function actionPremium() {
             
             
-            $this->render('Addons');
+            $this->render('premium');
     }
     public function actionDashboard() {
             
@@ -154,10 +154,34 @@ class CompanyController extends Controller  {
    }
 
 
-   public function actionBuy($id){
- 
-        $amt = $id;
-        $cid = Yii::app()->user->getID();
+   public function actionBuy(){
+  
+   if(isset($_GET['amt']))
+   {
+      $amount = $_GET['amt'];
+    if($amount == 'normal')
+    {
+      $amt = 9.99;
+      $id = Yii::app()->user->getID();
+    }else if($amount == 'enterprise'){
+      $amt = 30;
+      $id = Yii::app()->user->getID();
+    }else if($amount == 'elite')
+    {
+      $amt = 100;
+      $id = Yii::app()->user->getID();
+    }
+    
+   }else{
+    $amt = 5;
+      $id = $_GET['JID'];
+   }
+
+   var_dump($_GET);
+
+    die;
+        
+        
         $paymentInfo['Order']['theTotal'] = $amt;
         $paymentInfo['Order']['description'] = "Some payment description here";
         $paymentInfo['Order']['quantity'] = '1';
@@ -179,7 +203,7 @@ class CompanyController extends Controller  {
         }else { 
             // send user to paypal 
             $token = urldecode($result["TOKEN"]); 
-            Yii::app()->session['CID'] = $cid;
+            Yii::app()->session['ID'] = $cid;
             $payPalURL = Yii::app()->Paypal->paypalUrl.$token; 
             $this->redirect($payPalURL); 
         }

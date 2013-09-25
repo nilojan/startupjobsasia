@@ -119,7 +119,7 @@ return array(
                             'apiSignature' => 'AGwhn2LphfWjyIRWvc3SpX2Os17IAcKaCktBlnu42LdKuy3XaY6HtRZ9',
                             'apiLive' => false,
  
-                            'returnUrl' => 'job/confirmPayment', //regardless of url management component
+                            'returnUrl' => 'pay/confirmPayment', //regardless of url management component
                             'cancelUrl' => 'site/index/', //regardless of url management component
  
                             // Default currency to use, if not set USD is the default
