@@ -23,7 +23,7 @@
                     <?php echo CHtml::link($data->Employee->fname, array('user/profile/'.$data->EID)) ; ?>                    
          </div>
          <div class ="span2">
-                    <?php  echo CHtml::link(CHtml::encode('Resume'),Yii::app()->baseUrl . '/resume/'.$data->Employee->resume,array('target'=>'_blank')); ?>
+                    <?php  echo CHtml::link(CHtml::encode('Resume'),array('company/downloadResume?filename='.$data->Employee->resume)); ?>
          </div>
          
          

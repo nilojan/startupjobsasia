@@ -33,7 +33,7 @@
                                                             'label'=>'Add to Premium',
                                                             'type'=>'warning', // null, 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
                                                             //array('job/update'),    
-                                                            'url'=>Yii::app()->createUrl("job/buy", array("JID"=>$data->JID )),));
+                                                            'url'=>Yii::app()->createUrl("pay/buy", array("JID"=>$data->JID )),));
                     }
                     else if($data->premium == 1)
                     {

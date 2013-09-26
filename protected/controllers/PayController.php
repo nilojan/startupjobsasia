@@ -26,12 +26,17 @@ class PayController extends Controller  {
       $amt = 30;
       $id = Yii::app()->user->getID();
       yii::app()->session['company']='enterprise';
+    }else if($amount == 'addons')
+    {
+      $amt = 100;
+      $id = Yii::app()->user->getID();
+      yii::app()->session['company']='enterprise';
     }
     
    }else{
     $amt = 5;
     yii::app()->session['company']='';
-      $id = $_GET['JID'];
+    $id = $_GET['JID'];
    }
 
    
@@ -58,6 +63,8 @@ class PayController extends Controller  {
             // send user to paypal 
             $token = urldecode($result["TOKEN"]); 
             Yii::app()->session['ID'] = $id;
+            /*echo Yii::app()->session['ID'];
+            die;*/
             $payPalURL = Yii::app()->Paypal->paypalUrl.$token; 
             $this->redirect($payPalURL); 
         }
@@ -67,7 +74,9 @@ class PayController extends Controller  {
                 {
 
                     $CID = Yii::app()->session['ID'];
-                    $company = company::model()->find('CID=:CID',array(':CID'=>$CID));
+                   
+                    $company = company::model()->find('ID=:CID',array(':CID'=>$CID));
+                   
                     $user = user::model()->find('ID=:ID',array(':ID'=>Yii::app()->user->getID()));
                    if(Yii::app()->session['company'] = 'normal')
                    {
@@ -75,23 +84,52 @@ class PayController extends Controller  {
                         $post_bal = $company->job_post_balance;
                         $post_bal = $post_bal + 10; 
                         $company->job_post_balance = $post_bal;
+                        date_default_timezone_set('Asia/Singapore');
+                        $date = date('Y-m-d H:i:s');;
+                        $end_date =echo date('Y-m-d H:i:s', mktime(date("H"), date("i"), date("s"), date("m"), date("d") +30, date("Y"))); 
+                        $company->premium_start_date =  $date;
+                        $company->premium_end_date =$end_date;
                         $company->save();
 
                     }else if(Yii::app()->session['company'] = 'enterprise')
                     {
                         $company->premium = 2;
+                        date_default_timezone_set('Asia/Singapore');
+                        $date = date('Y-m-d H:i:s');;
+                        $end_date =echo date('Y-m-d H:i:s', mktime(date("H"), date("i"), date("s"), date("m"), date("d") +30, date("Y"))); 
+                        $company->premium_start_date =  $date;
+                        $company->premium_end_date =$end_date;
                         $company->save();
 
+                    }else if(Yii::app()->session['company'] = 'addons')
+                    {
+
+                        $company->addons = 1;
+                        date_default_timezone_set('Asia/Singapore');
+                        $date = date('Y-m-d H:i:s');;
+                        $end_date =echo date('Y-m-d H:i:s', mktime(date("H"), date("i"), date("s"), date("m"), date("d") +30, date("Y"))); 
+                        $company->addons_start_date =  $date;
+                        $company->addons_end_date =$end_date;
+                        $compnay->save();
                     }
-                    
+                    $user = user::model()->find('role=:role',array(':role'=>1));
                      $data = array(
-                    'name' => $company->cname,
-                    'job_url' => Yii::app()->getBaseUrl(true).'/company/company/'.$company->CID,
+                    
+                    'url' => Yii::app()->getBaseUrl(true).'/company/company/'.$company->CID,
+                    'company' =>  $company->cname,
+                   
+                    'to' => $company->cemail,
+                );    
+
+                     $dataAdmin =
+                     array(
+                    'url' => Yii::app()->getBaseUrl(true).'/company/company/'.$company->CID,
                     'company' =>  $company->cname,
                     'username' => $user->username,
                     'to' => $user->email,
-                );                              
+                            );                       
                 $sendEmail =  Yii::app()->user->sendEmail('startup_premium',$data);
+                $senAdmindEmail =  Yii::app()->user->sendEmail('startup_premium',$dataAdmin);
                 Yii::app()->session['ID'] = null;
                 yii::app()->session['company']='';
                // var_dump($sendEmail); die;
