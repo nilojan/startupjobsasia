@@ -12,6 +12,43 @@ class PayController extends Controller  {
                 'users'=>array('*')),
         );
     }
+public function actionJobPremium($JID)
+{
+
+
+                $job = job::model()->with('company')->find('JID=:JID&&ID=:ID',  array(':JID' => $JID, ':ID'=>Yii::app()->user->getID()));
+                $company = company::model()->find('CID=:CID',array(':CID'=>Yii::app()->user->getID()));
+               // $user = user::model()->find('ID=:ID',array(':ID'=>Yii::app()->user->getID()));
+            if(($company->premium == 1)&&($company->premium_bal>0))
+                {               $job->premium = 1;
+                                date_default_timezone_set('Asia/Singapore');
+                                $date = date('Y-m-d H:i:s');;
+                                $job->pre_start_date = $date;
+                                $job->save();
+                                $company->job_post_balance--;
+                                $company->premium_bal--;
+                                $company->save();
+                }else if($company->premium == 2)
+                {
+                                $job->premium = 1;
+                                date_default_timezone_set('Asia/Singapore');
+                                $date = date('Y-m-d H:i:s');;
+                                $job->pre_start_date = $date;
+                                $job->save();
+
+                }
+                $data = array(
+                    
+                    'job' => $job->title,
+                    'job_url' => Yii::app()->getBaseUrl(true).'/job/job?JID='.$job->JID,
+                    'company' =>$company->cname,
+                    'name' => $company->cname,
+                    'to' => $company->cemail,
+                );                              
+                $sendEmail =  Yii::app()->user->sendEmail('premium_job',$data);
+
+                 $this->redirect(array('job/manageJobs'));
+}
  public function actionBuy(){
   
    if(isset($_GET['type']))
@@ -34,10 +71,17 @@ class PayController extends Controller  {
     }
     
    }else{
+$company = company::model()->find('ID=:ID', array('ID' => Yii::app()->user->getID()));
+if(($company->premium == 1 )||($company->premium == 2))
+{
+    $this->actionJobPremium($_GET['JID']);
+    
+}
     $amt = 5;
     yii::app()->session['company']='';
     $id = $_GET['JID'];
-   }
+  
+    }
 
    
         
@@ -85,36 +129,25 @@ class PayController extends Controller  {
                         $post_bal = $post_bal + 10; 
                         $company->job_post_balance = $post_bal;
                         date_default_timezone_set('Asia/Singapore');
-                        $date = date('Y-m-d H:i:s');;
-                        $end_date =echo date('Y-m-d H:i:s', mktime(date("H"), date("i"), date("s"), date("m"), date("d") +30, date("Y"))); 
-                        $company->premium_start_date =  $date;
-                        $company->premium_end_date =$end_date;
+                        
+                        $company->premium_bal = 10;
                         $company->save();
 
                     }else if(Yii::app()->session['company'] = 'enterprise')
                     {
                         $company->premium = 2;
-                        date_default_timezone_set('Asia/Singapore');
-                        $date = date('Y-m-d H:i:s');;
-                        $end_date =echo date('Y-m-d H:i:s', mktime(date("H"), date("i"), date("s"), date("m"), date("d") +30, date("Y"))); 
-                        $company->premium_start_date =  $date;
-                        $company->premium_end_date =$end_date;
+                        
                         $company->save();
 
                     }else if(Yii::app()->session['company'] = 'addons')
                     {
 
                         $company->addons = 1;
-                        date_default_timezone_set('Asia/Singapore');
-                        $date = date('Y-m-d H:i:s');;
-                        $end_date =echo date('Y-m-d H:i:s', mktime(date("H"), date("i"), date("s"), date("m"), date("d") +30, date("Y"))); 
-                        $company->addons_start_date =  $date;
-                        $company->addons_end_date =$end_date;
                         $compnay->save();
                     }
                     $user = user::model()->find('role=:role',array(':role'=>1));
                      $data = array(
-                    
+                     'name' =>  $company->cname,
                     'url' => Yii::app()->getBaseUrl(true).'/company/company/'.$company->CID,
                     'company' =>  $company->cname,
                    
@@ -123,6 +156,7 @@ class PayController extends Controller  {
 
                      $dataAdmin =
                      array(
+                    'name' =>  $company->cname,
                     'url' => Yii::app()->getBaseUrl(true).'/company/company/'.$company->CID,
                     'company' =>  $company->cname,
                     'username' => $user->username,
@@ -153,14 +187,14 @@ class PayController extends Controller  {
                 $job->save();
 
                 $data = array(
-                    'name' => $user->name,
+                    
                     'job' => $job->title,
                     'job_url' => Yii::app()->getBaseUrl(true).'/job/job?JID='.$job->JID,
                     'company' =>  $company->cname,
                     'username' => $user->username,
                     'to' => $user->email,
                 );                              
-                $sendEmail =  Yii::app()->user->sendEmail('premium_job',$data);
+                $sendEmail =  Yii::app()->user->sendEmail('startup_premium',$data);
                 Yii::app()->session['JID'] = null;
                // var_dump($sendEmail); die;
                 $this->redirect(array('job/manageJobs'));

@@ -20,10 +20,22 @@
                     <?php echo CHtml::link($data->job->title, array('job/job', 'JID' => $data->JID)) ; ?>
          </div>
          <div class ="span2">
+
                     <?php echo CHtml::link($data->Employee->fname, array('user/profile/'.$data->EID)) ; ?>                    
          </div>
          <div class ="span2">
-                    <?php  echo CHtml::link(CHtml::encode('Resume'),array('company/downloadResume?filename='.$data->Employee->resume)); ?>
+
+                    <?php 
+
+                      if($data->Employee->resume!=NULL)
+                      {
+                        echo CHtml::link(CHtml::encode('Resume'),array('company/downloadResume?filename='.$data->Employee->resume));    
+                      }else{
+                        echo CHtml::encode('No resume Available');
+                      }
+                     
+
+                     ?>
          </div>
          
          

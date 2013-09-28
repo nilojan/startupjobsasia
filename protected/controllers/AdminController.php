@@ -56,7 +56,7 @@ class AdminController extends Controller
          
          if($job->save())
          {
-          $this->redirect(array('admin/job'));
+          $this->redirect(array('admin/jobs'));
          } 
 
     }

@@ -76,13 +76,16 @@ class UserController extends Controller
 
 	public function actionSearch()
     {
+        $company = company::model()->find('ID=:ID', array('ID' => Yii::app()->user->getID()));
+        if($company->addons != 1){
+        		$this->redirect('../site/page/view/notAuthorized');
+        }else{
+                $query = $_GET['q'];
         
-        $query = $_GET['q'];
-
-       // $this->redirect(array('site/page','view'=>'success'));
- 
-        $this->render('search', array('query'=>$query));
-       
+               // $this->redirect(array('site/page','view'=>'success'));
+         
+                $this->render('search', array('query'=>$query));
+               }
     }
  
 

@@ -29,10 +29,10 @@ $extt = substr(strrchr($data->resume,'.'),1);
 			
 			<div>		          
 				<?php if($extt == 'doc' or $extt == 'docx'){
-					echo CHtml::link(CHtml::image(Yii::app()->baseUrl.'/images/icons/doc_icon_small.png'),Yii::app()->baseUrl . '/resume/'.$data->resume,array('target'=>'_blank')); 
+					echo CHtml::link(CHtml::image(Yii::app()->baseUrl.'/images/icons/doc_icon_small.png'),array('company/downloadUserResume?filename='.$data->resume)); 
 					}
 					if($extt == 'pdf') {
-					echo CHtml::link(CHtml::image(Yii::app()->baseUrl.'/images/icons/pdf_icon_small.png'),Yii::app()->baseUrl . '/resume/'.$data->resume,array('target'=>'_blank')); 
+					echo CHtml::link(CHtml::image(Yii::app()->baseUrl.'/images/icons/pdf_icon_small.png'),array('company/downloadUserResume?filename='.$data->resume)); 
 					}
 				?>
 

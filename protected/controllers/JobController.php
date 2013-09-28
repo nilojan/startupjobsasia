@@ -133,7 +133,7 @@ class JobController extends Controller {
 									  $record->responsibility = $model->responsibility;
 									  $record->requirement = $model->requirement;
 									  $record->howtoapply = $model->howtoapply;
-                                      $record->type = $model->type;
+                    $record->type = $model->type;
 									  $record->full_time = $model->full_time;
 									  $record->part_time = $model->part_time;
 									  $record->freelance = $model->freelance;
@@ -143,13 +143,19 @@ class JobController extends Controller {
                                       $record->location = $model->location;
                                       $record->category = $model->category;
 									  $record->tags = $model->tags;
+                    
+                    @$record->premium =$model->premium;
+                    date_default_timezone_set('Asia/Singapore');
+                     $date = date('Y-m-d H:i:s');
+                     @$record->pre_start_date = $date;
                                       $record->CID = $company->CID;
-                                      //$time = new CDbExpression('NOW()');
-                                      //$date = new DateTime($time);
-                                      //$record->created = $date;
-                                      //$record->expiration = $date->add(new DateInterval('P30D'));; 
+
+                                      
                                       if ($record->save()) {      
-                                            
+                                            if($record->premium == 1)
+                                            {
+                                              $company->premium_bal--;
+                                            }
                                             $company->job_post_balance--;
                                             $company->save();
 
@@ -189,7 +195,7 @@ class JobController extends Controller {
                        else
                             $this->redirect(array('site/page', 'view'=>'notApproved'));
        }
-       $this->render('submitJob', array('model' => $model,'job_post_balance'=>$company->job_post_balance));
+       $this->render('submitJob', array('model' => $model,'premium'=>$company->premium,'job_post_balance'=>$company->job_post_balance));
     }
     //Not completed
     //Upgrade job posting to premium

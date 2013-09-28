@@ -174,13 +174,9 @@ class WebUser extends CWebUser {
     }
     function download_file($file, $name, $mime_type='')
 {
-  /*var_dump($file);
-  var_dump($name);
-  die;*/
- /*
- This function takes a path to a file to output ($file),  the filename that the browser will see ($name) and  the MIME type of the file ($mime_type, optional).
- */
+  $file_extension = strtolower(substr(strrchr($file,"."),1));
  
+  $name ='StartupResumes.'.$file_extension;
  //Check the file premission
  if(!is_readable($file)) die('File not found or inaccessible!');
  

@@ -99,8 +99,8 @@
         array('label'=>'LOGOUT ('.Yii::app()->user->name.')', 'url'=>array('/site/logout'), 'visible'=>!Yii::app()->user->isGuest, 'active'=>true),		
 			),
 		)); 
-	
-	if(Yii::app()->user->isCompany())
+	$company = company::model()->find('ID=:ID', array('ID' => Yii::app()->user->getID()));
+	if((Yii::app()->user->isCompany()) && ($company->addons == 1 ))
 	{ ?>
 		<div class="clear">
 			<form class="SearchForm" action="<?php echo Yii::app()->request->baseUrl?>/user/search">

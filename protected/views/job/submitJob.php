@@ -84,6 +84,11 @@ else
 	   <?php echo $form->textAreaRow($model,'requirement', array('class'=>'span12', 'rows'=>10)); ?>
        <?php echo $form->textAreaRow($model,'howtoapply', array('class'=>'span12', 'rows'=>2)); ?> 
 	   <?php echo $form->textAreaRow($model,'tags', array('class'=>'span8', 'rows'=>2)); ?> 
+       <?php
+
+       if(($premium == 1) || ($premium == 2) ) 
+            echo $form->CheckboxRow($model,'premium', array('class'=>'span1', 'rows'=>2));
+        ?> 
        <div class="form-actions">
        <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary','label'=>'Submit')); ?>
        </div>

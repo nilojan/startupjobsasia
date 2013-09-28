@@ -20,6 +20,7 @@ class JobForm extends CFormModel
     public $modified;
     public $location;
     public $tags;
+    public $premium;
     public $category;
     public $meta;
     public $meta_title;
@@ -85,6 +86,7 @@ public function rules(){
 			'meta'=>'Meta Description',
 			'meta_title'=> 'Meta Title',
 			'ulr'=> 'URL',
+			'premium'=>'Add to Premium',
  
 		);
 	}

@@ -136,10 +136,7 @@ class CompanyController extends Controller  {
             
             $this->render('upgrade');
     }
-    public function actionAddons()
-    {
-      
-    }
+    
      public function actionPremium() {
             
             
@@ -151,19 +148,47 @@ class CompanyController extends Controller  {
             {
 
             $filename=$_GET['filename'];
-            $path=''. dirname(Yii::app()->request->scriptFile).'\resume\\'.$filename.'';          
-            Yii::app()->user->download_file($path,$filename);
-              
-            }else
-            {?>
-              <script>
-              $(document).ready(function(){
-                alert('no file to download...');
-              });
-              </script>
-
-            <?php }
+            $path=''. dirname(Yii::app()->request->scriptFile).'\resume\\'.$filename.'';
+           $company = company::model()->find('ID=:ID', array('ID' => Yii::app()->user->getID()));
+           date_default_timezone_set('Asia/Singapore');
+           $date = date('Y-m-d H:i:s');
+           
+            var_dump(Yii::app()->user->download_file($path,$filename));
+        
+            }
             
+    }
+    public function actionDownloadUserResume() 
+    {
+            if(isset($_GET['filename']))
+            {
+
+            $filename=$_GET['filename'];
+            $path=''. dirname(Yii::app()->request->scriptFile).'\resume\\'.$filename.'';
+           $company = company::model()->find('ID=:ID', array('ID' => Yii::app()->user->getID()));
+           date_default_timezone_set('Asia/Singapore');
+           $date = date('Y-m-d H:i:s');
+
+           if($company->premium == 1)
+          {
+            if($company->download_count<100)
+            {
+                          $company->download_count++;
+                          $company->save();
+                          Yii::app()->user->download_file($path,$filename);
+            }else{
+              $this->redirect('../site/page/view/notAuthorized'); 
+            }
+
+          }else if($company->premium == 2)
+              {
+                Yii::app()->user->download_file($path,$filename);
+              }
+          else{
+
+              $this->redirect('../site/page/view/notAuthorized');
+                }
+            }
     }
     public function actionDashboard() {
             
