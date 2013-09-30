@@ -5,6 +5,7 @@ $length = sizeof($model);
 for ($i=0; $i<$length; $i++)
 {
  ?> 
+ <startup>
            <name>
             <?php echo CHtml::encode($model[$i]->cname); ?>
             </name>
@@ -33,6 +34,7 @@ for ($i=0; $i<$length; $i++)
             <location>
             <?php echo CHtml::encode($model[$i]->location); ?>
             </location>
+      </startup>
 <?php
 }
 ?> 

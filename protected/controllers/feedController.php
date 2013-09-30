@@ -10,7 +10,7 @@ class FeedController extends Controller
             	 'users' => array('*'),
                 ),
             array('allow',
-                  'actions'=>array('FullTime','PartTime','Internship','Freelance','Temporary','Startup'),
+                  'actions'=>array('FullTime','PartTime','Internship','Freelance','Temporary','Startup','Company'),
                   'users'=>array('*'),  
                  ),
             
@@ -61,6 +61,15 @@ class FeedController extends Controller
 		
 		$this->layout = "xml.php";
 		$this->render("categories",array('model'=>$model));
+	}
+	public function actionCompany()
+	{
+		$user= company::model()->find('ID=:ID',array(':ID'=>Yii::app()->user->getID()));
+		
+		$model = job::model()->findAll('CID=:CID',array(':CID'=> $user->CID));
+		
+		$this->layout ='xml.php';
+		$this->render('job',array('model'=>$model));
 	}
 	public function actionStartup()
 	{

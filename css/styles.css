@@ -390,3 +390,41 @@ h1.AboutUs,h1.Advisors {
 .dashboard-f:hover{
 	background:#A6F7E8;
 	}
+	#style-switcher-content {
+float: left;
+padding: 10px 20px 20px 20px;
+background: rgba(0, 0, 0, 0.8);
+}
+
+#style-switcher h2 {
+height: 40px;
+background: rgba(0, 0, 0, 0.8);
+font-family: 'Open Sans', sans-serif;
+font-size: 13px;
+width: 100%;
+font-weight: bold;
+line-height: 40px;
+color: #fff;
+padding: 0 10px 0 20px;
+margin: 0;
+text-align: left;
+text-transform: none;
+}
+
+#style-switcher h2 {
+height: 40px;
+background: rgba(0, 0, 0, 0.8);
+font-family: 'Open Sans', sans-serif;
+font-size: 13px;
+width: 100%;
+font-weight: bold;
+line-height: 40px;
+color: #fff;
+padding: 0 10px 0 20px;
+margin: 0;
+text-align: left;
+text-transform: none;
+}
+.full-spectrum .sp-palette {
+max-width: 200px;
+}

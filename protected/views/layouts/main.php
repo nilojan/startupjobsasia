@@ -3,10 +3,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/styles.css" />
+<link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->request->baseUrl; ?>/css/spectrum.css" />
+
 <meta charset="UTF-8">
 <?php $this->display_seo(); ?>
 <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/startupjobs_header.js"></script>
 <script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/selectize.js"></script>
+<script type="text/javascript" src="<?php echo Yii::app()->request->baseUrl; ?>/js/spectrum.js"></script>
 
 </head>
 <body>
