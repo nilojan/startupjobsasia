@@ -390,41 +390,20 @@ h1.AboutUs,h1.Advisors {
 .dashboard-f:hover{
 	background:#A6F7E8;
 	}
-	#style-switcher-content {
-float: left;
+#style-switcher-content {
+position: fixed;
+left: -123px;
 padding: 10px 20px 20px 20px;
 background: rgba(0, 0, 0, 0.8);
 }
 
-#style-switcher h2 {
-height: 40px;
-background: rgba(0, 0, 0, 0.8);
-font-family: 'Open Sans', sans-serif;
-font-size: 13px;
-width: 100%;
-font-weight: bold;
-line-height: 40px;
-color: #fff;
-padding: 0 10px 0 20px;
-margin: 0;
-text-align: left;
-text-transform: none;
-}
 
-#style-switcher h2 {
-height: 40px;
-background: rgba(0, 0, 0, 0.8);
-font-family: 'Open Sans', sans-serif;
-font-size: 13px;
-width: 100%;
-font-weight: bold;
-line-height: 40px;
-color: #fff;
-padding: 0 10px 0 20px;
-margin: 0;
-text-align: left;
-text-transform: none;
-}
+
 .full-spectrum .sp-palette {
 max-width: 200px;
 }
+
+.theme_select { width:130px; padding: 10px; height:130px; margin-left: -150px; position: fixed; left:0;top:150px; background:url(../images/icons/black_trans.png) repeat 0 0; border-radius:0 5px 5px 0; -moz-border-radius:0 5px 5px 0; -webkit-border-radius:0 5px 5px 0; -o-border-radius:0 5px 5px 0; }
+.theme_select .close_btn { width:30px; height:30px; position: absolute; right:-30px; top:10px; background:url(../images/icons/popup_close_btn.png) no-repeat 0 0; cursor: pointer; }
+.theme_select h3 { width:100%; float:left; color:#ffffff; font-size: 16px; font-weight:normal; margin: 0; letter-spacing: 2px; }
+.theme_select .input { width:20px; height:20px; float:left; margin:5px; }

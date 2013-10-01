@@ -27,7 +27,7 @@
         appendTo: "body",
         maxSelectionSize: 7,
         cancelText: "cancel",
-        chooseText: "choose",
+        chooseText: "Apply",
         preferredFormat: false,
         className: "",
         showAlpha: false,

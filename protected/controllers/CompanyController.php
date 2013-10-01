@@ -40,7 +40,18 @@ class CompanyController extends Controller  {
         $this->render('view', array('company' => $company,
                                      'job'=>$job));
     }
-    
+    public function actionColor()
+    {
+      $id=Yii::app()->user->getID();
+      $cname=$_POST['cname'];
+      file_put_contents('colr.txt',$id);
+
+        $company = company::model()->find('ID=:ID', array('ID' => $id));
+        $company->themecolor=$cname;
+        $company->save();
+
+
+    }
     public function actionUpdate($id) {
       if(!(yii::app()->user->isAdmin()))
       {

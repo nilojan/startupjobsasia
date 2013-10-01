@@ -16,6 +16,9 @@
 </style>
 
 <?php
+ /*echo $company->themecolor;
+ die;*/
+
 $this->breadcrumbs = array(
     "{$company->cname} {$company->location}",
 );
@@ -26,11 +29,29 @@ $this->pageOgDesc= $company->mission;
 $this->pageOgImage='/images/company/180/'.$company->image;
 ?>
 <script>
-
+    
    $(document).ready(function(){
 
+    var c_color ='<?php echo $company->themecolor; ?>';
+    
+    var bgc=   c_color;
+    changeThemeColor(bgc);
+                    function changeThemeColor(bgc){
+                            $(".nav > li > a").css("color",bgc);
+                            $(".breadcrumb > li >a").css("color",bgc);
+                            $(".span5").css("background-color",bgc);
+                            $(".SearchForm input[type='text']").css("border-color",bgc);
+                            $(".span11").css("border-color",bgc);
+                            $("#bgchange").css("background-color",bgc);
+                            $(".nav-pills > .active > a").css("background-color",bgc);
+                            $(".nav-pills > .active > a").css("color","");
+                            $(".topHeader").css("border-bottom-color",bgc);
+                            $(".abc").css("border-top-color",bgc);
+                            $(".span6").css("border-color",bgc);
+                            $('textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input').css("border-color",bgc);
+                             }
         $("#full").spectrum({
-            color: "#f89406",
+            color: c_color,
             showInput: true,
             
             showInitial: true,
@@ -40,28 +61,50 @@ $this->pageOgImage='/images/company/180/'.$company->image;
             preferredFormat: "hex",
             localStorageKey: "spectrum.demo",
            
-            change: function(color) {
+            move: function(color) {
                 
               var bgc=   color.toHexString();
-                
-                $(".nav > li > a").css("color",bgc);
-                $(".breadcrumb > li >a").css("color",bgc);
-                $(".span5").css("background-color",bgc);
-                $(".SearchForm input[type='text']").css("border-color",bgc);
-                $(".span11").css("border-color",bgc);
-                $("#bgchange").css("background-color",bgc);
-                $(".nav-pills > .active > a").css("background-color",bgc);
-                $(".nav-pills > .active > a").css("color","");
-                 $(".topHeader").css("border-bottom-color",bgc);
-                 $(".abc").css("border-top-color",bgc);
-                 $(".span6").css("border-color",bgc);
-                 $('textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input').css("border-color",bgc);
-                 
+               changeThemeColor(bgc);
 
                  
 
                 
             },
+
+           change: function(color) {
+                
+              var bgc=   color.toHexString();
+                
+             changeThemeColor(bgc);
+                 $.ajax({  
+
+               type: 'POST',  
+               url:'<?php echo $this->createUrl('company/color'); ?>',  
+               data: 'cname='+bgc ,  
+
+                           success: function(data)  
+                               {                                                      
+
+                                    $('#PackagingMetric_std_rate').html(data); 
+
+                             } 
+
+                               }); 
+                 
+
+                
+            },
+          show: function(color) {
+                
+              var bgc=   color.toHexString();
+                
+              changeThemeColor(bgc);
+
+                 
+
+                
+            },
+ 
             palette: [
                 ["rgb(0, 0, 0)", "rgb(67, 67, 67)", "rgb(102, 102, 102)",
                 "rgb(204, 204, 204)", "rgb(217, 217, 217)","rgb(255, 255, 255)"],
@@ -80,12 +123,53 @@ $this->pageOgImage='/images/company/180/'.$company->image;
             ]
         });
 
+        
+        
 
+        
     });
+$(document).ready(function(){
+    var i = 0;
+    $(".theme_select .close_btn").click(function(){
+        if(i==0){
+            $(".theme_select").css('margin-left','0');
+        i=1;
+        }
+        else{
+            $(".theme_select").css('margin-left','-150px');
+            i=0;
+        }
+    });
+});
 </script>
+<div id="style-switcher" >
+    <div class="theme_select">
+        <div class="close_btn">&nbsp;</div>
+        <div class="content_box">
+            <h3>Style Switcher</h3>
+            <input class="input" type='text' id='full' />
+        </div>
+    </div>    
+        
+        
+        
 
-<input type='text' id='full' />
+        <!--/*<h2>Style Switcher</h2>
+    
+        <div id="style-switcher-content">
+            <ul id="colors" class="colors">
+                <li></li>
+                
+            </ul>
+            <span>CLOSE</span>
+                 
+        </div>*/-->
+        
+        
+        
+    </div>
 
+</div>
 <div class ="abc"></div>
 
 <div class="row-fluid">
