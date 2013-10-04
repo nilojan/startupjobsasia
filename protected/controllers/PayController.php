@@ -145,22 +145,22 @@ if(($company->premium == 1 )||($company->premium == 2))
                         $company->addons = 1;
                         $compnay->save();
                     }
-                    $user = user::model()->find('role=:role',array(':role'=>1));
-                     $data = array(
-                     'name' =>  $company->cname,
-                    'url' => Yii::app()->getBaseUrl(true).'/company/company/'.$company->CID,
-                    'company' =>  $company->cname,
-                   
-                    'to' => $company->cemail,
-                );    
+                            $user = user::model()->find('role=:role',array(':role'=>1));
+                            $data = array(
+                                'name' =>  $company->cname,
+                                'url' => Yii::app()->getBaseUrl(true).'/company/company/'.$company->CID,
+                                'company' =>  $company->cname,
+                                'plan' => Yii::app()->session['company'],
+                                'to' => $company->cemail,
+                                 );    
 
-                     $dataAdmin =
-                     array(
-                    'name' =>  $company->cname,
-                    'url' => Yii::app()->getBaseUrl(true).'/company/company/'.$company->CID,
-                    'company' =>  $company->cname,
-                    'username' => $user->username,
-                    'to' => $user->email,
+                     $dataAdmin = array(
+                            'name' =>  $company->cname,
+                            'url' => Yii::app()->getBaseUrl(true).'/company/company/'.$company->CID,
+                            'company' =>  $company->cname,
+                            'plan' => Yii::app()->session['company'],
+                            'username' => $user->username,
+                            'to' => $user->email,
                             );                       
                 $sendEmail =  Yii::app()->user->sendEmail('startup_premium',$data);
                 $senAdmindEmail =  Yii::app()->user->sendEmail('startup_premium',$dataAdmin);

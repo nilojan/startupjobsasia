@@ -10,7 +10,7 @@ class JobController extends Controller {
                   'roles'=>array('2'),
             ),
             array('allow',
-                  'actions'=>array('apply','search'),
+                  'actions'=>array('apply','search','JobSearch'),
                   'users'=>array('*'),  
                     
             ),
@@ -42,10 +42,48 @@ class JobController extends Controller {
         
        $this->render('manageJobs');
     }
+     public function actionJsearch($dataProvider) {
+        
+       $this->render('Jsearch',array('dataProvider'=>$dataProvider));
+    }
     /*Approve job post only if company is approved ( status = 1)
      * else redirect to not approved
      */
+     public function actionJobSearch() {
 
+      $model= job::model()->findAll();
+     
+      if(isset($_POST) && $_POST != null)
+      {
+       $post = $_POST; 
+        if($post['search_type'] == 0)
+         { 
+          
+          $dataProvider=new CActiveDataProvider('job', array( 
+                                                         'criteria'=>array(
+                                                          'order'=>'created DESC',
+                                                          'condition'=>'JID in(SELECT JID FROM job WHERE status = 1 && MATCH (title,description) 
+                                                          AGAINST ("'.$post['keywords'].'" IN BOOLEAN MODE))',  
+                                                          ),
+                                                          'pagination'=>array(
+                                                                  'pageSize'=>20,
+                                                                 ),
+                                                         ));
+$this->redirect('Jsearch',array('model'=>$model));
+
+
+
+         }
+      }
+       $this->render('AdvancejobSearch',array('model'=>$model));
+    }
+
+      public function actionQuickSearch($post)
+      {
+       
+       $this->render('AdvancejobSearch',array('dataProvider'=>$dataProvider));
+
+      }
     public function actionSubmitJob() {
        
 
@@ -712,103 +750,7 @@ class JobController extends Controller {
         $this-> render('jobList', array('jobList' =>$jobList));
     }
 
-   
-    public function actionBuy($JID){
  
-        // set 
-        $paymentInfo['Order']['theTotal'] = 5.00;
-        $paymentInfo['Order']['description'] = "Some payment description here";
-        $paymentInfo['Order']['quantity'] = '1';
- 
-        // call paypal 
-        $result = Yii::app()->Paypal->SetExpressCheckout($paymentInfo); 
-        //Detect Errors 
-        if(!Yii::app()->Paypal->isCallSucceeded($result)){ 
-            if(Yii::app()->Paypal->apiLive === true){
-                //Live mode basic error message
-                $error = 'We were unable to process your request. Please try again later';
-            }else{
-                //Sandbox output the actual error message to dive in.
-                $error = $result['L_LONGMESSAGE0'];
-            }
-            echo $error;
-            Yii::app()->end();
- 
-        }else { 
-            // send user to paypal 
-            $token = urldecode($result["TOKEN"]); 
-            Yii::app()->session['JID'] = $JID;
-            $payPalURL = Yii::app()->Paypal->paypalUrl.$token; 
-            $this->redirect($payPalURL); 
-        }
-    }
- 
-    public function actionConfirm($JID)
-    {
-      
-        $token = trim($_GET['token']);
-        $payerId = trim($_GET['PayerID']);
- 
- 
- 
-        $result = Yii::app()->Paypal->GetExpressCheckoutDetails($token);
- 
-        $result['PAYERID'] = $payerId; 
-        $result['TOKEN'] = $token; 
-        $result['ORDERTOTAL'] = 10.00;
- 
-        //Detect errors 
-        if(!Yii::app()->Paypal->isCallSucceeded($result)){ 
-            if(Yii::app()->Paypal->apiLive === true){
-                //Live mode basic error message
-                $error = 'We were unable to process your request. Please try again later';
-            }else{
-                //Sandbox output the actual error message to dive in.
-                $error = $result['L_LONGMESSAGE0'];
-            }
-            echo $error;
-            Yii::app()->end();
-        }else{ 
- 
-            $paymentResult = Yii::app()->Paypal->DoExpressCheckoutPayment($result);
-            //Detect errors  
-            if(!Yii::app()->Paypal->isCallSucceeded($paymentResult)){
-                if(Yii::app()->Paypal->apiLive === true){
-                    //Live mode basic error message
-                    $error = 'We were unable to process your request. Please try again later';
-                }else{
-                    //Sandbox output the actual error message to dive in.
-                    $error = $paymentResult['L_LONGMESSAGE0'];
-                }
-                echo $error;
-                Yii::app()->end();
-            }else{
-                //payment was completed successfully
-                $JID = Yii::app()->session['JID'];
-                echo $JID;
-                $job = job::model()->find('JID=:JID',  array('JID' => $JID, ));
-                $job->premium = 1;
-               
-                $job->save();
-                Yii::app()->session['JID'] = null;
-                //$this->render('confirm');
-             //   $this->redirect(array('site/page','view'=>'success'));
-            }
- 
-        }
-                
-        
-    }
- 
-    public function actionCancel()
-    {
-        //The token of the cancelled payment typically used to cancel the payment within your application
-        $token = $_GET['token'];
-        $this->redirect(array('site/page','view'=>'success'));
- 
-        //$this->render('cancel');
-    }
-
     public function actionSearch()
     {
        
@@ -820,33 +762,5 @@ class JobController extends Controller {
        
     }
  
-    public function actionConfirmPayment()  {
-                $JID = Yii::app()->session['JID'];
-               // echo $JID;
-                //$job = job::model()->find('JID=:JID',  array('JID' => $JID, ));
-                $job = job::model()->with('company')->find('JID=:JID&&ID=:ID',  array(':JID' => $JID, ':ID'=>Yii::app()->user->getID()));
-                $company = company::model()->find('CID=:CID',array(':CID'=>$job->CID));
-                $user = user::model()->find('ID=:ID',array(':ID'=>Yii::app()->user->getID()));
-                $job->premium = 1;
-                date_default_timezone_set('Asia/Singapore');
-                $date = date('Y-m-d H:i:s');;
-                $job->pre_start_date = $date;
-                $job->save();
-
-                $data = array(
-                    'name' => $user->name,
-                    'job' => $job->title,
-                    'job_url' => Yii::app()->getBaseUrl(true).'/job/job?JID='.$job->JID,
-                    'company' =>  $company->cname,
-                    'username' => $user->username,
-                    'to' => $user->email,
-                );                              
-                $sendEmail =  Yii::app()->user->sendEmail('premium_job',$data);
-                Yii::app()->session['JID'] = null;
-               // var_dump($sendEmail); die;
-                $this->redirect(array('job/manageJobs'));
-                //$this->render('confirm');
-                //$this->redirect(array('site/page','view'=>'success'));
-    }
-}
+  } 
 ?>

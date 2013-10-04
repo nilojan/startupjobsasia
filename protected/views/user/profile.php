@@ -14,7 +14,7 @@ $this->breadcrumbs=array(
 	//$model->EID,
 	'Profile',
 );
-echo "<div class=\"span10\">";
+echo "<div class=\"span12\">";
 
 echo '<img src='.Yii::app()->request->baseUrl.'/images/profile/'. $model->photo.' style= "margin-left:20px;height:200px; width:200px; float:left; border:5px solid #F89406;" >';
 
@@ -22,7 +22,18 @@ echo '<img src='.Yii::app()->request->baseUrl.'/images/profile/'. $model->photo.
 
 <span style="font-family: 'BebasNeue';font-size:60px;padding:0px 20px;"><?php echo $model->fname." ".$model->lname; ?></span>
 <hr style="border:2px solid #F89406;margin: 80px 0 100px;" />
-
+<div class="btn-toolbar">
+    <?php $this->widget('bootstrap.widgets.TbButtonGroup', array(
+        'type'=>'info', // '', 'primary', 'info', 'success', 'warning', 'danger' or 'inverse'
+        'buttons'=>array(
+            array('label'=>'Resume', 'items'=>array(
+                array('label'=>'Export as word file', 'url'=>'../download'),
+                '---',
+                array('label'=>'Export as pdf file', 'url'=>'../pdf'),
+            )),
+        ),
+    )); ?>
+</div>
 
 <?php $curent_user_id = (string)Yii::app()->user->getId();
 if($_GET['id'] == $curent_user_id || Yii::app()->user->isAdmin())
@@ -95,13 +106,13 @@ if($_GET['id'] == $curent_user_id || Yii::app()->user->isAdmin())
 	<?php echo CHtml::encode($model->availability); ?>
 	<br />
 
-<<<<<<< HEAD
+
 	<b><?php //echo CHtml::encode($model->getAttributeLabel('content')); ?></b>
 	<?php //echo CHtml::encode($model->content); ?>
-=======
+
 	<b><?php echo CHtml::encode($model->getAttributeLabel('tags')); ?>:</b>
 	<?php echo CHtml::encode($model->tags); ?>
->>>>>>> viv_changes
+
 	<br />
 
 	

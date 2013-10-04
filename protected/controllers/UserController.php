@@ -62,6 +62,14 @@ class UserController extends Controller
 		);
 	}
 
+public function behaviors()
+   {
+       return array(
+           'doccy' => array(
+               'class' => 'ext.doccy.Doccy',
+           ),
+       );
+   }
 	/**
 	 * Displays a particular model.
 	 * @param integer $id the ID of the model to be displayed
@@ -88,7 +96,95 @@ class UserController extends Controller
                }
     }
  
+public function actionDownload()
+{
+	$id=Yii::app()->user->getID();
+	$model= Employee::model()->find('UID=:id',array(':id'=>$id));
+	
+$fname=$model->fname;
+$lname=$model->lname;
+$fullname=$fname.$lname;
+		$this->doccy->newFile('template.docx'); // template.docx must be located in protected/views/report/template.docx  where "report" is the name of the curren controller view folder (alternatively you must configure option "templatePath")
+		$this->doccy->phpdocx->assign("#Name#",$model->fname); // basic field mapping
+		$this->doccy->phpdocx->assign("#Surname#",$model->lname);
+		$this->doccy->phpdocx->assign("#email#",$model->email);
+		$this->doccy->phpdocx->assign("#phone#",$model->contact);
+		$this->doccy->phpdocx->assign("#gender#",$model->gender);
+		$this->doccy->phpdocx->assign("#dob#",$model->dob);
+		$this->doccy->phpdocx->assign("#nationality#",$model->country);
+		$this->doccy->phpdocx->assign("#Lastjob#",$model->lastjob);
+		$this->doccy->phpdocx->assign("#experience#",$model->work_exp);
+		$this->doccy->phpdocx->assign("#education#",$model->edu);
+		$this->doccy->phpdocx->assignToHeader("#HEADER1#","Resume verified by  STARTUP JOB ASIA"); // basic field mapping to header
+		$this->doccy->phpdocx->assignToFooter("#FOOTER1#","Startup Job Asia | RM Resume Generator"); // basic field mapping to footer
 
+
+		$this->renderDocx($fullname.".docx", true); // use $forceDownload=false in order to (just) store file in the outputPath folder.
+}
+public function actionPdf()
+{
+	$id=Yii::app()->user->getID();
+	$model= Employee::model()->find('UID=:id',array(':id'=>$id));
+	
+$fname=$model->fname;
+$lname=$model->lname;
+$fullname=$fname.$lname;
+	$html = <<<HTML
+		<div >
+        <h4 style="color:#adadad; font-size:18px;">$fname $lname</h4>
+        <span style="color:#000000;font-size:12px;">$model->email</span><br />
+        <span style="color:#000000;font-size:12px;">$model->contact</span><br />
+        <hr>
+       <br />
+       <div>       
+        <span style="color:#000000;font-weight:normal;font-size:12px;">Gender : $model->gender</span><br />
+        <span style="color:#000000;font-weight:normal;font-size:12px;">DOB : $model->dob</span><br />
+        <span style="color:#000000;font-weight:normal;font-size:12px;">Nationality : $model->country</span>
+       </div>
+        <hr><br />
+        <div>
+        <span style="color:#adadad; font-size:14px;">Experience</span><br /><br />
+        <span style="color:#000000;font-weight:normal;font-size:12px;">Last Job : $model->lastjob</span><br />
+        <span style="color:#000000;font-weight:normal;font-size:12px;">Work Experience : $model->work_exp years</span><br />
+        </div>
+        <hr>
+        <div>
+        <span style="color:#adadad; font-size:14px;">Education</span><br /><br />
+        <span style="color:#000000;font-weight:normal;font-size:12px;">$model->edu</span><br />
+        </div>
+        <hr>
+<div></div>
+<div></div>
+<div></div><div></div>
+<div></div><div></div><div></div>
+<div></div>
+<div></div><div></div><div></div>
+<div></div><div></div><div></div><div></div><div></div>
+<div></div><div></div><div></div>
+<div></div>
+<div></div>
+<div>	</div>
+  		</div>
+  		     <center>   <span style="color:#adadad; font-size:8px;">Startup Job Asia &nbsp;| &nbsp;RM Resume Generator</span></center>
+
+
+HTML;
+$pdf = Yii::createComponent('application.extensions.tcpdf.ETcPdf', 
+                            'P', 'cm', 'A4', true, 'UTF-8');
+$pdf->SetCreator(PDF_CREATOR);
+$pdf->SetAuthor("Rohan Mashiyava");
+$pdf->SetTitle("startup job Asia");
+$pdf->SetSubject("Startup job Asia Resume");
+$pdf->SetKeywords("TCPDF, PDF, example, test, guide");
+$pdf->setPrintHeader(false);
+$pdf->setPrintFooter(false);
+$pdf->AliasNbPages();
+$pdf->AddPage();
+$pdf->SetFont("times", "BI", 12);
+$pdf->writeHTMLCell(0, 0, '', '', $html, 0, 1, 0, true, '', true);
+$pdf->Output($fullname.".pdf", "D");
+
+}
 	public function actionApplication() {
 		
 		if(Yii::app()->user->isGuest)

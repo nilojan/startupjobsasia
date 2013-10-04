@@ -86,6 +86,7 @@
         array('label'=>'Submit a job', 'url'=>array('/job/submitJob'),'visible'=>Yii::app()->user->isCompany()),
         array('label'=>'Premium Features', 'url'=>array('/company/premium'),'visible'=>Yii::app()->user->isCompany()),
         array('label'=>'Edit Profile', 'url'=>array('/user/edit'),'visible'=>Yii::app()->user->isMember()),
+        array('label'=>'Job Search', 'url'=>array('/job/jobSearch'),'visible'=>Yii::app()->user->isMember()),
         array('label'=>'Company', 'url'=>array('/company/company/12'),'visible'=>Yii::app()->user->isCompany()),
         array('label'=>'Update Profile', 'url'=>array('/company/update/12'),'visible'=>Yii::app()->user->isCompany()),
         array('label'=>'Manage', 'url'=>array('/admin/manage'),'visible'=>Yii::app()->user->isAdmin()),

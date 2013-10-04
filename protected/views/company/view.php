@@ -31,7 +31,19 @@ $this->pageOgImage='/images/company/180/'.$company->image;
 <script>
     
    $(document).ready(function(){
+    var i =0;
+     $('#btn').click(function(){
+      
+      if(i==0){
+            $(".theme_select").animate({marginLeft:'0'},800);
+        i=1;
+        }
+        else{
+            $(".theme_select").animate({marginLeft:'-150px'},800);
+            i=0;
+          }
 
+      });
     var c_color ='<?php echo $company->themecolor; ?>';
     
     var bgc=   c_color;
@@ -123,51 +135,18 @@ $this->pageOgImage='/images/company/180/'.$company->image;
             ]
         });
 
-        
-        
-
-        
     });
-$(document).ready(function(){
-    var i = 0;
-    $(".theme_select .close_btn").click(function(){
-        if(i==0){
-            $(".theme_select").css('margin-left','0');
-        i=1;
-        }
-        else{
-            $(".theme_select").css('margin-left','-150px');
-            i=0;
-        }
-    });
-});
+/**/
 </script>
 <div id="style-switcher" >
     <div class="theme_select">
-        <div class="close_btn">&nbsp;</div>
+        <div id='btn' class="close_btn">&nbsp;</div>
         <div class="content_box">
             <h3>Style Switcher</h3>
             <input class="input" type='text' id='full' />
         </div>
-    </div>    
-        
-        
-        
-
-        <!--/*<h2>Style Switcher</h2>
-    
-        <div id="style-switcher-content">
-            <ul id="colors" class="colors">
-                <li></li>
-                
-            </ul>
-            <span>CLOSE</span>
-                 
-        </div>*/-->
-        
-        
-        
     </div>
+</div>
 
 </div>
 <div class ="abc"></div>
