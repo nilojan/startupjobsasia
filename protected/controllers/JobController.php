@@ -10,7 +10,7 @@ class JobController extends Controller {
                   'roles'=>array('2'),
             ),
             array('allow',
-                  'actions'=>array('apply','search','JobSearch'),
+                  'actions'=>array('apply','search','Jsearch','JobSearch'),
                   'users'=>array('*'),  
                     
             ),
@@ -42,9 +42,13 @@ class JobController extends Controller {
         
        $this->render('manageJobs');
     }
-     public function actionJsearch($dataProvider) {
-        
-       $this->render('Jsearch',array('dataProvider'=>$dataProvider));
+     public function actionJsearch() {
+      $post_key = Yii::app()->request->getQuery('key', 0);
+      $post_type = Yii::app()->request->getQuery('type', 0);
+
+        /*var_dump($post_key);
+        die;*/
+       $this->render('Jsearch',array('key'=>$post_key,'type'=>$post_type));
     }
     /*Approve job post only if company is approved ( status = 1)
      * else redirect to not approved
@@ -52,28 +56,17 @@ class JobController extends Controller {
      public function actionJobSearch() {
 
       $model= job::model()->findAll();
-     
-      if(isset($_POST) && $_POST != null)
+  if(isset($_POST) && $_POST != NULL)
+     {var_dump($_POST);
+           die;
+           }
+      if(isset($_POST['keywords']))
       {
-       $post = $_POST; 
-        if($post['search_type'] == 0)
-         { 
-          
-          $dataProvider=new CActiveDataProvider('job', array( 
-                                                         'criteria'=>array(
-                                                          'order'=>'created DESC',
-                                                          'condition'=>'JID in(SELECT JID FROM job WHERE status = 1 && MATCH (title,description) 
-                                                          AGAINST ("'.$post['keywords'].'" IN BOOLEAN MODE))',  
-                                                          ),
-                                                          'pagination'=>array(
-                                                                  'pageSize'=>20,
-                                                                 ),
-                                                         ));
-$this->redirect('Jsearch',array('model'=>$model));
-
-
-
-         }
+       $post_key = $_POST['keywords'];
+       $post_type = $_POST['search_type']; 
+        
+          $this->redirect(array('job/Jsearch','key'=>$post_key,'type'=>$post_type));
+         
       }
        $this->render('AdvancejobSearch',array('model'=>$model));
     }
