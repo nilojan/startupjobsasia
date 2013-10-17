@@ -32,6 +32,7 @@
 	 <?php /** @var BootActiveForm $form */
             $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array('id'=>'verticalForm',
                                                                                 'type'=>'horizontal',
+                                                                                'action'=>Yii::app()->createUrl("job/Quicksearch"),
                                                                                 'enableClientValidation'=>true,
                                                                                 'clientOptions'=>array('validateOnSubmit'=>true,),
                                                                                 )); ?>
@@ -40,10 +41,13 @@
 	     <?php echo '<b>Monthly Salary</b> ' ?><br />
 (SGD) MIN
 <?php 
-echo CHtml::textField('Min_salary');  ?>
+echo CHtml::dropDownList('Min_salary',"",array('1'=>'1','1001'=>'1001','2001'=>'2001','3001'=>'3001'),
+              array('empty' => 'Select Minimum Salary'));?>
 &nbsp; MAX &nbsp;
 <?php
-echo CHtml::textField('Max_salary'); ?><br />
+//echo CHtml::textField('Max_salary'); 
+echo CHtml::dropDownList('Max_salary',"",array('1000'=>'1000','2000'=>'2000','3000'=>'3000','4000'=>'4000'),
+              array('empty' => 'Select Maximum Salary'));?><br />
   <?php echo CHtml::CheckBox('salary_option',true, array (
                                         'value'=>'on',
                                         )); ?>  Include Jobs with Unspecified Salary
@@ -77,19 +81,19 @@ echo CHtml::textField('Max_salary'); ?><br />
 <hr>
 <?php echo '<b>Job Type</b> ' ?><br />
 <span>
-<?php echo CHtml::CheckBox('Manager',false, array (
+<?php echo CHtml::CheckBox('full_time',false, array (
                                         'value'=>'on',
                                         )); ?>Full Time
-<?php echo CHtml::CheckBox('Junior_executive',false, array (
+<?php echo CHtml::CheckBox('part_time',false, array (
                                         'value'=>'on',
                                         )); ?> Part Time                                     
-<?php echo CHtml::CheckBox('Nonexecutive',false, array (
+<?php echo CHtml::CheckBox('internship',false, array (
                                         'value'=>'on',
                                         )); ?> Internship
- <?php echo CHtml::CheckBox('Junior_executive',false, array (
+ <?php echo CHtml::CheckBox('temporary',false, array (
                                         'value'=>'on',
                                         )); ?>Temporary                                    
-<?php echo CHtml::CheckBox('Nonexecutive',false, array (
+<?php echo CHtml::CheckBox('freelance',false, array (
                                         'value'=>'on',
                                         )); ?> Freelance
 </span>

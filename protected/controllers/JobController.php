@@ -1,5 +1,6 @@
 <?php
 class JobController extends Controller {
+  
     public function filters()   {
         return array( 'accessControl' ); // perform access control for CRUD operations
     }
@@ -10,7 +11,7 @@ class JobController extends Controller {
                   'roles'=>array('2'),
             ),
             array('allow',
-                  'actions'=>array('apply','search','Jsearch','JobSearch'),
+                  'actions'=>array('apply','search','Jsearch','JobSearch','QuickSearch'),
                   'users'=>array('*'),  
                     
             ),
@@ -56,28 +57,148 @@ class JobController extends Controller {
      public function actionJobSearch() {
 
       $model= job::model()->findAll();
-  if(isset($_POST) && $_POST != NULL)
-     {var_dump($_POST);
-           die;
-           }
       if(isset($_POST['keywords']))
-      {
+       {
        $post_key = $_POST['keywords'];
        $post_type = $_POST['search_type']; 
         
           $this->redirect(array('job/Jsearch','key'=>$post_key,'type'=>$post_type));
          
-      }
+       }
        $this->render('AdvancejobSearch',array('model'=>$model));
     }
 
-      public function actionQuickSearch($post)
+public function actionQuickSearch()
+{
+              if(isset($_POST['Min_salary'])||isset($_POST['Max_salary']))
       {
-       
-       $this->render('AdvancejobSearch',array('dataProvider'=>$dataProvider));
+          $syntax="SELECT JID FROM job WHERE";
+          if(isset($_POST['Min_salary'])&&isset($_POST['Max_salary'])&&isset($_POST['salary_option']))
+          $syntax.=  " ((min_salary >= ".$_POST['Min_salary']." AND max_salary <= ".$_POST['Max_salary']." )OR( min_salary = 0 AND max_salary = 0))";
+          else 
+          $syntax.=  " ((min_salary >= ".$_POST['Min_salary']." AND max_salary <= ".$_POST['Max_salary'].")) ";
+
+          //var_dump($_POST);
+          $syntax_desig=[];
+          if(isset($_POST['senior_manager']))
+          array_push($syntax_desig," designation = 'Senior Manager '");
+          if(isset($_POST['senior_executive']))
+          array_push($syntax_desig,"designation = 'Senior Executive'"); 
+          if(isset($_POST['Fresh/Entry']))
+          array_push($syntax_desig,"designation = 'Fresh/Entry Level'");
+          if(isset($_POST['Manager']))
+          array_push($syntax_desig,"designation = 'Manager'");
+          if(isset($_POST['Junior_executive']))
+          array_push($syntax_desig,"designation = 'Junior Executive'"); 
+          if(isset($_POST['Nonexecutive']))
+          array_push($syntax_desig, "designation = 'Non-Executive'");
+
+          $size=sizeof($syntax_desig);
+          $desig="";
+              for($i=0;$i<$size;$i++)
+              { 
+                  if($i==0)
+                  {
+                    $desig .="AND (";
+
+                  }
+                  $desig .= $syntax_desig[$i];
+                  if($i != ($size-1))
+                  {
+                    $desig .= " OR ";
+                  }
+                  if($i==$size-1)
+                  {
+                    $desig.= ")";      
+                  }
+              }
+
+      $syntax.=$desig;
+      $syntax_job=[];
+      if(isset($_POST['full_time']))
+          array_push($syntax_job,"type = 'Full-Time'");
+      if(isset($_POST['part_time']))
+          array_push($syntax_job,"type = 'Part-Time'");
+      if(isset($_POST['internship']))
+          array_push($syntax_job,"type = 'Internship'");
+      if(isset($_POST['freelance']))
+          array_push($syntax_job,"type = 'Freelance'");
+      if(isset($_POST['temporary']))
+          array_push($syntax_job,"type = 'Temporary'");
+      $size=sizeof($syntax_job);
+      $job="";
+        for($i=0;$i<$size;$i++)
+        { 
+          if($i==0)
+          {
+            $job .="AND (";
+
+          }
+          $job .= $syntax_job[$i];
+          if($i!=($size-1))
+          {
+            $job .= " OR ";
+          }
+          if($i==$size-1)
+          {
+            $job.= ")";      
+          }
+        }
+      $syntax.=$job;
+
+      if(isset($_POST['job_posted']) && ($_POST['job_posted']!='all'))
+      {
+          date_default_timezone_set('Asia/Singapore');
+          $c_date = date('Y-m-d H:i:s');
+          if($_POST['job_posted']=='1')
+          {
+              $date = strtotime($c_date);
+              $date = strtotime("-1 day", $date);
+              $date =date('Y-m-d H:i:s',$date);
+          }
+          if($_POST['job_posted']=='3')
+          {
+              $date = strtotime($c_date);
+              $date = strtotime("-3 day", $date);
+              $date =date('Y-m-d H:i:s',$date);
+
+          }
+          if($_POST['job_posted']=='7')
+          {
+              $date = strtotime($c_date);
+              $date = strtotime("-7 day", $date);
+              $date =date('Y-m-d H:i:s',$date);
+
+          }
+          if($_POST['job_posted']=='14')
+          {
+              $date = strtotime($c_date);
+              $date = strtotime("-14 day", $date);
+              $date =date('Y-m-d H:i:s',$date);
+
+          }
+      $datediff='';
+      $datediff.="AND(created between '".$date."' and '".$c_date."' )";
 
       }
-    public function actionSubmitJob() {
+
+
+          if(isset($_POST['location']))
+          {
+            $locate='';
+            $locate.=" AND (location='".$_POST['location']."')";
+            $syntax.= $locate;
+          }
+
+      }
+$job=job::model()->find("JID in(".$syntax.")"); 
+
+$this->render('AdSearch',array('job'=>$job));
+
+       
+         
+      }
+        public function actionSubmitJob() {
        
 
        $model = new JobForm;
@@ -170,6 +291,16 @@ class JobController extends Controller {
 									  $record->freelance = $model->freelance;
 									  $record->internship = $model->internship;
 									  $record->temporary = $model->temporary;
+                    if($model->salary == NULL)
+                    {
+                      $record->min_salary=0;
+                      $record->max_salary=0;
+                    }else{
+
+                      $salary= explode('-',$model->salary);
+                      $record->min_salary=$salary[0];
+                      $record->max_salary=$salary[1];
+                    }
                                       $record->salary = $model->salary;
                                       $record->location = $model->location;
                                       $record->category = $model->category;
@@ -340,7 +471,17 @@ class JobController extends Controller {
                         $job->freelance = $model->freelance;
                         $job->internship = $model->internship;
                         $job->temporary = $model->temporary;
-                        $job->salary = $model->salary;
+                        if($model->salary== NULL)
+                    {
+                      $job->min_salary=0;
+                      $job->max_salary=0;
+                    }else{
+                      $salary= explode('-',$model->salary);
+                     
+                      $job->min_salary=$salary[0];
+                      $job->max_salary=$salary[1];
+                     
+                    }
                         $job->location = $model->location;
                         $job->category = $model->category;
                         $job->tags = $model->tags;

@@ -16,6 +16,8 @@ class JobForm extends CFormModel
 	public $internship;
 	public $temporary;
     public $salary;
+    public $min_salary;
+    public $max_salary;
     public $created;
     public $modified;
     public $location;

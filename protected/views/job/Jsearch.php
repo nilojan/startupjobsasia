@@ -47,24 +47,26 @@ $company= company::model()->find('CID in(SELECT CID FROM company WHERE MATCH (cn
                                                       AGAINST ("'.$key.'" IN BOOLEAN MODE))');
 /*var_dump($company);
 die;*/
-if($company == NULL){
-  echo "No Result found";
+    if($company == NULL){
+      echo "No Result found";
 
-}else{
-  $dataProvider=new CActiveDataProvider('job', array( 'criteria'=>array(                                                                
-                                              'with'=>array('company'),
-                                                'condition'=>'company.CID=:CID',
-                                                'params'=>array(':CID'=>$company->CID),    
-                                                ),
-                                            'pagination'=>array(
-                                                      'pageSize'=>20,),
-                                                ));
+    }else{
+      $dataProvider=new CActiveDataProvider('job', array( 'criteria'=>array(                                                                
+                                                  'with'=>array('company'),
+                                                    'condition'=>'company.CID=:CID',
+                                                    'params'=>array(':CID'=>$company->CID),    
+                                                    ),
+                                                'pagination'=>array(
+                                                          'pageSize'=>20,),
+                                                    ));
 
+
+
+    }
 
 
 }
 
-}
 
   if($dataProvider != NULL && isset($dataProvider)){
 
