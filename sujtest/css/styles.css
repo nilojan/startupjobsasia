@@ -1,0 +1,532 @@
+/*@import url("icons.css");*/
+/*  from http://marcoceppi.github.io/bootstrap-glyphicons/  */
+@import url(http://fonts.googleapis.com/css?family=Acme);
+@font-face {
+	font-style: normal;
+	font-family: 'BebasNeue';
+	letter-spacing: 1.1px;
+	src: url('fonts/BebasNeue.otf');
+}
+
+@font-face {
+	font-style: normal;
+	font-family: 'FrutigerBold';	
+	src: url('fonts/FrutigerCnd-Bold.ttf');
+}
+
+@font-face {
+	font-style: normal;
+	font-family: 'FrutigerLT';	
+	src: url('fonts/Frutiger_LT_47_Light_Condensed.ttf');
+}
+
+body {
+  margin: 0;
+  font-family: 'Helvetica Neue' , Arial, Helvetica, sans-serif;
+  font-size: 15px;
+  line-height: 130%;
+  color: #333333;
+  background-color: #ffffff;
+}
+
+#page {
+    padding-top: 0px;
+}
+
+span.JobRole{font-family: 'BebasNeue', Arial, Helvetica, sans-serif;margin: 0px;}
+
+.clear
+{
+clear:both;
+float:none;
+}
+.pagination ul{margin:0 auto;}
+#footer
+{
+	padding: 10px;
+	margin: 10px 20px;
+	font-size: 3.0;
+	text-align: center;
+	border-top: 1px solid #C9E0ED;
+}
+#footer ul{text-align:center;margin:0 auto;width:57%;padding:10px 0px;}
+#footer .nav li{padding:0px 10px;}
+#footer .nav li a{font-family: 'FrutigerLT'; font-size:15px;}
+div.form .errorSummary
+{
+	border: 2px solid #C00;
+	padding: 7px 7px 12px 7px;
+	margin: 0 0 20px 0;
+	background: #FEE;
+	font-size: 0.9em;
+}
+
+div.form .errorMessage
+{
+	color: red;
+	font-size: 0.9em;
+}
+
+div.form .errorSummary p
+{
+	margin: 0;
+	padding: 5px;
+}
+
+div.form .errorSummary ul
+{
+	margin: 0;
+	padding: 0 0 0 20px;
+}
+.Premium
+{
+	background: url('http://www.startupjobs.asia/wp-content/uploads/premium_box.png') no-repeat scroll 0 0 transparent;
+	height:414px;
+	width:273px;
+	overflow-x:hidden;
+	overflow-y:hidden;
+	padding:10px 30px 50px;
+	float:left;
+	margin-right:35px;
+}
+.PremiumType{
+	padding:10px 0px 0px 0px;
+	text-transform: uppercase;
+	font-size: 15px;
+    font-weight: normal;
+	font-family: 'FrutigerBold';
+	}
+.PremiumLogo{padding:80px 0px 0px 0px;}
+.PremiumTitle{padding:10px 0px 0px 0px;	text-transform: uppercase;
+	font-size: 20px;
+    font-weight: normal;
+	font-family: 'BebasNeue';
+	}
+.PremiumTopTitle a{ color:transparent;padding:0px 83px 65px;}
+.PremiumTopTitle a:hover{ color:transparent;}
+.PremiumDescription{padding:10px 0px 0px 0px;font-family: 'FrutigerLT'; font-size:16px;}
+.pagination{clear:both;}
+
+.JobRole{	text-transform: uppercase;
+	font-size: 25px;
+    font-weight: normal;}
+.JobRole a{color:#000;}	
+.CountryName{
+	font-size: 16px;
+	color:#ccc1ad;
+	font-family: 'FrutigerLT';
+	}
+.CountryName a{
+	font-family: 'FrutigerLT';
+	color:#8e8383;
+	}	
+.CompanyName{
+	font-size: 16px;
+	color:#ccc1ad;
+	font-family: 'FrutigerLT';
+	}
+.CompanyName a{
+	font-family: 'FrutigerLT';
+	color:#000;
+	}	
+.SingleJob{display: block;
+    margin-bottom: 10px;
+    overflow: hidden;}
+
+.ListLogo{float:left;display:block;overflow:hidden;}
+.ListTitle{float:left;display:block;overflow:hidden;padding:0px 10px}
+.JobType{float:right;display:block;overflow:hidden;margin-top: -35px;}
+.JobType a{color:#fff;text-decoration:none;}
+
+.JobTypee{float:left;display:block;overflow:hidden;}
+
+
+.type div{
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border-radius: 30px;
+	height: 41px;
+    padding: 22px 0 0 2px;
+    width: 63px;
+	font-size:15px;
+	text-align:center;
+	font-family: 'FrutigerBold';
+	}
+.type div.Full-time {
+	color: #fff;
+	background:#FA7D31 !important;
+}
+.type div.Part-time {
+	color: #fff;
+	background:#ab32db !important;
+}
+.type div.Freelance {
+	color: #fff;
+	background:#6464f4 !important;
+}
+.type div.Temporary {
+	color: #fff;
+	background:#d51386 !important;
+}
+.type div.Internship {92dbd8
+	color: #fff;
+	background:#998c9e !important;
+}
+.type div.Co-Founder {
+	color: #fff;
+	background:#92dbd8 !important;
+}
+
+
+.Border div.Full-time {
+	background:#FA7D31 !important;
+	border:2px solid #FA7D31;
+    height: 2px;
+    margin-top: 8px;		
+}
+.Border div.Part-time {
+	background:#ab32db !important;
+	border:2px solid #ab32db;
+    height: 2px;
+    margin-top: 8px;
+}
+.Border div.Freelance {
+	background:#6464f4 !important;
+	border:2px solid #6464f4;
+    height: 2px;
+    margin-top: 8px;
+}
+.Border div.Temporary {
+	background:#d51386 !important;
+	border:2px solid #d51386;
+    height: 2px;
+    margin-top: 8px;	
+}
+.Border div.Internship {
+	background:#998c9e !important;
+	border:2px solid #998c9e;
+    height: 2px;
+    margin-top: 8px;
+}
+
+
+.Border div.Co-Founder {
+	background:#92dbd8 !important;
+	border:2px solid #92dbd8;
+    height: 2px;
+    margin-top: 8px;
+}
+#company {}
+
+.info{
+    background: linear-gradient(to bottom, #F89406 100%, #222222 100%) repeat scroll 0 0 transparent;
+    border-top: 1px solid rgba(255, 255, 255, 0.03);
+    box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.25);
+    color: #FFFFFF;
+    margin-bottom: 40px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3), -1px -1px 2px rgba(0, 0, 0, 0.3);
+}
+
+element.style {
+    height: 382px;
+}
+.masthead {
+    background-color: transparent;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 520px;
+    margin-top: -25px;
+}
+#company img{width:50%;}
+
+#job {}
+.apply-instructions {
+    background: none repeat scroll 0 0 #222222;
+    border-radius: 5px 5px 5px 5px;
+    color: #FFFFFF;
+    margin-top: 15px;
+    padding: 15px;
+}
+
+#main img{ width:100%}
+#main {}
+h1.HomeLatestJobs {
+	color:#fff;
+	background:#F97C30;
+	text-transform:uppercase;
+	margin:0px 0px 0px 30px;
+	width: 23%;
+	padding: 10px;
+	float:left;
+	}
+
+	
+.SearchForm input[type="text"] {
+    border: 2px solid #F97C30;
+	width:77%;
+	-webkit-border-radius: 1px;
+	-moz-border-radius: 1px;
+	border-radius: 1px;
+}
+.SearchForm {
+    float: right;
+    width: 25%;
+}
+
+	
+	.items{padding:0px;}
+	.list-view{padding:30px;}
+	
+
+.navbar-inner {
+	display: none;
+}
+.topHeader{padding:10px 0px; border-bottom:2px solid #F97C30;}
+.topHeader ul{float:right;}
+.topHeader ul li{padding:5px 10px;}
+.topHeader ul li a{font-family: 'FrutigerLT'; font-size:15px;}
+
+/*
+#horizontalForm{margin:0 auto;}
+#ApplyJobForm_coverLetter{margin:0 auto;}
+
+*/
+.About
+{
+	background: url("http://test.startupjobs.sg/suj/images/man_walk_up_stair2.jpg") no-repeat scroll 0 0 transparent;
+	height:1084px;
+	overflow-x:hidden;
+	overflow-y:hidden;
+	padding:0px;
+}
+h1.AboutUs,h1.Advisors {
+	color:#fff;
+	background:#F97C30;
+	text-transform:uppercase;
+	margin:0px 0px 10px 0px;
+	width: 15%;
+	padding: 10px;
+	}
+.AboutTitle{text-transform:uppercase;font-family: 'BebasNeue',Arial,Helvetica,sans-serif;line-height: 190%;}
+
+
+.yelloBall{
+	-webkit-border-radius: 30px;
+	-moz-border-radius: 30px;
+	border-radius: 30px;
+	height: 40px;
+    width: 40px;
+	float:left;
+	background:#F97C30;
+	}
+.yelloLine{
+	float:left;
+	border:2px solid #F97C30;
+	width:70%;
+	margin-top: 18px;
+	}
+.hint{font-size:12px;}	
+.st_facebook_count .stArrow{display:none;}
+.st_twitter_hcount .stArrow{display:none;}
+.st_linkedin_hcount .stArrow{display:none;}
+
+
+.CheckBox .control-group{float:left;margin-bottom: 0px;}
+.CheckBox{
+  display:block;
+
+  overflow:hidden;}
+
+.CheckBox .control-group .controls{margin-left: 15px;}
+
+.DashBoard a{	
+	font-family: 'Acme', sans-serif;
+	color:#000;
+	font-size:200%;	
+	}
+
+	
+.dashboard-a{
+	background:#258dc8;
+	height:270px;
+	margin-bottom:10px;
+	display:block;
+	overflow:hidden;
+	padding:20px;
+	margin-right:10px;
+	}
+.dashboard-a:hover{
+	background:#53A1CE;
+	}
+	
+.Post-Job{
+	background: url("http://test.startupjobs.sg/sujtest/images/Post-Job.png") no-repeat scroll center 10px transparent;
+	height:100%;
+	width:100%;
+	text-align:center;
+	}
+
+	
+.dashboard-b{
+	background:#75d350;
+	height:270px;
+	margin-bottom:10px;
+	display:block;
+	overflow:hidden;
+	padding:20px;
+	margin-right:10px;
+	
+	}
+.dashboard-b:hover{
+	background:#97E679;
+	}
+
+.Manage-Job{
+	background: url("http://test.startupjobs.sg/sujtest/images/Manage-Jobs.png") no-repeat scroll center 10px transparent;
+	height:100%;
+	width:100%;
+	text-align:center;
+	}
+	
+.dashboard-c{
+	background:#f76f6f;
+	height:270px;
+	margin-bottom:10px;
+	display:block;
+	overflow:hidden;
+	padding:20px;
+	
+	}	
+.dashboard-c:hover{
+	background:#F7A4A4;
+	}
+
+.Application{
+	background: url("http://test.startupjobs.sg/sujtest/images/Applications.png") no-repeat scroll center 10px transparent;
+	height:100%;
+	width:100%;
+	text-align:center;
+	}
+	
+	
+.dashboard-d{
+	background:#ffa93a;
+	height:270px;
+	margin-bottom:10px;
+	display:block;
+	overflow:hidden;
+	padding:20px;
+	margin-right:10px;
+	
+	}
+
+.dashboard-d:hover{
+	background:#f7b560;
+	}
+	
+.Profile{
+	background: url("http://test.startupjobs.sg/sujtest/images/ComanyProfile.png") no-repeat scroll center 10px transparent;
+	height:100%;
+	width:100%;
+	text-align:center;
+	}
+	
+.dashboard-e{
+	background:#cd82f2;
+	height:270px;
+	margin-bottom:10px;
+	display:block;
+	overflow:hidden;
+	padding:20px;
+	margin-right:10px;
+	
+	}
+.dashboard-e:hover{
+	background:#d7aded;
+	}
+
+.UpdateProfile{
+	background: url("http://test.startupjobs.sg/sujtest/images/Update-Profile.png") no-repeat scroll center 10px transparent;
+	height:100%;
+	width:100%;
+	text-align:center;
+	}
+	
+	
+.dashboard-f{
+	background:#ffd06b;
+	height:270px;
+	margin-bottom:10px;
+	display:block;
+	overflow:hidden;
+	padding:20px;
+	
+	}
+.dashboard-f:hover{
+	background:#F7D487;
+	}
+
+.Premiumm{
+	background: url("http://test.startupjobs.sg/sujtest/images/Premium-Peature.png") no-repeat scroll center 10px transparent;
+	height:100%;
+	width:100%;
+	text-align:center;
+	}	
+
+	
+	
+#style-switcher-content{
+	position: fixed;
+	left: -123px;
+	padding: 10px 20px 20px 20px;
+	background: rgba(0, 0, 0, 0.8);
+	}
+
+
+
+.full-spectrum .sp-palette{
+	max-width: 200px;
+	}
+
+.theme_select { z-index:9999; width:130px; padding: 10px; height:130px; margin-left: -150px; position: fixed; left:0;top:150px; background:url(../images/icons/black_trans.png) repeat 0 0; border-radius:0 5px 5px 0; -moz-border-radius:0 5px 5px 0; -webkit-border-radius:0 5px 5px 0; -o-border-radius:0 5px 5px 0; }
+.theme_select .close_btn { width:30px; height:30px; position: absolute; right:-30px; top:10px; background:url(../images/icons/popup_close_btn.png) no-repeat 0 0; cursor: pointer; }
+.theme_select h3 { width:100%; float:left; color:#ffffff; font-size: 16px; font-weight:normal; margin: 0; letter-spacing: 2px; }
+.theme_select .input { width:20px; height:20px; float:left; margin:5px; }
+
+
+.redactor_editor{
+	border:1px solid #F97C30;
+	height:200px;
+}
+
+
+input[type="text"].jobtitle{
+	min-height: 40px;
+	font-size: 18px;
+	font-weight:bold;
+}
+
+.bgone{
+	background-color:#fff7f7;
+	padding:5px;
+	margin-bottom:2px;
+	}
+.bgtwo{
+	background-color:#f7efef;
+	padding:5px; 
+	margin-bottom:2px;	
+	}
+	
+.bgtwo:hover,.bgone:hover{
+
+	-khtml-opacity:.50; 
+	-moz-opacity:.50; 
+	-ms-filter:”alpha(opacity=50)”;
+	filter:alpha(opacity=50);
+	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0.5);
+	opacity:.50; 
+}
+.list-view .summary {
+    display: none;
+}
