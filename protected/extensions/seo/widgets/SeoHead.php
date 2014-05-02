@@ -35,9 +35,10 @@ class SeoHead extends CWidget
 	 */
 	public $defaultProperties = array();
 
-	private $_description;
-	private $_keywords;
-	private $_properties = array();
+	protected $_description;
+	protected $_keywords;
+	protected $_properties = array();
+	protected $_canonical;
 
 	/**
 	 * Initializes the widget.
@@ -60,6 +61,9 @@ class SeoHead extends CWidget
 			$this->_properties = CMap::mergeArray($behavior->metaProperties, $this->defaultProperties);
 		else
 			$this->_properties = $this->defaultProperties;
+
+		if ($behavior !== null && $behavior->canonical !== null)
+			$this->_canonical = $behavior->canonical;
 	}
 
 	/**
@@ -83,11 +87,14 @@ class SeoHead extends CWidget
 		if ($this->_description !== null)
 			echo CHtml::metaTag($this->_description, 'description').PHP_EOL;
 
-		if ($this->defaultKeywords !== null)
+		if ($this->_keywords !== null)
 			echo CHtml::metaTag($this->_keywords, 'keywords').PHP_EOL;
 
 		foreach ($this->_properties as $name => $content)
 			echo '<meta property="'.$name.'" content="'.$content.'" />'.PHP_EOL; // we can't use Yii's method for this.
+
+		if ($this->_canonical !== null)
+			$this->renderCanonical();
 	}
 	
 	/**
@@ -114,5 +121,18 @@ class SeoHead extends CWidget
 		}
 
 		$this->widget($class, $title);
+	}
+
+	/**
+	 * Renders the canonical link tag.
+	 */
+	protected function renderCanonical()
+	{
+		$request = Yii::app()->getRequest();
+		$url = $request->getUrl();
+
+		// Make sure that we do not create a recursive canonical redirect.
+		if ($this->_canonical !== $url && $this->_canonical !== $request->getHostInfo().$url)
+			echo '<link rel="canonical" href="'.$this->_canonical.'" />'.PHP_EOL;
 	}
 }

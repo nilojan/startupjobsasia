@@ -15,7 +15,7 @@
   <div class ="span2">Applied On</div>
   <div class ="btn-toolbar">Edit</div>
   <div class ="btn-toolbar">Delete</div> -->
-<table class ="table">
+<div class ="row">
          <div class ="span2">          
                     <?php echo CHtml::link($data->job->title, array('job/job', 'JID' => $data->JID)) ; ?>
          </div>

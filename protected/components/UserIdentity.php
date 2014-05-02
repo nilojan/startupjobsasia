@@ -23,14 +23,17 @@ class UserIdentity extends CUserIdentity
 
             $user_available = 'false';
             $use1 = $this->username;
-            if($user = user::model()->find('username=:username', array(':username'=>$use1)))
+			$user = NULL;
+			$use1 = trim($use1);
+
+			if($user = user::model()->find('email=:email', array(':email'=>$use1)))
             {
                 $user_available = 'true';            
             }
             $users = array(
                     'demo' => 'demo',
                     'admin' => 'admin',
-                    $user['username'] => $user['password'],
+                    $user['email'] => $user['password'],
                     //$employee['username'] => $employee['password'],
                 );
            
@@ -43,7 +46,7 @@ class UserIdentity extends CUserIdentity
                 $emp = Employee::model()->find('UID=:user_id', array(':user_id'=>$user->ID));
                 if($emp->registered == 1)
                 {
-                    $user_active =  'true';   
+                    $user_active =  'true';
                 }
 
             } 

@@ -29,10 +29,8 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
     
 )); ?>
  
-<?php echo $form->textFieldRow($model, 'username', array('class'=>'span3',
-                                                         'placeholder'=>"Username",)); ?>
-<?php echo $form->passwordFieldRow($model, 'password', array('class'=>'span3',
-                                                             'placeholder'=>"Password")); ?>
+<?php echo $form->textFieldRow($model, 'email', array('class'=>'span3','placeholder'=>"Email",)); ?>
+<?php echo $form->passwordFieldRow($model, 'password', array('class'=>'span3','placeholder'=>"Password")); ?>
 <?php echo $form->checkboxRow($model, 'rememberMe'); ?>
  
 <?php // $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'label'=>'Login')); ?>
@@ -56,10 +54,11 @@ $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
 
 
 
-
+<!--
 	<ul class="nav nav-pills">
         <li><a href ="<?php echo Yii::app()->request->baseUrl?>/user/forgetPassword">Reset Password</a></li>
     </ul>
+-->
 	
 </div>
 

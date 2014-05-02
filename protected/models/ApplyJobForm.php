@@ -1,55 +1,30 @@
 <?php
-
-
 class ApplyJobForm extends CFormModel
 {
     public $resume;
-    public $photo;
-    public $coverLetter;
 
-    public $fname;
-    public $lname;
-    public $email;
-    public $contact;
-    public $dob;
-    public $gender;
-    public $edu;
-    public $country;
-  
-    
-    
+    public $coverLetter;
+	//public $agree;
+
+
+
     /**
      * Declares the validation rules.
      */
     //to be changed
 
     public function rules() {
-        return array(
-            // name, email, subject and body are required
-            //array('resume, photo, coverLetter', 'safe'),
-            // email has to be a valid email address
-           // array('address,contact, image, about','safe'),
+		return array(
 
-            // verifyCode needs to be entered correctly
-            array('coverLetter', 'safe'),
-            array('resume', 'file',
-                  'types'=>'pdf,doc,docx',
-                  'maxSize' => 1024 * 1024 * 2, 
-                  'allowEmpty'=>true,),
-            array('photo', 'file',
-                  'types'=>'jpg, png,jpeg, gif',
-                  'maxSize' => 1024 * 1024 * 2,   
-                  'allowEmpty'=>true, ),
-           
-            // password must be at lenght minimal of 6 charaycters
-            
-           
-// array('title', 'length', 'max'=>255, 'on'=>'insert,update'),
-     //       array('email, username','unique','className'=>'member'),
-            //array('verifyCode', 'captcha', 'allowEmpty' => !CCaptcha::checkRequirements()),
-           );
-    }
-    
+		//array('agree', 'required','message'=>'You must agree the agreement.'),
+        array('coverLetter,resume', 'safe'),
+		array('resume', 'required','on'=>'update'),
+		array('resume', 'file', 'types'=>'pdf,doc,docx','safe'=>true, 'allowEmpty'=>true,'wrongType'=>'Only pdf/doc/docx allowed.'),
+        array('resume,coverLetter', 'safe', 'on'=>'search'),
+
+		);
+	}
+
 
     /*
      * Declares customized attribute labels.
@@ -59,8 +34,8 @@ class ApplyJobForm extends CFormModel
 
     public function attributeLabels() {
         return array(
-            'coverLetter'=>'Cover Letter',
-			'gender'=>'Gender',
+            'coverLetter'=>'Achievements / Summary',
+
         );
     }
 

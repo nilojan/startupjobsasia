@@ -39,6 +39,7 @@ class RegistrationController extends Controller {
 
     public function actionRegistration() {
         $model = new RegistrationForm;
+        die;
         if (isset($_POST['RegistrationForm'])) {
               $model->attributes = $_POST['RegistrationForm'];
               if ($model->validate()) {       //generate activation key

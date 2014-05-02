@@ -28,6 +28,7 @@
  * @property string $source
  * @property string $ip
  * @property string $acc_status
+ * @property string $agree 
  * @property integer $views
  * @property string $tags
  * @property string $last_modified
@@ -49,7 +50,7 @@ class Employee extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'employee1';
+		return 'employee';
 	}
 
 	/**
@@ -60,23 +61,28 @@ class Employee extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('fname, lname, contact, email, coverLetter, gender, country, edu', 'required'),
-			array('UID, registered, work_exp, curr_salary, exp_salary, views', 'numerical', 'integerOnly'=>true),
+			array('fname, lname, contact, email, country,gender, edu', 'required'),
+			array('fname,lname','nameWithSpace'),
+			array('email','validateEmail'),
+			array('agree', 'required','message'=>'You must agree the agreement.'),
+			//array('email', 'unique','message'=>'Email already registered, Please Login'),
+			//array('email', 'unique', 'className' => 'user', 'attributeName' => 'email','on'=>'update', 'message'=>'This email already registered <script> var rr = 1</script>'),
+			array('UID, registered, curr_salary, exp_salary, views', 'numerical', 'integerOnly'=>true),
 			array('fname, lname', 'length', 'max'=>30),
-			array('email, photo', 'length', 'max'=>250),
-			array('gender', 'length', 'max'=>10),
-			array('location, source, ip', 'length', 'max'=>255),
-			array('country', 'length', 'max'=>50),
 			array('lastjob, edu', 'length', 'max'=>250),
 			array('availability, acc_status', 'length', 'max'=>20),
 			array('resume', 'length', 'max'=>256),
-			array('last_modified', 'safe'),
-			array('dob', 'safe'),
+			array('last_modified,resume,dob,country,edu,gender,contact,fname,lname,agree', 'safe'),
 
-			array('work_exp, curr_salary, exp_salary, availability, content, source, ip, acc_status, views','safe'),
+			array('photo,location,work_exp, tags,curr_salary, exp_salary, availability, content, source, ip, acc_status, views','safe'),
 			//image upload		
 			array('photo', 'file', 'types'=>'jpg,gif,png', 'allowEmpty'=>true,'wrongType'=>'Only jpg/gif/png allowed.'),
-			array('resume', 'file', 'types'=>'pdf,doc,docx', 'allowEmpty'=>true,'wrongType'=>'Only pdf/doc/docx allowed.'),
+
+			array('email', 'addressNotInUseByUser'),
+
+			//array('resume', 'required','on'=>'update'),
+			array('resume', 'file', 'types'=>'pdf,doc,docx','safe'=>true, 'allowEmpty'=>true,'wrongType'=>'Only pdf/doc/docx allowed.'),
+			//array('resume','FileType'),
 			array('coverLetter', 'safe'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
@@ -94,7 +100,7 @@ class Employee extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'company'=> array(self::BELONGS_TO, 'company', 'CID'),
-            'Application1'=> array(self::HAS_MANY, 'Application1', 'EID'),
+            'Application'=> array(self::HAS_MANY, 'Application', 'EID'),
             //'job'=> array(self::HAS_MANY, 'job', 'CID'),
 
 		);
@@ -114,7 +120,7 @@ class Employee extends CActiveRecord
 			'contact' => 'Contact Number',
 			'email' => 'Email ID',
 			'photo' => 'Photo',
-			'coverLetter' => 'Cover Letter',
+			'coverLetter' => 'Achievements / Summary',
 			'gender' => 'Gender',
 			'dob' => 'Date of Birth',
 			'location' => 'Current Location',
@@ -125,7 +131,7 @@ class Employee extends CActiveRecord
 			'curr_salary' => 'Current Salary',
 			'exp_salary' => 'Expected Salary',
 			'availability' => 'Availability',
-			'resume' => 'Resume',
+			'resume' => 'Updated Resume',
 			'content' => 'Content',
 			'source' => 'Source',
 			'ip' => 'IP Address',
@@ -133,6 +139,7 @@ class Employee extends CActiveRecord
 			'views' => 'Views',
 			'last_modified' => 'Last Modified',
 			'tags'=>'Tags/Keywords',
+			'agree'=>'<small style="padding-top:20px;font-size:11px;">I agree to Startup Jobs Asia’s <a href ="/site/page/view/privacy-statement" target="_blank">Privacy Statement</a>, <a href ="/site/page/view/terms-and-conditions" target="_blank">Terms & Conditions</a></small>',
 		);
 	}
 
@@ -154,6 +161,7 @@ class Employee extends CActiveRecord
 		$criteria->compare('lname',$this->lname,true);
 		$criteria->compare('contact',$this->contact);
 		$criteria->compare('email',$this->email,true);
+		$criteria->compare('agree',$this->agree,true);
 		$criteria->compare('photo',$this->photo,true);
 		$criteria->compare('coverLetter',$this->coverLetter,true);
 		$criteria->compare('gender',$this->gender,true);
@@ -179,5 +187,72 @@ class Employee extends CActiveRecord
 		));
 	}
 
+	public function checkDuplicate($attribute,$params)
+	{
+		$attribute = strtolower(trim($attribute));
+		$user = user::model()->find('email=:email AND email!=:Crntemail', array(':email'=>$this->$attribute,':Crntemail'=>Yii::app()->user->name));
+		
+		if($user===null){
+            //$message=$this->message!==null?$this->message:Yii::t('yii','{attribute} "{value}" has already been taken.');
+            //$this->addError($object,$attribute,$message,array('{value}'=>$value));
+			$this->addError($attribute, 'email has already been taken');
+        }
 
+	}
+	// from http://jeffreifman.com/yii/custom-validation/
+// for validating inserts
+	public function addressNotInUseByUser($attribute){
+		if(user::model()->exists('email=:email and email!=:Crntemail',array(':email'=>$this->$attribute,':Crntemail'=>Yii::app()->user->name)))
+		$this->addError($attribute, 'Sorry, this email is already in use<script>var rr = 1</script>');
+	}
+
+	public function validateEmail($attribute)
+        {
+            if(!filter_var($this->$attribute, FILTER_VALIDATE_EMAIL))
+             {                
+			  $this->addError($attribute, 'Sorry, this is not validate email address');
+             } else {
+                return true;
+            }
+            
+        }
+		
+		
+		public function NumberONly($attribute)
+        {
+            if (!preg_match("/^[0-9+]*$/",$this->$attribute))
+             {                
+			  $this->addError($attribute, 'Sorry, this is not validate number');
+             } else {
+                return true;
+            }
+            
+        }
+
+
+
+
+		public function nameWithSpace($attribute,$params)
+        {
+            if (!preg_match("/^[a-zA-Z0-9 ]*$/",$this->$attribute))
+             {                
+			  $this->addError($attribute, 'Sorry, this is not validate name');
+             } else {
+                return true;
+            }
+            
+        }
+		
+
+		public function FileType($attribute,$params)
+        {
+			$extt = pathinfo($this->$attribute, PATHINFO_EXTENSION);
+				if($extt != 'doc' || $extt != 'docx'  || $extt != 'pdf' )
+				{
+					$this->addError($attribute, 'Sorry, '.$extt.' this is not a validate file type');
+				}else{
+                return true;
+				}
+            
+        }
 }

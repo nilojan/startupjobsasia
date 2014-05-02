@@ -38,12 +38,12 @@ class Stats extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('JID, IP, last_visit', 'required'),
+			//array('JID, IP, last_visit', 'required'),
 			array('JID, visits', 'numerical', 'integerOnly'=>true),
 			array('IP', 'length', 'max'=>25),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('ID, JID, IP, visits, last_visit', 'safe', 'on'=>'search'),
+			array('ID, JID, IP, visits, last_visit, last_visit_date', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -88,6 +88,7 @@ class Stats extends CActiveRecord
 		$criteria->compare('IP',$this->IP,true);
 		$criteria->compare('visits',$this->visits);
 		$criteria->compare('last_visit',$this->last_visit,true);
+		$criteria->compare('last_visit_date',$this->last_visit_date,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

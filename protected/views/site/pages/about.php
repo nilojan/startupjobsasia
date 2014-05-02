@@ -1,4 +1,16 @@
 <?php
+$this->pageTitle = "Startup Hire:{$job->title} job at {$company->cname} {$job->location}";
+$this->pageDesc = strip_tags(trim(substr($job->description,0,190)));
+$this->pageOgTitle = "{$job->title} job at {$company->cname} {$job->location}";
+$this->pageOgDesc= strip_tags(trim(substr($job->description,0,400)));
+$this->pageOgImage='/images/company/400/'.$company->image;
+//$this->addMetaProperty('fb:app_id',Yii::app()->params['fbAppId']);
+$this->pageCanonical = $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI']; // canonical URLs should always be absolute
+$this->pagePublishedTime = $job->created;
+$this->pageModifiedTime = $job->modified;
+$this->pageSiteName = "Start up Jobs Asia";
+$this->pageAuthor = $company->cname;
+
 $this->breadcrumbs=array(
 	'About',
 );

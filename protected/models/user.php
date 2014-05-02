@@ -29,10 +29,12 @@ class User extends CActiveRecord
 	/**
 	 * @return string the associated database table name
 	 */
+	 
 	public function tableName()
 	{
-		return 'user1';
+		return 'user';
 	}
+	
 
 	/**
 	 * @return array validation rules for model attributes.
@@ -42,12 +44,13 @@ class User extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('username', 'length', 'max'=>80),
+			//array('username', 'length', 'max'=>80),
+			array('username', 'unique', 'message' => 'This user name already exists.'),
 			array('password', 'length', 'max'=>120),
+			 //array('password','checkStrength','score'=>20),
 			array('email, name, activation_key', 'length', 'max'=>100),
 			array('role', 'length', 'max'=>2),
 			array('last_login, registered', 'safe'),
-			array('username','unique','attributeName' => 'username','message'=>'heloo'),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
 			array('ID, username, password, email, name, role, activation_key, last_login, registered', 'safe', 'on'=>'search'),
@@ -63,7 +66,7 @@ class User extends CActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'company'=> array(self::BELONGS_TO, 'company', 'CID'),
-            'Application1'=> array(self::HAS_MANY, 'Application1', 'ID'),
+            'Application'=> array(self::HAS_MANY, 'Application', 'ID'),
 
 		);
 	}

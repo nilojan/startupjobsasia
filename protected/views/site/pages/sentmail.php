@@ -14,17 +14,18 @@ $this->breadcrumbs=array(
         <div id="inspired_big_content">
         
 
-                <h3>Your username and password has been sent </h3>
-                <br>
-                <br>
+                <h4>Your password has been sent to your email</h4>
+                
+<br />
+<img src ="<?php echo Yii::app()->request->baseUrl?>/images/suj.jpg" style="width:100px; height:100px; float:left;">
+<br />
                 Please check your email<br>
-                You will receive the email in the next 15 minutes
+                You will receive the new password in a while.
                  <br>
-                 <br>
+                 <br><br><br>
                  
             Best Regards, <br>
-            uStyle Team   
-        <img src ="<?php echo Yii::app()->request->baseUrl?>/images/resend.png" style="width=300px; height:300px; float:right;">
+            <b>StartUp Jobs</b>
 
         </div>
         

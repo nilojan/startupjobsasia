@@ -10,8 +10,8 @@ $this->breadcrumbs = array(
         $dataProvider=new CActiveDataProvider('Employee', array( 
                                                 'criteria'=>array(
                                                         'order'=>'EID DESC',
-                                    'condition'=>'EID in(SELECT EID FROM employee1 WHERE MATCH (content,tags) 
-                                    AGAINST ("'.$query.'" IN BOOLEAN MODE))',  
+                                    'condition'=>'EID in(SELECT EID FROM employee WHERE MATCH (content,tags) 
+                                    AGAINST ("'.$query.'" IN BOOLEAN MODE) AND acc_status = 1)',  
                                                            ),
                                                         'pagination'=>array(
                                                                             'pageSize'=>5,
@@ -19,7 +19,7 @@ $this->breadcrumbs = array(
                                                 ));
         $this->widget('zii.widgets.CListView', array(
             'dataProvider'=>$dataProvider,
-            'cssFile' => Yii::app()->baseUrl . '/css/gridView.css',
+            //'cssFile' => Yii::app()->baseUrl . '/css/gridView.css',
             'itemView'=>'_userView',   // refers to the partial view named '_post'
             'sortableAttributes'=>array(
            // 'title',

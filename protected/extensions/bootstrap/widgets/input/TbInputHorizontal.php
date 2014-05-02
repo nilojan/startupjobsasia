@@ -140,10 +140,11 @@ class TbInputHorizontal extends TbInput
 	protected function radioButtonList()
 	{
 		echo $this->getLabel();
-		echo '<div class="controls">';
+		//echo '<div class="controls">'; fixed from https://github.com/timothynott/YiiBooster/commit/980d87338578a4a13e9dc44cfda8d06400bf160f
+		echo '<div class="controls"><span id="' . $this->getAttributeId($this->attribute) . '">';
 		echo $this->form->radioButtonList($this->model, $this->attribute, $this->data, $this->htmlOptions);
 		echo $this->getError().$this->getHint();
-		echo '</div>';
+		echo '</span></div>';
 	}
 
 	/**
