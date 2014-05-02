@@ -16,11 +16,11 @@ class SiteController extends Controller
 	public function actionIndex()   {
 		$this->render('index');
 	}
-/*	
+	
 	public function actionDashboard()   {
 		$this->render('dashboard');
 	}
-*/	
+	
 	/**
 	 * This is the action to handle external exceptions.
 	 */
@@ -32,32 +32,25 @@ class SiteController extends Controller
 				$this->render('error', $error);
 		}
 	}
-	
-        
-	public function actionContact() {
+        public function actionContact() {
 		$model=new ContactForm;
-		
 		if(isset($_POST['ContactForm']))    {
 			$model->attributes=$_POST['ContactForm'];
 			if($model->validate())  {
 				$name='=?UTF-8?B?'.base64_encode($model->name).'?=';
 				$subject='=?UTF-8?B?'.base64_encode($model->subject).'?=';
-				$body = "I'm a ".$model->type." - ".$model->body;
 				$headers="From: $name <{$model->email}>\r\n".
 					 "Reply-To: {$model->email}\r\n".
 					 "MIME-Version: 1.0\r\n".
 					 "Content-type: text/plain; charset=UTF-8";
-					 
-                mail(Yii::app()->params['adminEmail'],$subject,$body,$headers);
-				Yii::app()->user->setFlash('contact','Thank you for contacting us.<br /> We will respond to you as soon as possible.');
+                                mail(Yii::app()->params['adminEmail'],$subject,$model->body,$headers);
+				Yii::app()->user->setFlash('contact','Thank you for contacting us. We will respond to you as soon as possible.');
 				$this->refresh();
 			}
 		}
 		$this->render('contact',array('model'=>$model));
 	}
-        
-		
-	public function actionLogin() {
+        public function actionLogin() {
                 $model = new LoginForm;
                 // if it is ajax validation request
                 if (isset($_POST['ajax']) && $_POST['ajax'] === 'login-form') {
@@ -69,80 +62,42 @@ class SiteController extends Controller
                 if (isset($_POST['LoginForm'])) {
                         $model->attributes = $_POST['LoginForm'];
                 // validate user input and redirect to the previous page if valid
-				//print_r($model->getErrors());
-						/*
-						if(!$model->validate(false)){
-						   var_dump($model->getErrors());
-						}
-						*/
                         if ($model->validate()) {
-						/*
-						print_r($model->getErrors());
-						echo "<pre>";
-						var_dump($model->attributes);
-						echo "</pre>";
-						//die;
-						*/
-						
+
                        // if ($employee->activationKey != 0) {
                          //   $this->redirect(array('registration/resend?memberEmail='.$member->email));
                         //} else {
-							$model->email = strtolower(trim($model->email));
-							$username = $model->email;
-                            //$user =user::model()->find('username=:username', array('username' => $model->username));
-							//$user = user::model()->find('username=:username', array(':username'=>$username));
-							
-							
-							   $user = user::model()->find('email=:email', array(':email'=>$username));
-							
-			
-							//echo var_dump($user);
-
+                            $user =user::model()->find('username=:username', array('username' => $model->username));
                             $user ->last_login = new CDbExpression('NOW()');
                             $user->save();
+                            $returnUrl = Yii::app()->user->returnUrl;
                             $model->login();
                             if(Yii::app()->user->isMember())
                             {
-                                $this->redirect(array('user/profile/'.Yii::app()->user->getID()));
-									
-                            }
-							else if(Yii::app()->user->isAdmin())
+                                    $this->redirect(array('user/profile/'.Yii::app()->user->getID()));
+                            }else if(Yii::app()->user->isAdmin())
                             {
                                 $this->redirect(array('admin/manage'));
-								
                             }
-							else if(Yii::app()->user->isCompany())
-							{
-							
-								$this->redirect(array('company/Dashboard'));
-                                
-                            }else{
-								$this->redirect(array('site/latest'));
-							}
-							/*
                             if($returnUrl == '/yii/suj/index.php')
-							
-                                    $this->redirect(array('site/mangae'));
+                                    $this->redirect(array('site/dashboard'));
                             
                             Yii::app()->request->redirect($returnUrl);
-							*/
                         }
                 }
         $this->render('login', array('model' => $model));
     }
 
       
-    public function actionLogout()  {
+      public function actionLogout()  {
 		Yii::app()->user->logout();
 		$this->redirect(Yii::app()->homeUrl);
 	}
-	
-    public function actionLatest() {
-		
+      public function actionLatest() {
             $this->render('latest');
-    }
+      }
          
-    public function actionFullTime() {
+      public function actionFullTime() {
         $location = '';
        // var_dump($_GET);
         if(isset($_GET['loc']) && $_GET['loc'] != '')
@@ -152,69 +107,40 @@ class SiteController extends Controller
         $this->render('Full-time', array('location' => $location));
          //  $this->render('fullTime', array('posts' => $post));
            
-    }
-	
-    public function actionPartTime() {
+       }
+      public function actionPartTime() {
         
          $this->render('Part-time');
-    }
-    
-	public function actionTemporary() {
+       }
+      public function actionTemporary() {
        
          $this->render('temporary');
-    }
-     
-	public function actionInternship() {
+       }  
+      public function actionInternship() {
          
          $this->render('internship');
-    }
-    
-	public function actionCoFounder() {
-         
-         $this->render('Co-Founder');
-    }
-
-	public function actionContract() {
-         
-         $this->render('Contract');
-    }
-	
-	/*public function actionLocation() {
+       }
+      /*public function actionLocation() {
 
          var_dump($_GET);
          
          $this->render('location');
-    }*/	
+       }*/	
 
-    public function actionJobs() {
+      public function actionJobs() {
 
          $location = $_GET['location'];
          
          $this->render('location',array('location'=>$location));
-    } 
+       } 
 
-
-    public function actionJobsCategory() {
-
-		 $category = $_GET['category'];
-         
-         $this->render('category',array('category'=>$category));
-    } 
-/*
-	public function getUrl(){
-
-		return Yii::app()->controller->createUrl('/site/jobs/location', array(
-			'location'=>$this->id,
-		));
-	}
-*/	
-    public function actionFreeLance() {
+     public function actionFreeLance() {
         $PAGE_SIZE = 10; 
         $model=new job();
         $criteria=new CDbCriteria;
         //  $criteria->order = 'created DESC';
         $type = "Freelance";
-        $criteria->condition='freelance=:type';
+        $criteria->condition='type=:type';
         $criteria->params=array(':type'=>$type);
         $total = $model->count($criteria);
         $pages=new CPagination($total);
@@ -225,13 +151,10 @@ class SiteController extends Controller
         //$posts=job::model()->with('company')->findAll($criteria);
         $this->render('freelance',array('list'=>$list,
                                         'pages'=>$pages,));
-    }
-    
-	public function actionForgetPassword() {
+       }
+      public function actionForgetPassword() {
         $forget = new forgetPassword;
 
-		// this is not working
-		
         if (isset($_POST['forgetPassword'])) {
             $forget->attributes = $_POST['forgetPassword'];
 
@@ -258,9 +181,9 @@ class SiteController extends Controller
                         ------------------------------------------------------------------------<br>
                         <br>
                         -------------<br>
-                        StartUpJobs Asia Team";
+                        uStyle Team";
                 $message->setBody($body, 'text/html');
-                $message->subject = "StartUpJobs Asia Account Verification";
+                $message->subject = "uStyle Account Verification";
                 $message->addTo($model->email);
                 $message->from = 'noreply@startupjobs.asia';
                 Yii::app()->mail->send($message);
@@ -269,11 +192,10 @@ class SiteController extends Controller
             $this->redirect(array('site/page', 'view' => 'emailNotFound'));
         }
         $this->render('forgetPassword', array('forget' => $forget));
-    }
-	
-    public function actionFeed()    {
+    }   
+    public function actionFeeds()    {
 
-        $this->render('feed'); 
+        $this->render('feeds'); 
                     //array('feed'=>$feed));
         
     }

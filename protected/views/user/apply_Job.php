@@ -29,27 +29,23 @@ else if($action=='depositResume')
 }
 ?>  
 <?php  $form = $this->beginWidget('bootstrap.widgets.TbActiveForm', array(
-                                                                                'id'=>'deposit-Resume',
-                                                                                'type'=>'vertical',
-                                                                                'enableClientValidation'=>true,
-                                                                                'enableAjaxValidation'=>true,
-                                                                                'clientOptions'=>array(
-																					'validateOnSubmit'=>true,
-																					'validateOnChange' => true,
-																					'validateOnType'=>true,
-																					),
-                                                            'htmlOptions' => array('enctype' => 'multipart/form-data'),
+                                                                                'id'=>'horizontalForm',
+                                                                                //'type'=>'horizontal',
+                                                                                'enableClientValidation'=>false,
+                                                                                'enableAjaxValidation'=>false,
+                                                                                'clientOptions'=>array('validateOnSubmit'=>true,),
+                                                                                'htmlOptions' => array('enctype' => 'multipart/form-data'),
                                                                                 )); ?>
     <p class="help-block">Fields with <span class="required">*</span> are required.</p>
-     
+    <?php echo $form->errorSummary($model); ?> 
        
-    <?php echo $form->textFieldRow($model,'fname',array('class'=>'span3','onkeypress'=>'return textonly(event);','placeholder'=>'First Name')); ?>
-    <?php echo $form->textFieldRow($model,'lname',array('class'=>'span3','onkeypress'=>'return textonly(event);','placeholder'=>'Last Name')); ?>
-    <?php echo $form->textFieldRow($model,'email',array('class'=>'span3','placeholder'=>'email address')); ?>
+    <?php echo $form->textFieldRow($model,'fname',array('class'=>'span3', 'rows'=>10)); ?>
+    <?php echo $form->textFieldRow($model,'lname',array('class'=>'span3', 'rows'=>10)); ?>
+    <?php echo $form->textFieldRow($model,'email',array('class'=>'span3', 'rows'=>10)); ?>
 
 	
 	<?php echo $form->dropDownListRow($myDate,'country_code', $myDate->getCountryCodes(), array('select'=>$myDate->country_code,'class'=>'span2')); ?>
-	<?php echo $form->textField($model,'contact',array('class'=>'span2','onkeypress'=>'return numericOnly(event);','maxlength'=>15)); ?><span id="errmsg"></span>
+	<?php echo $form->textField($model,'contact',array('class'=>'span2','maxlength'=>10)); ?><span id="errmsg"></span>
 	
     <?php /* echo $form->textFieldRow($model,'dob',array('class'=>'span3', 'rows'=>10)); 
        
@@ -79,7 +75,7 @@ else if($action=='depositResume')
    
         <?php echo $form->dropDownList($myDate,'year', $myDate->getYears(), array('select'=>$myDate->year,'class'=>'span1')); ?>
 	
-    <?php /*  echo $form->dropDownListRow($model,'location',$myDate->getCountryList(), array('select'=>$model->location, 'prompt'=>'Select'), array('class'=>'span5','maxlength'=>255));  */ ?>
+    <?php echo $form->dropDownListRow($model,'location',$myDate->getCountryList(), array('select'=>$model->location, 'prompt'=>'Select'), array('class'=>'span5','maxlength'=>255)); ?>
 
 	<?php echo $form->dropDownListRow($model,'country',$myDate->getCountryList(), array('select'=>$model->country, 'prompt'=>'Select'), array('class'=>'span5','maxlength'=>50)); ?>
 
@@ -89,6 +85,8 @@ else if($action=='depositResume')
         'Female' => 'Female'
     )); ?>
    
+    
+
 	<?php echo $form->dropDownListRow($model, 'edu', array(''=>'Education', 
 															'Doctorate'=>'Doctorate (PHD)',
 															'Master'=>'Master Degree',
@@ -100,13 +98,11 @@ else if($action=='depositResume')
 
 	
     <?php echo $form->textAreaRow($model,'coverLetter', array('class'=>'span5', 'rows'=>5)); ?>
-    <?php echo $form->fileFieldRow($model,'resume', array('class'=>'FileResume')); ?><br /><br />
-	<?php echo $form->checkboxRow($model, 'agree'); ?>
+    <?php echo $form->fileFieldRow($model,'resume'); ?>
 
-<?php echo $form->errorSummary($model); ?>
-<span id="ResumeError"></span>
 
-<div class="form-actions" style="clear:both;float:none;">
+<div id="job" class="apply-instructions">
+    <h3>Are you sure you want to submit this? </h3>
     <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary','label'=>'Submit')); ?>
 
 </div>

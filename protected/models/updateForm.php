@@ -16,9 +16,6 @@ class UpdateForm extends CFormModel
         public $contact;
         public $website;
         public $facebook;
-		public $twitter;
-		public $gplus;
-		public $linkedin;
         public $awards;
         public $started;
         public $summary;
@@ -53,7 +50,7 @@ class UpdateForm extends CFormModel
 	public function attributeLabels()
 	{
 		return array(
-                        //'cemail'    => 'Email Address',
+                        'cemail'    => 'Email Address',
                         'cname'     => 'Company Name',
                         'image'     => 'Company logo',
                         'coverpicture'     => 'Cover Photo',

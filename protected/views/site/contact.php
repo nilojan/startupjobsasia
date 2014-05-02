@@ -21,42 +21,32 @@ $this->pageTitle = 'Contact Us | '.Yii::app()->params['pageTitle'];
                                                                                 //'type'=>'horizontal',
                                                                                 'enableClientValidation'=>true,
                                                                                 'clientOptions'=>array('validateOnSubmit'=>true,),
-                                                                                'htmlOptions'=>array('class'=>'well ContactForm'),)); ?>
+                                                                                'htmlOptions'=>array('class'=>'well'),)); ?>
         
         	<p class="note">Fields with <span class="required">*</span> are required.</p>
-        	
-        	<?php echo $form->textFieldRow($model, 'name', array('class'=>'span6')); ?>
-	        <?php echo $form->textFieldRow($model, 'email', array('class'=>'span6')); ?>
-			<div style="clear:both;float:none;">
-			<?php echo $form->radioButtonList($model,'type',array('Job seeker'=>'Job seeker','Startup'=>'Startup')); ?>
-			</div>
-			<div style="clear:both;float:none;">
-			<?php echo $form->dropDownListRow($model, 'subject', array('Feedback-Testimonial on Jobs' => 'Feedback-Testimonial on Jobs',
-                                                                'Featured Jobs' => 'Featured Jobs',
-                                                                'Resume database' => 'Resume database',
-                                                                'Exploring Partnership' => 'Exploring Partnership',
-                                                                'Upcoming Events'=> 'Upcoming Events',
-                                                                'Your feedback on our blogs' => 'Your feedback on our blogs',
-																'Report an issue' => 'Report an issue',
-																'Others' => 'Others',), 
-                                                                 array('class'=>'span6','options' => array('M' => array('selected' => true)))); ?>
-			</div>
-        	<?php echo $form->textAreaRow($model, 'body', array('class'=>'span6', 'rows'=>6)); ?>
-
+        	<?php echo $form->errorSummary($model); ?>
+        	<?php echo $form->textFieldRow($model, 'name', array('class'=>'span3')); ?>
+	        <?php echo $form->textFieldRow($model, 'email', array('class'=>'span3')); ?>
+	        <?php echo $form->textFieldRow($model, 'subject', array('class'=>'span3')); ?>
+        	<?php echo $form->textAreaRow($model, 'body', array('class'=>'span6', 'rows'=>10)); ?>
+        
                 <?php if(CCaptcha::checkRequirements()): ?>
                     	<?php echo $form->labelEx($model,'verifyCode'); ?>
                         <?php $this->widget('CCaptcha'); ?><br />
                         <?php echo $form->textField($model,'verifyCode'); ?>
-                        <div class="hint">
-							<small>Please enter the letters as they are shown in the image above.
-                            <br/>Letters are not case-sensitive.</small>
-						</div>
+                        <div class="hint"><small>Please enter the letters as they are shown in the image above.
+                            <br/>Letters are not case-sensitive.</small></div>
                             <?php echo $form->error($model,'verifyCode'); ?>
                 <?php endif; ?>
-		<?php echo $form->errorSummary($model); ?>		
                 <?php $this->widget('bootstrap.widgets.TbButton', array('buttonType'=>'submit', 'type'=>'primary','label'=>'Submit')); ?>
 	<?php $this->endWidget(); ?>
 
      </div>
+  
+     <div class="span1 ">
+        <!-- <h3> Address</h3> -->
+     </div>
 
     <?php endif; ?>
+
+

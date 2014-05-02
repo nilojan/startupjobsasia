@@ -224,8 +224,4 @@ class EmployeeController extends Controller
         }
         $this->render('registration', array('model' => $model));
     }
-	
-	
-
-	
 }

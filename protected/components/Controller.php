@@ -5,29 +5,10 @@
  */
 class Controller extends CController
 {
-
-// http://angelotremonte.com/blog/2010/12/how-to-handle-301-redirects-for-a-moved-site-using-yii/
-/*	public function init() {
-		parent :: init();
-		// test for query string variable mid_cat_id
-		if (isset ($_GET['mid_cat_id']) && $_GET['mid_cat_id'] != '') {
-			$main_id = BdListingCategories :: getSubCategoryName($_GET['mid_cat_id'], $type = 'main');
-			// set up redirect to the appropriate page
-			yii :: app()->request->redirect(Yii :: app()->createUrl('category/detail', array('sub' => $_GET['mid_cat_id'], 'id' => $main_id)), true, 301);
-		}
-		if (isset ($_GET['main_cat_id']) && $_GET['main_cat_id'] != '') {
-			yii :: app()->request->redirect(Yii :: app()->createUrl('category/index', array('id' => $_GET['main_cat_id'])), true, 301);
-		}
-		if (isset ($_GET['jobs']) && $_GET['jobs'] != '') {
-			yii :: app()->request->redirect(Yii :: app()->createUrl('job/job', array('id' => $_GET['lid'])), true, 301);
-		}
-	}
-*/
-       //$todayi = date('Y-m-d'); // date('Y-m-d H:i:s');
+	
+       
          /**
 	 * @var string the d /* SEO Vars */
-	// date_default_timezone_set("Asia/Singapore");
-	 
         public $pageTitle = 'StartUp Jobs Asia | Startup Hire | Startup Hiring | Startup Recruiting | Startup Jobs | VC Hire | VC Jobs | Work In Startups';
         public $pageDesc = 'We bring great talents to great startups. StartUp Jobs Asia | Startup Hire | Startup Hiring | Startup Recruiting | Startup Jobs | Starup Careers | Startup Career';
         public $pageRobotsIndex = true;
@@ -36,13 +17,7 @@ class Controller extends CController
         public $pageOgDesc = 'We bring great talents to great startups';
         //cannot work strangely
         public $pageOgImage = "/images/suj.png";
-		public $pageCanonical = "http://www.startupjobs.asia";
-
-		public $pagePublishedTime = "2013-03-14";
-		public $pageModifiedTime = "2013-03-24";
-		public $pageAuthor = "Start up Jobs Asia";
-		public $pageSiteName = "Start up Jobs Asia";
-
+        
         /*
         efault layout for the controller view. Defaults to '//layouts/column1',
 	 * meaning using a single column layout. See 'protected/views/layouts/column1.php'.
@@ -58,50 +33,33 @@ class Controller extends CController
 	 * for more details on how to specify this property.
 	 */
 	public $breadcrumbs=array();
-
+        
         public function display_seo()
     {
     // STANDARD TAGS
     // -------------------------
     // Title/Desc
     echo "\t".'<title>',CHtml::encode($this->pageTitle),'</title>'.PHP_EOL;
-    echo "\t".'<meta name="description" content="'.strip_tags($this->pageDesc).'">'.PHP_EOL;
+    echo "\t".'<meta name="description" content="',CHtml::encode($this->pageDesc),'">'.PHP_EOL;
 
     // Option for NoIndex
     if ( $this->pageRobotsIndex == false ) {
         echo '<meta name="robots" content="noindex">'.PHP_EOL;
     }
 
-    if ( !empty($this->pageCanonical) ) {
-        echo "\t".'<link rel="canonical" href="'.$this->pageCanonical.'" />'.PHP_EOL;
-
-    }
-
-	// OPEN GRAPH(FACEBOOK) META
+    // OPEN GRAPH(FACEBOOK) META
     // -------------------------
     if ( !empty($this->pageOgTitle) ) {
-        echo "\t".'<meta property="og:title" content="'.$this->pageOgTitle.'">'.PHP_EOL;
+        echo "\t".'<meta property="og:title" content="',CHtml::encode($this->pageOgTitle),'">'.PHP_EOL;
     }
     if ( !empty($this->pageOgDesc) ) {
-        echo "\t".'<meta property="og:description" content="'.strip_tags($this->pageOgDesc).'">'.PHP_EOL;
+        echo "\t".'<meta property="og:description" content="',CHtml::encode($this->pageOgDesc),'">'.PHP_EOL;
     }
     if ( !empty($this->pageOgImage) ) {
-        echo "\t".'<meta property="og:image" content="'.$this->pageOgImage.'">'.PHP_EOL;
+        echo "\t".'<meta property="og:image" content="'.Yii::app()->getBaseUrl(true).''.$this->pageOgImage.'">'.PHP_EOL;
     }
-	if ( !empty($this->pagePublishedTime) ) {
-        echo "\t".'<meta property="article:published_time" content="'.$this->pagePublishedTime.'" />'.PHP_EOL;
-    }
-	if ( !empty($this->pageModifiedTime) ) {
-        echo "\t".'<meta property="article:modified_time" content="'.$this->pageModifiedTime.'" />'.PHP_EOL;
-    }
-	if ( !empty($this->pageAuthor) ) {
-        echo "\t".'<meta property="article:author" content="'.$this->pageAuthor.'" />'.PHP_EOL;    }
-	if ( !empty($this->pageSiteName) ) {
-        echo "\t".'<meta property="og:site_name" content="StartUp Jobs Asia" />'.PHP_EOL;
-    }
-
 }
-
+        
 // http://www.blogs.zeenor.com/it/read-ms-word-docx-ms-word-2007-file-document-using-php.html
 
 public function read_file_docx($filename){

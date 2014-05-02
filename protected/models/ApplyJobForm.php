@@ -1,30 +1,55 @@
 <?php
+
+
 class ApplyJobForm extends CFormModel
 {
     public $resume;
-
+    public $photo;
     public $coverLetter;
-	//public $agree;
 
-
-
+    public $fname;
+    public $lname;
+    public $email;
+    public $contact;
+    public $dob;
+    public $gender;
+    public $edu;
+    public $country;
+  
+    
+    
     /**
      * Declares the validation rules.
      */
     //to be changed
 
     public function rules() {
-		return array(
+        return array(
+            // name, email, subject and body are required
+            //array('resume, photo, coverLetter', 'safe'),
+            // email has to be a valid email address
+           // array('address,contact, image, about','safe'),
 
-		//array('agree', 'required','message'=>'You must agree the agreement.'),
-        array('coverLetter,resume', 'safe'),
-		array('resume', 'required','on'=>'update'),
-		array('resume', 'file', 'types'=>'pdf,doc,docx','safe'=>true, 'allowEmpty'=>true,'wrongType'=>'Only pdf/doc/docx allowed.'),
-        array('resume,coverLetter', 'safe', 'on'=>'search'),
-
-		);
-	}
-
+            // verifyCode needs to be entered correctly
+            array('coverLetter', 'safe'),
+            array('resume', 'file',
+                  'types'=>'pdf,doc,docx',
+                  'maxSize' => 1024 * 1024 * 2, 
+                  'allowEmpty'=>true,),
+            array('photo', 'file',
+                  'types'=>'jpg, png,jpeg, gif',
+                  'maxSize' => 1024 * 1024 * 2,   
+                  'allowEmpty'=>true, ),
+           
+            // password must be at lenght minimal of 6 charaycters
+            
+           
+// array('title', 'length', 'max'=>255, 'on'=>'insert,update'),
+     //       array('email, username','unique','className'=>'member'),
+            //array('verifyCode', 'captcha', 'allowEmpty' => !CCaptcha::checkRequirements()),
+           );
+    }
+    
 
     /*
      * Declares customized attribute labels.
@@ -34,8 +59,8 @@ class ApplyJobForm extends CFormModel
 
     public function attributeLabels() {
         return array(
-            'coverLetter'=>'Achievements / Summary',
-
+            'coverLetter'=>'Cover Letter',
+			'gender'=>'Gender',
         );
     }
 

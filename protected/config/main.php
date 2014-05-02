@@ -4,7 +4,7 @@ include("dbconfig.php");
 // Yii::setPathOfAlias('local','path/to/local-folder');
 Yii::setPathOfAlias('bootstrap', dirname(__FILE__).'/../extensions/bootstrap');
 Yii::setPathOfAlias('paypal', dirname(__FILE__).'/../extensions/paypal');
-//Yii::setPathOfAlias('editable', dirname(__FILE__).'/../extensions/x-editable');
+Yii::setPathOfAlias('editable', dirname(__FILE__).'/../extensions/x-editable');
 
 // This is the main Web application configuration. Any writable
 // CWebApplication properties can be configured here.
@@ -23,26 +23,22 @@ return array(
 	'import'=>array(
 		'application.models.*',
 		'application.components.*',
-               // 'application.extensions.yii-mail.*',
+                'application.extensions.yii-mail.*',
                 'application.helpers.*',
-				'application.extensions.imperavi-redactor.ImperaviRedactorWidget',
-				'application.extensions.easyPaypal.*',
-				'ext.YiiMailer.YiiMailer',
-               // 'editable.*',
-				//'ext.EDataTables.*',
-               // 'application.modules.PcViewsCounter.*',
-		       // 'application.modules.PcViewsCounter.models.*',
-		      //  'application.modules.PcViewsCounter.controllers.*',
-		      ///  'application.modules.PcViewsCounter.components.*',
-		      //  'application.modules.PcViewsCounter.extensions.ViewsCountWidget.*',
-               
+                'editable.*',
+                'application.modules.PcViewsCounter.*',
+		        'application.modules.PcViewsCounter.models.*',
+		        'application.modules.PcViewsCounter.controllers.*',
+		        'application.modules.PcViewsCounter.components.*',
+		        'application.modules.PcViewsCounter.extensions.ViewsCountWidget.*',
+                
             ),
 
    
        // 'theme'=>'bootstrap', // requires you to copy the theme under your themes directory
 	'modules'=>array(
 		// uncomment the following to enable the Gii tool
-		/*
+		
 			'gii'=>array(
 		
                 'generatorPaths'=>array(
@@ -54,41 +50,24 @@ return array(
 			// If removed, Gii defaults to localhost only. Edit carefully to taste.
 			//'ipFilters'=>array('127.0.0.1','::1'),
 			),
-		*/
-		/*
+
 			'contentViewsCounter' => array(
            			'class' => 'application.modules.PcViewsCounter.PcViewsCounterModule',
        		 ),
-		*/	 
-		/*'payPal'=>array(
-			'env'=>'sandbox',
-			'account'=>array(
-				'username'=>'tamilnilo-facilitator_api1.gmail.com',
-				'password'=>'1370868718',
-				'signature'=>'At.8WFjicwkSqrcV9gGhYiblkBz4AlVmR0O5Ff5T07tDh--84I2.VuTT',
-				'email'=>'tamilnilo-facilitator@gmail.com',
-				'identityToken'=>'BcxTQ1ohRQvULOtEi502DV3Hg7Vv0KaZSoVkndjbdND6Uoqkmhl5dNfV1oy',
-			),
-			'components'=>array(
-				'buttonManager'=>array(
-					//'class'=>'payPal.components.PPDbButtonManager'
-					'class'=>'payPal.components.PPPhpButtonManager',
-				 ),
-			),
-		),		*/
+		
 	),
-							
+
 	// application components
 	'components'=>array(
 		'widgetFactory' => array(
-			'widgets' => array(
-				'YiiSelectize' => array(
-					'defaultOptions' => array(
-						'create' => false,
-					),
-				),
-			),
-		),
+    'widgets' => array(
+        'YiiSelectize' => array(
+            'defaultOptions' => array(
+                'create' => false,
+            ),
+        ),
+    ),
+),
 		'user'=>array(
 			// enable cookie-based authentication
 			 'class'=>'WebUser',
@@ -99,7 +78,7 @@ return array(
                 
                  ),
 
-       /*     'editable' => array(
+            'editable' => array(
             'class'     => 'editable.EditableConfig',
             'form'      => 'bootstrap',        //form style: 'bootstrap', 'jqueryui', 'plain' 
             'mode'      => 'inline',            //mode: 'popup' or 'inline'  
@@ -107,7 +86,7 @@ return array(
                'emptytext' => 'Pending'
             )
         	),        
-		*/
+
             'mail' => array(
 			    'class' => 'ext.yii-mail.YiiMail',
 			     'transportType'=>'smtp',
@@ -135,22 +114,16 @@ return array(
             
                 'Paypal' => array(
                             'class'=>'paypal.components.Paypal',
-                         //   'apiUsername' => 'tamilnilo-facilitator_api1.gmail.com',
-                        //    'apiPassword' => '1370868718',
-                        //    'apiSignature' => 'At.8WFjicwkSqrcV9gGhYiblkBz4AlVmR0O5Ff5T07tDh--84I2.VuTT',
-                        //    'apiLive' => false,
+                            'apiUsername' => 'foryoung89-facilitator_api1.gmail.com',
+                            'apiPassword' => '1370866813',
+                            'apiSignature' => 'AGwhn2LphfWjyIRWvc3SpX2Os17IAcKaCktBlnu42LdKuy3XaY6HtRZ9',
+                            'apiLive' => false,
  
-                             'apiUsername' => 'payment_api1.startupjobs.asia',
-                            'apiPassword' => 'V3NWKAB9DQLTMYU8',
-                            'apiSignature' => 'A8HURf2Xu4TL8J-s8kexgHMqwHaSABQejSmdc0dILJZ9v3vRDK81baA6',
-                            'apiLive' => true,
-
-
-							'returnUrl' => 'pay/confirmPayment', //regardless of url management component
-                            'cancelUrl' => 'job/manageJobs', //regardless of url management component
+                            'returnUrl' => 'job/confirmPayment', //regardless of url management component
+                            'cancelUrl' => 'site/index/', //regardless of url management component
  
                             // Default currency to use, if not set USD is the default
-                            'currency' => 'USD',
+                            'currency' => 'SGD',
  
                             // Default description to use, defaults to an empty string
                             //'defaultDescription' => '',
@@ -159,36 +132,22 @@ return array(
                             //'defaultQuantity' => '1',
  
                            //The version of the paypal api to use, defaults to '3.0' (review PayPal documentation to include a valid API version)
-                           //'version' => '1.0',
+                           //'version' => '3.0',
                 ),
 		'urlManager'=>array(
 			'urlFormat'=>'path',
                         'showScriptName'=>false,
-						'caseSensitive'=>false,
 			'rules'=>array(
-				'connect-with-us'=>'site/contact',
-				'testimonial'=>'/site/page/view/testimonials',
-				'aboutus'=>'/site/page/view/about',
-				'resources'=>'/site/page/view/resources',
-				'blognewsroom'=>'/site/page/view/blognewsroom',
-				'events'=>'/site/page/view/events',
-				'advisors'=>'/site/page/view/advisors',
-				
-				'feed'=>'feed/feed',
-				'sitemap.xml'=>'feed/sitemap',
-				'job/<id:\d+>'=>'job/job',
-
 				'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
+				
                                // '<controller:\w+>/<id:\d+>'=>'<controller>/view',
 				'<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
 				//'<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
                                 //'<controller>'=>'<controller:\w+>/<action:\w+>/<id:\d+><title>',
                                 '<controller>'=>'<controller:\w+>/<action:\w+>/<JID:\d+>/<title:\w+>',
-                                'company'=>'company/<CID:\d+>/title/',
+                                'company'=>'company/view/<CID:\d+>/title/',
                                 //'<controller>/<title>'=>'<controller>/<action>',
 				'<controller>'=>'<controller:\w+>/<action:\w+>',
-				'http://<CID:\w+>.startupjobs.asia/company/view/CID' => 'company/view/CID',
-
 			),
 	/*array(
 	        'post/<id:\d+>/<title:.*?>'=>'post/view',
@@ -214,6 +173,21 @@ return array(
 	    ),*/
 		),
 		
+		//'db'=>array(
+		//	'connectionString' => 'sqlite:'.dirname(__FILE__).'/../data/testdrive.db',
+		//),
+		// uncomment the following to use a MySQL database
+		
+		/*'db'=>array(
+			'connectionString' => 'mysql:host=localhost;dbname=mydb',
+			//'connectionString' => 'mysql:host=localhost;dbname=startup_job',
+			'emulatePrepare' => true,
+			'username' => 'root',
+			'password' => '',
+			'charset' => 'utf8',
+		),
+		*/
+
 		'db'=>array(
 	     'connectionString' => 'mysql:host='.global_dbhost.';dbname='.global_dbdatabase.'',
 	     'emulatePrepare' => global_emulatePrepare,
@@ -229,26 +203,16 @@ return array(
 		'log'=>array(
 			'class'=>'CLogRouter',
 			'routes'=>array(
+				array(
+					'class'=>'CFileLogRoute',
+					'levels'=>'error, warning',
+				),
 				// uncomment the following to show log messages on web pages
 				/*
 				array(
 					'class'=>'CWebLogRoute',
 				),
 				*/
-				array(
-                    'class'=>'CFileLogRoute',
-                    'levels'=>'error, warning ,trace, info',
-                    'categories'=>'system.*',
-                ),
-				/*
-                array(
-                    'class'=>'CEmailLogRoute',
-                    'levels'=>'error, warning',
-                    'emails'=>'nilojan@outlook.com',
-                ),
-				*/
-				
-				
 			),
 		),
 	
@@ -279,17 +243,11 @@ return array(
         // global variables
 	'params'=>array(
 		// this is used in contact page
-		'adminEmail'=>'nilojan@startupjobs.asia,partners@startupjobs.asia',
-                'job_limit'=>'100',
-                'job_expire'=>'180',
-				'pre_job_expire'=>'30',
+		'adminEmail'=>'webmaster@example.com',
+                'job_limit'=>'3',
+                'job_expire'=>'90',
                 'pageTitle'=>'StartUp Jobs Asia | Startup Hire | Startup Hiring | Startup Recruiting | Startup Jobs | VC Hire | VC Jobs | Work In Startups',
                 'pageDescription'=>'We bring great talents to great startups. StartUp Jobs Asia | Startup Hire | Startup Hiring | Startup Recruiting | Startup Jobs | Starup Careers | Startup Career',
                 'image'=> "/images/suj.png",
-				
-                        'PAYPAL_API_USERNAME'=>'nilojan_api1.startupjobs.asia',
-                        'PAYPAL_API_PASSWORD'=>'1395842128',
-                        'PAYPAL_API_SIGNATURE'=>'AGOM5VcRO5OlPgXyycytnHmiBdetAtrE5y-GPIS1mT-QSU3ifT7YLEuF',
-                        'PAYPAL_MODE'=>'sandbox'   // sandbox/live  default=sandbox					
             ),
 );
